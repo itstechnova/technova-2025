@@ -30,7 +30,7 @@ function Navbar() {
           Contact Us
         </a>
       </div>
-      <button className="flex items-center bg-navSecondary text-white px-4 py-2 rounded-md">
+      <button className="flex items-center bg-navSecondary text-white px-4 py-2 rounded-md shadow-sm shadow-navSecondary">
         <h1 className="">Your Application</h1>
       </button>
     </div>
