@@ -13,6 +13,8 @@ export default {
         foreground: "var(--foreground)",
         navPrimary: "#FFFAF3",
         navSecondary: "#19123C",
+        textPrimary: "#19123C",
+        textSecondary: "#06402B",
       },
     },
   },
