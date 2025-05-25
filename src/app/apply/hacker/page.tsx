@@ -3,7 +3,7 @@ import HackerLandingForm from '@/components/hacker/landingform';
 
 function HackerLanding() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-navPrimary">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-navPrimary">
       <HackerLandingForm />
     </div>
   );

@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 function HackerLandingForm() {
   return (
-    <div className="p-24 flex flex-col items-center h-screen bg-navPrimary">
+    <div className="p-24 flex flex-col h-full bg-navPrimary relative">
       <div className="pb-5 border-b-2 border-textPrimary">
         <div className="flex gap-2 items-center">
           <h1 className="text-5xl font-semibold text-textSecondary">
@@ -61,27 +61,41 @@ function HackerLandingForm() {
           </p>
         </div>
       </div>
-      <div className="py-32 ">
-        {/* TODO: refactor form  */}
+      <div className="py-32 text-left w-1/2 md:w-3/5">
         <form>
-          <div>
-            <label className="block mb-2 text-sm font-medium text-gray-600">
-              Email
-            </label>
-            <input
-              type="text"
-              className="w-full px-4 py-2 border
-                                       border-gray-300 rounded-md
-                                       focus:outline-none focus:ring-2
-                                       focus:ring-indigo-500"
-              placeholder=""
-            />
+          <div className="flex flex-col gap-24 text-textPrimary">
+            <div className="flex flex-col gap-5">
+              <label className="text-base font-bold">Email</label>
+              <input
+                type="text"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-buttonSecondary shadow-xs shadow-navSecondary"
+                placeholder="ex. janesmith@gmail.com"
+              />
+            </div>
+            <div className="flex flex-col gap-5">
+              <label className="text-base font-bold">
+                How old will you be as of September 27, 2025?
+              </label>
+              <input
+                type="text"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-buttonSecondary shadow-xs shadow-navSecondary"
+                placeholder="ex. 21"
+              />
+            </div>
           </div>
-          <button className="bg-buttonPrimary px-8 py-2 text-white rounded-md">
+          <button className="bg-buttonPrimary px-8 py-2 mt-24 text-white text-2xl rounded-xl w-auto shadow-xs shadow-navSecondary">
             →
           </button>
         </form>
       </div>
+      {/* TODO: export vectors assets instead */}
+      <Image
+        className="absolute bottom-0 right-0"
+        src="/themed_assets/bunnywithflower.png"
+        alt="flower bunny"
+        width={800}
+        height={800}
+      />
     </div>
   );
 }
