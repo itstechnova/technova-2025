@@ -17,6 +17,7 @@ export default {
         textSecondary: "#06402B",
         buttonPrimary:"#CD5769",
         buttonSecondary: "#5B5BA9",
+        backgroundSecondary: "rgba(255, 196, 188, 0.2)",
       },
     },
   },

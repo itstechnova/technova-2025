@@ -4,7 +4,8 @@ import Image from 'next/image';
 function HackerLandingForm() {
   return (
     <div className="p-24 flex flex-col h-full bg-navPrimary relative">
-      <div className="pb-5 border-b-2 border-textPrimary">
+      <div className="absolute top-0 left-0 w-full h-1/4 pointer-events-none z-0 bg-gradient-to-b from-backgroundSecondary to-navPrimary" />
+      <div className="pb-5 border-b-2 border-textPrimary relative z-10">
         <div className="flex gap-2 items-center">
           <h1 className="text-5xl font-semibold text-textSecondary">
             TechNova 2025 Hacker Application
@@ -61,7 +62,7 @@ function HackerLandingForm() {
           </p>
         </div>
       </div>
-      <div className="py-32 text-left w-1/2 md:w-3/5">
+      <div className="py-32 text-left w-1/2 md:w-3/5 relative z-10">
         <form>
           <div className="flex flex-col gap-24 text-textPrimary">
             <div className="flex flex-col gap-5">
@@ -88,10 +89,9 @@ function HackerLandingForm() {
           </button>
         </form>
       </div>
-      {/* TODO: export vectors assets instead */}
       <Image
-        className="absolute bottom-0 right-0"
-        src="/themed_assets/bunnywithflower.png"
+        className="absolute bottom-0 right-0 z-10"
+        src="/themed_assets/bunnywithflower.svg"
         alt="flower bunny"
         width={800}
         height={800}
