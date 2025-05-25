@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 function Navbar() {
   return (
-    <div className="flex justify-between items-center border-b-2 border-navSecondary bg-navPrimary px-24 py-3">
+    <div className="sticky top-0 z-50 flex justify-between items-center border-b-2 border-navSecondary bg-navPrimary px-24 py-3">
       <div className="flex items-center gap-8 ">
         <Image
           src="/Technova2024Logo512.png"
@@ -30,8 +30,11 @@ function Navbar() {
           Contact Us
         </a>
       </div>
-      <button className="flex items-center bg-navSecondary text-white px-4 py-2 rounded-md shadow-sm shadow-navSecondary">
-        <h1 className="">Your Application</h1>
+      <button className="relative flex items-center text-white px-4 py-2 rounded-md shadow-sm shadow-navSecondary bg-navSecondary group">
+        <span className="relative font-semibold text-lg z-50">
+          Your Application
+        </span>
+        <div className="opacity-0 group-hover:opacity-100 absolute inset-0 h-full w-full rounded-md transition duration-300 bg-gradient-to-r from-navSecondary to-buttonSecondary"></div>
       </button>
     </div>
   );

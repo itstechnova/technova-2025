@@ -15,6 +15,8 @@ export default {
         navSecondary: "#19123C",
         textPrimary: "#19123C",
         textSecondary: "#06402B",
+        buttonPrimary:"#CD5769",
+        buttonSecondary: "#5B5BA9",
       },
     },
   },

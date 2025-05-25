@@ -61,6 +61,27 @@ function HackerLandingForm() {
           </p>
         </div>
       </div>
+      <div className="py-32 ">
+        {/* TODO: refactor form  */}
+        <form>
+          <div>
+            <label className="block mb-2 text-sm font-medium text-gray-600">
+              Email
+            </label>
+            <input
+              type="text"
+              className="w-full px-4 py-2 border
+                                       border-gray-300 rounded-md
+                                       focus:outline-none focus:ring-2
+                                       focus:ring-indigo-500"
+              placeholder=""
+            />
+          </div>
+          <button className="bg-buttonPrimary px-8 py-2 text-white rounded-md">
+            →
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
