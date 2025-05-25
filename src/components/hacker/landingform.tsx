@@ -1,7 +1,17 @@
 import React from 'react';
 import Image from 'next/image';
 
-function HackerLandingForm() {
+interface HackerLandingFormProps {
+  data: any;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+}
+
+function HackerLandingForm({
+  data,
+  handleChange,
+  handleSubmit,
+}: HackerLandingFormProps) {
   return (
     <div className="p-24 flex flex-col h-full bg-navPrimary relative">
       <div className="absolute top-0 left-0 w-full h-1/4 pointer-events-none z-0 bg-gradient-to-b from-backgroundSecondary to-navPrimary" />
@@ -63,14 +73,18 @@ function HackerLandingForm() {
         </div>
       </div>
       <div className="py-32 text-left w-1/2 md:w-3/5 relative z-10">
-        <form>
+        <form onSubmit={handleSubmit} className="form">
           <div className="flex flex-col gap-24 text-textPrimary">
             <div className="flex flex-col gap-5">
               <label className="text-base font-bold">Email</label>
               <input
                 type="text"
+                name="email"
+                id="email"
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-buttonSecondary shadow-xs shadow-navSecondary"
                 placeholder="ex. janesmith@gmail.com"
+                value={data.email}
+                onChange={handleChange}
               />
             </div>
             <div className="flex flex-col gap-5">
@@ -79,16 +93,24 @@ function HackerLandingForm() {
               </label>
               <input
                 type="text"
+                name="age2025"
+                id="age2025"
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-buttonSecondary shadow-xs shadow-navSecondary"
                 placeholder="ex. 21"
+                value={data.age2025}
+                onChange={handleChange}
               />
             </div>
           </div>
-          <button className="bg-buttonPrimary px-8 py-2 mt-24 text-white text-2xl rounded-xl w-auto shadow-xs shadow-navSecondary">
+          <button
+            type="submit"
+            className="bg-buttonPrimary px-8 py-2 mt-24 text-white text-2xl rounded-xl w-auto shadow-xs shadow-navSecondary"
+          >
             →
           </button>
         </form>
       </div>
+      {/* TODO: refactor this button for more uses */}
       <Image
         className="absolute bottom-0 right-0 z-10"
         src="/themed_assets/bunnywithflower.svg"
