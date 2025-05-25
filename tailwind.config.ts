@@ -11,6 +11,8 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        navPrimary: "#FFFAF3",
+        navSecondary: "#19123C",
       },
     },
   },
