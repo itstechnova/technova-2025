@@ -31,7 +31,7 @@ function Navbar() {
           Contact Us
         </a>
       </div>
-      <Link href="/apply/hacker" className="flex items-center gap-2">
+      <Link href="/apply/hacker/landing" className="flex items-center gap-2">
         <button className="relative flex items-center text-white px-4 py-2 rounded-md shadow-sm shadow-navSecondary bg-navSecondary group">
           <span className="relative font-semibold text-lg z-50">
             Your Application
