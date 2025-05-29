@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import ShortAnswerQuestion from '../shortanswerq';
 
 interface HackerLandingFormProps {
   data: any;
@@ -75,32 +76,16 @@ function HackerLandingForm({
       <div className="py-32 text-left w-1/2 md:w-3/5 relative z-10">
         <form onSubmit={handleSubmit} className="form">
           <div className="flex flex-col gap-24 text-textPrimary">
-            <div className="flex flex-col gap-5">
-              <label className="text-base font-bold">Email</label>
-              <input
-                type="text"
-                name="email"
-                id="email"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-buttonSecondary shadow-xs shadow-navSecondary"
-                placeholder="ex. janesmith@gmail.com"
-                value={data.email}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="flex flex-col gap-5">
-              <label className="text-base font-bold">
-                How old will you be as of September 27, 2025?
-              </label>
-              <input
-                type="text"
-                name="age2025"
-                id="age2025"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-buttonSecondary shadow-xs shadow-navSecondary"
-                placeholder="ex. 21"
-                value={data.age2025}
-                onChange={handleChange}
-              />
-            </div>
+            <ShortAnswerQuestion
+              question="Email"
+              name="email"
+              id="email"
+              placeholder="ex. janesmith@gmail.com"
+              value={data.email}
+              onChange={handleChange}
+            />
+            <ShortAnswerQuestion question="How old will you be as of September 27, 2025?" name="age2025" id="age2025" placeholder="ex. 21" value={data.age2025}
+                onChange={handleChange}/>
           </div>
           <button
             type="submit"

@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import ShortAnswerQuestion from '../shortanswerq';
 
 interface HackerLandingFormProps {
   data: any;
@@ -26,43 +27,25 @@ function HackerStepOneForm() {
         <form className="form">
           <div className="flex flex-col gap-24 text-textPrimary">
             <div className="grid grid-cols-2 gap-10 w-full">
-              <div className="flex flex-col gap-5">
-                <label className="text-base font-bold">
-                  What's your first name?
-                </label>
-                <input
-                  type="text"
-                  name="email"
-                  id="email"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-buttonSecondary shadow-xs shadow-navSecondary"
-                  placeholder="ex. Jane"
-                />
-              </div>
-              <div className="flex flex-col gap-5">
-                <label className="text-base font-bold">
-                  What's your last name?
-                </label>
-                <input
-                  type="text"
-                  name="email"
-                  id="email"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-buttonSecondary shadow-xs shadow-navSecondary"
-                  placeholder="ex. Smith"
-                />
-              </div>
-            </div>
-            <div className="flex flex-col gap-5">
-              <label className="text-base font-bold">
-                What are your pronouns?
-              </label>
-              <input
-                type="text"
-                name="age2025"
-                id="age2025"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-buttonSecondary shadow-xs shadow-navSecondary"
-                placeholder="ex. she/her/hers (all lowercase)"
+              <ShortAnswerQuestion
+                question=" What's your first name?"
+                name="firstName"
+                id="firstName"
+                placeholder="ex. Jane"
+              />
+              <ShortAnswerQuestion
+                question=" What's your last name?"
+                name="lastName"
+                id="lastName"
+                placeholder="ex. Smith"
               />
             </div>
+            <ShortAnswerQuestion
+              question="What are your pronouns?"
+              name="pronouns"
+              id="pronouns"
+              placeholder="ex. she/her/hers (all lowercase)"
+            />
           </div>
           <button
             type="submit"
