@@ -6,7 +6,6 @@ import MentorLandingForm from "@/components/mentor/landingform";
 function MentorLanding() {
   const [landingData, setLandingData] = useState({
     email: "",
-    age2025: "",
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
