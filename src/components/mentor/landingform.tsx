@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
-import Image from "next/image";
-import CheckOff from "../checkOff";
+import React, { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
+import Image from 'next/image';
+import CheckOff from '../checkOff';
 
 interface MentorLandingFormProps {
   data: any;
@@ -16,18 +16,18 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
   handleChange,
   handleSubmit,
 }) => {
-  const [introMd, setIntroMd] = useState("");
-  const [resMd, setResMd] = useState("");
+  const [introMd, setIntroMd] = useState('');
+  const [resMd, setResMd] = useState('');
 
   useEffect(() => {
-    fetch("/textFiles/mentor/intro.md")
+    fetch('/textFiles/mentor/intro.md')
       .then((r) => r.text())
       .then(setIntroMd)
       .catch(console.error);
   }, []);
 
   useEffect(() => {
-    fetch("/textFiles/mentor/responsibilities.md")
+    fetch('/textFiles/mentor/responsibilities.md')
       .then((r) => r.text())
       .then(setResMd)
       .catch(console.error);
@@ -116,7 +116,7 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
             <p className="pt-12 text-textPrimary font-semibold">
               I acknowledge the roles and responsibilities outlined above.
             </p>
-            <CheckOff />
+            <CheckOff label="Yes." />
           </div>
 
           {/* Submit button */}

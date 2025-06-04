@@ -8,27 +8,32 @@ function HackerStepOne() {
     firstName: '',
     lastName: '',
     pronouns: '',
+    tshirtSize: '',
+    levelOfStudy: '',
+    levelOfStudyOther: '',
+    graduatingYear: '',
+    graduatingYearOther: '',
   });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(JSON.stringify(stepOneData));
-  };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, type } = e.target;
-
-    const value = type === 'checkbox' ? e.target.checked : e.target.value;
-
-    setStepOneData((prev: typeof stepOneData) => ({
+    const { name, type, value } = e.target;
+    setStepOneData((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Do validation here
+    console.log(JSON.stringify(stepOneData));
+  };
+
   return (
     <div className="min-h-screen bg-navPrimary">
       <HackerStepOneForm
         data={stepOneData}
+        setData={setStepOneData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
       />
