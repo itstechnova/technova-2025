@@ -13,9 +13,13 @@ function HackerStepOne() {
     levelOfStudyOther: '',
     graduatingYear: '',
     graduatingYearOther: '',
+    university: '',
+    universityOther: '',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, type, value } = e.target;
     setStepOneData((prev) => ({
       ...prev,

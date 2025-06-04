@@ -3,11 +3,14 @@ import Image from 'next/image';
 import ShortAnswerQuestion from '../shortanswerq';
 import SubmitButton from '../submitButton';
 import CheckOff from '../checkOff';
+import UniversityDropdown from './UniversityDropdown';
 
 interface HackerStepOneFormProps {
   data: any;
   setData: React.Dispatch<React.SetStateAction<any>>;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
@@ -208,6 +211,17 @@ function HackerStepOneForm({
               ))}
             </div>
           </div>
+
+          {/* University section */}
+          <span className="font-bold text-base">
+            Please select which institution you are/will be attending in Fall
+            2025.
+          </span>
+          <UniversityDropdown
+            value={data.university}
+            otherValue={data.universityOther}
+            onChange={handleChange}
+          />
         </div>
         <SubmitButton>→</SubmitButton>
       </form>
