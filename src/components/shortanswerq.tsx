@@ -9,11 +9,14 @@ interface ShortAnswerQuestionProps
 function ShortAnswerQuestion({
   question,
   note,
+  id,
   ...inputProps
 }: ShortAnswerQuestionProps) {
   return (
     <div className="flex flex-col gap-5">
-      <label className="text-base font-bold">{question}</label>
+      <label htmlFor={id} className="text-base font-bold">
+        {question}
+      </label>
       {note && (
         <>
           <span className="text-base font-bold inline">Note: </span>

@@ -5,12 +5,22 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import ShortAnswerQuestion from '../shortanswerq';
 import { useState } from 'react';
+import SubmitButton from '../submitButton';
 
 interface HackerLandingFormProps {
   data: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
+
+// function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+//   e.preventDefault();
+//   const form = e.target as HTMLFormElement;
+//   const formData = new FormData(form);
+//   const data = Object.fromEntries(formData.entries());
+//   console.log(data);
+//   // TODO: send data to backend
+// }
 
 function HackerLandingForm({
   data,
@@ -75,15 +85,9 @@ function HackerLandingForm({
               onChange={handleChange}
             />
           </div>
-          <button
-            type="submit"
-            className="bg-buttonPrimary px-8 py-2 mt-24 text-white text-2xl rounded-xl w-auto shadow-xs shadow-navSecondary"
-          >
-            →
-          </button>
+          <SubmitButton>→</SubmitButton>
         </form>
       </div>
-      {/* TODO: refactor this button for more uses */}
       <Image
         className="absolute bottom-0 right-0 z-10"
         src="/themed_assets/bunnywithflower.svg"
