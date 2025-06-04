@@ -38,6 +38,7 @@ const graduatingYearOptions = [
   '2031+',
   'Other:',
 ];
+const hackathonCountOptions = ['This will be my first!', '1', '2', '3', '4+'];
 
 function HackerStepOneForm({
   data,
@@ -176,7 +177,6 @@ function HackerStepOneForm({
             <span className="font-bold text-base">
               What year will you be graduating? 
             </span>
-
             <span className="font-normal">
               (Based on the education level you had selected above)
             </span>
@@ -213,15 +213,48 @@ function HackerStepOneForm({
           </div>
 
           {/* University section */}
-          <span className="font-bold text-base">
-            Please select which institution you are/will be attending in Fall
-            2025.
-          </span>
-          <UniversityDropdown
-            value={data.university}
-            otherValue={data.universityOther}
+          <div className="flex flex-col gap-2">
+            <span className="font-bold text-base mb-4">
+              Please select which institution you are/will be attending in Fall
+              2025.
+            </span>
+            <UniversityDropdown
+              value={data.university}
+              otherValue={data.universityOther}
+              onChange={handleChange}
+            />
+          </div>
+
+          <ShortAnswerQuestion
+            question="What program are you in?"
+            note="If in Highschool, what is your program of interest?"
+            name="major"
+            id="major"
+            placeholder="ex. Systems Design Engineering"
+            value={data.major}
             onChange={handleChange}
           />
+
+          {/* Hackathon count section */}
+          <div className="flex flex-col gap-2">
+            <span className="font-bold text-base">
+              How many hackathons have you been to?
+            </span>
+
+            <div className="flex flex-col gap-2">
+              {hackathonCountOptions.map((level) => (
+                <label key={level} className="flex items-end gap-2 w-full">
+                  <CheckOff
+                    label={level}
+                    name="hackathonCount"
+                    value={level}
+                    checked={data.hackathonCount === level}
+                    onChange={handleChange}
+                  />
+                </label>
+              ))}
+            </div>
+          </div>
         </div>
         <SubmitButton>→</SubmitButton>
       </form>

@@ -15,6 +15,8 @@ function HackerStepOne() {
     graduatingYearOther: '',
     university: '',
     universityOther: '',
+    major: '',
+    hackathonCount: '',
   });
 
   const handleChange = (

@@ -1,5 +1,7 @@
 import React from 'react';
 import CheckOff from '../checkOff';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 interface UniversityDropdownProps {
   value: string;
@@ -50,9 +52,9 @@ const UniversityDropdown: React.FC<UniversityDropdownProps> = ({
           name="university"
           value={value}
           onChange={onChange}
-          className="w-full px-4 py-3 rounded-md border border-gray-300 shadow-sm text-base focus:outline-none focus:ring-0 focus:border-textPrimary appearance-none bg-white text-textPrimary"
+          className="w-full px-4 py-2 rounded-md border border-textPrimary shadow-xs bg-navPrimary text-textPrimary text-base focus:outline-none focus:ring-0 focus:border-textPrimary bg-white appearance-none text-textPrimary"
         >
-          <option value="" disabled>
+          <option value="" disabled className="text-textPrimary">
             Please select from this dropdown.
           </option>
           {universities.map((uni) => (
@@ -61,25 +63,13 @@ const UniversityDropdown: React.FC<UniversityDropdownProps> = ({
             </option>
           ))}
         </select>
-        <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
-          <svg
-            width="20"
-            height="20"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
+
+        <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2">
+          <FontAwesomeIcon icon={faChevronDown} className="text-textPrimary" />
         </span>
       </div>
       {/* Other selection */}
-      <div className="flex items-end gap-2 w-full mt-2">
+      <div className="flex items-end gap-2 w-full">
         <CheckOff
           label="Other:"
           name="university"

@@ -19,8 +19,9 @@ function ShortAnswerQuestion({
       </label>
       {note && (
         <>
-          <span className="text-base font-bold inline">Note: </span>
-          <span className="inline">{note}</span>
+          <span className="text-base font-bold inline">
+            Note: <span className="inline font-normal">{note}</span>
+          </span>
         </>
       )}
       <input
