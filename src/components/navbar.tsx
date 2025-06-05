@@ -1,6 +1,6 @@
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 function Navbar() {
   return (
@@ -31,6 +31,13 @@ function Navbar() {
           Contact Us
         </a>
       </div>
+      <Link href="/apply/mentor" className="flex items-center gap-2">
+        <button className="relative flex items-center text-white px-4 py-2 rounded-md shadow-sm shadow-navSecondary bg-navSecondary group">
+          <span className="relative font-semibold text-lg z-50">Mentor</span>
+          <div className="opacity-0 group-hover:opacity-100 absolute inset-0 h-full w-full rounded-md transition duration-300 bg-gradient-to-r from-navSecondary to-buttonSecondary"></div>
+        </button>
+      </Link>
+
       <Link href="/apply/hacker" className="flex items-center gap-2">
         <button className="relative flex items-center text-white px-4 py-2 rounded-md shadow-sm shadow-navSecondary bg-navSecondary group">
           <span className="relative font-semibold text-lg z-50">
