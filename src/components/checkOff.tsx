@@ -4,8 +4,15 @@ interface CheckOffProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
 }
 
-function CheckOff({ label, checked, name, value, onChange, ...inputProps }: CheckOffProps) {
-   const id = `${name}-${value}`
+function CheckOff({
+  label,
+  checked,
+  name,
+  value,
+  onChange,
+  ...inputProps
+}: CheckOffProps) {
+  const id = `${name}-${value}`;
   return (
     <div className="pt-6">
       <label
@@ -25,10 +32,12 @@ function CheckOff({ label, checked, name, value, onChange, ...inputProps }: Chec
         <div
           className={[
             'w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors',
-            checked ? 'border-[#AABD9C]' : 'border-gray-300',
+            checked ? 'border-checkMarkGreen' : 'border-gray-300',
           ].join(' ')}
         >
-          {checked && <div className="w-3 h-3 rounded-full bg-[#AABD9C]" />}
+          {checked && (
+            <div className="w-3 h-3 rounded-full bg-checkMarkGreen" />
+          )}
         </div>
         <span className="ml-3 text-base text-[#29223C]">{label}</span>
       </label>

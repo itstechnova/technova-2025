@@ -4,6 +4,7 @@ import ShortAnswerQuestion from '../shortanswerq';
 import SubmitButton from '../submitButton';
 import CheckOff from '../checkOff';
 import UniversityDropdown from './UniversityDropdown';
+import MultiCheckbox from './MultiCheckbox';
 
 interface HackerStepOneFormProps {
   data: any;
@@ -39,6 +40,19 @@ const graduatingYearOptions = [
   'Other:',
 ];
 const hackathonCountOptions = ['This will be my first!', '1', '2', '3', '4+'];
+const wordOfMouthOptions = [
+  'Facebook',
+  'Instagram',
+  'Discord',
+  'Slack',
+  'Twitter',
+  'Linkedin',
+  'Math mailing list',
+  'Engineering mailing list',
+  'Orientation mailing list',
+  'Word of mouth',
+  'Other:',
+];
 
 function HackerStepOneForm({
   data,
@@ -254,6 +268,24 @@ function HackerStepOneForm({
                 </label>
               ))}
             </div>
+          </div>
+
+          {/* How did you hear about us? */}
+          <div className="flex flex-col gap-2">
+            <span className="font-bold text-base">
+              How did you hear about us?
+            </span>
+            <MultiCheckbox
+              options={wordOfMouthOptions}
+              selected={data.hearAboutUs}
+              onChange={(selected) =>
+                setData((prev: any) => ({ ...prev, hearAboutUs: selected }))
+              }
+              otherValue={data.hearAboutUsOther}
+              onOtherChange={(val) =>
+                setData((prev: any) => ({ ...prev, hearAboutUsOther: val }))
+              }
+            />
           </div>
         </div>
         <SubmitButton>→</SubmitButton>
