@@ -62,10 +62,18 @@ function HackerStepOneForm({
 }: HackerStepOneFormProps) {
   return (
     <div className="p-24 flex flex-col h-full bg-navPrimary relative">
-      <div className="absolute top-0 left-0 w-full h-1/4 pointer-events-none z-0 bg-gradient-to-b from-backgroundSecondary to-navPrimary" />
+      {/* Background SVG graphic */}
+      <div className="absolute inset-0 z-7 pointer-events-none">
+        <img
+          src="/hackerformsgraphic.svg"
+          alt="Hacker Forms Graphic Background"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="absolute top-0 left-0 w-full h-1/4 pointer-events-none z-5 bg-gradient-to-b from-backgroundSecondary to-navPrimary" />
       <div className="pb-5 relative z-10">
         <div className="flex gap-2 items-center pb-10">
-          <h1 className="text-5xl font-semibold text-textSecondary z-1">
+          <h1 className="text-5xl font-semibold text-textSecondary">
             Let's get to know you better!
           </h1>
           <Image
