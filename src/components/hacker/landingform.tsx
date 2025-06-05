@@ -13,15 +13,6 @@ interface HackerLandingFormProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-// function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-//   e.preventDefault();
-//   const form = e.target as HTMLFormElement;
-//   const formData = new FormData(form);
-//   const data = Object.fromEntries(formData.entries());
-//   console.log(data);
-//   // TODO: send data to backend
-// }
-
 function HackerLandingForm({
   data,
   handleChange,
@@ -72,6 +63,7 @@ function HackerLandingForm({
               question="Email"
               name="email"
               id="email"
+              type="email"
               placeholder="ex. janesmith@gmail.com"
               value={data.email}
               onChange={handleChange}

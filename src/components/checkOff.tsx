@@ -10,6 +10,7 @@ function CheckOff({
   name,
   value,
   onChange,
+  type = 'radio',
   ...inputProps
 }: CheckOffProps) {
   const id = `${name}-${value}`;
@@ -20,7 +21,7 @@ function CheckOff({
         className="flex items-center cursor-pointer select-none"
       >
         <input
-          type="radio"
+          type={type}
           name={name}
           id={id}
           value={value}
