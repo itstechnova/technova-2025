@@ -288,7 +288,9 @@ function HackerStepOneForm({
             />
           </div>
         </div>
-        <SubmitButton>→</SubmitButton>
+        <div className="flex justify-end mt-8">
+          <SubmitButton>→</SubmitButton>
+        </div>
       </form>
     </div>
   );
