@@ -11,12 +11,14 @@ interface HackerLandingFormProps {
   data: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  formError: string | null;
 }
 
 function HackerLandingForm({
   data,
   handleChange,
   handleSubmit,
+  formError,
 }: HackerLandingFormProps) {
   const [introMd, setIntroMd] = useState('');
 
@@ -77,6 +79,7 @@ function HackerLandingForm({
               onChange={handleChange}
             />
           </div>
+          {formError && <p className="text-red-500">{formError}</p>}
           <SubmitButton>→</SubmitButton>
         </form>
       </div>
