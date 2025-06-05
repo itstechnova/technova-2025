@@ -1,11 +1,12 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import MentorLandingForm from "@/components/mentor/landingform";
+import React, { useState } from 'react';
+import MentorLandingForm from '@/components/mentor/landingform';
 
 function MentorLanding() {
   const [landingData, setLandingData] = useState({
-    email: "",
+    email: '',
+    acknowledgement: 'No.',
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -16,7 +17,7 @@ function MentorLanding() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, type } = e.target;
 
-    const value = type === "checkbox" ? e.target.checked : e.target.value;
+    const value = type === 'checkbox' ? e.target.checked : e.target.value;
 
     setLandingData((prev: typeof landingData) => ({
       ...prev,
@@ -28,6 +29,7 @@ function MentorLanding() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-navPrimary">
       <MentorLandingForm
         data={landingData}
+        setData={setLandingData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
       />
