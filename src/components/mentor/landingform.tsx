@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import rehypeRaw from 'rehype-raw';
-import Image from 'next/image';
-import CheckOff from '../checkOff';
+import React, { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
+import Image from "next/image";
+import CheckOff from "../checkOff";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface MentorLandingFormProps {
   data: any;
@@ -18,28 +20,36 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
   handleChange,
   handleSubmit,
 }) => {
-  const [introMd, setIntroMd] = useState('');
-  const [resMd, setResMd] = useState('');
+  const [introMd, setIntroMd] = useState("");
+  const [resMd, setResMd] = useState("");
 
   useEffect(() => {
-    fetch('/textFiles/mentor/intro.md')
+    fetch("/textFiles/mentor/intro.md")
       .then((r) => r.text())
       .then(setIntroMd)
       .catch(console.error);
   }, []);
 
   useEffect(() => {
-    fetch('/textFiles/mentor/responsibilities.md')
+    fetch("/textFiles/mentor/responsibilities.md")
       .then((r) => r.text())
       .then(setResMd)
       .catch(console.error);
   }, []);
 
+  const router = useRouter();
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleSubmit(e);
+    router.push("/apply/mentor/step-one");
+  };
+
   return (
     <div className="relative min-h-screen bg-navPrimary">
       <div
         className="fixed inset-x-0 top-0 h-1/3 pointer-events-none z-0
-                   bg-gradient-to-b from-backgroundTertiary to-navPrimary"
+                   bg-gradient-to-b from-backgroundTertiary to-transparent"
       />
 
       <div className="pt-24 relative z-10 mx-auto px-6 lg:px-24 py-12">
@@ -123,26 +133,28 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
               type="checkbox"
               label="Yes."
               value="Yes."
-              checked={data.acknowledgement === 'Yes.'}
+              checked={data.acknowledgement === "Yes."}
               onChange={(e) => {
                 setData((prev: any) => ({
                   ...prev,
-                  acknowledgement: e.target.checked ? 'Yes.' : 'No.',
+                  acknowledgement: e.target.checked ? "Yes." : "No.",
                 }));
               }}
             />
           </div>
 
           {/* Submit button */}
-          <div className="pb-36">
-            <button
-              type="submit"
-              className="bg-buttonSecondary px-8 py-3 text-white text-xl 
+          <Link href="/apply/mentor/step-one">
+            <div className="pb-36">
+              <button
+                type="submit"
+                className="bg-buttonSecondary px-8 py-3 text-white text-xl 
                        rounded-xl shadow-sm"
-            >
-              →
-            </button>
-          </div>
+              >
+                →
+              </button>
+            </div>
+          </Link>
         </form>
       </div>
 
