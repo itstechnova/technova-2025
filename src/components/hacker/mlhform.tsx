@@ -2,7 +2,7 @@ import React from "react";
 import SubmitButton from "../submitButton";
 import CheckOff from "../checkOff";
 
-interface HackerStepTwoFormProps {
+interface HackerMLHProps {
   data: any;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -10,11 +10,7 @@ interface HackerStepTwoFormProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-function HackerStepTwoForm({
-  data,
-  handleChange,
-  handleSubmit,
-}: HackerStepTwoFormProps) {
+function HackerMLHForm({ data, handleChange, handleSubmit }: HackerMLHProps) {
   return (
     <div className="p-24 flex flex-col h-full bg-navPrimary relative">
       {/* Background SVG graphic */}
@@ -139,4 +135,4 @@ function HackerStepTwoForm({
   );
 }
 
-export default HackerStepTwoForm;
+export default HackerMLHForm;
