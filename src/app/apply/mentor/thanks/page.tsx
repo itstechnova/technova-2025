@@ -30,16 +30,16 @@ export default function MentorThankYouPage() {
         {/* Header */}
         <div className="flex items-center gap-2 pb-24">
           <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
-            TechNova 2025 Mentor Application
+            Thanks for Applying!
           </h1>
         </div>
 
         {/* Markdown Text */}
         <div
-          className="prose max-w-none prose-lg prose-stone mb-8
-            prose-headings:font-semibold prose-headings:text-2xl
-            prose-a:text-blue-600 prose-a:underline hover:prose-a:text-blue-800
-            prose-em:text-gray-700 prose-em:italic"
+			className="prose max-w-none prose-lg prose-stone mb-8
+			prose-headings:font-semibold prose-headings:text-2xl
+			prose-a:text-inherit hover:prose-a:text-inherit prose-a:no-underline
+			prose-em:text-gray-700 prose-em:italic"
         >
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
@@ -52,7 +52,7 @@ export default function MentorThankYouPage() {
         {/* CTA Button */}
         <div className="flex justify-center mt-12">
           <Link href="/">
-            <button className="bg-gradient-to-l from-[#FAC4BD] to-[#CD5769] text-white px-6 py-3 rounded-xl font-semibold">
+            <button className="text-white px-4 py-2 rounded-md shadow-sm shadow-navSecondary bg-navSecondary">
               Go Back Home!
             </button>
           </Link>
