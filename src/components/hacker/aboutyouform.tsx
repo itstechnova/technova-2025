@@ -6,7 +6,7 @@ import CheckOff from "../checkOff";
 import UniversityDropdown from "./UniversityDropdown";
 import MultiCheckbox from "./MultiCheckbox";
 
-interface HackerStepOneFormProps {
+interface HackerAboutYouFormProps {
   data: any;
   setData: React.Dispatch<React.SetStateAction<any>>;
   handleChange: (
@@ -54,12 +54,12 @@ const wordOfMouthOptions = [
   "Other:",
 ];
 
-function HackerStepOneForm({
+function HackerAboutYouForm({
   data,
   setData,
   handleChange,
   handleSubmit,
-}: HackerStepOneFormProps) {
+}: HackerAboutYouFormProps) {
   return (
     <div className="p-24 flex flex-col h-full bg-navPrimary relative">
       {/* Background SVG graphic */}
@@ -77,7 +77,7 @@ function HackerStepOneForm({
             Let's get to know you better!
           </h1>
           <Image
-            src="/themed_assets/Sunflower.png"
+            src="/themed_assets/sunflower.svg"
             alt="grass"
             width={40}
             height={40}
@@ -129,7 +129,7 @@ function HackerStepOneForm({
               </span>
             </span>
             <Image
-              src="/sizingchart.png"
+              src="/sizingchart.svg"
               alt="sizing chart"
               className="w-auto my-2"
               width={800}
@@ -304,4 +304,4 @@ function HackerStepOneForm({
   );
 }
 
-export default HackerStepOneForm;
+export default HackerAboutYouForm;
