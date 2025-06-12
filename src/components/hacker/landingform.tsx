@@ -75,6 +75,8 @@ function HackerLandingForm({
               name="age2025"
               id="age2025"
               placeholder="ex. 21"
+              min={0}
+              max={100}
               value={data.age2025}
               onChange={handleChange}
             />
