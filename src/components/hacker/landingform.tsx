@@ -28,10 +28,14 @@ function HackerLandingForm({
   }, []);
 
   return (
-    <div className="p-24 flex flex-col h-full bg-navPrimary relative">
-      <div className="absolute top-0 left-0 w-full h-1/4 pointer-events-none z-0 bg-gradient-to-b from-backgroundSecondary to-navPrimary" />
-      <div className="pb-5 border-b-2 border-textPrimary relative z-10">
-        <div className="flex gap-2 items-center pb-12">
+	
+    <div className="relative min-h-screen bg-navPrimary">
+      <div
+        className="fixed inset-x-0 top-0 h-1/3 pointer-events-none z-0
+                   bg-gradient-to-b from-backgroundTertiary to-navPrimary"
+      />
+      <div className="pt-24 relative z-10 mx-auto px-6 lg:px-24 py-12">
+        <div className="flex items-center gap-2 pb-24">
           <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
             TechNova 2025 Hacker Application
           </h1>
