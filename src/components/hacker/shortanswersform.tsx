@@ -59,7 +59,7 @@ function HackerShortAnswersForm({
           />
 
           <LongAnswerQuestion
-            question="Please choose *one* of the following prompts to answer and clarify the question you have chosen in the box."
+            question="Please choose *one* of the following prompts to answer and clarify the question you have chosen in the box. (200 words max)"
             options={questionOptions}
             selectedOption={data.selectedOption}
             selectOption={handleChange}
