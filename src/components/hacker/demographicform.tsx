@@ -155,7 +155,8 @@ function HackerDemographicForm({
 
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
-              Are you the first in your immediate family to pursue tech?
+              If you are pursuing technology, are you the first in your
+              immediate family to pursue tech?
             </span>
             <div className="flex flex-col gap-2">
               {firstToPursueTechOptions.map((choice) => (
@@ -173,7 +174,8 @@ function HackerDemographicForm({
 
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
-              How long have you been involved in tech?
+              How long have you been studying, working, or self-learning in tech
+              (if applicable)?
             </span>
             <div className="flex flex-col gap-2">
               {timeStudyingTechOptions.map((time) => (
