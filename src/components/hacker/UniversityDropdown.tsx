@@ -1,7 +1,7 @@
-import React from 'react';
-import CheckOff from '../checkOff';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import React from "react";
+import CheckOff from "../checkOff";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 interface UniversityDropdownProps {
   value: string;
@@ -12,32 +12,32 @@ interface UniversityDropdownProps {
 }
 
 const universities = [
-  'Algoma University',
-  'Brock University',
-  'Carleton University',
-  'Collège Universitaire Dominicain',
-  'Conestoga College',
-  'Lakehead University',
-  'Laurentian University',
-  'McMaster University',
-  'Nipissing University',
-  'OCAD University',
-  'Ontario Tech University',
+  "Algoma University",
+  "Brock University",
+  "Carleton University",
+  "Collège Universitaire Dominicain",
+  "Conestoga College",
+  "Lakehead University",
+  "Laurentian University",
+  "McMaster University",
+  "Nipissing University",
+  "OCAD University",
+  "Ontario Tech University",
   "Queen's University",
-  'Redeemer University College',
-  'Royal Military College of Canada',
-  'Toronto Metropolitan University',
-  'Trent University',
-  'University of British Columbia',
-  'University of Guelph',
-  'University of Ottawa',
-  'University of Toronto',
-  'University of Waterloo',
-  'University of Windsor',
-  'Western University London',
-  'Wilfrid Laurier University',
-  'York University',
-  'Other:',
+  "Redeemer University College",
+  "Royal Military College of Canada",
+  "Toronto Metropolitan University",
+  "Trent University",
+  "University of British Columbia",
+  "University of Guelph",
+  "University of Ottawa",
+  "University of Toronto",
+  "University of Waterloo",
+  "University of Windsor",
+  "Western University London",
+  "Wilfrid Laurier University",
+  "York University",
+  "Other:",
 ];
 
 const UniversityDropdown: React.FC<UniversityDropdownProps> = ({
@@ -74,7 +74,7 @@ const UniversityDropdown: React.FC<UniversityDropdownProps> = ({
           label="Other:"
           name="university"
           value="Other:"
-          checked={value === 'Other:'}
+          checked={value === "Other:"}
           onChange={onChange}
         />
         <input
@@ -84,7 +84,6 @@ const UniversityDropdown: React.FC<UniversityDropdownProps> = ({
           onChange={onChange}
           className="flex-1 border-0 border-b border-textPrimary bg-transparent ml-2 text-base focus:outline-none focus:ring-0 focus:border-textPrimary"
           style={{ minWidth: 0 }}
-          placeholder="Please specify"
         />
       </div>
     </div>
