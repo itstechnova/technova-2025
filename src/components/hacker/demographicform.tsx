@@ -66,8 +66,12 @@ function HackerDemographicForm({
               Demographic Questions 🗺️
             </h1>
             <p>
-              We’d like to understand our applicants’ backgrounds to improve
-              accessibility. These questions are for statistical purposes only.
+              One of our most important team pillars is diversity and we would
+              like to better understand the backgrounds of our applicants in
+              order to gain insight into how to improve accessibility as an
+              organization. The following questions have no effect on your
+              application other than being used for statistical purposes to
+              better forward our event's mission. 💡
             </p>
             <p>
               Your information will be kept confidential in accordance with our
@@ -80,12 +84,6 @@ function HackerDemographicForm({
               .
             </p>
           </div>
-          <Image
-            src="/themed_assets/sunflower.svg"
-            alt="grass"
-            width={40}
-            height={40}
-          />
         </div>
       </div>
 
