@@ -133,7 +133,7 @@ function HackerSurveyForm({
           </div>
 
           <Image
-            src="/themed_assets/Sunflower.png"
+            src="/themed_assets/sunflower.svg"
             alt="grass"
             width={40}
             height={40}

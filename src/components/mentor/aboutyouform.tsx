@@ -4,7 +4,7 @@ import ShortAnswerQuestion from "../shortanswerq";
 import CheckOff from "../checkOff";
 import AvailabilityGrid from "./AvailabilityGrid";
 
-interface HackerStepOneFormProps {
+interface MentorAboutYouFormProps {
   data: any;
   setData: React.Dispatch<React.SetStateAction<any>>;
   handleChange: (
@@ -23,12 +23,12 @@ const genderIdentityOptions = [
 const mentorInPersonOptions = ["Yes!", "No", "Maybe"];
 const tshirtSizeOptions = ["XS", "S", "M", "L", "XL", "2XL", "3XL"];
 
-function MentorStepOneForm({
+function MentorAboutYouForm({
   data,
   setData,
   handleChange,
   handleSubmit,
-}: HackerStepOneFormProps) {
+}: MentorAboutYouFormProps) {
   const initialAvailability = Array.from({ length: 10 }, () =>
     Array(3).fill(false)
   );
@@ -43,7 +43,7 @@ function MentorStepOneForm({
         {/* TODO: Crop the svg to fit the screen better */}
         <img
           src="/mentorFormGraphic.svg"
-          alt="Hacker Forms Graphic Background"
+          alt="Mentor Forms Graphic Background"
           className="w-full h-full object-cover"
         />
         <div
@@ -169,12 +169,12 @@ function MentorStepOneForm({
               Disclaimer:
               <span className="font-normal">
                 {" "}
-                The supply for sizes vary, in the event there are no XS, hackers
+                The supply for sizes vary, in the event there are no XS, mentors
                 will be sent a S.
               </span>
             </span>
             <Image
-              src="/sizingchart.png"
+              src="/sizingchart.svg"
               alt="sizing chart"
               className="w-auto my-2"
               width={800}
@@ -228,4 +228,4 @@ function MentorStepOneForm({
   );
 }
 
-export default MentorStepOneForm;
+export default MentorAboutYouForm;
