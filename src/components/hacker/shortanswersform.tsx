@@ -7,7 +7,8 @@ interface HackerShortAnswersProps {
   handleChange: (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    >,
+    wordLimit?: number
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
@@ -55,7 +56,7 @@ function HackerShortAnswersForm({
             id="longAnswerQ1"
             placeholder="Start typing..."
             value={data.longAnswerQ1}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e, 150)}
           />
 
           <LongAnswerQuestion
@@ -67,7 +68,7 @@ function HackerShortAnswersForm({
             id="longAnswerQ2"
             placeholder="Start typing..."
             value={data.longAnswerQ2}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e, 200)}
           />
 
           <LongAnswerQuestion
@@ -76,7 +77,7 @@ function HackerShortAnswersForm({
             id="longAnswerQ3"
             placeholder="Start typing..."
             value={data.longAnswerQ3}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e, 150)}
           />
 
           <LongAnswerQuestion
@@ -85,7 +86,7 @@ function HackerShortAnswersForm({
             id="longAnswerQ4"
             placeholder="Start typing..."
             value={data.longAnswerQ4}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e, 10)}
           />
         </div>
         <div className="flex justify-end mt-8">

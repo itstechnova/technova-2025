@@ -15,12 +15,22 @@ function HackerShortAnswers() {
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    >,
+    wordLimit?: number
   ) => {
     const { name, type, value } = e.target;
+    let newValue = value;
+
+    if (wordLimit !== undefined) {
+      const words = value.trim().split(/\s+/).filter(Boolean);
+      if (words.length > wordLimit) {
+        newValue = words.slice(0, wordLimit).join(" ");
+      }
+    }
+
     setShortAnswersData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: newValue,
     }));
   };
 
