@@ -84,7 +84,6 @@ const UniversityDropdown: React.FC<UniversityDropdownProps> = ({
           onChange={onChange}
           className="flex-1 border-0 border-b border-textPrimary bg-transparent ml-2 text-base focus:outline-none focus:ring-0 focus:border-textPrimary"
           style={{ minWidth: 0 }}
-          placeholder="Please specify"
         />
       </div>
     </div>

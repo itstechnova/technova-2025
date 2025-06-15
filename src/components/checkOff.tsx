@@ -64,7 +64,6 @@ function CheckOff({
                   ? "border-textPrimary"
                   : "border-gray-300 text-gray-400",
               ].join(" ")}
-              placeholder="Please specify"
             />
           )}
         </div>
