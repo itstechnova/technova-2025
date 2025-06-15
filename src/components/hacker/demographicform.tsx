@@ -75,10 +75,7 @@ function HackerDemographicForm({
             </p>
             <p>
               Your information will be kept confidential in accordance with our
-              <a
-                href="https://mlh.io/privacy"
-                className="text-blue-500 underline ml-1"
-              >
+              <a href="https://mlh.io/privacy" className="underline ml-1">
                 Privacy Policy
               </a>
               .
