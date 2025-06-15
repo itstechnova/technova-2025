@@ -131,13 +131,6 @@ function HackerSurveyForm({
               sections too!
             </span>
           </div>
-
-          <Image
-            src="/themed_assets/sunflower.svg"
-            alt="grass"
-            width={40}
-            height={40}
-          />
         </div>
       </div>
 
