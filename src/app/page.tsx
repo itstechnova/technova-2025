@@ -1,5 +1,6 @@
-import HeroAbout from '@/components/landing-page/hero-about';
-import supabase from '@/config/supabaseClient';
+import HeroAbout from "@/components/landing-page/hero-about";
+import FAQ from "@/components/landing-page/faq";
+import supabase from "@/config/supabaseClient";
 
 export default async function Home() {
   console.dir(supabase, { depth: 1 });
@@ -7,6 +8,9 @@ export default async function Home() {
   return (
     <div>
       <HeroAbout />
+      <div className="pb-24">
+        <FAQ />
+      </div>
     </div>
   );
 }
