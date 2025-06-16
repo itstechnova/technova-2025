@@ -48,7 +48,8 @@ export function Button({
   return (
     <button
       className={cn(
-        "max-sm:w-full inline-flex items-center justify-center rounded-md font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-2 focus:ring-navSecondary",
+        size !== "icon" && "max-sm:w-full",
+        "inline-flex items-center justify-center rounded-md font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-2 focus:ring-navSecondary",
         variantClasses[variant],
         sizeClasses[size],
         className
