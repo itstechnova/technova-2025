@@ -3,7 +3,10 @@ import { Button } from "../base-ui/button";
 
 const SponsorUsSection: React.FC = () => {
   return (
-    <section className="px-24 py-32 flex flex-col h-full relative w-full text-left">
+    <section
+      id="sponsors"
+      className="scroll-mt-16 px-24 py-32 flex flex-col h-full relative w-full text-left"
+    >
       <h2 className="text-4xl font-bold text-textPrimary mb-16">Sponsor Us</h2>
       <p className="max-w-4xl text-lg text-textPrimary mb-12">
         Support more than 300+ young women in the next step of their journey by
