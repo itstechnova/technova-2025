@@ -1,8 +1,10 @@
+"use client";
 import React from "react";
-import Image from "next/image";
 import { Button } from "../base-ui/button";
+import { useRouter } from "next/navigation";
 
 function HeroAbout() {
+  const router = useRouter();
   return (
     <div className="bg-background">
       {/* Hero before gate */}
@@ -36,10 +38,18 @@ function HeroAbout() {
               </small>
             </div>
             <div className="flex flex-col gap-4 max-md:w-full">
-              <Button variant="default" size="lg">
+              <Button
+                variant="default"
+                size="lg"
+                onClick={() => router.push("/apply/hacker")}
+              >
                 Hack with us!
               </Button>
-              <Button variant="outline" size="lg">
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => router.push("/apply/mentor")}
+              >
                 Mentor with us!
               </Button>
             </div>
@@ -65,7 +75,9 @@ function HeroAbout() {
         {/* Overlay Content */}
         <div className="absolute bottom-0 left-0 w-full h-full flex items-center z-10">
           <div className="flex flex-col gap-4 items-start px-10 md:px-24 py-6 rounded-3xl w-3/4 md:w-1/2 absolute sm:bottom-12 md:bottom-1/5 bg-navPrimary/50">
-            <h2 className="text-3xl font-bold">About Us</h2>
+            <h2 id="about" className="text-3xl font-bold scroll-mt-28">
+              About Us
+            </h2>
             <p className="text-base">
               TechNova’s mission is to create safe, inclusive and empowering
               spaces for women and non-binary individuals to start, grow and
