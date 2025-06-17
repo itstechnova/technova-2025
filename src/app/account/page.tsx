@@ -1,9 +1,10 @@
 import React from 'react';
+import Image from 'next/image';
 
 function LoginPage() {
   return (
-    <div className="min-h-screen bg-navPrimary">
-      <div className="pt-52 p-24 flex flex-col h-full bg-navPrimary relative">
+    <div className="min-h-screen bg-navPrimary relative overflow-hidden">
+      <div className="pt-52 p-24 flex flex-col h-full bg-navPrimary relative w-3/5">
         <h1 className="text-8xl font-semibold text-textPrimary">
           Welcome to <br />
           Tech
@@ -31,6 +32,20 @@ function LoginPage() {
           </div>
         </div>
       </div>
+      <Image
+        className="absolute bottom-0 right-[-200px] z-10 w-3/5"
+        src="/themed_assets/goose.svg"
+        alt="goose"
+        width={800}
+        height={800}
+      />
+      <Image
+        className="absolute top-[-100px] left-[-100px] z-10 w-1/3"
+        src="/themed_assets/ButtercupFlower.svg"
+        alt="goose"
+        width={800}
+        height={800}
+      />
     </div>
   );
 }
