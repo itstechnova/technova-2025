@@ -5,9 +5,10 @@ import ShortAnswerQuestion from '@/components/shortanswerq';
 import SubmitButton from '@/components/submitButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import supabase from '@/config/supabaseClient';
 
 export default function CreateAccountPage() {
-  const [form, setForm] = useState({
+  const [createAccountForm, setCreateAccountForm] = useState({
     firstName: '',
     lastName: '',
     email: '',
@@ -16,22 +17,43 @@ export default function CreateAccountPage() {
     codeOfConduct: false,
   });
 
+  const [formError, setFormError] = useState('');
+  const [formSuccess, setFormSuccess] = useState('');
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
-    setForm((prev) => ({
+    setCreateAccountForm((prev) => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
   };
 
   const handleCustomCheckbox = () => {
-    setForm((prev) => ({ ...prev, codeOfConduct: !prev.codeOfConduct }));
+    setCreateAccountForm((prev) => ({
+      ...prev,
+      codeOfConduct: !prev.codeOfConduct,
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: handle sign up logic
+    signUpNewUser();
   };
+
+  async function signUpNewUser() {
+    const { data, error } = await supabase.auth.signUp({
+      email: createAccountForm.email,
+      password: createAccountForm.password,
+    });
+    console.log('data', data);
+    console.log('error', error);
+    if (data) {
+      setFormError('');
+      setFormSuccess('Account created successfully');
+    } else {
+      setFormError('Account creation failed');
+    }
+  }
 
   return (
     <div className="min-h-screen bg-navPrimary flex flex-col justify-between">
@@ -51,7 +73,7 @@ export default function CreateAccountPage() {
             name="firstName"
             id="firstName"
             placeholder="ex. Jane"
-            value={form.firstName}
+            value={createAccountForm.firstName}
             onChange={handleChange}
             required
           />
@@ -60,7 +82,7 @@ export default function CreateAccountPage() {
             name="lastName"
             id="lastName"
             placeholder="ex. Smith"
-            value={form.lastName}
+            value={createAccountForm.lastName}
             onChange={handleChange}
             required
           />
@@ -72,7 +94,7 @@ export default function CreateAccountPage() {
             id="email"
             type="email"
             placeholder="ex. jane.smith@domain.com"
-            value={form.email}
+            value={createAccountForm.email}
             onChange={handleChange}
             required
           />
@@ -82,7 +104,7 @@ export default function CreateAccountPage() {
             id="password"
             type="password"
             placeholder="type here..."
-            value={form.password}
+            value={createAccountForm.password}
             onChange={handleChange}
             required
           />
@@ -92,7 +114,7 @@ export default function CreateAccountPage() {
             id="confirmPassword"
             type="password"
             placeholder="type here..."
-            value={form.confirmPassword}
+            value={createAccountForm.confirmPassword}
             onChange={handleChange}
             required
           />
@@ -103,7 +125,7 @@ export default function CreateAccountPage() {
               type="checkbox"
               id="codeOfConduct"
               name="codeOfConduct"
-              checked={form.codeOfConduct}
+              checked={createAccountForm.codeOfConduct}
               onChange={handleCustomCheckbox}
               className="sr-only"
               required
@@ -111,12 +133,12 @@ export default function CreateAccountPage() {
             <div
               className={[
                 'w-5 h-5 rounded border-2 flex items-center justify-center transition-colors',
-                form.codeOfConduct
+                createAccountForm.codeOfConduct
                   ? 'border-checkMarkGreen bg-checkMarkGreen'
                   : 'border-gray-300 bg-transparent',
               ].join(' ')}
             >
-              {form.codeOfConduct && (
+              {createAccountForm.codeOfConduct && (
                 <FontAwesomeIcon
                   icon={faCheck}
                   className="text-white w-3 h-3"
@@ -136,9 +158,14 @@ export default function CreateAccountPage() {
             </span>
           </label>
         </div>
-        <SubmitButton className="text-white bg-textPrimary px-8 py-3 text-xl font-semibold rounded-lg shadow-md w-40">
+        <SubmitButton
+          type="submit"
+          className="text-white bg-textPrimary px-8 py-3 text-xl font-semibold rounded-lg shadow-md w-40"
+        >
           Sign Up
         </SubmitButton>
+        {formError && <div className="text-red-500">{formError}</div>}
+        {formSuccess && <div className="text-green-500">{formSuccess}</div>}
         <div className="mt-8 text-base text-textPrimary">
           Already have an account?{' '}
           <Link href="/account/login" className="underline text-textPrimary">
