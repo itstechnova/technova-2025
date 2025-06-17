@@ -86,7 +86,7 @@ function HackerLandingForm({
         </form>
       </div>
       <Image
-        className="absolute bottom-0 right-0 z-10"
+        className="absolute bottom-0 right-0 z-10 pointer-events-none"
         src="/themed_assets/bunnywithflower.svg"
         alt="flower bunny"
         width={800}
