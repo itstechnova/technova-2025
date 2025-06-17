@@ -33,14 +33,14 @@ function LoginPage() {
         </div>
       </div>
       <Image
-        className="absolute bottom-0 right-[-200px] z-10 w-3/5"
+        className="absolute bottom-0 right-[-200px] z-10 w-3/5 pointer-events-none"
         src="/themed_assets/goose.svg"
         alt="goose"
         width={800}
         height={800}
       />
       <Image
-        className="absolute top-[-100px] left-[-100px] z-10 w-1/3"
+        className="absolute top-[-100px] left-[-100px] z-10 w-1/3 pointer-events-none"
         src="/themed_assets/ButtercupFlower.svg"
         alt="goose"
         width={800}
