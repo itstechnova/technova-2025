@@ -40,7 +40,6 @@ export default function SignUpPage() {
               name="email"
               id="email"
               type="email"
-              placeholder="ex. jane.smith@domain.com"
               value={form.email}
               onChange={handleChange}
               required
@@ -50,25 +49,28 @@ export default function SignUpPage() {
               name="password"
               id="password"
               type="password"
-              placeholder="type here..."
               value={form.password}
               onChange={handleChange}
               required
             />
           </div>
-          <div className="mb-6 mt-2">
+          <div className="my-6 flex flex-col gap-8">
             <Link href="#" className="underline text-textPrimary text-base">
               Forgot your password?
             </Link>
-          </div>
-          <SubmitButton className="bg-textPrimary text-white px-8 py-3 text-xl font-semibold rounded-lg shadow-md w-32 mb-4">
-            Log In
-          </SubmitButton>
-          <div className="mt-4 text-base text-textPrimary">
-            Don't have an account yet?{' '}
-            <Link href="/account/create" className="underline text-textPrimary">
-              Create one here!
-            </Link>
+
+            <SubmitButton className="bg-textPrimary text-white px-8 py-3 text-xl font-semibold rounded-lg shadow-md w-32 mb-4">
+              Log In
+            </SubmitButton>
+            <div className=" text-base text-textPrimary">
+              Don't have an account yet?{' '}
+              <Link
+                href="/account/create"
+                className="underline text-textPrimary"
+              >
+                Create one here!
+              </Link>
+            </div>
           </div>
         </form>
       </div>
