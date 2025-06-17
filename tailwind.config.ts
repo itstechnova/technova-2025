@@ -13,6 +13,7 @@ export default {
         foreground: "var(--foreground)",
         navPrimary: "#FFFAF3",
         navSecondary: "#19123C",
+        navSecondaryHover: "#5B5BA9",
         textPrimary: "#19123C",
         textSecondary: "#06402B",
         buttonPrimary: "#CD5769",
