@@ -4,21 +4,38 @@ import Link from 'next/link';
 import ShortAnswerQuestion from '@/components/shortanswerq';
 import SubmitButton from '@/components/submitButton';
 import Image from 'next/image';
+import supabase from '@/config/supabaseClient';
 
 export default function SignUpPage() {
-  const [form, setForm] = useState({
+  const [loginForm, setLoginForm] = useState({
     email: '',
     password: '',
   });
 
+  const [loginFormError, setLoginFormError] = useState('');
+  const [loginFormSuccess, setLoginFormSuccess] = useState('');
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    setLoginForm((prev) => ({ ...prev, [name]: value }));
   };
+
+  async function signInWithEmail() {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: loginForm.email,
+      password: loginForm.password,
+    });
+    if (data) {
+      setLoginFormError('');
+      setLoginFormSuccess('Login successful');
+    } else {
+      setLoginFormError('Login failed');
+    }
+  }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: handle login logic
+    signInWithEmail();
   };
 
   return (
@@ -40,7 +57,7 @@ export default function SignUpPage() {
               name="email"
               id="email"
               type="email"
-              value={form.email}
+              value={loginForm.email}
               onChange={handleChange}
               required
             />
@@ -49,7 +66,7 @@ export default function SignUpPage() {
               name="password"
               id="password"
               type="password"
-              value={form.password}
+              value={loginForm.password}
               onChange={handleChange}
               required
             />
@@ -59,7 +76,10 @@ export default function SignUpPage() {
               Forgot your password?
             </Link>
 
-            <SubmitButton className="bg-textPrimary text-white px-8 py-3 text-xl font-semibold rounded-lg shadow-md w-32 mb-4">
+            <SubmitButton
+              type="submit"
+              className="bg-textPrimary text-white px-8 py-3 text-xl font-semibold rounded-lg shadow-md w-32 mb-4"
+            >
               Log In
             </SubmitButton>
             <div className=" text-base text-textPrimary">
@@ -72,6 +92,12 @@ export default function SignUpPage() {
               </Link>
             </div>
           </div>
+          {loginFormError && (
+            <div className="text-red-500">{loginFormError}</div>
+          )}
+          {loginFormSuccess && (
+            <div className="text-green-500">{loginFormSuccess}</div>
+          )}
         </form>
       </div>
       <Image
