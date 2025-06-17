@@ -141,7 +141,7 @@ export default function CreateAccountPage() {
         </SubmitButton>
         <div className="mt-8 text-base text-textPrimary">
           Already have an account?{' '}
-          <Link href="/login/signup" className="underline text-textPrimary">
+          <Link href="/account/login" className="underline text-textPrimary">
             Log in here!
           </Link>
         </div>

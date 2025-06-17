@@ -21,11 +21,11 @@ function LoginPage() {
         </p>
         <div className="flex flex-col gap-4">
           <div className="px-8 py-3 bg-textPrimary text-white font-semibold text-xl rounded-lg shadow-md hover:bg-[#2A2346] transition-colors w-fit">
-            <a href="/login/create">Create an Account</a>
+            <a href="/account/create">Create an Account</a>
           </div>
           <div className="text-lg text-textPrimary">
             Already have an account?{' '}
-            <a href="/login/signup" className="underline">
+            <a href="/account/login" className="underline">
               Log in here!
             </a>
           </div>
