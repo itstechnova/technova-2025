@@ -17,7 +17,7 @@ const genderIdentityOptions = [
   "Female",
   "Male",
   "Non-binary",
-  "Perfer not to say",
+  "Prefer not to say",
   "Other:",
 ];
 const mentorInPersonOptions = ["Yes!", "No", "Maybe"];
@@ -103,31 +103,27 @@ function MentorAboutYouForm({
             </span>
             <div className="flex flex-col gap-2 mt-2">
               {genderIdentityOptions.map((gender) => (
-                <label key={gender} className="flex items-end gap-2 w-full">
-                  <CheckOff
-                    label={gender}
-                    name="genderIdentity"
-                    value={gender}
-                    checked={data.genderIdentity === gender}
-                    onChange={handleChange}
-                  />
-                  {gender === "Other:" && (
-                    <input
-                      type="text"
-                      name="genderIdentityOther"
-                      value={data.genderIdentityOther || ""}
-                      onChange={(e) => {
-                        setData((prev: any) => ({
-                          ...prev,
-                          levelOfStudy: "Other:",
-                          levelOfStudyOther: e.target.value,
-                        }));
-                      }}
-                      className="flex-1 border-0 border-b border-textPrimary bg-transparent ml-2 text-base focus:outline-none focus:ring-0 focus:border-textPrimary"
-                      style={{ minWidth: 0 }}
-                    />
-                  )}
-                </label>
+                <CheckOff
+                  key={gender}
+                  label={gender}
+                  name="genderIdentity"
+                  value={gender}
+                  checked={data.genderIdentity === gender}
+                  onChange={handleChange}
+                  otherValue={
+                    gender === "Other:" ? data.genderIdentityOther : undefined
+                  }
+                  onOtherChange={
+                    gender === "Other:"
+                      ? (val) =>
+                          setData((prev: any) => ({
+                            ...prev,
+                            genderIdentity: "Other:",
+                            genderIdentityOther: val,
+                          }))
+                      : undefined
+                  }
+                />
               ))}
             </div>
           </div>

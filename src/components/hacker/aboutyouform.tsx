@@ -165,31 +165,27 @@ function HackerAboutYouForm({
             </span>
             <div className="flex flex-col gap-2 mt-2">
               {levelOfStudyOptions.map((level) => (
-                <label key={level} className="flex items-end gap-2 w-full">
-                  <CheckOff
-                    label={level}
-                    name="levelOfStudy"
-                    value={level}
-                    checked={data.levelOfStudy === level}
-                    onChange={handleChange}
-                  />
-                  {level === "Other:" && (
-                    <input
-                      type="text"
-                      name="levelOfStudyOther"
-                      value={data.levelOfStudyOther || ""}
-                      onChange={(e) => {
-                        setData((prev: any) => ({
-                          ...prev,
-                          levelOfStudy: "Other:",
-                          levelOfStudyOther: e.target.value,
-                        }));
-                      }}
-                      className="flex-1 border-0 border-b border-textPrimary bg-transparent ml-2 text-base focus:outline-none focus:ring-0 focus:border-textPrimary"
-                      style={{ minWidth: 0 }}
-                    />
-                  )}
-                </label>
+                <CheckOff
+                  key={level}
+                  label={level}
+                  name="levelOfStudy"
+                  value={level}
+                  checked={data.levelOfStudy === level}
+                  onChange={handleChange}
+                  otherValue={
+                    level === "Other:" ? data.levelOfStudyOther : undefined
+                  }
+                  onOtherChange={
+                    level === "Other:"
+                      ? (val) =>
+                          setData((prev: any) => ({
+                            ...prev,
+                            levelOfStudy: "Other:",
+                            levelOfStudyOther: val,
+                          }))
+                      : undefined
+                  }
+                />
               ))}
             </div>
           </div>
@@ -204,32 +200,28 @@ function HackerAboutYouForm({
             </span>
 
             <div className="flex flex-col gap-2 mt-2">
-              {graduatingYearOptions.map((level) => (
-                <label key={level} className="flex items-end gap-2 w-full">
-                  <CheckOff
-                    label={level}
-                    name="graduatingYear"
-                    value={level}
-                    checked={data.graduatingYear === level}
-                    onChange={handleChange}
-                  />
-                  {level === "Other:" && (
-                    <input
-                      type="text"
-                      name="graduatingYearOther"
-                      value={data.graduatingYearOther || ""}
-                      onChange={(e) => {
-                        setData((prev: any) => ({
-                          ...prev,
-                          graduatingYear: "Other:",
-                          graduatingYearOther: e.target.value,
-                        }));
-                      }}
-                      className="flex-1 border-0 border-b border-textPrimary bg-transparent ml-2 text-base focus:outline-none focus:ring-0 focus:border-textPrimary"
-                      style={{ minWidth: 0 }}
-                    />
-                  )}
-                </label>
+              {graduatingYearOptions.map((year) => (
+                <CheckOff
+                  key={year}
+                  label={year}
+                  name="graduatingYear"
+                  value={year}
+                  checked={data.graduatingYear === year}
+                  onChange={handleChange}
+                  otherValue={
+                    year === "Other:" ? data.graduatingYearOther : undefined
+                  }
+                  onOtherChange={
+                    year === "Other:"
+                      ? (val) =>
+                          setData((prev: any) => ({
+                            ...prev,
+                            graduatingYear: "Other:",
+                            graduatingYearOther: val,
+                          }))
+                      : undefined
+                  }
+                />
               ))}
             </div>
           </div>
@@ -244,6 +236,13 @@ function HackerAboutYouForm({
               value={data.university}
               otherValue={data.universityOther}
               onChange={handleChange}
+              onOtherChange={(val) =>
+                setData((prev: any) => ({
+                  ...prev,
+                  university: "Other:",
+                  universityOther: val,
+                }))
+              }
             />
           </div>
 
