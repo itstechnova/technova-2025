@@ -19,13 +19,10 @@ function LoginPage() {
           Sign in or create an account to apply, build your team, and experience
           the hackathon of the year.
         </p>
-        <div className="">
-          <a
-            href="/login/create"
-            className="bg-textPrimary text-white font-semibold text-xl px-8 py-3 rounded-lg shadow-md hover:bg-[#2A2346] transition-colors"
-          >
-            Create an Account
-          </a>
+        <div className="flex flex-col gap-4">
+          <div className="px-8 py-3 bg-textPrimary text-white font-semibold text-xl rounded-lg shadow-md hover:bg-[#2A2346] transition-colors w-fit">
+            <a href="/login/create">Create an Account</a>
+          </div>
           <div className="text-lg text-textPrimary">
             Already have an account?{' '}
             <a href="/login/signup" className="underline">
