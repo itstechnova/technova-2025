@@ -18,7 +18,7 @@ export default function ContactUs() {
         <div className="grid md:grid-cols-5 max-w-4xl mx-auto items-center">
           <div className="md:col-span-4 rounded-xl bg-gradient-to-r from-navSecondary to-navSecondaryHover p-5">
             <div className="rounded-lg bg-background p-6 text-center">
-              <p className="text-lg">
+              <p className="text-lg text-textPrimary">
                 Reach out to us at{" "}
                 <a
                   href="mailto:hello@itstechnova.org"
