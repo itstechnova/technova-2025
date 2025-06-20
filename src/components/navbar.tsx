@@ -10,7 +10,7 @@ const navLinks = [
   { label: "About", href: "#about" },
   { label: "Sponsors", href: "#sponsors" },
   { label: "FAQ", href: "/" },
-  { label: "Contact Us", href: "/" },
+  { label: "Contact Us", href: "#contact-us" },
 ];
 
 function Navbar() {
