@@ -1,10 +1,31 @@
-"use client";
-import React from "react";
-import { Button } from "../base-ui/button";
-import { useRouter } from "next/navigation";
+'use client';
+import React, { useState } from 'react';
+import { Button } from '../base-ui/button';
+import { useRouter } from 'next/navigation';
+import InterestInputBox from '../interestinputbox';
+import supabase from '@/config/supabaseClient';
 
 function HeroAbout() {
   const router = useRouter();
+  const [email, setEmail] = useState('');
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
+  const handleSubmit = async () => {
+    console.log(email);
+    const { data, error } = await supabase
+      .from('interest_form')
+      .insert({ email });
+    if (error) {
+      console.error(error);
+    }
+    if (data) {
+      console.log(data);
+    }
+  };
+
   return (
     <div className="bg-background">
       {/* Hero before gate */}
@@ -20,24 +41,31 @@ function HeroAbout() {
         <div className="absolute top-0 left-0 w-full h-1/4 pointer-events-none z-5 from-backgroundSecondary to-navPrimary" />
         <div className="pb-5 relative z-10 max-md:w-full">
           <div className="flex flex-row justify-between items-center max-md:flex-col gap-6 max-md:w-full">
-            <div className="flex flex-col gap-4 max-md:items-center">
-              <h1 className="text-7xl max-md:text-5xl font-bold">
-                <span>Tech</span>
-                <span className="bg-gradient-to-r from-[#06402B] to-[#648E61] text-transparent bg-clip-text">
-                  Nova
-                </span>
-              </h1>
-              <h2 className="text-3xl max-sm:text-2xl font-bold">
-                Hack With Us
-              </h2>
-              <p className="text-base max-sm:text-sm max-md:text-center">
-                University of Waterloo’s Women+ in Tech Hackathon
-              </p>
-              <small className="text-sm max-sm:text-xs font-semibold">
-                Sept 22–24, 2025
-              </small>
+            <div className="flex flex-col gap-12">
+              <div className="flex flex-col gap-4 max-md:items-center">
+                <h1 className="text-9xl max-md:text-7xl font-bold">
+                  <span>Tech</span>
+                  <span className="bg-gradient-to-r from-[#06402B] to-[#648E61] text-transparent bg-clip-text">
+                    Nova
+                  </span>
+                </h1>
+                <h2 className="text-6xl max-sm:text-5xl font-bold">
+                  Hack With Us
+                </h2>
+                <p className="text-2xl max-sm:text-xl max-md:text-center">
+                  University of Waterloo’s Women+ in Tech Hackathon
+                </p>
+                <small className="text-xl max-sm:text-lg font-semibold">
+                  Sept 22–24, 2025
+                </small>
+              </div>
+              <InterestInputBox
+                value={email}
+                onChange={handleEmailChange}
+                onSubmit={handleSubmit}
+              />
             </div>
-            <div className="flex flex-col gap-4 max-md:w-full">
+            {/* <div className="flex flex-col gap-4 max-md:w-full">
               <Button
                 variant="default"
                 size="lg"
@@ -52,7 +80,7 @@ function HeroAbout() {
               >
                 Mentor with us!
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
