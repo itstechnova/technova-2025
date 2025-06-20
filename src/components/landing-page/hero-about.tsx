@@ -8,6 +8,8 @@ import supabase from '@/config/supabaseClient';
 function HeroAbout() {
   const router = useRouter();
   const [email, setEmail] = useState('');
+  const [formError, setFormError] = useState('');
+  const [formSuccess, setFormSuccess] = useState('');
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -19,10 +21,12 @@ function HeroAbout() {
       .from('interest_form')
       .insert({ email });
     if (error) {
-      console.error(error);
-    }
-    if (data) {
-      console.log(data);
+      setFormError(error.message);
+      setFormSuccess('');
+    } else {
+      setFormSuccess('Email added to interest form');
+      setFormError('');
+      console.log('data', data);
     }
   };
 
@@ -59,11 +63,17 @@ function HeroAbout() {
                   Sept 22–24, 2025
                 </small>
               </div>
-              <InterestInputBox
-                value={email}
-                onChange={handleEmailChange}
-                onSubmit={handleSubmit}
-              />
+              <div className="flex flex-col gap-2">
+                <InterestInputBox
+                  value={email}
+                  onChange={handleEmailChange}
+                  onSubmit={handleSubmit}
+                />
+                {formError && <div className="text-red-500">{formError}</div>}
+                {formSuccess && (
+                  <div className="text-green-500">{formSuccess}</div>
+                )}
+              </div>
             </div>
             {/* <div className="flex flex-col gap-4 max-md:w-full">
               <Button
