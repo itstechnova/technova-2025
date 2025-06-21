@@ -13,7 +13,7 @@ function HackerMLHRequirements() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, type, value } = e.target;
+    const { name, value } = e.target;
     setMLHData((prev) => ({
       ...prev,
       [name]: (e.target as HTMLInputElement).checked ? value : "",

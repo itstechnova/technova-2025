@@ -1,13 +1,13 @@
 
 'use client';
 import React, { useState } from 'react';
-import { Button } from '../base-ui/button';
-import { useRouter } from 'next/navigation';
+// import { Button } from '../base-ui/button';
+// import { useRouter } from 'next/navigation';
 import InterestInputBox from '../interestinputbox';
 import supabase from '@/config/supabaseClient';
 
 function HeroAbout() {
-  const router = useRouter();
+//   const router = useRouter();
   const [email, setEmail] = useState('');
   const [formError, setFormError] = useState('');
   const [formSuccess, setFormSuccess] = useState('');

@@ -58,10 +58,10 @@ export default function ContactUs() {
           Inclusivity Statement
         </h2>
         <p className="text-base text-textPrimary">
-          TechNova’s mission is to create safe, inclusive and empowering spaces
+          TechNova&apos;s mission is to create safe, inclusive and empowering spaces
           for women and non-binary individuals to start, grow and thrive in the
           technology industry. We ensure that all members of the hackathon are
-          respectful of our participants' gender expression. The TechNova team
+          respectful of our participants&apos; gender expression. The TechNova team
           would also like to acknowledge that “female” or “women” is not an
           accurate description for many people and it may make some feel
           unwelcome. We use the term Women+ to specifically and intentionally
