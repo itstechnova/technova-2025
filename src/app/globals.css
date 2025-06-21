@@ -3,19 +3,40 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  --background: #fffaf3;
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
+/* should implement if we want to accomidate dark mode */
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
 }
+*/
 
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-poppins), Arial, Helvetica, sans-serif;
+}
+
+.bg-faq-grid {
+  background-image: linear-gradient(to right, #dcdcdc 5px, transparent 1px),
+    linear-gradient(to bottom, #dcdcdc 5px, transparent 1px);
+  background-size: 200px 200px;
+  background-position: top left;
+  border-right: 5px solid #dcdcdc;
+  border-bottom: 5px solid #dcdcdc;
+}
+
+/* Hide scrollbars entirely (both vertical & horizontal) */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
 }
