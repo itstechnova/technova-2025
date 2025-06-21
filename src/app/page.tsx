@@ -13,9 +13,9 @@ export default async function Home() {
       <HeroAbout />
       <SponsorUsSection />
 
-      <div className="pb-24">
+      {/* <div className="pb-24">
         <FAQ />
-      </div>
+      </div> */}
       <ContactUs />
 
     </div>
