@@ -9,7 +9,7 @@ import { Button } from "./base-ui/button";
 const navLinks = [
   { label: "About", href: "#about" },
   { label: "Sponsors", href: "#sponsors" },
-  { label: "FAQ", href: "/" },
+//   { label: "FAQ", href: "/" },
   { label: "Contact Us", href: "#contact-us" },
 ];
 
