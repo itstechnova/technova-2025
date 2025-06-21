@@ -42,9 +42,9 @@ function Navbar() {
             ))}
           </div>
         </div>
-        <Link href="/apply/hacker" className="max-md:hidden">
+        {/* <Link href="/apply/hacker" className="max-md:hidden">
           <Button variant="default">Sign In</Button>
-        </Link>
+        </Link> */}
         {/* Mobile hamburger */}
         <Button
           onClick={toggleMenu}
@@ -71,9 +71,9 @@ function Navbar() {
               {label}
             </Link>
           ))}
-          <Link href="/apply/hacker">
+          {/* <Link href="/apply/hacker">
             <Button variant="default">Sign In</Button>
-          </Link>
+          </Link> */}
         </div>
       )}
     </div>
