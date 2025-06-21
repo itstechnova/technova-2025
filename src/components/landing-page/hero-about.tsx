@@ -60,7 +60,7 @@ function HeroAbout() {
                   University of Waterloo’s Women+ in Tech Hackathon
                 </p>
                 <small className="text-xl max-sm:text-lg font-semibold">
-                  Sept 22–24, 2025
+                  Sept 26–28, 2025
                 </small>
               </div>
               <div className="flex flex-col gap-2">
