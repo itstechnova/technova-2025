@@ -55,7 +55,7 @@ function CheckOff({
                 const val = e.target.value;
                 onOtherChange?.(val);
                 if (val && !checked) {
-                  onChange?.({ target: { value, name } } as any);
+                  onChange?.({ target: { value, name } } as unknown as React.ChangeEvent<HTMLInputElement>);
                 }
               }}
               className={[
