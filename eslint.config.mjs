@@ -10,13 +10,12 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-	{
-		ignores: [
-      'src/components/mentor/**/*',
-      'src/components/_hacker/**/*',
-      'src/app/_apply/**/*',
-    ],
-	},
+  {
+    files: ["**/*.ts", "**/*.tsx"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+    },
+  },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];
 

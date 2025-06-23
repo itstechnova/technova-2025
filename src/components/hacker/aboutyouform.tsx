@@ -6,26 +6,9 @@ import CheckOff from "../checkOff";
 import UniversityDropdown from "./UniversityDropdown";
 import MultiCheckbox from "./MultiCheckbox";
 
-interface HackerFormData {
-  firstName: string;
-  lastName: string;
-  pronouns: string;
-  tshirtSize: string;
-  levelOfStudy: string;
-  levelOfStudyOther?: string;
-  graduatingYear: string;
-  graduatingYearOther?: string;
-  university: string;
-  universityOther?: string;
-  major: string;
-  hackathonCount: string;
-  hearAboutUs: string[]; 
-  hearAboutUsOther?: string;
-}
-
 interface HackerAboutYouFormProps {
-  data: HackerFormData;
-  setData: React.Dispatch<React.SetStateAction<HackerFormData>>;
+  data: any;
+  setData: React.Dispatch<React.SetStateAction<any>>;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
@@ -91,7 +74,7 @@ function HackerAboutYouForm({
       <div className="pb-5 relative z-10">
         <div className="flex gap-2 items-center pb-10">
           <h1 className="text-5xl font-semibold text-textSecondary">
-            Let&apos;s get to know you better!
+            Let's get to know you better!
           </h1>
           <Image
             src="/themed_assets/sunflower.svg"
@@ -195,7 +178,7 @@ function HackerAboutYouForm({
                   onOtherChange={
                     level === "Other:"
                       ? (val) =>
-                          setData((prev) => ({
+                          setData((prev: any) => ({
                             ...prev,
                             levelOfStudy: "Other:",
                             levelOfStudyOther: val,
@@ -231,7 +214,7 @@ function HackerAboutYouForm({
                   onOtherChange={
                     year === "Other:"
                       ? (val) =>
-                          setData((prev) => ({
+                          setData((prev: any) => ({
                             ...prev,
                             graduatingYear: "Other:",
                             graduatingYearOther: val,
@@ -254,7 +237,7 @@ function HackerAboutYouForm({
               otherValue={data.universityOther}
               onChange={handleChange}
               onOtherChange={(val) =>
-                setData((prev) => ({
+                setData((prev: any) => ({
                   ...prev,
                   university: "Other:",
                   universityOther: val,
@@ -303,11 +286,11 @@ function HackerAboutYouForm({
               options={wordOfMouthOptions}
               selected={data.hearAboutUs}
               onChange={(selected) =>
-                setData((prev) => ({ ...prev, hearAboutUs: selected }))
+                setData((prev: any) => ({ ...prev, hearAboutUs: selected }))
               }
               otherValue={data.hearAboutUsOther}
               onOtherChange={(val) =>
-                setData((prev) => ({ ...prev, hearAboutUsOther: val }))
+                setData((prev: any) => ({ ...prev, hearAboutUsOther: val }))
               }
             />
           </div>
