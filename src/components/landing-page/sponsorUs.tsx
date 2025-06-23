@@ -31,7 +31,7 @@ const SponsorUsSection: React.FC = () => {
           </Button>
         </a>
         <a
-          href="https://itstechnova.org/pdfs/sponsorship_package.pdf"
+          href="/pdfs/sponsorship_package.pdf"
           target="_blank"
           rel="noopener noreferrer"
         >
