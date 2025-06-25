@@ -17,7 +17,7 @@ function HackerDemographic() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, type, value } = e.target;
+    const { name, value } = e.target;
     setDemographicData((prev) => ({
       ...prev,
       [name]: value,

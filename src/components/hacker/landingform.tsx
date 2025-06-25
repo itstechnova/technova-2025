@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import Image from 'next/image';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import rehypeRaw from 'rehype-raw';
-import ShortAnswerQuestion from '../shortanswerq';
-import { useState } from 'react';
-import SubmitButton from '../submitButton';
+import React, { useEffect } from "react";
+import Image from "next/image";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
+import ShortAnswerQuestion from "../shortanswerq";
+import { useState } from "react";
+import SubmitButton from "../submitButton";
 
 interface HackerLandingFormProps {
   data: any;
@@ -20,10 +20,10 @@ function HackerLandingForm({
   handleSubmit,
   formError,
 }: HackerLandingFormProps) {
-  const [introMd, setIntroMd] = useState('');
+  const [introMd, setIntroMd] = useState("");
 
   useEffect(() => {
-    fetch('/textFiles/hacker/intro.md')
+    fetch("/textFiles/hacker/intro.md")
       .then((r) => r.text())
       .then(setIntroMd)
       .catch(console.error);
@@ -38,7 +38,7 @@ function HackerLandingForm({
             TechNova 2025 Hacker Application
           </h1>
           <Image
-            src="/themed_assets/grass2.png"
+            src="/themed_assets/grass.svg"
             alt="grass"
             width={30}
             height={30}
