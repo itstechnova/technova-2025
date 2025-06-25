@@ -22,7 +22,7 @@ export default function NotFound() {
             width={500}
             height={400}
           />
-          <p className="text-lg text-center text-textPrimary px-10">
+          <p className="text-lg text-center text-textPrimary px-10 pb-5">
             Oops! Page not found. Our bunnies are debugging the issue!
           </p>
         </div>
