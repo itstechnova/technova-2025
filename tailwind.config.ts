@@ -22,6 +22,8 @@ export default {
         backgroundSecondary: "rgba(255, 196, 188, 0.3)",
         backgroundTertiary: "rgba(105, 96, 175, 0.3)",
         checkMarkGreen: "#AABD9C",
+        textGradientPurple: "#50469C",
+        textGradientRed: "#CD5769",
       },
     },
   },
