@@ -28,23 +28,19 @@ function HackerLanding() {
       setFormError(null);
     }
 
-    const { data, error } = await supabase
-      .from('hacker_landing')
-      .insert([
-        {
-          email: landingData.email,
-          age2025: landingData.age2025,
-        },
-      ])
-      .select();
+    const { data, error } = await supabase.from('hacker_landing').upsert([
+      {
+        email: landingData.email,
+        age2025: landingData.age2025,
+      },
+    ]);
     if (error) {
       setFormError('Error submitting form');
       console.log('error', error);
-    }
-    if (data) {
+    } else {
       setFormError(null);
-      router.push('/apply/hacker/step-one');
-      console.log(JSON.stringify(landingData));
+      router.push('/apply/hacker/about-you');
+      // console.log(JSON.stringify(landingData));
     }
   };
 

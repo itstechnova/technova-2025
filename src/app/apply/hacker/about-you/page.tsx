@@ -1,24 +1,28 @@
-"use client";
+'use client';
 
-import HackerAboutYouForm from "@/components/hacker/aboutyouform";
-import React, { useState } from "react";
+import HackerAboutYouForm from '@/components/hacker/aboutyouform';
+import supabase from '@/config/supabaseClient';
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 function HackerAboutYou() {
+  const [formError, setFormError] = useState<string | null>(null);
+  const router = useRouter();
   const [aboutYouData, setAboutYouData] = useState({
-    firstName: "",
-    lastName: "",
-    pronouns: "",
-    tshirtSize: "",
-    levelOfStudy: "",
-    levelOfStudyOther: "",
-    graduatingYear: "",
-    graduatingYearOther: "",
-    university: "",
-    universityOther: "",
-    major: "",
-    hackathonCount: "",
+    firstName: '',
+    lastName: '',
+    pronouns: '',
+    tshirtSize: '',
+    levelOfStudy: '',
+    levelOfStudyOther: '',
+    graduatingYear: '',
+    graduatingYearOther: '',
+    university: '',
+    universityOther: '',
+    major: '',
+    hackathonCount: '',
     hearAboutUs: [],
-    hearAboutUsOther: "",
+    hearAboutUsOther: '',
   });
 
   const handleChange = (
@@ -31,10 +35,35 @@ function HackerAboutYou() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Do validation here
-    console.log(JSON.stringify(aboutYouData));
+
+    const { data, error } = await supabase.from('hacker_landing').upsert([
+      {
+        firstName: aboutYouData.firstName,
+        lastName: aboutYouData.lastName,
+        pronouns: aboutYouData.pronouns,
+        tshirtSize: aboutYouData.tshirtSize,
+        levelOfStudy: aboutYouData.levelOfStudy,
+        levelOfStudyOther: aboutYouData.levelOfStudyOther,
+        graduatingYear: aboutYouData.graduatingYear,
+        graduatingYearOther: aboutYouData.graduatingYearOther,
+        university: aboutYouData.university,
+        universityOther: aboutYouData.universityOther,
+        major: aboutYouData.major,
+        hackathonCount: aboutYouData.hackathonCount,
+        hearAboutUs: aboutYouData.hearAboutUs,
+        hearAboutUsOther: aboutYouData.hearAboutUsOther,
+      },
+    ]);
+    if (error) {
+      setFormError('Error submitting form');
+      console.log('error', error);
+    } else {
+      setFormError(null);
+      router.push('/apply/hacker/mlh-requirements');
+      // console.log(JSON.stringify(landingData));
+    }
   };
 
   return (
