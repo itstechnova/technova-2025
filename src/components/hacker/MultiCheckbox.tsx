@@ -1,6 +1,6 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 interface MultiCheckboxProps {
   options: string[];
@@ -28,7 +28,7 @@ const MultiCheckbox: React.FC<MultiCheckboxProps> = ({
   return (
     <div className="flex flex-col gap-3">
       {options.map((option) =>
-        option === 'Other:' ? (
+        option === "Other:" ? (
           <div key={option} className="flex items-end gap-2 w-full">
             <label className="flex items-center gap-2">
               <input
@@ -39,11 +39,11 @@ const MultiCheckbox: React.FC<MultiCheckboxProps> = ({
               />
               <div
                 className={[
-                  'w-5 h-5 rounded border-2 flex items-center justify-center transition-colors',
+                  "w-5 h-5 rounded border-2 flex items-center justify-center transition-colors",
                   selected.includes(option)
-                    ? 'border-checkMarkGreen bg-checkMarkGreen'
-                    : 'border-gray-300 bg-transparent',
-                ].join(' ')}
+                    ? "border-checkMarkGreen bg-checkMarkGreen"
+                    : "border-gray-300 bg-transparent",
+                ].join(" ")}
               >
                 {selected.includes(option) && (
                   <FontAwesomeIcon
@@ -56,18 +56,17 @@ const MultiCheckbox: React.FC<MultiCheckboxProps> = ({
             </label>
             <input
               type="text"
-              value={otherValue || ''}
+              value={otherValue || ""}
               onChange={(e) => {
                 const val = e.target.value;
                 if (onOtherChange) onOtherChange(val);
                 // If user types, ensure 'Other:' is checked
-                if (val && !selected.includes('Other:')) {
-                  onChange([...selected, 'Other:']);
+                if (val && !selected.includes("Other:")) {
+                  onChange([...selected, "Other:"]);
                 }
               }}
               className="flex-1 border-0 border-b border-textPrimary bg-transparent ml-2 text-base focus:outline-none focus:ring-0 focus:border-textPrimary"
               style={{ minWidth: 0 }}
-              placeholder="Please specify"
             />
           </div>
         ) : (
@@ -80,11 +79,11 @@ const MultiCheckbox: React.FC<MultiCheckboxProps> = ({
             />
             <div
               className={[
-                'w-5 h-5 rounded border-2 flex items-center justify-center transition-colors',
+                "w-5 h-5 rounded border-2 flex items-center justify-center transition-colors",
                 selected.includes(option)
-                  ? 'border-checkMarkGreen bg-checkMarkGreen'
-                  : 'border-gray-300 bg-transparent',
-              ].join(' ')}
+                  ? "border-checkMarkGreen bg-checkMarkGreen"
+                  : "border-gray-300 bg-transparent",
+              ].join(" ")}
             >
               {selected.includes(option) && (
                 <FontAwesomeIcon

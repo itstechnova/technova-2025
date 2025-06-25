@@ -4,7 +4,7 @@ import ShortAnswerQuestion from "../shortanswerq";
 import CheckOff from "../checkOff";
 import AvailabilityGrid from "./AvailabilityGrid";
 
-interface HackerStepOneFormProps {
+interface MentorAboutYouFormProps {
   data: any;
   setData: React.Dispatch<React.SetStateAction<any>>;
   handleChange: (
@@ -17,18 +17,18 @@ const genderIdentityOptions = [
   "Female",
   "Male",
   "Non-binary",
-  "Perfer not to say",
+  "Prefer not to say",
   "Other:",
 ];
 const mentorInPersonOptions = ["Yes!", "No", "Maybe"];
 const tshirtSizeOptions = ["XS", "S", "M", "L", "XL", "2XL", "3XL"];
 
-function MentorStepOneForm({
+function MentorAboutYouForm({
   data,
   setData,
   handleChange,
   handleSubmit,
-}: HackerStepOneFormProps) {
+}: MentorAboutYouFormProps) {
   const initialAvailability = Array.from({ length: 10 }, () =>
     Array(3).fill(false)
   );
@@ -43,14 +43,14 @@ function MentorStepOneForm({
         {/* TODO: Crop the svg to fit the screen better */}
         <img
           src="/mentorFormGraphic.svg"
-          alt="Hacker Forms Graphic Background"
+          alt="Mentor Forms Graphic Background"
           className="w-full h-full object-cover"
         />
-        <div
-          className="fixed inset-x-0 top-0 h-1/3 pointer-events-none z-0
-                   bg-gradient-to-b from-backgroundTertiary to-transparent"
-        />
       </div>
+      <div
+        className="fixed inset-x-0 top-0 h-1/3 pointer-events-none z-0
+                   bg-gradient-to-b from-backgroundTertiary to-transparent"
+      />
       <div className="pb-5 relative z-10">
         <div className="flex gap-2 items-center pb-10">
           <h1 className="text-5xl font-semibold text-textSecondary">
@@ -103,31 +103,27 @@ function MentorStepOneForm({
             </span>
             <div className="flex flex-col gap-2 mt-2">
               {genderIdentityOptions.map((gender) => (
-                <label key={gender} className="flex items-end gap-2 w-full">
-                  <CheckOff
-                    label={gender}
-                    name="genderIdentity"
-                    value={gender}
-                    checked={data.genderIdentity === gender}
-                    onChange={handleChange}
-                  />
-                  {gender === "Other:" && (
-                    <input
-                      type="text"
-                      name="genderIdentityOther"
-                      value={data.genderIdentityOther || ""}
-                      onChange={(e) => {
-                        setData((prev: any) => ({
-                          ...prev,
-                          levelOfStudy: "Other:",
-                          levelOfStudyOther: e.target.value,
-                        }));
-                      }}
-                      className="flex-1 border-0 border-b border-textPrimary bg-transparent ml-2 text-base focus:outline-none focus:ring-0 focus:border-textPrimary"
-                      style={{ minWidth: 0 }}
-                    />
-                  )}
-                </label>
+                <CheckOff
+                  key={gender}
+                  label={gender}
+                  name="genderIdentity"
+                  value={gender}
+                  checked={data.genderIdentity === gender}
+                  onChange={handleChange}
+                  otherValue={
+                    gender === "Other:" ? data.genderIdentityOther : undefined
+                  }
+                  onOtherChange={
+                    gender === "Other:"
+                      ? (val) =>
+                          setData((prev: any) => ({
+                            ...prev,
+                            genderIdentity: "Other:",
+                            genderIdentityOther: val,
+                          }))
+                      : undefined
+                  }
+                />
               ))}
             </div>
           </div>
@@ -169,12 +165,12 @@ function MentorStepOneForm({
               Disclaimer:
               <span className="font-normal">
                 {" "}
-                The supply for sizes vary, in the event there are no XS, hackers
+                The supply for sizes vary, in the event there are no XS, mentors
                 will be sent a S.
               </span>
             </span>
             <Image
-              src="/sizingchart.png"
+              src="/sizingchart.svg"
               alt="sizing chart"
               className="w-auto my-2"
               width={800}
@@ -228,4 +224,4 @@ function MentorStepOneForm({
   );
 }
 
-export default MentorStepOneForm;
+export default MentorAboutYouForm;

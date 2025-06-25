@@ -11,7 +11,7 @@ import { Button } from "./base-ui/button";
 
 function Footer() {
   return (
-    <div className="border-t-2 border-navSecondary bg-navPrimary px-24 py-8 flex flex-col gap-6">
+    <div className="border-t-2 border-navSecondary bg-navPrimary px-24 max-sm:px-6 py-8 flex flex-col gap-6">
       <div className="flex flex-wrap gap-4">
         <Button size="icon" variant="outline">
           <a href="mailto:hello@itstechnova.org" target="_blank">

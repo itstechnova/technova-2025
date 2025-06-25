@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import MentorStepOneForm from "@/components/mentor/steponeform";
+import MentorAboutYouForm from "@/components/mentor/aboutyouform";
 
-export default function MentorStepOneFormPage() {
+export default function MentorAboutYouFormPage() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -28,12 +28,12 @@ export default function MentorStepOneFormPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Mentor Step One Data:", formData);
+    console.log("Mentor About You Data:", formData);
     // handle form submission, such as sending data to an API
   };
 
   return (
-    <MentorStepOneForm
+    <MentorAboutYouForm
       data={formData}
       setData={setFormData}
       handleChange={handleChange}

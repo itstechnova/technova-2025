@@ -66,26 +66,21 @@ function HackerDemographicForm({
               Demographic Questions 🗺️
             </h1>
             <p>
-              We’d like to understand our applicants’ backgrounds to improve
-              accessibility. These questions are for statistical purposes only.
+              One of our most important team pillars is diversity and we would
+              like to better understand the backgrounds of our applicants in
+              order to gain insight into how to improve accessibility as an
+              organization. The following questions have no effect on your
+              application other than being used for statistical purposes to
+              better forward our event's mission. 💡
             </p>
             <p>
               Your information will be kept confidential in accordance with our
-              <a
-                href="https://mlh.io/privacy"
-                className="text-blue-500 underline ml-1"
-              >
+              <a href="https://mlh.io/privacy" className="underline ml-1">
                 Privacy Policy
               </a>
               .
             </p>
           </div>
-          <Image
-            src="/themed_assets/Sunflower.png"
-            alt="grass"
-            width={40}
-            height={40}
-          />
         </div>
       </div>
 
@@ -157,7 +152,8 @@ function HackerDemographicForm({
 
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
-              Are you the first in your immediate family to pursue tech?
+              If you are pursuing technology, are you the first in your
+              immediate family to pursue tech?
             </span>
             <div className="flex flex-col gap-2">
               {firstToPursueTechOptions.map((choice) => (
@@ -175,7 +171,8 @@ function HackerDemographicForm({
 
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
-              How long have you been involved in tech?
+              How long have you been studying, working, or self-learning in tech
+              (if applicable)?
             </span>
             <div className="flex flex-col gap-2">
               {timeStudyingTechOptions.map((time) => (

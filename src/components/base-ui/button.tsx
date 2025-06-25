@@ -6,6 +6,7 @@ type Variant =
   | "outline"
   | "secondary"
   | "ghost"
+  | "green"
   | "link";
 type Size = "default" | "sm" | "lg" | "icon";
 
@@ -29,6 +30,8 @@ const variantClasses: Record<Variant, string> = {
     "bg-gray-100 text-gray-800 shadow-sm shadow-navSecondary hover:bg-gray-200",
   ghost:
     "bg-transparent text-gray-700 shadow-sm shadow-navSecondary hover:bg-gray-100",
+  green:
+    "bg-[#185941] bg-left hover:bg-[#3c7a62] text-white shadow-sm border-2 border-[#0C3D30]",
   link: "text-navSecondary underline hover:text-navSecondaryHover",
 };
 
@@ -48,7 +51,8 @@ export function Button({
   return (
     <button
       className={cn(
-        "max-sm:w-full inline-flex items-center justify-center rounded-md font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-2 focus:ring-navSecondary",
+        size !== "icon" && "max-sm:w-full",
+        "inline-flex items-center justify-center rounded-md font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-2 focus:ring-navSecondary",
         variantClasses[variant],
         sizeClasses[size],
         className

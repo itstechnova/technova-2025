@@ -2,7 +2,7 @@ import React from "react";
 
 interface AvailabilityGridProps {
   availability: boolean[][];
-  setAvailability: (newAvailability: boolean[][]) => void;
+	setAvailability: React.Dispatch<React.SetStateAction<boolean[][]>>;
 }
 
 const days = ["Fri. Sept 27th", "Sat. Sept 28th", "Sun. Sept 29"];

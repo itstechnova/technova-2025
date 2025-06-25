@@ -58,7 +58,7 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
             TechNova 2025 Mentor Application
           </h1>
           <Image
-            src="/themed_assets/grass2.png"
+            src="/themed_assets/grass.svg"
             alt="grass"
             width={30}
             height={30}
