@@ -48,7 +48,7 @@ export default function RootLayout({
               maxWidth: '120px',
               minWidth: '80px',
               position: 'absolute', // change to "absolute" since you want it to scroll with the page
-              right: '200px',
+              right: '70px',
               top: '0',
               width: '10%',
               zIndex: 10000,
@@ -60,11 +60,9 @@ export default function RootLayout({
               style={{ width: '100%' }}
             />
           </a>
-          <div className="min-h-screen flex flex-col">
-            <Navbar />
-            <div className="flex-grow">{children}</div>
-            <Footer />
-          </div>
+          <Navbar />
+          {children}
+          <Footer />
         </AccountProvider>
       </body>
     </html>
