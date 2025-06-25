@@ -4,7 +4,8 @@ import Link from 'next/link';
 import ShortAnswerQuestion from '@/components/shortanswerq';
 import SubmitButton from '@/components/submitButton';
 import Image from 'next/image';
-import supabase from '@/config/supabaseClient';
+import { useAccount } from '@/components/AccountContext';
+import { useRouter } from 'next/navigation';
 
 export default function SignUpPage() {
   const [loginForm, setLoginForm] = useState({
@@ -19,23 +20,31 @@ export default function SignUpPage() {
     const { name, value } = e.target;
     setLoginForm((prev) => ({ ...prev, [name]: value }));
   };
-
-  async function signInWithEmail() {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: loginForm.email,
-      password: loginForm.password,
-    });
-    if (data) {
-      setLoginFormError('');
-      setLoginFormSuccess('Login successful');
-    } else {
-      setLoginFormError('Login failed');
-    }
-  }
+  const { loginWithEmail } = useAccount();
+  const router = useRouter();
+  // async function signInWithEmail() {
+  //   const { data, error } = await supabase.auth.signInWithPassword({
+  //     email: loginForm.email,
+  //     password: loginForm.password,
+  //   });
+  //   if (data) {
+  //     setLoginFormError('');
+  //     setLoginFormSuccess('Login successful');
+  //   } else {
+  //     setLoginFormError('Login failed');
+  //   }
+  // }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    signInWithEmail();
+    loginWithEmail(loginForm.email, loginForm.password).then((res) => {
+      if (res.error) {
+        setLoginFormError(res.error);
+      } else {
+        setLoginFormSuccess('Login successful');
+        router.push('/');
+      }
+    });
   };
 
   return (
