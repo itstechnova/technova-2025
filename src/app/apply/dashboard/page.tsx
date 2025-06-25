@@ -4,6 +4,7 @@ import ApplicationTable from "@/components/dashboard/app-table";
 import { Application, AppType } from "@/components/dashboard/utils/types";
 import { Button } from "@/components/base-ui/button";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 // TODO: this is a sample list of applications, need to implement
 // actual functionality
@@ -28,7 +29,8 @@ const applications: Application[] = [
 function AppDashboard() {
   const appOptions: AppType[] = ["Hacker", "Mentor", "Volunteer"];
   const activeApps = applications.map((app) => app.type);
-
+  const router = useRouter();
+  
   return (
     <div className="flex flex-col h-full bg-navPrimary relative">
       {/* Background SVG graphic */}
@@ -68,7 +70,13 @@ function AppDashboard() {
           {appOptions
             .filter((role) => !activeApps.includes(role))
             .map((role, index) => (
-              <Button key={role} variant={index === 0 ? "default" : "outline"}>
+              <Button
+                key={role}
+                variant={index === 0 ? "default" : "outline"}
+                onClick={() => {
+                  router.push(`/apply/${role.toLowerCase()}`);
+                }}
+              >
                 Apply to be a {role.toLowerCase()}!
               </Button>
             ))}
