@@ -14,14 +14,13 @@ export default function NotFound() {
         height={300}
         className="absolute top-0 left-0 z-0 hidden md:block"
       />
-      <div className="grid grid-cols-1 md:grid-cols-3 place-items-center max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 place-items-center max-w-7xl mx-auto z-10">
         <div className="flex flex-col items-center space-y-10 md:col-span-2 p-10 md:p-0">
           <Image
             src="/themed_assets/404.svg"
             alt="404"
             width={500}
             height={400}
-            className="z-10"
           />
           <p className="text-lg text-center text-textPrimary px-10 pb-5">
             Oops! Page not found. Our bunnies are debugging the issue!
