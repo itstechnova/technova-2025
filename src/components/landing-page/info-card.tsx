@@ -35,8 +35,8 @@ const InfoCard: React.FC<InfoCardProps> = ({ flowerIndex, title, body }) => {
           src="/themed_assets/carrot.svg"
           alt="Carrot Icon"
           className="w-8 h-8 sm:w-10 sm:h-10"
-          initial={{ rotate: 0 }}
-          animate={{ rotate: isOpen ? 180 : 0 }}
+          initial={{ rotate: 180 }}
+          animate={{ rotate: isOpen ? 0 : 180 }}
           transition={{ duration: 0.3 }}
         />
       </div>
