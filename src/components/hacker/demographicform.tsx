@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import SubmitButton from "../submitButton";
 import CheckOff from "../checkOff";
@@ -49,6 +49,21 @@ function HackerDemographicForm({
   handleChange,
   handleSubmit,
 }: HackerDemographicFormProps) {
+  useEffect(() => {
+    const savedData = sessionStorage.getItem("hackerDemographicData");
+    if (savedData) {
+      setData(JSON.parse(savedData));
+    }
+  }, [setData]);
+
+  const updateData = (newData: any) => {
+    setData((prev: any) => {
+      const updated = { ...prev, ...newData };
+      sessionStorage.setItem("hackerDemographicData", JSON.stringify(updated));
+      console.log(updated);
+      return updated;
+    });
+  };
   return (
     <div className="p-24 flex flex-col h-full bg-navPrimary relative">
       <div className="absolute inset-0 z-7 pointer-events-none">
@@ -93,13 +108,9 @@ function HackerDemographicForm({
             <MultiCheckbox
               options={ethnicityOptions}
               selected={data.ethnicity}
-              onChange={(selected) =>
-                setData((prev: any) => ({ ...prev, ethnicity: selected }))
-              }
+              onChange={(selected) => updateData({ ethnicity: selected })}
               otherValue={data.ethnicity_other}
-              onOtherChange={(val) =>
-                setData((prev: any) => ({ ...prev, ethnicity_other: val }))
-              }
+              onOtherChange={(val) => updateData({ ethnicity_other: val })}
             />
           </div>
 
@@ -115,17 +126,16 @@ function HackerDemographicForm({
                   value={option}
                   label={option}
                   checked={data.gender === option}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    updateData({ gender: e.target.value });
+                  }}
                   otherValue={
                     option === "Other:" ? data.gender_other : undefined
                   }
                   onOtherChange={
                     option === "Other:"
-                      ? (val) =>
-                          setData((prev: any) => ({
-                            ...prev,
-                            gender_other: val,
-                          }))
+                      ? (val) => updateData({ gender_other: val })
                       : undefined
                   }
                 />
@@ -142,10 +152,7 @@ function HackerDemographicForm({
               options={minorityCategoriesOptions}
               selected={data.minority_categories}
               onChange={(selected) =>
-                setData((prev: any) => ({
-                  ...prev,
-                  minority_categories: selected,
-                }))
+                updateData({ minority_categories: selected })
               }
             />
           </div>
@@ -159,11 +166,14 @@ function HackerDemographicForm({
               {firstToPursueTechOptions.map((choice) => (
                 <CheckOff
                   key={choice}
-                  name="firstToPursueTech"
+                  name="first_to_pursue_tech"
                   value={choice}
                   label={choice}
                   checked={data.first_to_pursue_tech === choice}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    updateData({ first_to_pursue_tech: e.target.value });
+                  }}
                 />
               ))}
             </div>
@@ -178,11 +188,14 @@ function HackerDemographicForm({
               {timeStudyingTechOptions.map((time) => (
                 <CheckOff
                   key={time}
-                  name="timeStudyingTech"
+                  name="time_studying_tech"
                   value={time}
                   label={time}
                   checked={data.time_studying_tech === time}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    updateData({ time_studying_tech: e.target.value });
+                  }}
                 />
               ))}
             </div>
