@@ -96,9 +96,9 @@ function HackerDemographicForm({
               onChange={(selected) =>
                 setData((prev: any) => ({ ...prev, ethnicity: selected }))
               }
-              otherValue={data.ethnicityOther}
+              otherValue={data.ethnicity_other}
               onOtherChange={(val) =>
-                setData((prev: any) => ({ ...prev, ethnicityOther: val }))
+                setData((prev: any) => ({ ...prev, ethnicity_other: val }))
               }
             />
           </div>
@@ -117,14 +117,14 @@ function HackerDemographicForm({
                   checked={data.gender === option}
                   onChange={handleChange}
                   otherValue={
-                    option === "Other:" ? data.genderOther : undefined
+                    option === "Other:" ? data.gender_other : undefined
                   }
                   onOtherChange={
                     option === "Other:"
                       ? (val) =>
                           setData((prev: any) => ({
                             ...prev,
-                            genderOther: val,
+                            gender_other: val,
                           }))
                       : undefined
                   }
@@ -140,11 +140,11 @@ function HackerDemographicForm({
             </span>
             <MultiCheckbox
               options={minorityCategoriesOptions}
-              selected={data.minorityCategories}
+              selected={data.minority_categories}
               onChange={(selected) =>
                 setData((prev: any) => ({
                   ...prev,
-                  minorityCategories: selected,
+                  minority_categories: selected,
                 }))
               }
             />
@@ -162,7 +162,7 @@ function HackerDemographicForm({
                   name="firstToPursueTech"
                   value={choice}
                   label={choice}
-                  checked={data.firstToPursueTech === choice}
+                  checked={data.first_to_pursue_tech === choice}
                   onChange={handleChange}
                 />
               ))}
@@ -181,7 +181,7 @@ function HackerDemographicForm({
                   name="timeStudyingTech"
                   value={time}
                   label={time}
-                  checked={data.timeStudyingTech === time}
+                  checked={data.time_studying_tech === time}
                   onChange={handleChange}
                 />
               ))}
