@@ -1,5 +1,4 @@
 "use client";
-"use client";
 
 import React, { useState } from "react";
 import HackerLandingForm from "@/components/hacker/landingform";
@@ -25,7 +24,6 @@ function HackerLanding() {
         (field) => !landingData[field as keyof typeof landingData]
       )
     ) {
-      setFormError("Please fill in all required fields");
       setFormError("Please fill in all required fields");
       return;
     } else {
