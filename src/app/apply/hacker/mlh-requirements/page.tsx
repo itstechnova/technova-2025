@@ -1,7 +1,7 @@
 "use client";
 
 import HackerMLHForm from "@/components/hacker/mlhform";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import supabase from "@/config/supabaseClient";
 import { useRouter } from "next/navigation";
 import { useAccount } from "@/components/AccountContext";
@@ -15,6 +15,50 @@ function HackerMLHRequirements() {
     mandatory_requirement_2: "",
     optional: "",
   });
+
+  useEffect(() => {
+    const loadData = async () => {
+      const response = await supabase
+        .from("hacker_landing")
+        .select("mandatory_requirement_1, mandatory_requirement_2, optional")
+        .eq("user_id", user.id)
+        .single();
+
+      if (response.error) {
+        console.log("Supabase fetch error:", response.error);
+        throw response.error;
+      } else if (response.data) {
+        const fallbackData = JSON.parse(
+          sessionStorage.getItem("hackerMLHData") ?? "{}"
+        );
+        console.log("Loaded from Supabase:", response.data);
+        const sanitizedData = {
+          mandatory_requirement_1:
+            response.data.mandatory_requirement_1 ??
+            fallbackData.mandatory_requirement_1 ??
+            "",
+          mandatory_requirement_2:
+            response.data.mandatory_requirement_2 ??
+            fallbackData.mandatory_requirement_2 ??
+            "",
+          optional: response.data.optional ?? fallbackData.optional ?? "",
+        };
+        sessionStorage.setItem("hackerMLHData", JSON.stringify(sanitizedData));
+        setMLHData(sanitizedData);
+        return;
+      }
+
+      const savedData = sessionStorage.getItem("hackerMLHData");
+      if (savedData) {
+        console.log("Loaded from sessionStorage");
+        setMLHData(JSON.parse(savedData));
+      }
+    };
+
+    if (user?.id) {
+      loadData();
+    }
+  }, [user?.id]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>

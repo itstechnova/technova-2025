@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HackerLandingForm from "@/components/hacker/landingform";
 import supabase from "@/config/supabaseClient";
 import { useRouter } from "next/navigation";
@@ -17,6 +17,46 @@ function HackerLanding() {
   const router = useRouter();
   const { user } = useAccount();
 
+  useEffect(() => {
+    const loadData = async () => {
+      const response = await supabase
+        .from("hacker_landing")
+        .select("email, age2025")
+        .eq("user_id", user.id)
+        .single();
+
+      if (response.error) {
+        console.log("Supabase fetch error:", response.error);
+        throw response.error;
+      } else if (response.data) {
+        const fallbackData = JSON.parse(
+          sessionStorage.getItem("hackerLandingData") ?? "{}"
+        );
+        console.log("Loaded from Supabase:", response.data);
+        const sanitizedData = {
+          email: response.data.email ?? fallbackData.email ?? "",
+          age2025: response.data.age2025 ?? fallbackData.age2025 ?? "",
+        };
+        sessionStorage.setItem(
+          "hackerLandingData",
+          JSON.stringify(sanitizedData)
+        );
+        setLandingData(sanitizedData);
+        return;
+      }
+
+      const savedData = sessionStorage.getItem("hackerLandingData");
+      if (savedData) {
+        console.log("Loaded from sessionStorage");
+        setLandingData(JSON.parse(savedData));
+      }
+    };
+
+    if (user?.id) {
+      loadData();
+    }
+  }, [user?.id]);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (
@@ -29,9 +69,9 @@ function HackerLanding() {
     } else {
       setFormError(null);
     }
- 
+
     console.log(JSON.stringify(landingData));
-    
+
     const { data, error } = await supabase
       .from("hacker_landing")
       .update([
