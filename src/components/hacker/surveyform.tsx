@@ -105,12 +105,6 @@ function HackerSurveyForm({
   handleChange,
   handleSubmit,
 }: HackerSurveyFormProps) {
-  useEffect(() => {
-    const savedData = sessionStorage.getItem("hackerSurveyData");
-    if (savedData) {
-      setData(JSON.parse(savedData));
-    }
-  }, [setData]);
 
   const updateData = (newData: any) => {
     setData((prev: any) => {

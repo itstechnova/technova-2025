@@ -23,13 +23,6 @@ function HackerLandingForm({
 }: HackerLandingFormProps) {
   const [introMd, setIntroMd] = useState("");
 
-  useEffect(() => {
-    const savedData = sessionStorage.getItem("hackerLandingData");
-    if (savedData) {
-      setData(JSON.parse(savedData));
-    }
-  }, [setData]);
-
   const updateData = (newData: any) => {
     setData((prev: any) => {
       const updated = { ...prev, ...newData };

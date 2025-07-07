@@ -60,13 +60,6 @@ function HackerAboutYouForm({
   handleChange,
   handleSubmit,
 }: HackerAboutYouFormProps) {
-  useEffect(() => {
-    const savedData = sessionStorage.getItem("hackerAboutYouData");
-    if (savedData) {
-      setData(JSON.parse(savedData));
-    }
-  }, [setData]);
-
   const updateData = (newData: any) => {
     setData((prev: any) => {
       const updated = { ...prev, ...newData };
