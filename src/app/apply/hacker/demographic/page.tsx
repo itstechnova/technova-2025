@@ -6,12 +6,12 @@ import React, { useState } from "react";
 function HackerDemographic() {
   const [demographicData, setDemographicData] = useState({
     ethnicity: [],
-    ethnicityOther: "",
+    ethnicity_other: "",
     gender: "",
-    genderOther: "",
-    minorityCategories: [],
-    firstToPursueTech: "",
-    timeStudyingTech: "",
+    gender_other: "",
+    minority_categories: [],
+    first_to_pursue_tech: "",
+    time_studying_tech: "",
   });
 
   const handleChange = (
