@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import ShortAnswerQuestion from "../shortanswerq";
-import { useState } from "react";
 import SubmitButton from "../submitButton";
 
 interface HackerLandingFormProps {
   data: any;
+  setData: React.Dispatch<React.SetStateAction<any>>;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   formError: string | null;
@@ -19,8 +19,24 @@ function HackerLandingForm({
   handleChange,
   handleSubmit,
   formError,
+  setData,
 }: HackerLandingFormProps) {
   const [introMd, setIntroMd] = useState("");
+
+  useEffect(() => {
+    const savedData = sessionStorage.getItem("hackerLandingData");
+    if (savedData) {
+      setData(JSON.parse(savedData));
+    }
+  }, [setData]);
+
+  const updateData = (newData: any) => {
+    setData((prev: any) => {
+      const updated = { ...prev, ...newData };
+      sessionStorage.setItem("hackerLandingData", JSON.stringify(updated));
+      return updated;
+    });
+  };
 
   useEffect(() => {
     fetch("/textFiles/hacker/intro.md")
@@ -48,12 +64,7 @@ function HackerLandingForm({
             height={30}
           />
         </div>
-        <div
-          className="prose max-w-none prose-lg prose-stone mb-8
-                        prose-headings:font-semibold prose-headings:text-2xl
-                        prose-a:text-blue-600 prose-a:underline hover:prose-a:text-blue-800
-                        prose-em:text-gray-700 prose-em:italic"
-        >
+        <div className="prose max-w-none prose-lg prose-stone mb-8 prose-headings:font-semibold prose-headings:text-2xl prose-a:text-blue-600 prose-a:underline hover:prose-a:text-blue-800 prose-em:text-gray-700 prose-em:italic">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw]}
@@ -62,6 +73,7 @@ function HackerLandingForm({
           </ReactMarkdown>
         </div>
       </div>
+
       <div className="py-32 text-left w-1/2 md:w-3/5 relative z-10">
         <form onSubmit={handleSubmit} className="form">
           <div className="flex flex-col gap-24 text-textPrimary">
@@ -72,7 +84,10 @@ function HackerLandingForm({
               type="email"
               placeholder="ex. janesmith@gmail.com"
               value={data.email}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+                updateData({ email: e.target.value });
+              }}
             />
             <ShortAnswerQuestion
               question="How old will you be as of September 27, 2025?"
@@ -82,13 +97,17 @@ function HackerLandingForm({
               min={0}
               max={100}
               value={data.age2025}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+                updateData({ age2025: e.target.value });
+              }}
             />
           </div>
           {formError && <p className="text-red-500">{formError}</p>}
           <SubmitButton>→</SubmitButton>
         </form>
       </div>
+
       <Image
         className="absolute bottom-0 right-0 z-10 pointer-events-none"
         src="/themed_assets/bunnywithflower.svg"

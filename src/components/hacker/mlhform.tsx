@@ -1,19 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SubmitButton from "../submitButton";
 import CheckOff from "../checkOff";
 
 interface HackerMLHProps {
   data: any;
+  setData: React.Dispatch<React.SetStateAction<any>>;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-function HackerMLHForm({ data, handleChange, handleSubmit }: HackerMLHProps) {
+function HackerMLHForm({
+  data,
+  setData,
+  handleChange,
+  handleSubmit,
+}: HackerMLHProps) {
+  useEffect(() => {
+    const savedData = sessionStorage.getItem("hackerMLHData");
+    if (savedData) {
+      setData(JSON.parse(savedData));
+    }
+  }, [setData]);
+
+  const updateData = (newData: any) => {
+    setData((prev: any) => {
+      const updated = { ...prev, ...newData };
+      sessionStorage.setItem("hackerMLHData", JSON.stringify(updated));
+      return updated;
+    });
+  };
+
   return (
     <div className="p-24 flex flex-col h-full bg-navPrimary relative">
-      {/* Background SVG graphic */}
       <div className="absolute inset-0 z-7 pointer-events-none">
         <img
           src="/goose.svg"
@@ -27,14 +47,13 @@ function HackerMLHForm({ data, handleChange, handleSubmit }: HackerMLHProps) {
           <h1 className="text-5xl font-semibold text-textSecondary">
             MLH Requirements
           </h1>
-          <br></br>
-          <br></br>
+          <br />
           <p>
             We are currently in the process of partnering with MLH. The
             following 3 checkboxes are for this partnership. If we do not end up
             partnering with MLH, your information will not be shared. All
-            hackers MUST agree to the first two checkboxes however, the third
-            checkbox is optional.
+            hackers MUST agree to the first two checkboxes; the third is
+            optional.
           </p>
         </div>
       </div>
@@ -58,10 +77,13 @@ function HackerMLHForm({ data, handleChange, handleSubmit }: HackerMLHProps) {
                 type="checkbox"
                 key="requirement1"
                 label="I agree!"
-                name="mandatoryRequirement1"
+                name="mandatory_requirement_1"
                 value="agree"
-                checked={data.mandatoryRequirement1 === "agree"}
-                onChange={handleChange}
+                checked={data.mandatory_requirement_1 === "agree"}
+                onChange={(e) => {
+                  handleChange(e);
+                  updateData({ mandatory_requirement_1: e.target.value });
+                }}
               />
             </div>
           </div>
@@ -99,10 +121,13 @@ function HackerMLHForm({ data, handleChange, handleSubmit }: HackerMLHProps) {
                 type="checkbox"
                 key="requirement2"
                 label="I agree!"
-                name="mandatoryRequirement2"
+                name="mandatory_requirement_2"
                 value="agree"
-                checked={data.mandatoryRequirement2 === "agree"}
-                onChange={handleChange}
+                checked={data.mandatory_requirement_2 === "agree"}
+                onChange={(e) => {
+                  handleChange(e);
+                  updateData({ mandatory_requirement_2: e.target.value });
+                }}
               />
             </div>
           </div>
@@ -122,7 +147,10 @@ function HackerMLHForm({ data, handleChange, handleSubmit }: HackerMLHProps) {
                 name="optional"
                 value="agree"
                 checked={data.optional === "agree"}
-                onChange={handleChange}
+                onChange={(e) => {
+                  handleChange(e);
+                  updateData({ optional: e.target.value });
+                }}
               />
             </div>
           </div>
