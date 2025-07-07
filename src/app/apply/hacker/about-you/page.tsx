@@ -108,6 +108,7 @@ function HackerAboutYou() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(JSON.stringify(aboutYouData));
 
     const parsedGraduatingYearOther = Number(aboutYouData.graduatingYearOther);
 
@@ -140,10 +141,12 @@ function HackerAboutYou() {
 
     if (error) {
       setFormError("Error submitting form");
+      console.log("error", error);
     } else {
       setFormError(null);
       sessionStorage.removeItem("hackerAboutYouData");
-      router.push("/apply/hacker/short-answers");
+      console.log("data submitted");
+      router.push("/apply/hacker/mlh-requirements");
     }
   };
 

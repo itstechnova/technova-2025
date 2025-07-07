@@ -69,6 +69,8 @@ function HackerMLHRequirements() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // Do validation here
+    console.log(JSON.stringify(mlhData));
     const response = await supabase
       .from("hacker_landing")
       .update([mlhData])
@@ -78,7 +80,9 @@ function HackerMLHRequirements() {
       console.log(response.error);
       throw response.error;
     } else {
+      // setFormError(null);
       sessionStorage.removeItem("hackerMLHData");
+      console.log("data submitted");
       router.push("/apply/hacker/survey");
     }
   };

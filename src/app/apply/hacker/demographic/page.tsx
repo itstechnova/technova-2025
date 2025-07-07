@@ -88,6 +88,7 @@ function HackerDemographic() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Do validation here
+    console.log(JSON.stringify(demographicData));
     const response = await supabase
       .from("hacker_landing")
       .update([demographicData])
@@ -95,10 +96,12 @@ function HackerDemographic() {
       .select();
 
     if (response.error) {
+      console.log(response.error);
       throw response.error;
     } else {
       // setFormError(null);
       sessionStorage.removeItem("hackerDemographicData");
+      console.log("data submitted!");
       router.push("/apply/hacker/thanks");
     }
   };

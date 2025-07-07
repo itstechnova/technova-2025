@@ -17,6 +17,12 @@ function HackerMLHForm({
   handleChange,
   handleSubmit,
 }: HackerMLHProps) {
+  useEffect(() => {
+    const savedData = sessionStorage.getItem("hackerMLHData");
+    if (savedData) {
+      setData(JSON.parse(savedData));
+    }
+  }, [setData]);
 
   const updateData = (newData: any) => {
     setData((prev: any) => {
