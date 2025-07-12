@@ -36,34 +36,36 @@ export default function RootLayout({
       <body
         className={`${poppinsFont.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* MLH Trust Badge */}
-        <a
-          id="mlh-trust-badge"
-          href="https://mlh.io/na?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2026-season&utm_content=white"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: "block",
-            maxWidth: "120px",
-            minWidth: "80px",
-            position: "absolute", // change to "absolute" since you want it to scroll with the page
-            right: "70px",
-            top: "0",
-            width: "10%",
-            zIndex: 10000,
-          }}
-        >
-          <img
-            src="https://s3.amazonaws.com/logged-assets/trust-badge/2026/mlh-trust-badge-2026-white.svg"
-            alt="Major League Hacking 2026 Hackathon Season"
-            style={{ width: "100%" }}
-          />
-        </a>
-        <div className="min-h-screen flex flex-col">
-          <Navbar />
-          <div className="flex-grow">{children}</div>
-          <Footer />
-        </div>
+        <AccountProvider>
+          {/* MLH Trust Badge */}
+          <a
+            id="mlh-trust-badge"
+            href="https://mlh.io/na?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2026-season&utm_content=white"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'block',
+              maxWidth: '120px',
+              minWidth: '80px',
+              position: 'absolute', // change to "absolute" since you want it to scroll with the page
+              right: '200px',
+              top: '0',
+              width: '10%',
+              zIndex: 10000,
+            }}
+          >
+            <img
+              src="https://s3.amazonaws.com/logged-assets/trust-badge/2026/mlh-trust-badge-2026-white.svg"
+              alt="Major League Hacking 2026 Hackathon Season"
+              style={{ width: '100%' }}
+            />
+          </a>
+          <div className="min-h-screen flex flex-col">
+            <Navbar />
+            <div className="flex-grow">{children}</div>
+            <Footer />
+          </div>
+        </AccountProvider>
       </body>
     </html>
   );

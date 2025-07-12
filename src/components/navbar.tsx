@@ -24,7 +24,7 @@ function Navbar() {
   return (
     <div className="sticky top-0 z-50 w-full border-b-2 border-navSecondary bg-navPrimary px-6 md:px-24 py-3">
       <div className="flex flex-row justify-between min-gap-4 items-center">
-        <div className="flex justify-between">
+        <div className="flex justify-between w-full">
           <div className="flex flex-row gap-6">
             {/* Logo */}
             <div className="flex items-center">
@@ -46,20 +46,20 @@ function Navbar() {
                 </Link>
               ))}
             </div>
-            <Button
-              variant="default"
-              onClick={() => {
-                if (user) {
-                  logout();
-                  router.push('/');
-                } else {
-                  router.push('/account/login');
-                }
-              }}
-            >
-              {user ? 'Logout' : 'Login'}
-            </Button>
           </div>
+          <Button
+            variant="default"
+            onClick={() => {
+              if (user) {
+                logout();
+                router.push('/');
+              } else {
+                router.push('/account/login');
+              }
+            }}
+          >
+            {user ? 'Logout' : 'Login'}
+          </Button>
         </div>
 
         {/* <Link href="/apply/hacker" className="max-md:hidden">
