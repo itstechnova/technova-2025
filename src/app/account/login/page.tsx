@@ -81,7 +81,10 @@ export default function SignUpPage() {
             />
           </div>
           <div className="my-6 flex flex-col gap-8">
-            <Link href="#" className="underline text-textPrimary text-base">
+            <Link
+              href="/account/forgot-password"
+              className="underline text-textPrimary text-base"
+            >
               Forgot your password?
             </Link>
 
