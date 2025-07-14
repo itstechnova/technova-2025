@@ -1,4 +1,7 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface InfoCardProps {
   flowerIndex: number;
@@ -7,13 +10,18 @@ interface InfoCardProps {
 }
 
 const InfoCard: React.FC<InfoCardProps> = ({ flowerIndex, title, body }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleOpen = () => setIsOpen((prev) => !prev);
+
   return (
     <div
       className="relative bg-gradient-to-r from-navSecondary to-navSecondaryHover 
-                 p-6 sm:p-8 rounded-xl w-full min-h-[300px] flex flex-col justify-start"
+                 p-6 sm:p-8 rounded-xl w-full flex flex-col cursor-pointer"
+      onClick={toggleOpen}
     >
       {/* Flower Icon (top-left) */}
-      <div className="absolute -top-10 -left-4 z-10">
+      <div className="absolute -top-10 -left-4 z-10 pointer-events-none">
         <img
           src={`/themed_assets/flowers/flower${flowerIndex}.svg`}
           alt={`Flower ${flowerIndex}`}
@@ -21,19 +29,35 @@ const InfoCard: React.FC<InfoCardProps> = ({ flowerIndex, title, body }) => {
         />
       </div>
 
-      {/* Carrot Icon (top-right) */}
-      <div className="absolute top-4 right-2 z-10">
-        <img
+      {/* Carrot Icon (top-right, rotates) */}
+      <div className="absolute top-4 right-4 z-10 pointer-events-none">
+        <motion.img
           src="/themed_assets/carrot.svg"
           alt="Carrot Icon"
           className="w-8 h-8 sm:w-10 sm:h-10"
+          initial={{ rotate: 180 }}
+          animate={{ rotate: isOpen ? 0 : 180 }}
+          transition={{ duration: 0.3 }}
         />
       </div>
 
       {/* Card Content */}
       <div className="mt-16 text-white">
         <h3 className="text-xl sm:text-2xl font-bold mb-4">{title}</h3>
-        <p className="text-base sm:text-lg leading-relaxed">{body}</p>
+
+        <AnimatePresence>
+          {isOpen && (
+            <motion.p
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="text-base sm:text-lg leading-relaxed overflow-hidden"
+            >
+              {body}
+            </motion.p>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

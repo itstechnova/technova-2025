@@ -43,7 +43,7 @@ function FAQ() {
   }, [faqs, updateHeight]);
 
   return (
-    <div className="relative w-full px-10 md:px-24 py-6 rounded-3xl">
+    <div id="faq" className="relative w-full px-10 md:px-24 py-6 rounded-3xl">
       {/* FAQ Title */}
       <div className="mb-20">
         <h1 className="text-3xl font-bold text-textPrimary text-left">

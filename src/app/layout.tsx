@@ -35,7 +35,7 @@ export default function RootLayout({
       <body
         className={`${poppinsFont.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-		{/* MLH Trust Badge */}
+        {/* MLH Trust Badge */}
         <a
           id="mlh-trust-badge"
           href="https://mlh.io/na?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2026-season&utm_content=white"
@@ -58,9 +58,11 @@ export default function RootLayout({
             style={{ width: "100%" }}
           />
         </a>
-		<Navbar />
-        {children}
-        <Footer />
+        <div className="min-h-screen flex flex-col">
+          <Navbar />
+          <div className="flex-grow">{children}</div>
+          <Footer />
+        </div>
       </body>
     </html>
   );

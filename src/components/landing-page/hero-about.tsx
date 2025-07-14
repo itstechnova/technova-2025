@@ -1,12 +1,14 @@
 "use client";
 import React, { useState } from "react";
-import InterestInputBox from "../interestInputBox";
+import InterestInputBox from "../interestinputbox";
 import supabase from "@/config/supabaseClient";
 
 function HeroAbout() {
   const [email, setEmail] = useState("");
   const [formError, setFormError] = useState("");
   const [formSuccess, setFormSuccess] = useState("");
+
+  const [gateLoaded, setGateLoaded] = useState(false);
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -28,7 +30,7 @@ function HeroAbout() {
   return (
     <div className="bg-background flex flex-col">
       {/* Hero Section */}
-      <div className="relative px-24 pt-32 flex flex-col">
+      <div className="relative px-24 pt-32 pb-12 flex flex-col">
         <img
           src="/themed_assets/clouds-desktop.svg"
           alt="Clouds background"
@@ -53,57 +55,66 @@ function HeroAbout() {
                 Sept 26–28, 2025
               </small>
             </div>
-            <div className="flex flex-col gap-4 max-md:w-full">
-              <Button variant="default" size="lg">
-                Hack with us!
-              </Button>
-              <Button variant="outline" size="lg">
-                Mentor with us!
-              </Button>
+            <div className="flex flex-col gap-2">
+              <InterestInputBox
+                value={email}
+                onChange={handleEmailChange}
+                onSubmit={handleSubmit}
+              />
+              {formError && <div className="text-red-500">{formError}</div>}
+              {formSuccess && (
+                <div className="text-green-500">{formSuccess}</div>
+              )}
             </div>
           </div>
         </div>
       </div>
 
       {/* Gate to About Section */}
-      <div className="relative w-full">
-        {/* Background Images */}
-        <div className="w-full">
+      <div className="relative w-full flex flex-col">
+        {/* Reserve space to avoid layout shift */}
+        <div className="relative w-full min-h-[600px]">
+          {/* Mobile Image */}
           <img
             src="/themed_assets/gate-to-path-mobile.svg"
             alt="Gate to Path Mobile"
+            onLoad={() => setGateLoaded(true)}
             className="w-full h-auto block sm:hidden"
           />
+          {/* Desktop Image */}
           <img
             src="/themed_assets/gate-to-path-desktop.svg"
             alt="Gate to Path Desktop"
+            onLoad={() => setGateLoaded(true)}
             className="w-full h-auto hidden sm:block"
           />
-        </div>
 
-        {/* Overlay Content */}
-        <div className="absolute bottom-0 left-0 w-full h-full flex items-center z-10">
-          <div className="flex flex-col gap-4 items-start px-10 md:px-24 py-6 rounded-3xl w-3/4 md:w-1/2 absolute sm:bottom-12 md:bottom-1/5 bg-navPrimary/50">
-            <h2 className="text-3xl font-bold">About Us</h2>
-            <p className="text-base">
-              TechNova’s mission is to create safe, inclusive and empowering
-              spaces for women and non-binary individuals to start, grow and
-              thrive in the technology industry. We value fostering an inclusive
-              community, connecting students with career opportunities, and
-              empowering hackers to create.
-            </p>
-
-            <p>
-              TechNova aims to provide hackers with an end-to-end experience to
-              help accelerate students’ journeys in tech, whether they are
-              beginners just starting off or seasoned hackers looking for new
-              challenges.
-            </p>
-          </div>
+          {/* Overlay Content, no absolute positioning */}
+          {gateLoaded && (
+            <div className="relative flex justify-start px-6 sm:px-24 py-12 -mt-16 sm:-mt-40 transition-all duration-300 ease-in-out">
+              <div className="rounded-3xl w-full sm:w-3/4 md:w-1/2 p-8 flex flex-col gap-4">
+                <h2 id="about" className="text-3xl font-bold">
+                  About Us
+                </h2>
+                <p>
+                  TechNova’s mission is to create safe, inclusive and empowering
+                  spaces for women and non-binary individuals to start, grow,
+                  and thrive in the technology industry. We value fostering an
+                  inclusive community, connecting students with career
+                  opportunities, and empowering hackers to create.
+                </p>
+                <p>
+                  TechNova aims to provide hackers with an end-to-end experience
+                  to help accelerate students’ journeys in tech, whether they
+                  are a beginner just starting off or a seasoned hacker looking
+                  for new challenges.
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 }
-
 export default HeroAbout;
