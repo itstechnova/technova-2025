@@ -37,7 +37,7 @@ function HeroAbout() {
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         />
         <div className="relative z-10 flex flex-row justify-between max-md:flex-col gap-6">
-          <div className="flex flex-col gap-12">
+          <div className="flex flex-col gap-12 text-textPrimary">
             <div className="flex flex-col gap-4 max-md:items-center">
               <h1 className="text-9xl max-md:text-7xl font-bold">
                 <span>Tech</span>
@@ -91,7 +91,7 @@ function HeroAbout() {
 
           {/* Overlay Content, no absolute positioning */}
           {gateLoaded && (
-            <div className="relative flex justify-start px-6 sm:px-24 py-12 -mt-16 sm:-mt-40 transition-all duration-300 ease-in-out">
+            <div className="relative flex justify-start px-6 sm:px-24 py-12 -mt-16 sm:-mt-40 transition-all duration-300 ease-in-out text-textPrimary">
               <div className="rounded-3xl w-full sm:w-3/4 md:w-1/2 p-8 flex flex-col gap-4">
                 <h2 id="about" className="text-3xl font-bold">
                   About Us

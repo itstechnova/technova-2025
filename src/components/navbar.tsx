@@ -34,7 +34,7 @@ function Navbar() {
           </div>
 
           {/* Desktop links */}
-          <div className="flex flex-row max-md:hidden items-center gap-6">
+          <div className="flex flex-row max-md:hidden items-center gap-6 text-textPrimary">
             {navLinks.map(({ label, href }) => (
               <Link key={label} href={href}>
                 {label}
