@@ -65,7 +65,7 @@ function Navbar() {
 
       {/* Mobile menu content */}
       {menuOpen && (
-        <div className="md:hidden mt-4 space-y-4 flex flex-col items-center">
+        <div className="md:hidden mt-4 space-y-4 flex flex-col items-center text-textPrimary">
           {navLinks.map(({ label, href }) => (
             <Link key={label} href={href}>
               {label}
