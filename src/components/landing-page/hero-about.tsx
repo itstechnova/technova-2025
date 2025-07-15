@@ -44,7 +44,7 @@ function HeroAbout() {
                 </span>
               </h1>
               <h2 className="text-3xl md:text-6xl font-bold">Hack With Us</h2>
-              <p className="text-xl max-sm:text-xl max-md:text-center">
+              <p className="text-xl md:text-2xl max-md:text-center">
                 University of Waterloo&apos;s Women+ in Tech Hackathon
               </p>
               <small className="text-xl max-sm:text-lg font-semibold">
