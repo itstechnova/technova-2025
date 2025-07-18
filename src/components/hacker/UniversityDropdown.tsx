@@ -10,6 +10,7 @@ interface UniversityDropdownProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
   onOtherChange?: (val: string) => void;
+  required?: boolean;
 }
 
 const universities = [
@@ -45,7 +46,10 @@ const UniversityDropdown: React.FC<UniversityDropdownProps> = ({
   otherValue,
   onChange,
   onOtherChange,
+  required,
 }) => {
+  const isOtherSelected = value === "Other:";
+
   return (
     <div className="flex flex-col gap-4 w-full">
       <div className="relative w-full">
@@ -79,6 +83,7 @@ const UniversityDropdown: React.FC<UniversityDropdownProps> = ({
         onChange={onChange}
         otherValue={otherValue}
         onOtherChange={onOtherChange}
+        required={required && isOtherSelected}
       />
     </div>
   );

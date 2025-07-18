@@ -149,7 +149,7 @@ function HackerAboutYou() {
       setFormError(null);
       sessionStorage.removeItem("hackerAboutYouData");
       console.log("data submitted");
-      router.push("/apply/hacker/mlh-requirements");
+      router.push("/apply/hacker/short-answers");
     }
   };
 
