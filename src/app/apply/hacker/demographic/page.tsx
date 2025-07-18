@@ -31,13 +31,11 @@ function HackerDemographic() {
         .single();
 
       if (response.error) {
-        console.log("Supabase fetch error:", response.error);
         throw response.error;
       } else if (response.data) {
         const fallbackData = JSON.parse(
           sessionStorage.getItem("hackerDemographicData") ?? "{}"
         );
-        console.log("Loaded from Supabase:", response.data);
         const sanitizedData = {
           ethnicity: response.data.ethnicity ?? fallbackData.ethnicity ?? [],
           ethnicity_other:
@@ -68,7 +66,6 @@ function HackerDemographic() {
 
       const savedData = sessionStorage.getItem("hackerDemographicData");
       if (savedData) {
-        console.log("Loaded from sessionStorage");
         setDemographicData(JSON.parse(savedData));
       }
     };
@@ -91,7 +88,6 @@ function HackerDemographic() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Do validation here
-    console.log(JSON.stringify(demographicData));
     const response = await supabase
       .from("hacker_landing")
       .update([demographicData])
@@ -99,12 +95,10 @@ function HackerDemographic() {
       .select();
 
     if (response.error) {
-      console.log(response.error);
       throw response.error;
     } else {
       // setFormError(null);
       sessionStorage.removeItem("hackerDemographicData");
-      console.log("data submitted!");
       router.push("/apply/hacker/thanks");
     }
   };

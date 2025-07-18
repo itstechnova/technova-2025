@@ -40,14 +40,12 @@ function MentorSurvey() {
         .single();
 
       if (response.error) {
-        console.log("Supabase fetch error:", response.error);
         return;
       } else if (response.data) {
         const fallbackData = JSON.parse(
           sessionStorage.getItem("mentorRoleData") ?? "{}"
         );
 
-        console.log("Loaded from Supabase:", response.data);
         const sanitizedData = {
           onboarding: response.data.onboarding ?? fallbackData.onboarding ?? "",
           hackathon_experience:
@@ -164,17 +162,13 @@ function MentorSurvey() {
 
     if (error) {
       console.error("Error updating mentor_application:", error);
-      // Optionally show error to user
     } else {
       sessionStorage.removeItem("mentorRoleData");
-      console.log("Mentor Role Data submitted:", dbData);
       router.push("/");
-      // Optionally show success to user
     }
 
     // Handle file upload separately if needed
     if (mentorData.resume) {
-      console.log("Resume file:", mentorData.resume);
       // Implement file upload logic here if required
     }
   };

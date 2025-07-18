@@ -35,13 +35,11 @@ function HackerSurvey() {
         .single();
 
       if (response.error) {
-        console.log("Supabase fetch error:", response.error);
         throw response.error;
       } else if (response.data) {
         const fallbackData = JSON.parse(
           sessionStorage.getItem("hackerSurveyData") ?? "{}"
         );
-        console.log("Loaded from Supabase:", response.data);
 
         const sanitizedData = {
           career_sessions:
@@ -100,7 +98,6 @@ function HackerSurvey() {
 
       const savedData = sessionStorage.getItem("hackerSurveyData");
       if (savedData) {
-        console.log("Loaded from sessionStorage");
         setSurveyData(JSON.parse(savedData));
       }
     };
@@ -122,8 +119,6 @@ function HackerSurvey() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Do validation here
-    console.log(JSON.stringify(surveyData));
     const response = await supabase
       .from("hacker_landing")
       .update([surveyData])
@@ -131,11 +126,9 @@ function HackerSurvey() {
       .select();
 
     if (response.error) {
-      console.log(response.error);
       throw response.error;
     } else {
       sessionStorage.removeItem("hackerSurveyData");
-      console.log("data submitted");
       router.push("/apply/hacker/demographic");
     }
   };

@@ -25,14 +25,11 @@ function MentorLanding() {
         .single();
 
       if (response.error) {
-        console.log("Supabase fetch error:", response.error);
         throw response.error;
       } else if (response.data) {
         const fallbackData = JSON.parse(
           sessionStorage.getItem("mentorLandingData") ?? "{}"
         );
-
-        console.log("Loaded from Supabase:", response.data);
 
         const mergedData = {
           email: response.data.email ?? fallbackData.email ?? "",
@@ -79,12 +76,9 @@ function MentorLanding() {
 
     if (error) {
       console.error("Error updating mentor_application:", error);
-      // Optionally show error to user
     } else {
       sessionStorage.removeItem("mentorLandingData");
-      console.log("Mentor Landing Data submitted:", landingData);
       router.push("/apply/mentor/about-you");
-      // Optionally show success to user
     }
   };
 

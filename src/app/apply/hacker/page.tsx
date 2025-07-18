@@ -26,13 +26,11 @@ function HackerLanding() {
         .single();
 
       if (response.error) {
-        console.log("Supabase fetch error:", response.error);
         throw response.error;
       } else if (response.data) {
         const fallbackData = JSON.parse(
           sessionStorage.getItem("hackerLandingData") ?? "{}"
         );
-        console.log("Loaded from Supabase:", response.data);
         const sanitizedData = {
           email: response.data.email ?? fallbackData.email ?? "",
           age2025: response.data.age2025 ?? fallbackData.age2025 ?? "",
@@ -47,7 +45,6 @@ function HackerLanding() {
 
       const savedData = sessionStorage.getItem("hackerLandingData");
       if (savedData) {
-        console.log("Loaded from sessionStorage");
         setLandingData(JSON.parse(savedData));
       }
     };
@@ -70,8 +67,6 @@ function HackerLanding() {
       setFormError(null);
     }
 
-    console.log(JSON.stringify(landingData));
-
     const { data, error } = await supabase
       .from("hacker_landing")
       .update([
@@ -83,11 +78,9 @@ function HackerLanding() {
       .eq("user_id", user.id);
     if (error) {
       setFormError("Error submitting form");
-      console.log("error", error);
     } else {
       setFormError(null);
       sessionStorage.removeItem("hackerLandingData");
-      console.log("data submitted :o");
       router.push("/apply/hacker/about-you");
     }
   };

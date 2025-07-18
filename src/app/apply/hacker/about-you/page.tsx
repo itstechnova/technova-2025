@@ -38,13 +38,11 @@ function HackerAboutYou() {
         .single();
 
       if (response.error) {
-        console.log("Supabase fetch error:", response.error);
         throw response.error;
       } else if (response.data) {
         const fallbackData = JSON.parse(
           sessionStorage.getItem("hackerAboutYouData") ?? "{}"
         );
-        console.log("Loaded from Supabase:", response.data);
         const sanitizedData = {
           firstName: response.data.firstName ?? fallbackData.firstName ?? "",
           lastName: response.data.lastName ?? fallbackData.lastName ?? "",
@@ -89,7 +87,6 @@ function HackerAboutYou() {
 
       const savedData = sessionStorage.getItem("hackerAboutYouData");
       if (savedData) {
-        console.log("Loaded from sessionStorage");
         setAboutYouData(JSON.parse(savedData));
       }
     };
@@ -111,7 +108,6 @@ function HackerAboutYou() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(JSON.stringify(aboutYouData));
 
     const parsedGraduatingYearOther = Number(aboutYouData.graduatingYearOther);
 
@@ -144,11 +140,9 @@ function HackerAboutYou() {
 
     if (error) {
       setFormError("Error submitting form");
-      console.log("error", error);
     } else {
       setFormError(null);
       sessionStorage.removeItem("hackerAboutYouData");
-      console.log("data submitted");
       router.push("/apply/hacker/short-answers");
     }
   };

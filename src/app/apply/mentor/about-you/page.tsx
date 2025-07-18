@@ -111,7 +111,6 @@ export default function MentorAboutYouFormPage() {
     } else {
       sessionStorage.removeItem("mentorAboutYouData");
       console.log("data submitted!");
-      // Optionally redirect or show a success message
       router.push("/apply/mentor/role");
     }
   };
