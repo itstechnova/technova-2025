@@ -4,7 +4,8 @@ export type AppStatus =
   | "Waitlisted"
   | "In Review"
   | "Submitted"
-  | "In Progress";
+  | "In Progress"
+  | "Not Started";
 
 export type AppType = "Hacker" | "Mentor" | "Volunteer";
 
