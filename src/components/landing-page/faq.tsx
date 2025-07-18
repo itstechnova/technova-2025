@@ -43,26 +43,23 @@ function FAQ() {
   }, [faqs, updateHeight]);
 
   return (
-    <div id="faq" className="relative w-full px-10 md:px-24 py-6 rounded-3xl">
+    <div
+      id="faq"
+      className="relative w-full px-10 md:px-24 py-12 md:py-16 rounded-3xl"
+    >
       {/* FAQ Title */}
-      <div className="mb-20">
-        <h1 className="text-3xl font-bold text-textPrimary text-left">
+      <div className="mb-16">
+        <h1 className="text-3xl md:text-4xl font-bold text-textPrimary text-left">
           Frequently Asked Questions
         </h1>
       </div>
 
       {/* Grid Container */}
-      <div className="relative mx-auto max-w-[1200px] w-full pb-20">
-        {/* Grid Background */}
-        <div
-          className="absolute inset-0 bg-faq-grid z-0 rounded-xl pointer-events-none overflow-hidden"
-          style={{ height: `${gridHeight}px` }}
-        />
-
+      <div className="relative mx-auto max-w-[1200px] w-full">
         {/* Cards Container */}
         <div
           ref={gridRef}
-          className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-20 py-16 px-8 mx-auto"
+          className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-20 mx-auto"
         >
           {faqs.map((faq, idx) => (
             <InfoCard
