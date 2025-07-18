@@ -28,7 +28,6 @@ function HackerShortAnswers() {
         .single();
 
       if (response.error) {
-        console.log("Supabase fetch error:", response.error);
         throw response.error;
       } else if (response.data) {
         const fallbackData = JSON.parse(sessionStorage.getItem("hackerShortAnswersData") ?? "{}");
@@ -48,7 +47,6 @@ function HackerShortAnswers() {
 
       const savedData = sessionStorage.getItem("hackerShortAnswersData");
       if (savedData) {
-        console.log("Loaded from sessionStorage");
         setShortAnswersData(JSON.parse(savedData));
       }
     };
@@ -83,7 +81,6 @@ function HackerShortAnswers() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(JSON.stringify(shortAnswersData));
 
     const { data, error } = await supabase
       .from("hacker_landing")
@@ -103,7 +100,6 @@ function HackerShortAnswers() {
     } else {
       setFormError(null);
       sessionStorage.removeItem("hackerShortAnswersData");
-      console.log("Short answers submitted!");
       router.push("/apply/hacker/mlh-requirements");
     }
   };

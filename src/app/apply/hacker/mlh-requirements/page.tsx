@@ -25,13 +25,11 @@ function HackerMLHRequirements() {
         .single();
 
       if (response.error) {
-        console.log("Supabase fetch error:", response.error);
         throw response.error;
       } else if (response.data) {
         const fallbackData = JSON.parse(
           sessionStorage.getItem("hackerMLHData") ?? "{}"
         );
-        console.log("Loaded from Supabase:", response.data);
         const sanitizedData = {
           mandatory_requirement_1:
             response.data.mandatory_requirement_1 ??
@@ -50,7 +48,6 @@ function HackerMLHRequirements() {
 
       const savedData = sessionStorage.getItem("hackerMLHData");
       if (savedData) {
-        console.log("Loaded from sessionStorage");
         setMLHData(JSON.parse(savedData));
       }
     };
@@ -72,8 +69,6 @@ function HackerMLHRequirements() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Do validation here
-    console.log(JSON.stringify(mlhData));
     const response = await supabase
       .from("hacker_landing")
       .update([mlhData])
@@ -83,9 +78,7 @@ function HackerMLHRequirements() {
       console.log(response.error);
       throw response.error;
     } else {
-      // setFormError(null);
       sessionStorage.removeItem("hackerMLHData");
-      console.log("data submitted");
       router.push("/apply/hacker/survey");
     }
   };
