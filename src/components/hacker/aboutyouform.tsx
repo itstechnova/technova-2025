@@ -106,6 +106,7 @@ function HackerAboutYouForm({
                 handleChange(e);
                 updateData({ firstName: e.target.value });
               }}
+              required
             />
             <ShortAnswerQuestion
               question="What's your last name?"
@@ -117,6 +118,7 @@ function HackerAboutYouForm({
                 handleChange(e);
                 updateData({ lastName: e.target.value });
               }}
+              required
             />
           </div>
 
@@ -131,6 +133,7 @@ function HackerAboutYouForm({
               handleChange(e);
               updateData({ pronouns: e.target.value });
             }}
+            required
           />
 
           {/* T-shirt size section */}
@@ -167,6 +170,7 @@ function HackerAboutYouForm({
                     handleChange(e);
                     updateData({ tshirtSize: e.target.value });
                   }}
+                  required
                 />
               ))}
             </div>
@@ -212,6 +216,7 @@ function HackerAboutYouForm({
                       ? (val) => updateData({ levelOfStudyOther: val })
                       : undefined
                   }
+                  required
                 />
               ))}
             </div>
@@ -253,6 +258,7 @@ function HackerAboutYouForm({
                       ? (val) => updateData({ graduatingYearOther: val })
                       : undefined
                   }
+                  required
                 />
               ))}
             </div>
@@ -279,6 +285,7 @@ function HackerAboutYouForm({
                 }
               }}
               onOtherChange={(val) => updateData({ universityOther: val })}
+              required
             />
           </div>
 
@@ -293,6 +300,7 @@ function HackerAboutYouForm({
               handleChange(e);
               updateData({ major: e.target.value });
             }}
+            required
           />
 
           {/* Hackathon count section */}
@@ -312,6 +320,7 @@ function HackerAboutYouForm({
                     handleChange(e);
                     updateData({ hackathonCount: e.target.value });
                   }}
+                  required
                 />
               ))}
             </div>
