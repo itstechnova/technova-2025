@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import ShortAnswerQuestion from "../shortanswerq";
 import SubmitButton from "../submitButton";
@@ -60,9 +60,17 @@ function HackerAboutYouForm({
   handleChange,
   handleSubmit,
 }: HackerAboutYouFormProps) {
+  const updateData = (newData: any) => {
+    setData((prev: any) => {
+      const updated = { ...prev, ...newData };
+      sessionStorage.setItem("hackerAboutYouData", JSON.stringify(updated));
+      console.log(updated);
+      return updated;
+    });
+  };
+
   return (
     <div className="p-24 flex flex-col h-full bg-navPrimary relative">
-      {/* Background SVG graphic */}
       <div className="absolute inset-0 z-7 pointer-events-none">
         <img
           src="/hackerformsgraphic.svg"
@@ -78,7 +86,7 @@ function HackerAboutYouForm({
           </h1>
           <Image
             src="/themed_assets/sunflower.svg"
-            alt="grass"
+            alt="sunflower"
             width={40}
             height={40}
           />
@@ -94,7 +102,11 @@ function HackerAboutYouForm({
               id="firstName"
               placeholder="ex. Jane"
               value={data.firstName}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+                updateData({ firstName: e.target.value });
+              }}
+              required
             />
             <ShortAnswerQuestion
               question="What's your last name?"
@@ -102,16 +114,26 @@ function HackerAboutYouForm({
               id="lastName"
               placeholder="ex. Smith"
               value={data.lastName}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+                updateData({ lastName: e.target.value });
+              }}
+              required
             />
           </div>
+
+          {/* Pronouns */}
           <ShortAnswerQuestion
             question="What are your pronouns?"
             name="pronouns"
             id="pronouns"
             placeholder="ex. she/her/hers (all lowercase)"
             value={data.pronouns}
-            onChange={handleChange}
+            onChange={(e) => {
+              handleChange(e);
+              updateData({ pronouns: e.target.value });
+            }}
+            required
           />
 
           {/* T-shirt size section */}
@@ -144,7 +166,11 @@ function HackerAboutYouForm({
                   name="tshirtSize"
                   value={size}
                   checked={data.tshirtSize === size}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    updateData({ tshirtSize: e.target.value });
+                  }}
+                  required
                 />
               ))}
             </div>
@@ -171,26 +197,32 @@ function HackerAboutYouForm({
                   name="levelOfStudy"
                   value={level}
                   checked={data.levelOfStudy === level}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    if (level === "Other:") {
+                      updateData({ levelOfStudy: "Other:" });
+                    } else {
+                      updateData({
+                        levelOfStudy: e.target.value,
+                        levelOfStudyOther: "",
+                      });
+                    }
+                  }}
                   otherValue={
                     level === "Other:" ? data.levelOfStudyOther : undefined
                   }
                   onOtherChange={
                     level === "Other:"
-                      ? (val) =>
-                          setData((prev: any) => ({
-                            ...prev,
-                            levelOfStudy: "Other:",
-                            levelOfStudyOther: val,
-                          }))
+                      ? (val) => updateData({ levelOfStudyOther: val })
                       : undefined
                   }
+                  required
                 />
               ))}
             </div>
           </div>
 
-          {/* Graduating year section */}
+          {/* Graduating Year */}
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               What year will you be graduating? 
@@ -207,20 +239,26 @@ function HackerAboutYouForm({
                   name="graduatingYear"
                   value={year}
                   checked={data.graduatingYear === year}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    if (year === "Other:") {
+                      updateData({ graduatingYear: "Other:" });
+                    } else {
+                      updateData({
+                        graduatingYear: e.target.value,
+                        graduatingYearOther: "",
+                      });
+                    }
+                  }}
                   otherValue={
                     year === "Other:" ? data.graduatingYearOther : undefined
                   }
                   onOtherChange={
                     year === "Other:"
-                      ? (val) =>
-                          setData((prev: any) => ({
-                            ...prev,
-                            graduatingYear: "Other:",
-                            graduatingYearOther: val,
-                          }))
+                      ? (val) => updateData({ graduatingYearOther: val })
                       : undefined
                   }
+                  required
                 />
               ))}
             </div>
@@ -228,21 +266,26 @@ function HackerAboutYouForm({
 
           {/* University section */}
           <div className="flex flex-col gap-2">
-            <span className="font-bold text-base mb-4">
+            <span className="font-bold text-base">
               Please select which institution you are/will be attending in Fall
               2025.
             </span>
             <UniversityDropdown
               value={data.university}
               otherValue={data.universityOther}
-              onChange={handleChange}
-              onOtherChange={(val) =>
-                setData((prev: any) => ({
-                  ...prev,
-                  university: "Other:",
-                  universityOther: val,
-                }))
-              }
+              onChange={(e) => {
+                handleChange(e);
+                if (e.target.value === "Other:") {
+                  updateData({ university: "Other:" });
+                } else {
+                  updateData({
+                    university: e.target.value,
+                    universityOther: "",
+                  });
+                }
+              }}
+              onOtherChange={(val) => updateData({ universityOther: val })}
+              required
             />
           </div>
 
@@ -253,7 +296,11 @@ function HackerAboutYouForm({
             id="major"
             placeholder="ex. Systems Design Engineering"
             value={data.major}
-            onChange={handleChange}
+            onChange={(e) => {
+              handleChange(e);
+              updateData({ major: e.target.value });
+            }}
+            required
           />
 
           {/* Hackathon count section */}
@@ -261,18 +308,20 @@ function HackerAboutYouForm({
             <span className="font-bold text-base">
               How many hackathons have you been to?
             </span>
-
             <div className="flex flex-col gap-2">
-              {hackathonCountOptions.map((level) => (
-                <label key={level} className="flex items-end gap-2 w-full">
-                  <CheckOff
-                    label={level}
-                    name="hackathonCount"
-                    value={level}
-                    checked={data.hackathonCount === level}
-                    onChange={handleChange}
-                  />
-                </label>
+              {hackathonCountOptions.map((count) => (
+                <CheckOff
+                  key={count}
+                  label={count}
+                  name="hackathonCount"
+                  value={count}
+                  checked={data.hackathonCount === count}
+                  onChange={(e) => {
+                    handleChange(e);
+                    updateData({ hackathonCount: e.target.value });
+                  }}
+                  required
+                />
               ))}
             </div>
           </div>
@@ -285,16 +334,13 @@ function HackerAboutYouForm({
             <MultiCheckbox
               options={wordOfMouthOptions}
               selected={data.hearAboutUs}
-              onChange={(selected) =>
-                setData((prev: any) => ({ ...prev, hearAboutUs: selected }))
-              }
+              onChange={(selected) => updateData({ hearAboutUs: selected })}
               otherValue={data.hearAboutUsOther}
-              onOtherChange={(val) =>
-                setData((prev: any) => ({ ...prev, hearAboutUsOther: val }))
-              }
+              onOtherChange={(val) => updateData({ hearAboutUsOther: val })}
             />
           </div>
         </div>
+
         <div className="flex justify-end mt-8">
           <SubmitButton>→</SubmitButton>
         </div>

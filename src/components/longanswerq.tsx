@@ -33,7 +33,7 @@ function LongAnswerQuestion({
               <CheckOff
                 key={option}
                 label={option}
-                name="selectedOption"
+                name="selected_option"
                 value={option}
                 checked={selectedOption === option}
                 onChange={selectOption}

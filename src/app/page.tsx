@@ -12,9 +12,7 @@ export default async function Home() {
     <div>
       <HeroAbout />
       <SponsorUsSection />
-      <div className="pb-24">
-        <FAQ />
-      </div>
+      <FAQ />
       <ContactUs />
     </div>
   );

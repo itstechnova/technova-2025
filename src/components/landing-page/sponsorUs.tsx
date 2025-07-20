@@ -5,10 +5,12 @@ const SponsorUsSection: React.FC = () => {
   return (
     <section
       id="sponsors"
-      className="scroll-mt-16 px-24 py-32 flex flex-col h-full relative w-full text-left"
+      className="scroll-mt-16 px-10 md:px-24 py-12 md:py-16 flex flex-col h-full relative w-full text-left"
     >
-      <h2 className="text-4xl font-bold text-textPrimary mb-16">Sponsor Us</h2>
-      <p className="max-w-4xl text-lg text-textPrimary mb-12">
+      <h2 className="text-3xl md:text-4xl font-bold text-textPrimary mb-10">
+        Sponsors
+      </h2>
+      <p className="max-w-6xl text-base md:text-lg text-textPrimary mb-10">
         Support more than 300+ young women in the next step of their journey by
         sponsoring the next generation of leaders. Interested in sponsoring?
         Email us at{" "}

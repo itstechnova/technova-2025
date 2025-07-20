@@ -1,5 +1,4 @@
-import React from "react";
-import Image from "next/image";
+import React, { useEffect } from "react";
 import SubmitButton from "../submitButton";
 import MultiCheckbox from "./MultiCheckbox";
 
@@ -26,7 +25,6 @@ const careerSessionsOptions = [
 
 const communitySessionsOptions = [
   "Speed friending",
-
   "Speed team-finding",
   "Team bonding",
   "Virtual socials/meetups (eg. high schoolers, first years, LGBTQIA+, BIPOC, etc)",
@@ -107,9 +105,18 @@ function HackerSurveyForm({
   handleChange,
   handleSubmit,
 }: HackerSurveyFormProps) {
+
+  const updateData = (newData: any) => {
+    setData((prev: any) => {
+      const updated = { ...prev, ...newData };
+      sessionStorage.setItem("hackerSurveyData", JSON.stringify(updated));
+      console.log("Updated data:", updated);
+      return updated;
+    });
+  };
+
   return (
     <div className="p-24 flex flex-col h-full bg-navPrimary relative">
-      {/* Background SVG graphic */}
       <div className="absolute inset-0 z-7 pointer-events-none">
         <img
           src="/hackerformsgraphic.svg"
@@ -143,38 +150,32 @@ function HackerSurveyForm({
             </span>
             <MultiCheckbox
               options={careerSessionsOptions}
-              selected={data.careerSessions}
-              onChange={(selected) =>
-                setData((prev: any) => ({ ...prev, careerSessions: selected }))
-              }
-              otherValue={data.careerSessionsOther}
+              selected={data.career_sessions}
+              onChange={(selected) => updateData({ career_sessions: selected })}
+              otherValue={data.career_sessions_other}
               onOtherChange={(val) =>
-                setData((prev: any) => ({ ...prev, careerSessionsOther: val }))
+                updateData({ career_sessions_other: val })
               }
             />
           </div>
+
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               What community sessions would you be most interested in attending?{" "}
             </span>
             <MultiCheckbox
               options={communitySessionsOptions}
-              selected={data.communitySessions}
+              selected={data.community_sessions}
               onChange={(selected) =>
-                setData((prev: any) => ({
-                  ...prev,
-                  communitySessions: selected,
-                }))
+                updateData({ community_sessions: selected })
               }
-              otherValue={data.communitySessionsOther}
+              otherValue={data.community_sessions_other}
               onOtherChange={(val) =>
-                setData((prev: any) => ({
-                  ...prev,
-                  communitySessionsOther: val,
-                }))
+                updateData({ community_sessions_other: val })
               }
             />
           </div>
+
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               What "Intro to ..." technical sessions would you be most
@@ -182,22 +183,17 @@ function HackerSurveyForm({
             </span>
             <MultiCheckbox
               options={technicalSessionsOptions}
-              selected={data.technicalSessions}
+              selected={data.technical_sessions}
               onChange={(selected) =>
-                setData((prev: any) => ({
-                  ...prev,
-                  technicalSessions: selected,
-                }))
+                updateData({ technical_sessions: selected })
               }
-              otherValue={data.technicalSessionsOther}
+              otherValue={data.technical_sessions_other}
               onOtherChange={(val) =>
-                setData((prev: any) => ({
-                  ...prev,
-                  technicalSessionsOther: val,
-                }))
+                updateData({ technical_sessions_other: val })
               }
             />
           </div>
+
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               Which themed technology sessions would you be most interested in
@@ -205,19 +201,15 @@ function HackerSurveyForm({
             </span>
             <MultiCheckbox
               options={themedSessionsOptions}
-              selected={data.themedSessions}
-              onChange={(selected) =>
-                setData((prev: any) => ({
-                  ...prev,
-                  themedSessionsOptions: selected,
-                }))
-              }
-              otherValue={data.themedSessionsOther}
+              selected={data.themed_sessions}
+              onChange={(selected) => updateData({ themed_sessions: selected })}
+              otherValue={data.themed_sessions_other}
               onOtherChange={(val) =>
-                setData((prev: any) => ({ ...prev, themedSessionsOther: val }))
+                updateData({ themed_sessions_other: val })
               }
             />
           </div>
+
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               What technology industries would you be most interested in
@@ -225,16 +217,15 @@ function HackerSurveyForm({
             </span>
             <MultiCheckbox
               options={techIndustriesOptions}
-              selected={data.techIndustries}
-              onChange={(selected) =>
-                setData((prev: any) => ({ ...prev, techIndustries: selected }))
-              }
-              otherValue={data.techIndustriesOther}
+              selected={data.tech_industries}
+              onChange={(selected) => updateData({ tech_industries: selected })}
+              otherValue={data.tech_industries_other}
               onOtherChange={(val) =>
-                setData((prev: any) => ({ ...prev, techIndustriesOther: val }))
+                updateData({ tech_industries_other: val })
               }
             />
           </div>
+
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               What field(s) would you be interested in learning about at
@@ -242,14 +233,10 @@ function HackerSurveyForm({
             </span>
             <MultiCheckbox
               options={techFieldsOptions}
-              selected={data.techFields}
-              onChange={(selected) =>
-                setData((prev: any) => ({ ...prev, techFields: selected }))
-              }
-              otherValue={data.techFieldsOther}
-              onOtherChange={(val) =>
-                setData((prev: any) => ({ ...prev, techFieldsOther: val }))
-              }
+              selected={data.tech_fields}
+              onChange={(selected) => updateData({ tech_fields: selected })}
+              otherValue={data.tech_fields_other}
+              onOtherChange={(val) => updateData({ tech_fields_other: val })}
             />
           </div>
         </div>

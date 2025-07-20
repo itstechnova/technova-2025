@@ -6,6 +6,7 @@ import SubmitButton from '@/components/submitButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import supabase from '@/config/supabaseClient';
+import { useRouter } from 'next/navigation';
 
 export default function CreateAccountPage() {
   const [createAccountForm, setCreateAccountForm] = useState({
@@ -19,7 +20,7 @@ export default function CreateAccountPage() {
 
   const [formError, setFormError] = useState('');
   const [formSuccess, setFormSuccess] = useState('');
-
+  const router = useRouter();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     setCreateAccountForm((prev) => ({
@@ -37,6 +38,10 @@ export default function CreateAccountPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (createAccountForm.password !== createAccountForm.confirmPassword) {
+      setFormError('Passwords do not match');
+      return;
+    }
     signUpNewUser();
   };
 
@@ -47,11 +52,13 @@ export default function CreateAccountPage() {
     });
     console.log('data', data);
     console.log('error', error);
-    if (data) {
+    if (error) {
+      setFormError(error.message);
+      return;
+    } else {
       setFormError('');
       setFormSuccess('Account created successfully');
-    } else {
-      setFormError('Account creation failed');
+      router.push('/account/login');
     }
   }
 
