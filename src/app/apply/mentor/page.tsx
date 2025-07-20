@@ -64,7 +64,7 @@ function MentorLanding() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { error } = await supabase
+    const mentorApplicationResponse = await supabase
       .from("mentor_application")
       .update([
         {
@@ -74,8 +74,23 @@ function MentorLanding() {
       ])
       .eq("user_id", user.id);
 
-    if (error) {
-      console.error("Error updating mentor_application:", error);
+    const applicationsResponse = await supabase
+      .from("applications")
+      .update({ mentor: "In Progress" })
+      .eq("user_id", user.id)
+      .eq("mentor", "Not Started")
+      .select();
+
+    console.log(applicationsResponse.data);
+
+    if (mentorApplicationResponse.error) {
+      console.error(
+        "Error updating mentor_application:",
+        mentorApplicationResponse.error
+      );
+      // Optionally show error to user
+    } else if (applicationsResponse.error) {
+      throw applicationsResponse.error;
     } else {
       sessionStorage.removeItem("mentorLandingData");
       router.push("/apply/mentor/about-you");

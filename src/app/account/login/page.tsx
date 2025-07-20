@@ -42,7 +42,7 @@ export default function SignUpPage() {
         setLoginFormError(res.error);
       } else {
         setLoginFormSuccess('Login successful');
-        router.push('/');
+        router.push('/apply/dashboard');
       }
     });
   };

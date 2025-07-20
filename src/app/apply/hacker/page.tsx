@@ -1,5 +1,4 @@
 "use client";
-"use client";
 
 import React, { useState } from "react";
 import HackerLandingForm from "@/components/hacker/landingform";
@@ -26,15 +25,14 @@ function HackerLanding() {
       )
     ) {
       setFormError("Please fill in all required fields");
-      setFormError("Please fill in all required fields");
       return;
     } else {
       setFormError(null);
     }
  
     console.log(JSON.stringify(landingData));
-    
-    const { data, error } = await supabase
+
+    const hackerLandingResponse = await supabase
       .from("hacker_landing")
       .update([
         {
@@ -43,9 +41,20 @@ function HackerLanding() {
         },
       ])
       .eq("user_id", user.id);
-    if (error) {
+
+    const applicationsResponse = await supabase
+      .from("applications")
+      .update({ hacker: "In Progress" })
+      .eq("user_id", user.id)
+      .eq("hacker", "Not Started")
+      .select();
+
+    if (hackerLandingResponse.error) {
       setFormError("Error submitting form");
-      console.log("error", error);
+      console.log("error", hackerLandingResponse.error);
+    } else if (applicationsResponse.error) {
+      setFormError("Error submitting form");
+      console.log("error", applicationsResponse.error);
     } else {
       setFormError(null);
       sessionStorage.removeItem("hackerLandingData");
