@@ -49,7 +49,7 @@ function HackerAboutYou() {
         .select(
           "firstName, lastName, pronouns, tshirtSize, levelOfStudy, levelOfStudyOther, graduatingYear, graduatingYearOther, university, universityOther, major, hackathonCount, hearAboutUs, hearAboutUsOther"
         )
-        .eq("user_id", user.id)
+        .eq("user_id", user.id ? user.id : "")
         .single();
 
       if (response.error) {

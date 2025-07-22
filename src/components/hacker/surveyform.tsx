@@ -9,6 +9,7 @@ interface HackerSurveyFormProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  formError: string | null;
 }
 
 const careerSessionsOptions = [
@@ -104,6 +105,7 @@ function HackerSurveyForm({
   setData,
   handleChange,
   handleSubmit,
+  formError,
 }: HackerSurveyFormProps) {
   useEffect(() => {
     const savedData = sessionStorage.getItem("hackerSurveyData");
@@ -246,7 +248,8 @@ function HackerSurveyForm({
             />
           </div>
         </div>
-        <div className="flex justify-end mt-8">
+        <div className="flex flex-col mt-24 gap-2 items-end">
+          {formError && <p className="text-red-500">{formError}</p>}
           <SubmitButton>→</SubmitButton>
         </div>
       </form>
