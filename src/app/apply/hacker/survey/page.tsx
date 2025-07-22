@@ -1,7 +1,7 @@
 "use client";
 
 import HackerSurveyForm from "@/components/hacker/surveyform";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import supabase from "@/config/supabaseClient";
 import { useRouter } from "next/navigation";
 import { useAccount } from "@/components/AccountContext";
@@ -30,6 +30,73 @@ function HackerSurvey() {
     ["tech_industries", "tech_industries_other"],
     ["tech_fields", "tech_fields_other"],
   ];
+
+  useEffect(() => {
+    const loadData = async () => {
+      const response = await supabase
+        .from("hacker_landing")
+        .select(
+          "career_sessions, career_sessions_other, community_sessions, community_sessions_other, technical_sessions, technical_sessions_other, themed_sessions, themed_sessions_other, tech_industries, tech_industries_other, tech_fields, tech_fields_other"
+        )
+        .eq("user_id", user.id ? user.id : "")
+        .single();
+
+      if (response.error) {
+        throw response.error;
+      } else if (response.data) {
+        const fallbackData = JSON.parse(
+          sessionStorage.getItem("hackerSurveyData") ?? "{}"
+        );
+
+        const mergedData = {
+          career_sessions:
+            response.data.career_sessions ?? fallbackData.career_sessions ?? "",
+          career_sessions_other:
+            response.data.career_sessions_other ??
+            fallbackData.career_sessions_other ??
+            "",
+          community_sessions:
+            response.data.community_sessions ??
+            fallbackData.community_sessions ??
+            "",
+          community_sessions_other:
+            response.data.community_sessions_other ??
+            fallbackData.community_sessions_other ??
+            "",
+          technical_sessions:
+            response.data.technical_sessions ??
+            fallbackData.technical_sessions ??
+            "",
+          technical_sessions_other:
+            response.data.technical_sessions_other ??
+            fallbackData.technical_sessions_other ??
+            "",
+          themed_sessions:
+            response.data.themed_sessions ?? fallbackData.themed_sessions ?? "",
+          themed_sessions_other:
+            response.data.themed_sessions_other ??
+            fallbackData.themed_sessions_other ??
+            "",
+          tech_industries:
+            response.data.tech_industries ?? fallbackData.tech_industries ?? "",
+          tech_industries_other:
+            response.data.tech_industries_other ??
+            fallbackData.tech_industries_other ??
+            "",
+          tech_fields:
+            response.data.tech_fields ?? fallbackData.tech_fields ?? "",
+          tech_fields_other:
+            response.data.tech_fields_other ??
+            fallbackData.tech_fields_other ??
+            "",
+        };
+        sessionStorage.setItem("hackerSurveyData", JSON.stringify(mergedData));
+        setSurveyData(mergedData);
+        return;
+      }
+    };
+    loadData();
+  }, [user?.id]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
