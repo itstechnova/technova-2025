@@ -5,6 +5,7 @@ import supabase from "@/config/supabaseClient";
 import { useAccount } from "@/components/AccountContext";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
+import { stat } from "fs";
 
 interface MentorData {
   onboarding: string;
@@ -185,6 +186,11 @@ function MentorSurvey() {
       console.error("Error updating mentor_application:", error);
     } else {
       sessionStorage.removeItem("mentorRoleData");
+      const statusUpdateResponse = await supabase
+        .from("applications")
+        .update({ mentor: "Submitted" })
+        .eq("user_id", user.id);
+      if (statusUpdateResponse.error) throw statusUpdateResponse.error;
       router.push("/");
     }
   };
