@@ -27,6 +27,21 @@ function HackerAboutYou() {
     hearAboutUsOther: "",
   });
 
+  const requiredFields = [
+    "firstName",
+    "lastName",
+    "pronouns",
+    "tshirtSize",
+    "major",
+    "hackathonCount",
+  ];
+
+  const eitherOrRequiredFields = [
+    ["levelOfStudy", "levelOfStudyOther"],
+    ["graduatingYear", "graduatingYearOther"],
+    ["university", "universityOther"],
+  ];
+
   useEffect(() => {
     const loadData = async () => {
       const response = await supabase
@@ -34,7 +49,7 @@ function HackerAboutYou() {
         .select(
           "firstName, lastName, pronouns, tshirtSize, levelOfStudy, levelOfStudyOther, graduatingYear, graduatingYearOther, university, universityOther, major, hackathonCount, hearAboutUs, hearAboutUsOther"
         )
-        .eq("user_id", user.id)
+        .eq("user_id", user.id ? user.id : "")
         .single();
 
       if (response.error) {
@@ -115,6 +130,26 @@ function HackerAboutYou() {
       throw new TypeError("Graduating year must be a valid number");
     }
 
+    if (
+      requiredFields.some(
+        (field) => !aboutYouData[field as keyof typeof aboutYouData]
+      ) ||
+      eitherOrRequiredFields.some((pair) => {
+        const [field1, field2] = pair;
+        return (
+          !aboutYouData[field1 as keyof typeof aboutYouData] &&
+          !aboutYouData[field2 as keyof typeof aboutYouData]
+        );
+      })
+    ) {
+      setFormError("Please fill in all required fields");
+      return;
+    } else {
+      setFormError(null);
+    }
+
+    console.log(JSON.stringify(aboutYouData));
+
     const { data, error } = await supabase
       .from("hacker_landing")
       .update([
@@ -140,10 +175,12 @@ function HackerAboutYou() {
 
     if (error) {
       setFormError("Error submitting form");
+      console.log("error", error);
     } else {
       setFormError(null);
       sessionStorage.removeItem("hackerAboutYouData");
-      router.push("/apply/hacker/short-answers");
+      console.log("data submitted");
+      router.push("/apply/hacker/mlh-requirements");
     }
   };
 
@@ -154,6 +191,7 @@ function HackerAboutYou() {
         setData={setAboutYouData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
+        formError={formError}
       />
     </div>
   );

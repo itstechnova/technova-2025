@@ -32,6 +32,13 @@ function HackerLandingForm({
   };
 
   useEffect(() => {
+    const savedData = sessionStorage.getItem("hackerLandingData");
+    if (savedData) {
+      setData(JSON.parse(savedData));
+    }
+  }, [setData]);
+
+  useEffect(() => {
     fetch("/textFiles/hacker/intro.md")
       .then((r) => r.text())
       .then(setIntroMd)

@@ -9,6 +9,7 @@ interface HackerMLHProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  formError: string | null;
 }
 
 function HackerMLHForm({
@@ -16,7 +17,14 @@ function HackerMLHForm({
   setData,
   handleChange,
   handleSubmit,
+  formError,
 }: HackerMLHProps) {
+  useEffect(() => {
+    const savedData = sessionStorage.getItem("hackerMLHData");
+    if (savedData) {
+      setData(JSON.parse(savedData));
+    }
+  }, [setData]);
 
   const updateData = (newData: any) => {
     setData((prev: any) => {
@@ -142,14 +150,17 @@ function HackerMLHForm({
                 value="agree"
                 checked={data.optional === "agree"}
                 onChange={(e) => {
+                  const isChecked = e.target.checked;
+                  const newValue = isChecked ? "agree" : "";
                   handleChange(e);
-                  updateData({ optional: e.target.value });
+                  updateData({ optional: newValue });
                 }}
               />
             </div>
           </div>
         </div>
-        <div className="flex justify-end mt-8">
+        <div className="flex flex-col mt-24 gap-2 items-end">
+          {formError && <p className="text-red-500">{formError}</p>}
           <SubmitButton>→</SubmitButton>
         </div>
       </form>

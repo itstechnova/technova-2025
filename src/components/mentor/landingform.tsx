@@ -47,12 +47,6 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
     });
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    handleSubmit(e);
-    router.push("/apply/mentor/step-one");
-  };
-
   return (
     <div className="relative min-h-screen bg-navPrimary">
       <div className="fixed inset-x-0 top-0 h-1/3 pointer-events-none z-0 bg-gradient-to-b from-backgroundTertiary to-transparent" />
@@ -81,7 +75,7 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
 
         <div className="pb-5 border-b-2 border-textPrimary relative z-10" />
 
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit}>
           {/* Email field */}
           <div className="pt-24 pb-24">
             <label
@@ -141,16 +135,12 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
           </div>
 
           {/* Submit button */}
-          <Link href="/apply/mentor/about-you">
-            <div className="pb-36">
-              <button
-                type="submit"
-                className="bg-buttonSecondary px-8 py-3 text-white text-xl rounded-xl shadow-sm"
-              >
-                →
-              </button>
-            </div>
-          </Link>
+          <button
+            type="submit"
+            className="bg-buttonSecondary px-8 py-3 text-white text-xl rounded-xl shadow-sm"
+          >
+            →
+          </button>
         </form>
       </div>
 
