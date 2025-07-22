@@ -4,12 +4,32 @@ import React, { useState, useEffect } from "react";
 import supabase from "@/config/supabaseClient";
 import { useAccount } from "@/components/AccountContext";
 import { useRouter } from "next/navigation";
+import { v4 as uuidv4 } from "uuid";
+
+interface MentorData {
+  onboarding: string;
+  hackathon_experience: string[];
+  hackathon_experience_other: string;
+  resume: string | null;
+  additional_links: string;
+  role: string;
+  role_other: string;
+  experience_areas: string[];
+  experience_areas_other: string;
+  specific_mentorship: string;
+  additional_roles: string[];
+  referral_source: string[];
+  referral_source_other: string;
+  specific_referral: string;
+  volunteer_interest: string;
+  additional_comments: string;
+}
 
 function MentorSurvey() {
   const { user } = useAccount();
   const router = useRouter();
 
-  const [mentorData, setMentorData] = useState({
+  const [mentorData, setMentorData] = useState<MentorData>({
     onboarding: "",
     hackathon_experience: [],
     hackathon_experience_other: "",
@@ -57,7 +77,7 @@ function MentorSurvey() {
             response.data.hackathon_experience_other ??
             fallbackData.hackathon_experience_other ??
             "",
-          resume: null, // TODO: handle file uploads
+          resume: response.data.resume ?? fallbackData.resume ?? null,
           additional_links:
             response.data.additional_links ??
             fallbackData.additional_links ??
@@ -167,11 +187,46 @@ function MentorSurvey() {
       sessionStorage.removeItem("mentorRoleData");
       router.push("/");
     }
+  };
 
-    // Handle file upload separately if needed
-    if (mentorData.resume) {
-      // Implement file upload logic here if required
+  const handleResumeUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const filePath = `${user.id}/${uuidv4()}_${file.name}`;
+
+    const { data: uploadData, error: uploadError } = await supabase.storage
+      .from("resumes")
+      .upload(filePath, file);
+
+    if (uploadError) {
+      console.error("Upload error:", uploadError.message);
+      return;
     }
+
+    const { data: publicUrlData } = supabase.storage
+      .from("resumes")
+      .getPublicUrl(filePath);
+
+    const publicUrl = publicUrlData.publicUrl;
+
+    const { error: dbError } = await supabase
+      .from("mentor_application")
+      .update({ resume: publicUrl })
+      .eq("user_id", user.id);
+
+    if (dbError) {
+      console.error("Database update error:", dbError.message);
+      return;
+    }
+
+    setMentorData((prev) => {
+      const updated = { ...prev, resume: publicUrl };
+      sessionStorage.setItem("mentorRoleData", JSON.stringify(updated));
+      return updated;
+    });
+
+    console.log("Resume uploaded and URL saved:", publicUrl);
   };
 
   return (
@@ -181,6 +236,7 @@ function MentorSurvey() {
         setData={setMentorData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
+        handleResumeUpload={handleResumeUpload}
       />
     </div>
   );
