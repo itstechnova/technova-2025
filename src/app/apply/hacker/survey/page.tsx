@@ -9,6 +9,7 @@ import { useAccount } from "@/components/AccountContext";
 function HackerSurvey() {
   const router = useRouter();
   const { user } = useAccount();
+  const [formError, setFormError] = useState<string | null>(null);
   const [surveyData, setSurveyData] = useState({
     career_sessions: [],
     career_sessions_other: "",
@@ -23,6 +24,12 @@ function HackerSurvey() {
     tech_fields: [],
     tech_fields_other: "",
   });
+  const requiredFiveFields = [
+    ["career_sessions", "career_sessions_other"],
+    ["technical_sessions", "technical_sessions_other"],
+    ["tech_industries", "tech_industries_other"],
+    ["tech_fields", "tech_fields_other"],
+  ];
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -36,7 +43,28 @@ function HackerSurvey() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Do validation here
+    if (
+      requiredFiveFields.some(([field, otherField]) => {
+        let totalSelected = 0;
+        const arrayField = surveyData[field as keyof typeof surveyData];
+        const otherText = surveyData[otherField as keyof typeof surveyData];
+
+        if (Array.isArray(arrayField)) {
+          totalSelected += arrayField.length;
+        }
+
+        if (typeof otherText === "string" && otherText.trim() !== "") {
+          totalSelected += 1;
+        }
+
+        return totalSelected < 5;
+      })
+    ) {
+      setFormError("Please select at least 5 of all required fields");
+      return;
+    } else {
+      setFormError(null);
+    }
     console.log(JSON.stringify(surveyData));
     const response = await supabase
       .from("hacker_landing")
@@ -61,6 +89,7 @@ function HackerSurvey() {
         setData={setSurveyData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
+        formError={formError}
       />
     </div>
   );
