@@ -13,6 +13,7 @@ interface HackerAboutYouFormProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  formError: string | null;
 }
 
 const tshirtSizeOptions = ["XS", "S", "M", "L", "XL", "2XL", "3XL"];
@@ -59,6 +60,7 @@ function HackerAboutYouForm({
   setData,
   handleChange,
   handleSubmit,
+  formError,
 }: HackerAboutYouFormProps) {
   useEffect(() => {
     const savedData = sessionStorage.getItem("hackerAboutYouData");
@@ -100,7 +102,7 @@ function HackerAboutYouForm({
         </div>
       </div>
 
-      <form className="form z-10" onSubmit={handleSubmit}>
+      <form className="form z-10" onSubmit={handleSubmit} noValidate>
         <div className="flex flex-col gap-24 text-textPrimary">
           <div className="grid grid-cols-2 gap-10 w-full">
             <ShortAnswerQuestion
@@ -322,7 +324,8 @@ function HackerAboutYouForm({
                     updateData({ hackathonCount: e.target.value });
                   }}
                 />
-              ))}
+              ))}{" "}
+              {/* //TODO superbase saved choice doesn't update this */}
             </div>
           </div>
 
@@ -340,8 +343,8 @@ function HackerAboutYouForm({
             />
           </div>
         </div>
-
-        <div className="flex justify-end mt-8">
+        <div className="flex flex-col mt-24 gap-2 items-end">
+          {formError && <p className="text-red-500">{formError}</p>}
           <SubmitButton>→</SubmitButton>
         </div>
       </form>
