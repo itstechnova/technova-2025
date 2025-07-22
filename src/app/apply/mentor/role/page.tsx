@@ -30,13 +30,14 @@ function MentorSurvey() {
 
   // Load from Supabase or sessionStorage on mount
   useEffect(() => {
+    if (!user?.id) return;
     const loadData = async () => {
       const response = await supabase
         .from("mentor_application")
         .select(
           "onboarding, hackathon_experience, hackathon_experience_other, resume, additional_links, role, role_other, experience_areas, experience_areas_other, specific_mentorship, additional_roles, referral_source, referral_source_other, specific_referral, volunteer_interest, additional_comments"
         )
-        .eq("user_id", user.id)
+        .eq("user_id", user.id ? user.id : "")
         .single();
 
       if (response.error) {

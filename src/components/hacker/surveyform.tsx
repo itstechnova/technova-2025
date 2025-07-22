@@ -20,7 +20,7 @@ const careerSessionsOptions = [
   "Resume Writing and/or Resume feedback session",
   "How to pitch your project",
   "Getting an internship/Interview prepping",
-  "How to make the most out of your internship",
+  "How to make the most out of your internship",  
   "Other:",
 ];
 

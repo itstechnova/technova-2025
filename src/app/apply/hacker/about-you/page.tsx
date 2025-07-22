@@ -58,6 +58,18 @@ function HackerAboutYou() {
         const fallbackData = JSON.parse(
           sessionStorage.getItem("hackerAboutYouData") ?? "{}"
         );
+        function mapHackathonCount(value: string | number): string {
+          const stringValue = value.toString().trim();
+          if (stringValue === "0" || stringValue.toLowerCase() === "first") {
+            return "This will be my first!";
+          } else if (["1", "2", "3", "4+"].includes(stringValue)) {
+            return stringValue;
+          } else if (parseInt(stringValue) >= 4) {
+            return "4+";
+          } else {
+            return ""; 
+          }
+        }
         const sanitizedData = {
           firstName: response.data.firstName ?? fallbackData.firstName ?? "",
           lastName: response.data.lastName ?? fallbackData.lastName ?? "",
@@ -81,10 +93,11 @@ function HackerAboutYou() {
           universityOther:
             response.data.universityOther ?? fallbackData.universityOther ?? "",
           major: response.data.major ?? fallbackData.major ?? "",
-          hackathonCount:
+          hackathonCount: mapHackathonCount(
             response.data.hackathonCount?.toString() ??
-            fallbackData.hackathonCount?.toString() ??
-            "",
+              fallbackData.hackathonCount?.toString() ??
+              ""
+          ),
           hearAboutUs:
             response.data.hearAboutUs ?? fallbackData.hearAboutUs ?? [],
           hearAboutUsOther:

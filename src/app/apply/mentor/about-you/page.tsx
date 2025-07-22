@@ -60,11 +60,38 @@ export default function MentorAboutYouFormPage() {
             "",
           tshirt_size:
             response.data.tshirt_size ?? fallbackData.tshirt_size ?? "",
-          availability:
-            response.data.availability ??
-            fallbackData.availability ??
-            Array(10).fill(Array(3).fill(false)),
+          availability: (() => {
+            const supabaseAvailability = response.data.availability;
+            const fallbackAvailability = fallbackData.availability;
+
+            const arraysEqual = (a: boolean[][], b: boolean[][]): boolean => {
+              if (!Array.isArray(a) || !Array.isArray(b)) return false;
+              if (a.length !== b.length) return false;
+              for (let i = 0; i < a.length; i++) {
+                if (!Array.isArray(a[i]) || !Array.isArray(b[i])) return false;
+                if (a[i].length !== b[i].length) return false;
+                for (let j = 0; j < a[i].length; j++) {
+                  if (a[i][j] !== b[i][j]) return false;
+                }
+              }
+              return true;
+            };
+
+            if (
+              fallbackAvailability &&
+              !arraysEqual(supabaseAvailability, fallbackAvailability)
+            ) {
+              return fallbackAvailability;
+            }
+
+            if (Array.isArray(supabaseAvailability)) {
+              return supabaseAvailability;
+            }
+
+            return Array.from({ length: 10 }, () => Array(3).fill(false));
+          })(),
         };
+        console.log(JSON.stringify(sanitizedData));
         sessionStorage.setItem(
           "mentorAboutYouData",
           JSON.stringify(sanitizedData)
@@ -97,11 +124,18 @@ export default function MentorAboutYouFormPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Do validation here
-    console.log("Mentor About You Data:", formData);
+
+    // convert empty responses to null
+    const sanitizedFormData = Object.fromEntries(
+      Object.entries(formData).map(([key, value]) => [
+        key,
+        value === "" ? null : value,
+      ])
+    );
+
     const response = await supabase
       .from("mentor_application")
-      .update([formData])
+      .update([sanitizedFormData])
       .eq("user_id", user.id)
       .select();
 
