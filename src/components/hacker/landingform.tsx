@@ -46,7 +46,6 @@ function HackerLandingForm({
   }, []);
 
   return (
-	
     <div className="relative min-h-screen bg-navPrimary">
       <div
         className="fixed inset-x-0 top-0 h-1/3 pointer-events-none z-0
@@ -74,7 +73,7 @@ function HackerLandingForm({
         </div>
       </div>
 
-      <div className="py-32 text-left w-1/2 md:w-3/5 relative z-10">
+      <div className="py-32 lg:px-24 md:px-6 text-left w-1/2 md:w-3/5 relative z-10">
         <form onSubmit={handleSubmit} className="form">
           <div className="flex flex-col gap-24 text-textPrimary">
             <ShortAnswerQuestion
