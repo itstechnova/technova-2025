@@ -6,7 +6,7 @@ Mentors of all genders that agree to adhere to our [code of conduct](https://its
 
 _TechNova 2025 will be an in-person first event! Preference may be given to applicants who are available to come in-person._
 
-🛑 **Mentor Application Deadline:** July 4, 2025 @ 11:59 PM EST 🛑  
+🛑 **Mentor Application Deadline:** August 8, 2025 @ 11:59 PM EST 🛑  
 → You can save your progress at any time and come back. You can also edit even after you submit, so don’t worry!
 
 To learn more: [Mentor + Volunteer Role Descriptions](https://itstechnova.org/roles)

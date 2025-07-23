@@ -87,7 +87,26 @@ function MentorRoleForm({
   };
 
   return (
-    <div className="p-24 flex flex-col h-full bg-navPrimary relative">
+    <div className="p-10 md:p-24 flex flex-col h-full bg-navPrimary relative">
+      {/* Background SVG graphic */}
+      <div className="absolute inset-0 z-7 pointer-events-none">
+        <img
+          src="/mentorFormGraphic.svg"
+          alt="Mentor Forms Graphic Background"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div
+        className="fixed inset-x-0 top-0 h-1/3 pointer-events-none z-0
+                 bg-gradient-to-b from-backgroundTertiary to-transparent"
+      />
+      <div className="pb-5 relative z-10">
+        <div className="flex gap-2 items-center pb-10">
+          <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
+            Mentor Role & Availability Questions
+          </h1>
+        </div>
+      </div>
       <form className="form z-10" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-24 text-textPrimary">
           {/* Onboarding */}
@@ -327,7 +346,9 @@ function MentorRoleForm({
           </div>
         </div>
         <div className="flex justify-end mt-8">
-          <SubmitButton>Submit</SubmitButton>
+          <SubmitButton className="px-8 py-2 text-xl rounded-xl bg-gradient-to-r from-navSecondary to-navSecondaryHover bg-[length:200%_100%] bg-left hover:bg-right transition-all duration-300 text-white shadow-sm">
+            Submit
+          </SubmitButton>
         </div>
       </form>
     </div>

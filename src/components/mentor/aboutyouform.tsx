@@ -48,7 +48,7 @@ function MentorAboutYouForm({
   };
 
   return (
-    <div className="p-24 flex flex-col h-full bg-navPrimary relative">
+    <div className="p-10 md:p-24 flex flex-col h-full bg-navPrimary relative">
       {/* Background SVG graphic */}
       <div className="absolute inset-0 z-7 pointer-events-none">
         <img
@@ -63,8 +63,8 @@ function MentorAboutYouForm({
       />
       <div className="pb-5 relative z-10">
         <div className="flex gap-2 items-center pb-10">
-          <h1 className="text-5xl font-semibold text-textSecondary">
-            Let’s get to know you better! 🌷
+          <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
+            Let&apos;s get to know you better! 🌷
           </h1>
         </div>
       </div>
@@ -241,11 +241,10 @@ function MentorAboutYouForm({
             />
           </div>
         </div>
-        <div className="pb-36 flex justify-end pt-10 pr-10">
+        <div className="flex justify-end pt-10 pr-10">
           <button
             type="submit"
-            className="bg-buttonSecondary px-8 py-3 text-white text-xl 
-                     rounded-xl shadow-sm"
+            className="px-8 py-2 text-xl rounded-xl bg-gradient-to-r from-navSecondary to-navSecondaryHover bg-[length:200%_100%] bg-left hover:bg-right transition-all duration-300 text-white shadow-sm"
           >
             →
           </button>
