@@ -65,7 +65,7 @@ function HackerDemographicForm({
     });
   };
   return (
-    <div className="p-24 flex flex-col h-full bg-navPrimary relative">
+    <div className="p-10 md:p-24 flex flex-col h-full bg-navPrimary relative">
       <div className="absolute inset-0 z-7 pointer-events-none">
         <img
           src="/hackerformsgraphic.svg"
@@ -77,7 +77,7 @@ function HackerDemographicForm({
       <div className="pb-5 relative z-10">
         <div className="flex gap-2 items-center pb-10">
           <div className="flex flex-col gap-4">
-            <h1 className="text-5xl font-semibold text-textSecondary">
+            <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
               Demographic Questions 🗺️
             </h1>
             <p>
@@ -203,7 +203,7 @@ function HackerDemographicForm({
         </div>
 
         <div className="flex justify-end mt-8">
-          <SubmitButton>→</SubmitButton>
+          <SubmitButton>Submit</SubmitButton>
         </div>
       </form>
     </div>

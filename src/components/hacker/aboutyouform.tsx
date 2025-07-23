@@ -79,7 +79,7 @@ function HackerAboutYouForm({
   };
 
   return (
-    <div className="p-24 flex flex-col h-full bg-navPrimary relative">
+    <div className="p-10 md:p-24 flex flex-col h-full bg-navPrimary relative">
       <div className="absolute inset-0 z-7 pointer-events-none">
         <img
           src="/hackerformsgraphic.svg"
@@ -90,14 +90,15 @@ function HackerAboutYouForm({
       <div className="absolute top-0 left-0 w-full h-1/4 pointer-events-none z-5 bg-gradient-to-b from-backgroundSecondary to-navPrimary" />
       <div className="pb-5 relative z-10">
         <div className="flex gap-2 items-center pb-10">
-          <h1 className="text-5xl font-semibold text-textSecondary">
-            Let's get to know you better!
+          <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
+            Let&apos;s get to know you better!
           </h1>
           <Image
             src="/themed_assets/sunflower.svg"
             alt="sunflower"
             width={40}
             height={40}
+            className="hidden md:block"
           />
         </div>
       </div>

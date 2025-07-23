@@ -20,7 +20,7 @@ const careerSessionsOptions = [
   "Resume Writing and/or Resume feedback session",
   "How to pitch your project",
   "Getting an internship/Interview prepping",
-  "How to make the most out of your internship",  
+  "How to make the most out of your internship",
   "Other:",
 ];
 
@@ -124,7 +124,7 @@ function HackerSurveyForm({
   };
 
   return (
-    <div className="p-24 flex flex-col h-full bg-navPrimary relative">
+    <div className="p-10 md:p-24 flex flex-col h-full bg-navPrimary relative">
       <div className="absolute inset-0 z-7 pointer-events-none">
         <img
           src="/hackerformsgraphic.svg"
@@ -136,14 +136,14 @@ function HackerSurveyForm({
       <div className="pb-5 relative z-10">
         <div className="flex gap-2 items-center pb-10">
           <div className="flex flex-col gap-4">
-            <h1 className="text-5xl font-semibold text-textSecondary">
+            <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
               What Would You Like to See at the Event? 🎉{" "}
             </h1>
             <span>
               Please note these are an early list so we cannot guarantee they
               will be at the event. However, you can help us figure out which
-              ones you’d find most helpful! List any ideas you have in the other
-              sections too!
+              ones you&apos;d find most helpful! List any ideas you have in the
+              other sections too!
             </span>
           </div>
         </div>
