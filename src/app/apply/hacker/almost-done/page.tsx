@@ -6,12 +6,26 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import Image from "next/image";
 import Link from "next/link";
+import CheckOff from "../../../../components/checkOff";
+import SubmitButton from "../../../../components/submitButton";
 
-export default function MentorThankYouPage() {
+interface AlmostDoneProps {
+  data: any;
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+}
+
+export default function AlmostDonePage({
+  data,
+  handleChange,
+  handleSubmit,
+}: AlmostDoneProps) {
   const [markdown, setMarkdown] = useState("");
 
   useEffect(() => {
-    fetch("/textFiles/mentor/thanks.md")
+    fetch("/textFiles/hacker/almost_done.md")
       .then((res) => res.text())
       .then(setMarkdown)
       .catch(console.error);
@@ -22,7 +36,7 @@ export default function MentorThankYouPage() {
       {/* Gradient Background */}
       <div
         className="fixed inset-x-0 top-0 h-1/3 pointer-events-none z-0
-                   bg-gradient-to-b from-backgroundTertiary to-navPrimary"
+                   bg-gradient-to-b from-backgroundSecondary to-navPrimary"
       />
 
       {/* Main Content */}
@@ -30,7 +44,7 @@ export default function MentorThankYouPage() {
         {/* Header */}
         <div className="flex items-center gap-2 pb-10">
           <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
-            Thanks for Applying!
+            You&apos;re almost done! 🎈
           </h1>
         </div>
 
@@ -50,26 +64,37 @@ export default function MentorThankYouPage() {
           </ReactMarkdown>
         </div>
 
-        {/* CTA Button */}
-        <div className="flex justify-center mt-12">
-          <Link href="/">
-            <button className="text-lg text-white px-6 py-3 rounded-xl shadow-sm bg-gradient-to-r from-navSecondary to-navSecondaryHover bg-[length:200%_100%] bg-left hover:bg-right transition-all duration-300">
-              Go Back Home!
-            </button>
-          </Link>
+        <div className="relative z-10">
+          <form onSubmit={handleSubmit}>
+            <div className="pb-5">
+              <p className="pt-16 pb-2 text-textPrimary font-semibold">
+                I understand the above and:
+              </p>
+              <CheckOff
+                type="checkbox"
+                label="I accept! 🥳"
+                name="acceptance"
+                value="accept"
+                onChange={handleChange}
+              />
+            </div>
+
+            {/* Submit button */}
+            <div className="flex justify-center mt-4">
+              <SubmitButton>Submit</SubmitButton>
+            </div>
+          </form>
         </div>
 
-        {/* Spacer to push frog down */}
         <div className="h-64" />
       </div>
-      <div className="absolute bottom-0 right-0 z-5">
-        <Image
-          src="/themed_assets/profeshFrog.svg"
-          alt="professional frog"
-          width={800}
-          height={800}
-        />
-      </div>
+      <Image
+        className="absolute bottom-0 right-0 z-5 pointer-events-none opacity-25"
+        src="/themed_assets/bunnywithflower.svg"
+        alt="flower bunny"
+        width={800}
+        height={800}
+      />
     </div>
   );
 }

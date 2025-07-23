@@ -54,7 +54,7 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
       <div className="fixed inset-x-0 top-0 h-1/3 pointer-events-none z-0 bg-gradient-to-b from-backgroundTertiary to-transparent" />
 
       <div className="pt-10 md:pt-24 relative z-10 mx-auto px-6 lg:px-24 py-12 pb-36 md:pb-5">
-        <div className="flex items-center gap-2 pb-10 md:pb-24">
+        <div className="flex items-center gap-2 pb-10">
           <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
             TechNova 2025 Mentor Application
           </h1>
@@ -67,7 +67,13 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
           />
         </div>
 
-        <div className="prose max-w-none prose-lg prose-stone mb-8 prose-headings:font-semibold prose-headings:text-2xl prose-a:text-blue-600 prose-a:underline hover:prose-a:text-blue-800 prose-em:text-gray-700 prose-em:italic">
+        <div
+          className="prose max-w-none prose-lg prose-stone mb-8
+			prose-headings:font-semibold prose-headings:text-2xl
+			prose-a:text-inherit hover:prose-a:text-inherit prose-a:underline
+			prose-p:text-textPrimary prose-headings:text-textPrimary
+      prose-strong:text-textPrimary prose-em:italic"
+        >
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw]}
@@ -105,7 +111,12 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
             </div>
 
             {/* Responsibilities markdown */}
-            <div className="z-10 prose max-w-none prose-base prose-stone mb-12 font-semibold prose-headings:font-bold prose-ol:list-decimal prose-li:font-normal">
+            <div
+              className="z-10 prose max-w-none prose-base prose-stone mb-12 font-semibold
+              prose-headings:text-2xl prose-p:text-textPrimary
+              prose-headings:text-textPrimary prose-strong:text-textPrimary
+              prose-ol:list-decimal prose-li:font-normal prose-li:text-textPrimary prose-li:marker:text-textPrimary"
+            >
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw]}
@@ -116,7 +127,7 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
 
             {/* Acknowledgement */}
             <div className="pb-5">
-              <p className="pt-12 text-textPrimary font-semibold">
+              <p className="pt-12 pb-2 text-textPrimary font-semibold">
                 I acknowledge the roles and responsibilities outlined above.
               </p>
               <CheckOff
@@ -145,7 +156,6 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
             </button>
           </form>
         </div>
-
       </div>
 
       {/* Bottom-right frog */}

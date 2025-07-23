@@ -203,7 +203,7 @@ function HackerDemographicForm({
         </div>
 
         <div className="flex justify-end mt-8">
-          <SubmitButton>Submit</SubmitButton>
+          <SubmitButton>→</SubmitButton>
         </div>
       </form>
     </div>
