@@ -81,14 +81,21 @@ function MentorLanding() {
       setFormError(null);
     }
 
-    const { ["undefined"]: _bad, ...cleanData } = landingData;
+    const cleanEntries = Object.entries(landingData).filter(
+      ([key, val]) => key !== "undefined" && val !== undefined
+    );
+
+    const dataForUpdate = Object.fromEntries(cleanEntries) as {
+      email: string;
+      acknowledgement: string;
+    };
 
     const mentorApplicationResponse = await supabase
       .from("mentor_application")
       .update([
         {
           user_id: user.id,
-          ...cleanData,
+          ...dataForUpdate,
         },
       ])
       .eq("user_id", user.id);
