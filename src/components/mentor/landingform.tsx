@@ -5,13 +5,14 @@ import rehypeRaw from "rehype-raw";
 import Image from "next/image";
 import CheckOff from "../checkOff";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import SubmitButton from "../submitButton";
 
 interface MentorLandingFormProps {
   data: any;
   setData: React.Dispatch<React.SetStateAction<any>>;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  formError?: string | null;
 }
 
 const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
@@ -19,6 +20,7 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
   setData,
   handleChange,
   handleSubmit,
+  formError,
 }) => {
   const [introMd, setIntroMd] = useState("");
   const [resMd, setResMd] = useState("");
@@ -135,10 +137,7 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
           </div>
 
           {/* Submit button */}
-          <button
-            type="submit"
-            className="bg-buttonSecondary px-8 py-3 text-white text-xl rounded-xl shadow-sm"
-          >
+          <button className="bg-buttonSecondary px-8 py-3 text-white text-xl rounded-xl shadow-sm">
             →
           </button>
         </form>

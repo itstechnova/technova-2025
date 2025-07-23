@@ -116,5 +116,4 @@ function HeroAbout() {
     </div>
   );
 }
-
 export default HeroAbout;
