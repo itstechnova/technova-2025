@@ -88,6 +88,9 @@ export default function SignUpPage() {
               Forgot your password?
             </Link>
 
+            {loginFormError && (
+              <div className="text-red-500">{loginFormError}</div>
+            )}
             <SubmitButton
               type="submit"
               className="bg-textPrimary text-white px-8 py-3 text-xl font-semibold rounded-lg shadow-md w-32 mb-4"
@@ -104,12 +107,6 @@ export default function SignUpPage() {
               </Link>
             </div>
           </div>
-          {loginFormError && (
-            <div className="text-red-500">{loginFormError}</div>
-          )}
-          {loginFormSuccess && (
-            <div className="text-green-500">{loginFormSuccess}</div>
-          )}
         </form>
       </div>
       <Image
