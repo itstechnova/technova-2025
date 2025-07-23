@@ -1,32 +1,67 @@
-"use client";
+'use client';
 
-import ApplicationTable from "@/components/dashboard/app-table";
-import { Application, AppType } from "@/components/dashboard/utils/types";
-import { Button } from "@/components/base-ui/button";
-import React from "react";
-
-// TODO: this is a sample list of applications, need to implement
-// actual functionality
-const applications: Application[] = [
-  {
-    type: "Hacker",
-    status: "Submitted",
-    lastUpdated: "July 1, 2025",
-  },
-  //   {
-  //     type: "Mentor" ,
-  //     status: "In Progress" ,
-  //     lastUpdated: "Not Submitted",
-  //   },
-  //   {
-  //     type: "Volunteer" ,
-  //     status: "Rejected" ,
-  //     lastUpdated: "July 1, 2025",
-  //   },
-];
+import React, { useEffect, useState } from 'react';
+import ApplicationTable from '@/components/dashboard/app-table';
+import { Application, AppType } from '@/components/dashboard/utils/types';
+import { Button } from '@/components/base-ui/button';
+import { useRouter } from 'next/navigation';
+import { useAccount } from '@/components/AccountContext';
+import supabase from '@/config/supabaseClient';
 
 function AppDashboard() {
-  const appOptions: AppType[] = ["Hacker", "Mentor", "Volunteer"];
+  const { user } = useAccount();
+  const router = useRouter();
+  const appOptions: AppType[] = ['Hacker', 'Mentor'];
+
+  const [applications, setApplications] = useState<Application[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch applications from Supabase when user is available
+  useEffect(() => {
+    const fetchApplications = async () => {
+      setLoading(true);
+
+      const { data, error } = await supabase
+        .from('applications')
+        .select('hacker, mentor, updated_at')
+        .eq('user_id', user.id)
+        .single();
+
+      if (error) {
+        console.error('Failed to fetch applications:', error);
+        setApplications([]);
+      } else if (data) {
+        const appsFromDB: Application[] = [];
+
+        if (data.hacker !== 'Not Started') {
+          appsFromDB.push({
+            type: 'Hacker',
+            status: data.hacker,
+            lastUpdated: new Date(data.updated_at).toISOString(),
+          });
+        }
+
+        if (data.mentor !== 'Not Started') {
+          appsFromDB.push({
+            type: 'Hacker',
+            status: data.hacker,
+            lastUpdated: new Date(data.updated_at).toISOString(),
+          });
+        }
+
+        console.log(appsFromDB);
+
+        setApplications(appsFromDB);
+      }
+
+      setLoading(false);
+    };
+
+    if (user?.id) {
+      fetchApplications();
+    }
+  }, [user?.id]);
+
   const activeApps = applications.map((app) => app.type);
 
   return (
@@ -39,7 +74,7 @@ function AppDashboard() {
           className="w-full h-full object-cover opacity-50"
         />
       </div>
-      {/* heading + text */}
+
       <div className="w-full flex flex-col gap-12 px-24 max-sm:px-6 py-20 items-start">
         <div className="w-full flex flex-col gap-6 items-start">
           <h1 className="text-5xl max-sm:text-4xl font-semibold">
@@ -55,28 +90,41 @@ function AppDashboard() {
             </p>
           </div>
           <p className="text-lg">
-            🕒 Deadline to submit or update applications:{" "}
+            🕒 Deadline to submit or update applications:{' '}
             <span className="font-semibold">July 4, 2025</span>
           </p>
         </div>
 
-        {/* App table */}
-        <ApplicationTable applications={applications} />
+        {/* Loading state */}
+        {loading ? (
+          <p className="text-white text-lg">Loading applications...</p>
+        ) : (
+          <>
+            {/* App table */}
+            <ApplicationTable applications={applications} />
 
-        {/* App buttons */}
-        <div className="flex flex-row max-sm:flex-col gap-4 w-full">
-          {appOptions
-            .filter((role) => !activeApps.includes(role))
-            .map((role, index) => (
-              <Button key={role} variant={index === 0 ? "default" : "outline"}>
-                Apply to be a {role.toLowerCase()}!
-              </Button>
-            ))}
-        </div>
+            {/* App buttons */}
+            <div className="flex flex-row max-sm:flex-col gap-4 w-full">
+              {appOptions
+                .filter((role) => !activeApps.includes(role))
+                .map((role, index) => (
+                  <Button
+                    key={role}
+                    variant={index === 0 ? 'default' : 'outline'}
+                    onClick={() => {
+                      router.push(`/apply/${role.toLowerCase()}`);
+                    }}
+                  >
+                    Apply to be a {role.toLowerCase()}!
+                  </Button>
+                ))}
+            </div>
+          </>
+        )}
 
         {/* Pre-footer */}
         <p className="text-base">
-          Have any questions? Reach out to our team at{" "}
+          Have any questions? Reach out to our team at{' '}
           <a
             href="mailto:hello@itstechnova.org"
             className="text-navSecondary hover:text-navSecondaryHover transition duration-150 underline"
@@ -89,4 +137,5 @@ function AppDashboard() {
     </div>
   );
 }
+
 export default AppDashboard;

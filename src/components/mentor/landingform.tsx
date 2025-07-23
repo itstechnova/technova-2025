@@ -39,18 +39,17 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
 
   const router = useRouter();
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    handleSubmit(e);
-    router.push("/apply/mentor/step-one");
+  const updateData = (newData: any) => {
+    setData((prev: any) => {
+      const updated = { ...prev, ...newData };
+      sessionStorage.setItem("mentorLandingData", JSON.stringify(updated));
+      return updated;
+    });
   };
 
   return (
     <div className="relative min-h-screen bg-navPrimary">
-      <div
-        className="fixed inset-x-0 top-0 h-1/3 pointer-events-none z-0
-                   bg-gradient-to-b from-backgroundTertiary to-transparent"
-      />
+      <div className="fixed inset-x-0 top-0 h-1/3 pointer-events-none z-0 bg-gradient-to-b from-backgroundTertiary to-transparent" />
 
       <div className="pt-24 relative z-10 mx-auto px-6 lg:px-24 py-12">
         <div className="flex items-center gap-2 pb-24">
@@ -65,13 +64,7 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
           />
         </div>
 
-        <div
-          className="
-          prose max-w-none prose-lg prose-stone mb-8
-                        prose-headings:font-semibold prose-headings:text-2xl
-                        prose-a:text-blue-600 prose-a:underline hover:prose-a:text-blue-800
-                        prose-em:text-gray-700 prose-em:italic"
-        >
+        <div className="prose max-w-none prose-lg prose-stone mb-8 prose-headings:font-semibold prose-headings:text-2xl prose-a:text-blue-600 prose-a:underline hover:prose-a:text-blue-800 prose-em:text-gray-700 prose-em:italic">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw]}
@@ -100,21 +93,17 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
               name="email"
               type="email"
               value={data.email}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+                updateData({ email: e.target.value });
+              }}
               placeholder="ex. janesmith@gmail.com"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md 
-                         focus:outline-none focus:ring-buttonSecondary shadow-sm"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-buttonSecondary shadow-sm"
             />
           </div>
 
           {/* Responsibilities markdown */}
-          <div
-            className="z-10
-                        prose max-w-none prose-base prose-stone mb-12 font-semibold 
-                          prose-headings:font-bold 
-                          prose-ol:list-decimal
-                          prose-li:font-normal"
-          >
+          <div className="z-10 prose max-w-none prose-base prose-stone mb-12 font-semibold prose-headings:font-bold prose-ol:list-decimal prose-li:font-normal">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}
@@ -135,26 +124,23 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
               value="Yes."
               checked={data.acknowledgement === "Yes."}
               onChange={(e) => {
-                setData((prev: any) => ({
-                  ...prev,
-                  acknowledgement: e.target.checked ? "Yes." : "No.",
-                }));
+                const value = e.target.checked ? "Yes." : "No.";
+                handleChange({
+                  ...e,
+                  target: { ...e.target, value },
+                } as React.ChangeEvent<HTMLInputElement>);
+                updateData({ acknowledgement: value });
               }}
             />
           </div>
 
           {/* Submit button */}
-          <Link href="/apply/mentor/step-one">
-            <div className="pb-36">
-              <button
-                type="submit"
-                className="bg-buttonSecondary px-8 py-3 text-white text-xl 
-                       rounded-xl shadow-sm"
-              >
-                →
-              </button>
-            </div>
-          </Link>
+          <button
+            type="submit"
+            className="bg-buttonSecondary px-8 py-3 text-white text-xl rounded-xl shadow-sm"
+          >
+            →
+          </button>
         </form>
       </div>
 

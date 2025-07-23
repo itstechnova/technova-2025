@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { Application } from "./utils/types";
 import { Button } from "../base-ui/button";
+import Link from "next/link";
 
 interface Props {
   application: Application;
@@ -21,19 +22,23 @@ function AppRow({ application }: Props) {
       </td>
       <td className="flex flex-nowrap">
         <div className="border-r border-gray-300">
-          <Button variant="link" title="View your application">
+          <Link href={`/apply/${application.type.toLowerCase()}`}>
+            <Button variant="link" title="View your application">
+              <FontAwesomeIcon
+                icon={faEye}
+                className="text-gray-600 w-5 h-5 py-2 hover:text-navSecondary"
+              />
+            </Button>
+          </Link>
+        </div>
+        <Link href={`/apply/${application.type.toLowerCase()}`}>
+          <Button variant="link" title="Edit your application">
             <FontAwesomeIcon
-              icon={faEye}
+              icon={faPenToSquare}
               className="text-gray-600 w-5 h-5 py-2 hover:text-navSecondary"
             />
           </Button>
-        </div>
-        <Button variant="link" title="Edit your application">
-          <FontAwesomeIcon
-            icon={faPenToSquare}
-            className="text-gray-600 w-5 h-5 py-2 hover:text-navSecondary"
-          />
-        </Button>
+        </Link>
       </td>
     </tr>
   );
