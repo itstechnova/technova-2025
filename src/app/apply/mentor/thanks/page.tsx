@@ -52,7 +52,7 @@ export default function MentorThankYouPage() {
         {/* CTA Button */}
         <div className="flex justify-center mt-12">
           <Link href="/">
-            <button className="text-lg text-white px-6 py-3 rounded-md shadow-sm shadow-navSecondary bg-navSecondary">
+            <button className="text-lg text-white px-6 py-3 rounded-xl shadow-sm bg-gradient-to-r from-navSecondary to-navSecondaryHover bg-[length:200%_100%] bg-left hover:bg-right transition-all duration-300">
               Go Back Home!
             </button>
           </Link>
