@@ -1,100 +1,55 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
-import Image from "next/image";
-import Link from "next/link";
-import CheckOff from "../../../../components/checkOff";
-import SubmitButton from "../../../../components/submitButton";
+import AlmostDoneForm from "@/components/hacker/almostdoneform";
+import React, { useState } from "react";
 
-interface AlmostDoneProps {
-  data: any;
-  handleChange: (
+function HackerAlmostDone() {
+  const [acceptanceData, setAcceptanceData] = useState({
+    acceptance: "",
+  });
+
+  const [formError, setFormError] = useState<string | null>(null);
+
+  const requiredFields = ["acceptance"];
+
+  const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => void;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-}
+  ) => {
+    const { name, type, value } = e.target;
+    setAcceptanceData((prev) => ({
+      ...prev,
+      [name]: (e.target as HTMLInputElement).checked ? value : "",
+    }));
+  };
 
-export default function AlmostDonePage({
-  data,
-  handleChange,
-  handleSubmit,
-}: AlmostDoneProps) {
-  const [markdown, setMarkdown] = useState("");
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Do validation here
 
-  useEffect(() => {
-    fetch("/textFiles/hacker/almost_done.md")
-      .then((res) => res.text())
-      .then(setMarkdown)
-      .catch(console.error);
-  }, []);
+    if (
+      requiredFields.some(
+        (field) => !acceptanceData[field as keyof typeof acceptanceData]
+      )
+    ) {
+      setFormError("Please accept to submit your application");
+      return;
+    } else {
+      setFormError(null);
+    }
+
+    console.log(JSON.stringify(acceptanceData));
+  };
 
   return (
-    <div className="relative min-h-screen bg-navPrimary">
-      {/* Gradient Background */}
-      <div
-        className="fixed inset-x-0 top-0 h-1/3 pointer-events-none z-0
-                   bg-gradient-to-b from-backgroundSecondary to-navPrimary"
-      />
-
-      {/* Main Content */}
-      <div className="pt-10 md:pt-24 relative z-10 mx-auto px-6 lg:px-24 py-12">
-        {/* Header */}
-        <div className="flex items-center gap-2 pb-10">
-          <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
-            You&apos;re almost done! 🎈
-          </h1>
-        </div>
-
-        {/* Markdown Text */}
-        <div
-          className="prose max-w-none prose-lg prose-stone mb-8
-			prose-headings:font-semibold prose-headings:text-2xl
-			prose-a:text-inherit hover:prose-a:text-inherit prose-a:underline
-			prose-p:text-textPrimary prose-headings:text-textPrimary
-      prose-strong:text-textPrimary prose-em:italic"
-        >
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw]}
-          >
-            {markdown}
-          </ReactMarkdown>
-        </div>
-
-        <div className="relative z-10">
-          <form onSubmit={handleSubmit}>
-            <div className="pb-5">
-              <p className="pt-16 pb-2 text-textPrimary font-semibold">
-                I understand the above and:
-              </p>
-              <CheckOff
-                type="checkbox"
-                label="I accept! 🥳"
-                name="acceptance"
-                value="accept"
-                onChange={handleChange}
-              />
-            </div>
-
-            {/* Submit button */}
-            <div className="flex justify-center mt-4">
-              <SubmitButton>Submit</SubmitButton>
-            </div>
-          </form>
-        </div>
-
-        <div className="h-64" />
-      </div>
-      <Image
-        className="absolute bottom-0 right-0 z-5 pointer-events-none opacity-25"
-        src="/themed_assets/bunnywithflower.svg"
-        alt="flower bunny"
-        width={800}
-        height={800}
+    <div className="min-h-screen bg-navPrimary">
+      <AlmostDoneForm
+        data={acceptanceData}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        formError={formError}
       />
     </div>
   );
 }
+
+export default HackerAlmostDone;
