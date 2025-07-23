@@ -43,7 +43,7 @@ function AppDashboard() {
 
         if (data.mentor !== 'Not Started') {
           appsFromDB.push({
-            type: 'Hacker',
+            type: 'Mentor',
             status: data.hacker,
             lastUpdated: new Date(data.updated_at).toISOString(),
           });
