@@ -11,6 +11,7 @@ interface MentorAboutYouFormProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  formError?: string | null;
 }
 
 const genderIdentityOptions = [
@@ -28,6 +29,7 @@ function MentorAboutYouForm({
   setData,
   handleChange,
   handleSubmit,
+  formError,
 }: MentorAboutYouFormProps) {
   const [availability, setAvailability] = React.useState<boolean[][]>(
     data.availability ?? Array.from({ length: 10 }, () => Array(3).fill(false))
@@ -241,7 +243,12 @@ function MentorAboutYouForm({
             />
           </div>
         </div>
-        <div className="pb-36 flex justify-end pt-10 pr-10">
+        {formError && (
+          <p className="flex justify-end pt-10 pr-10 text-red-500">
+            {formError}
+          </p>
+        )}
+        <div className="pb-36 flex justify-end pt-2 pr-10">
           <button
             type="submit"
             className="bg-buttonSecondary px-8 py-3 text-white text-xl 

@@ -14,6 +14,7 @@ interface MentorRoleFormProps {
   handleResumeUpload: (
     e: React.ChangeEvent<HTMLInputElement>
   ) => void | Promise<void>;
+  formError?: string | null;
 }
 
 const onboardingOptions = [
@@ -77,6 +78,7 @@ function MentorRoleForm({
   handleChange,
   handleSubmit,
   handleResumeUpload,
+  formError,
 }: MentorRoleFormProps) {
   const updateData = (newData: any) => {
     setData((prev: any) => {
@@ -326,7 +328,10 @@ function MentorRoleForm({
             />
           </div>
         </div>
-        <div className="flex justify-end mt-8">
+        {formError && (
+          <p className="pt-10 flex justify-end text-red-500">{formError}</p>
+        )}
+        <div className="flex justify-end mt-2">
           <SubmitButton>Submit</SubmitButton>
         </div>
       </form>
