@@ -11,7 +11,8 @@ import supabase from "@/config/supabaseClient";
 function AppDashboard() {
   const { user } = useAccount();
   const router = useRouter();
-  const appOptions: AppType[] = ["Hacker", "Mentor", "Volunteer"];
+  // TODO: Add Volunteer application option
+  const appOptions: AppType[] = ["Hacker", "Mentor"];
 
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
@@ -23,7 +24,7 @@ function AppDashboard() {
 
       const { data, error } = await supabase
         .from("applications")
-        .select("hacker, mentor, updated_at")
+        .select("hacker, mentor")
         .eq("user_id", user.id)
         .single();
 
@@ -34,18 +35,38 @@ function AppDashboard() {
         const appsFromDB: Application[] = [];
 
         if (data.hacker !== "Not Started") {
+          const updatedAtResponse = await supabase
+            .from("hacker_landing")
+            .select("updated_at")
+            .eq("user_id", user.id)
+            .single();
+          if (updatedAtResponse.error) {
+            throw updatedAtResponse.error;
+          }
           appsFromDB.push({
             type: "Hacker",
             status: data.hacker,
-            lastUpdated: new Date(data.updated_at).toISOString(),
+            lastUpdated: new Date(
+              updatedAtResponse.data?.updated_at
+            ).toISOString(),
           });
         }
 
         if (data.mentor !== "Not Started") {
+          const updatedAtResponse = await supabase
+            .from("hacker_landing")
+            .select("updated_at")
+            .eq("user_id", user.id)
+            .single();
+          if (updatedAtResponse.error) {
+            throw updatedAtResponse.error;
+          }
           appsFromDB.push({
-            type: "Hacker",
-            status: data.hacker,
-            lastUpdated: new Date(data.updated_at).toISOString(),
+            type: "Mentor",
+            status: data.mentor,
+            lastUpdated: new Date(
+              updatedAtResponse.data?.updated_at
+            ).toISOString(),
           });
         }
 
@@ -77,7 +98,7 @@ function AppDashboard() {
 
       <div className="w-full flex flex-col gap-12 px-24 max-sm:px-6 py-20 items-start">
         <div className="w-full flex flex-col gap-6 items-start">
-          <h1 className="text-5xl max-sm:text-4xl font-semibold">
+          <h1 className="text-4xl md:text-5xl max-sm:text-4xl font-semibold text-textPrimary">
             Your Application Dashboard 🌟
           </h1>
           <div className="flex flex-col gap-2">
@@ -91,7 +112,7 @@ function AppDashboard() {
           </div>
           <p className="text-lg">
             🕒 Deadline to submit or update applications:{" "}
-            <span className="font-semibold">July 4, 2025</span>
+            <span className="font-semibold">August 8, 2025</span>
           </p>
         </div>
 

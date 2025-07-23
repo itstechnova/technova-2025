@@ -8,7 +8,7 @@ interface SubmitButtonProps
 const SubmitButton: React.FC<SubmitButtonProps> = ({ children, ...props }) => (
   <button
     type="submit"
-    className="bg-buttonPrimary px-8 py-2 mt-4 text-white text-2xl rounded-xl w-auto shadow-xs shadow-navSecondary bg-gradient-to-r from-buttonPrimary to-buttonTertiary"
+    className="bg-buttonPrimary px-8 py-2 mt-4 text-white text-xl rounded-xl w-auto shadow-xs shadow-navSecondary bg-gradient-to-r from-buttonPrimary to-buttonTertiary"
     {...props}
   >
     {children}

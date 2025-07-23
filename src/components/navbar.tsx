@@ -6,13 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "./base-ui/button";
 import { useAccount } from "./AccountContext";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Sponsors", href: "#sponsors" },
-  //   { label: "FAQ", href: "/" },
-  { label: "Contact Us", href: "#contact-us" },
+  { label: "About", href: "/#about" },
+  { label: "Sponsors", href: "/#sponsors" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Contact Us", href: "/#contact-us" },
 ];
 
 function Navbar() {
@@ -22,7 +22,7 @@ function Navbar() {
   const router = useRouter();
 
   return (
-    <div className="sticky top-0 z-50 w-full border-b-2 border-navSecondary bg-navPrimary px-6 md:px-24 py-3">
+    <div className="sticky top-0 z-50 w-full border-b-2 border-navSecondary bg-navPrimary px-6 lg:px-24 py-3">
       <div className="flex flex-row justify-between min-gap-4 items-center">
         <div className="flex justify-between w-full">
           <div className="flex flex-row gap-6">
@@ -39,7 +39,7 @@ function Navbar() {
             </div>
 
             {/* Desktop links */}
-            <div className="flex flex-row max-md:hidden items-center gap-6">
+            <div className="lg:flex flex-row hidden items-center gap-6 text-textPrimary">
               {navLinks.map(({ label, href }) => (
                 <Link key={label} href={href}>
                   {label}
@@ -47,7 +47,7 @@ function Navbar() {
               ))}
             </div>
           </div>
-          <div className="flex flex-row gap-4 items-center">
+          <div className="hidden lg:flex flex-row gap-4 items-center">
             <Button
               variant="default"
               onClick={() => {
@@ -74,14 +74,11 @@ function Navbar() {
           </div>
         </div>
 
-        {/* <Link href="/apply/hacker" className="max-md:hidden">
-          <Button variant="default">Sign In</Button>
-        </Link> */}
         {/* Mobile hamburger */}
-        <div className="pl-4">
+        <div className="pr-4">
           <Button
             onClick={toggleMenu}
-            className="md:hidden text-white focus:outline-none"
+            className="lg:hidden text-white focus:outline-none"
             size="icon"
             variant="link"
           >
@@ -95,19 +92,67 @@ function Navbar() {
             )}
           </Button>
         </div>
+
+        {/* MLH Trust Badge */}
+        {usePathname() === "/" && (
+          <div className="pr-20 lg:pr-24">
+            <a
+              id="mlh-trust-badge"
+              href="https://mlh.io/na?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2026-season&utm_content=white"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "block",
+                maxWidth: "120px",
+                minWidth: "80px",
+                position: "absolute", // change to "absolute" since you want it to scroll with the page
+                top: "0",
+                width: "10%",
+                zIndex: 10000,
+              }}
+            >
+              <img
+                src="https://s3.amazonaws.com/logged-assets/trust-badge/2026/mlh-trust-badge-2026-white.svg"
+                alt="Major League Hacking 2026 Hackathon Season"
+                style={{ width: "100%" }}
+              />
+            </a>
+          </div>
+        )}
       </div>
 
       {/* Mobile menu content */}
       {menuOpen && (
-        <div className="md:hidden mt-4 space-y-4 flex flex-col items-center text-textPrimary">
+        <div className="lg:hidden mt-4 space-y-4 flex flex-col items-center text-textPrimary">
           {navLinks.map(({ label, href }) => (
             <Link key={label} href={href}>
               {label}
             </Link>
           ))}
-          {/* <Link href="/apply/hacker">
-            <Button variant="default">Sign In</Button>
-          </Link> */}
+
+          <Button
+            variant="default"
+            onClick={() => {
+              if (user) {
+                logout();
+                router.push("/");
+              } else {
+                router.push("/account/login");
+              }
+            }}
+          >
+            {user ? "Logout" : "Login"}
+          </Button>
+          {user && (
+            <Button
+              variant="default"
+              onClick={() => {
+                router.push("/apply/dashboard");
+              }}
+            >
+              Dashboard
+            </Button>
+          )}
         </div>
       )}
     </div>
