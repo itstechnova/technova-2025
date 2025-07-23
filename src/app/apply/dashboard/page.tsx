@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import ApplicationTable from "@/components/dashboard/app-table";
-import { Application, AppType } from "@/components/dashboard/utils/types";
-import { Button } from "@/components/base-ui/button";
-import { useRouter } from "next/navigation";
-import { useAccount } from "@/components/AccountContext";
-import supabase from "@/config/supabaseClient";
+import React, { useEffect, useState } from 'react';
+import ApplicationTable from '@/components/dashboard/app-table';
+import { Application, AppType } from '@/components/dashboard/utils/types';
+import { Button } from '@/components/base-ui/button';
+import { useRouter } from 'next/navigation';
+import { useAccount } from '@/components/AccountContext';
+import supabase from '@/config/supabaseClient';
 
 function AppDashboard() {
   const { user } = useAccount();
   const router = useRouter();
-  const appOptions: AppType[] = ["Hacker", "Mentor", "Volunteer"];
+  const appOptions: AppType[] = ['Hacker', 'Mentor'];
 
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
@@ -22,28 +22,28 @@ function AppDashboard() {
       setLoading(true);
 
       const { data, error } = await supabase
-        .from("applications")
-        .select("hacker, mentor, updated_at")
-        .eq("user_id", user.id)
+        .from('applications')
+        .select('hacker, mentor, updated_at')
+        .eq('user_id', user.id)
         .single();
 
       if (error) {
-        console.error("Failed to fetch applications:", error);
+        console.error('Failed to fetch applications:', error);
         setApplications([]);
       } else if (data) {
         const appsFromDB: Application[] = [];
 
-        if (data.hacker !== "Not Started") {
+        if (data.hacker !== 'Not Started') {
           appsFromDB.push({
-            type: "Hacker",
+            type: 'Hacker',
             status: data.hacker,
             lastUpdated: new Date(data.updated_at).toISOString(),
           });
         }
 
-        if (data.mentor !== "Not Started") {
+        if (data.mentor !== 'Not Started') {
           appsFromDB.push({
-            type: "Hacker",
+            type: 'Hacker',
             status: data.hacker,
             lastUpdated: new Date(data.updated_at).toISOString(),
           });
@@ -90,7 +90,7 @@ function AppDashboard() {
             </p>
           </div>
           <p className="text-lg">
-            🕒 Deadline to submit or update applications:{" "}
+            🕒 Deadline to submit or update applications:{' '}
             <span className="font-semibold">July 4, 2025</span>
           </p>
         </div>
@@ -110,7 +110,7 @@ function AppDashboard() {
                 .map((role, index) => (
                   <Button
                     key={role}
-                    variant={index === 0 ? "default" : "outline"}
+                    variant={index === 0 ? 'default' : 'outline'}
                     onClick={() => {
                       router.push(`/apply/${role.toLowerCase()}`);
                     }}
@@ -124,7 +124,7 @@ function AppDashboard() {
 
         {/* Pre-footer */}
         <p className="text-base">
-          Have any questions? Reach out to our team at{" "}
+          Have any questions? Reach out to our team at{' '}
           <a
             href="mailto:hello@itstechnova.org"
             className="text-navSecondary hover:text-navSecondaryHover transition duration-150 underline"
