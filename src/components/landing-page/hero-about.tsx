@@ -51,7 +51,7 @@ function HeroAbout() {
                 Sept 26–28, 2025
               </small>
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 hidden">
               <InterestInputBox
                 value={email}
                 onChange={handleEmailChange}
