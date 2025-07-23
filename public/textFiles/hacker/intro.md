@@ -8,7 +8,7 @@ Fri. Sept 27, 2025 - Sun. Sept 29, 2025
 
 You can save your progress at any time and come back. You can also edit even after you submit, so don't worry! We'll be reviewing applications on a rolling basis, so make sure to apply early!
 
-🚨 **Hacker Application Deadline: July 4, 2025 @ 11:59 PM EST** 🚨
+🚨 **Hacker Application Deadline: August 8, 2025 @ 11:59 PM EST** 🚨
 
 If you require any accommodations or have any questions please email us at: [hello@itstechnova.org](mailto:hello@itstechnova.org).  
 For more information and FAQ, visit [itstechnova.org](https://itstechnova.org/).
