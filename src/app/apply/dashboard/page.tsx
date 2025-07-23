@@ -97,7 +97,7 @@ function AppDashboard() {
       </div>
 
       <div className="w-full flex flex-col gap-12 px-24 max-sm:px-6 py-20 items-start">
-        <div className="w-full flex flex-col gap-6 items-start">
+        <div className="w-full flex flex-col gap-6 items-start text-textPrimary">
           <h1 className="text-4xl md:text-5xl max-sm:text-4xl font-semibold text-textPrimary">
             Your Application Dashboard 🌟
           </h1>
@@ -118,7 +118,7 @@ function AppDashboard() {
 
         {/* Loading state */}
         {loading ? (
-          <p className="text-white text-lg">Loading applications...</p>
+          <p className="text-textPrimary text-lg">Loading applications...</p>
         ) : (
           <>
             {/* App table */}
@@ -144,7 +144,7 @@ function AppDashboard() {
         )}
 
         {/* Pre-footer */}
-        <p className="text-base">
+        <p className="text-base text-textPrimary">
           Have any questions? Reach out to our team at{" "}
           <a
             href="mailto:hello@itstechnova.org"
