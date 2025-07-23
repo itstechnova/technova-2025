@@ -32,7 +32,7 @@ export default function ForgotPasswordPage() {
     <div className="min-h-screen bg-navPrimary flex flex-col justify-center items-center">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md mx-auto bg-white/80 rounded-xl shadow-md px-8 py-12 mt-24"
+        className="w-full max-w-lg mx-auto bg-white/80 rounded-xl shadow-md px-8 py-12 mt-24"
       >
         <h1 className="text-3xl font-bold text-textPrimary mb-6">
           Forgot Your Password?
