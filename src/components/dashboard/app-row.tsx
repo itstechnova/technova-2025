@@ -18,7 +18,7 @@ function AppRow({ application }: Props) {
         {application.status}
       </td>
       <td className="px-4 py-2 border-r border-gray-300 truncate">
-        {application.lastUpdated}
+        {application.lastUpdated.substring(0, 10)}
       </td>
       <td className="flex flex-nowrap">
         <div className="border-r border-gray-300">
