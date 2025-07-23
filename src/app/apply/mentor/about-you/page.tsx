@@ -7,6 +7,7 @@ import { useAccount } from "@/components/AccountContext";
 import { useRouter } from "next/navigation";
 
 export default function MentorAboutYouFormPage() {
+  const [formError, setFormError] = useState<string | null>(null);
   const { user } = useAccount();
   const router = useRouter();
 
@@ -22,6 +23,16 @@ export default function MentorAboutYouFormPage() {
     availability: Array(10).fill(Array(3).fill(false)),
   });
 
+  const requiredFields = [
+    "first_name",
+    "last_name",
+    "phone_number",
+    "pronouns",
+    "in_person_option",
+    "tshirt_size",
+  ];
+
+  const eitherOrRequiredFields = [["gender_identity", "gender_identity_other"]];
   useEffect(() => {
     const loadData = async () => {
       const response = await supabase
@@ -125,6 +136,24 @@ export default function MentorAboutYouFormPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (
+      requiredFields.some(
+        (field) => !formData[field as keyof typeof formData]
+      ) ||
+      eitherOrRequiredFields.some((pair) => {
+        const [field1, field2] = pair;
+        return (
+          !formData[field1 as keyof typeof formData] &&
+          !formData[field2 as keyof typeof formData]
+        );
+      })
+    ) {
+      setFormError("Please fill in all required fields");
+      return;
+    } else {
+      setFormError(null);
+    }
+
     // convert empty responses to null
     const sanitizedFormData = Object.fromEntries(
       Object.entries(formData).map(([key, value]) => [
@@ -155,6 +184,7 @@ export default function MentorAboutYouFormPage() {
       setData={setFormData}
       handleChange={handleChange}
       handleSubmit={handleSubmit}
+      formError={formError}
     />
   );
 }
