@@ -1,9 +1,7 @@
 import React from "react";
-import Image from "next/image";
 import SubmitButton from "../submitButton";
 import MultiCheckbox from "../hacker/MultiCheckbox";
 import CheckOff from "../checkOff";
-
 interface MentorRoleFormProps {
   data: any;
   setData: React.Dispatch<React.SetStateAction<any>>;
@@ -13,6 +11,9 @@ interface MentorRoleFormProps {
     >
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleResumeUpload: (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => void | Promise<void>;
 }
 
 const onboardingOptions = [
@@ -75,8 +76,8 @@ function MentorRoleForm({
   setData,
   handleChange,
   handleSubmit,
+  handleResumeUpload,
 }: MentorRoleFormProps) {
-  // Add updateData helper for sessionStorage sync
   const updateData = (newData: any) => {
     setData((prev: any) => {
       const updated = { ...prev, ...newData };
@@ -87,7 +88,6 @@ function MentorRoleForm({
 
   return (
     <div className="p-24 flex flex-col h-full bg-navPrimary relative">
-      {/* ...background and header... */}
       <form className="form z-10" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-24 text-textPrimary">
           {/* Onboarding */}
@@ -135,10 +135,24 @@ function MentorRoleForm({
             <input
               type="file"
               accept=".pdf,.docx"
-              onChange={handleChange}
+              onChange={(e) => {
+                handleResumeUpload(e);
+                updateData({ resume: e.target.value });
+              }}
               name="resume"
               className="p-2 border rounded"
             />
+
+            {data.resume && typeof data.resume === "string" && (
+              <a
+                href={data.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-blue-600 underline"
+              >
+                View uploaded resume
+              </a>
+            )}
           </div>
           {/* Additional Links */}
           <div className="flex flex-col gap-2">

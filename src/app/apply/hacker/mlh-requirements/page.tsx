@@ -9,12 +9,15 @@ import { useAccount } from "@/components/AccountContext";
 function HackerMLHRequirements() {
   const router = useRouter();
   const { user } = useAccount();
+  const [formError, setFormError] = useState<string | null>(null);
 
   const [mlhData, setMLHData] = useState({
     mandatory_requirement_1: "",
     mandatory_requirement_2: "",
     optional: "",
   });
+
+  const requiredFields = ["mandatory_requirement_1", "mandatory_requirement_2"];
 
   useEffect(() => {
     const loadData = async () => {
@@ -69,6 +72,13 @@ function HackerMLHRequirements() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (
+      requiredFields.some((field) => !mlhData[field as keyof typeof mlhData])
+    ) {
+      setFormError("Please accept all required fields");
+      return;
+    }
+    console.log(JSON.stringify(mlhData));
     const response = await supabase
       .from("hacker_landing")
       .update([mlhData])
@@ -78,7 +88,9 @@ function HackerMLHRequirements() {
       console.log(response.error);
       throw response.error;
     } else {
+      setFormError(null);
       sessionStorage.removeItem("hackerMLHData");
+      console.log("data submitted");
       router.push("/apply/hacker/survey");
     }
   };
@@ -90,6 +102,7 @@ function HackerMLHRequirements() {
         setData={setMLHData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
+        formError={formError}
       />
     </div>
   );

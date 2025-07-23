@@ -17,41 +17,32 @@ function HackerLanding() {
   const router = useRouter();
   const { user } = useAccount();
 
+  // Load from Supabase or sessionStorage on mount
   useEffect(() => {
     const loadData = async () => {
       const response = await supabase
         .from("hacker_landing")
         .select("email, age2025")
-        .eq("user_id", user.id)
+        .eq("user_id", user.id ? user.id : "")
         .single();
 
       if (response.error) {
         throw response.error;
       } else if (response.data) {
         const fallbackData = JSON.parse(
-          sessionStorage.getItem("hackerLandingData") ?? "{}"
+          sessionStorage.getItem("landingData") ?? "{}"
         );
-        const sanitizedData = {
+
+        const mergedData = {
           email: response.data.email ?? fallbackData.email ?? "",
           age2025: response.data.age2025 ?? fallbackData.age2025 ?? "",
         };
-        sessionStorage.setItem(
-          "hackerLandingData",
-          JSON.stringify(sanitizedData)
-        );
-        setLandingData(sanitizedData);
+        sessionStorage.setItem("landingData", JSON.stringify(mergedData));
+        setLandingData(mergedData);
         return;
       }
-
-      const savedData = sessionStorage.getItem("hackerLandingData");
-      if (savedData) {
-        setLandingData(JSON.parse(savedData));
-      }
     };
-
-    if (user?.id) {
-      loadData();
-    }
+    loadData();
   }, [user?.id]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -67,7 +58,9 @@ function HackerLanding() {
       setFormError(null);
     }
 
-    const { data, error } = await supabase
+    console.log(JSON.stringify(landingData));
+
+    const hackerLandingResponse = await supabase
       .from("hacker_landing")
       .update([
         {
@@ -76,11 +69,24 @@ function HackerLanding() {
         },
       ])
       .eq("user_id", user.id);
-    if (error) {
+
+    const applicationsResponse = await supabase
+      .from("applications")
+      .update({ hacker: "In Progress" })
+      .eq("user_id", user.id)
+      .eq("hacker", "Not Started")
+      .select();
+
+    if (hackerLandingResponse.error) {
       setFormError("Error submitting form");
+      console.log("error", hackerLandingResponse.error);
+    } else if (applicationsResponse.error) {
+      setFormError("Error submitting form");
+      console.log("error", applicationsResponse.error);
     } else {
       setFormError(null);
       sessionStorage.removeItem("hackerLandingData");
+      console.log("data submitted :o");
       router.push("/apply/hacker/about-you");
     }
   };

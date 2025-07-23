@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import ShortAnswerQuestion from "../shortanswerq";
 import CheckOff from "../checkOff";
@@ -29,14 +29,16 @@ function MentorAboutYouForm({
   handleChange,
   handleSubmit,
 }: MentorAboutYouFormProps) {
-  const initialAvailability = Array.from({ length: 10 }, () =>
-    Array(3).fill(false)
-  );
   const [availability, setAvailability] = React.useState<boolean[][]>(
-    Array.from({ length: 10 }, () => Array(3).fill(false))
+    data.availability ?? Array.from({ length: 10 }, () => Array(3).fill(false))
   );
 
-  // Add updateData helper for sessionStorage sync
+  useEffect(() => {
+    if (Array.isArray(data.availability)) {
+      setAvailability(data.availability);
+    }
+  }, [data.availability]);
+
   const updateData = (newData: any) => {
     setData((prev: any) => {
       const updated = { ...prev, ...newData };
@@ -235,6 +237,7 @@ function MentorAboutYouForm({
             <AvailabilityGrid
               availability={availability}
               setAvailability={setAvailability}
+              updateData={updateData}
             />
           </div>
         </div>

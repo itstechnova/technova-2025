@@ -1,18 +1,18 @@
-'use client';
-import React, { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faX } from '@fortawesome/free-solid-svg-icons';
-import { Button } from './base-ui/button';
-import { useAccount } from './AccountContext';
-import { useRouter } from 'next/navigation';
+"use client";
+import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
+import { Button } from "./base-ui/button";
+import { useAccount } from "./AccountContext";
+import { useRouter } from "next/navigation";
 
 const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Sponsors', href: '#sponsors' },
+  { label: "About", href: "#about" },
+  { label: "Sponsors", href: "#sponsors" },
   //   { label: "FAQ", href: "/" },
-  { label: 'Contact Us', href: '#contact-us' },
+  { label: "Contact Us", href: "#contact-us" },
 ];
 
 function Navbar() {
@@ -24,7 +24,7 @@ function Navbar() {
   return (
     <div className="sticky top-0 z-50 w-full border-b-2 border-navSecondary bg-navPrimary px-6 md:px-24 py-3">
       <div className="flex flex-row justify-between min-gap-4 items-center">
-        <div className="flex justify-between">
+        <div className="flex justify-between w-full">
           <div className="flex flex-row gap-6">
             {/* Logo */}
             <div className="flex items-center">
@@ -46,19 +46,31 @@ function Navbar() {
                 </Link>
               ))}
             </div>
+          </div>
+          <div className="flex flex-row gap-4 items-center">
             <Button
               variant="default"
               onClick={() => {
                 if (user) {
                   logout();
-                  router.push('/');
+                  router.push("/");
                 } else {
-                  router.push('/account/login');
+                  router.push("/account/login");
                 }
               }}
             >
-              {user ? 'Logout' : 'Login'}
+              {user ? "Logout" : "Login"}
             </Button>
+            {user && (
+              <Button
+                variant="default"
+                onClick={() => {
+                  router.push("/apply/dashboard");
+                }}
+              >
+                Dashboard
+              </Button>
+            )}
           </div>
         </div>
 
@@ -66,21 +78,23 @@ function Navbar() {
           <Button variant="default">Sign In</Button>
         </Link> */}
         {/* Mobile hamburger */}
-        <Button
-          onClick={toggleMenu}
-          className="md:hidden text-white focus:outline-none w-5 h-5"
-          size="icon"
-          variant="link"
-        >
-          {menuOpen ? (
-            <FontAwesomeIcon icon={faX} className="text-navSecondary w-5 h-5" />
-          ) : (
-            <FontAwesomeIcon
-              icon={faBars}
-              className="text-navSecondary w-5 h-5"
-            />
-          )}
-        </Button>
+        <div className="pl-4">
+          <Button
+            onClick={toggleMenu}
+            className="md:hidden text-white focus:outline-none"
+            size="icon"
+            variant="link"
+          >
+            {menuOpen ? (
+              <FontAwesomeIcon icon={faX} className="text-navSecondary" />
+            ) : (
+              <FontAwesomeIcon
+                icon={faBars}
+                className="text-navSecondary w-5 h-5"
+              />
+            )}
+          </Button>
+        </div>
       </div>
 
       {/* Mobile menu content */}
