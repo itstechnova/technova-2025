@@ -1,14 +1,14 @@
-'use client';
-import React, { useState } from 'react';
-import Link from 'next/link';
-import ShortAnswerQuestion from '@/components/shortanswerq';
-import SubmitButton from '@/components/submitButton';
-import supabase from '@/config/supabaseClient';
+"use client";
+import React, { useState } from "react";
+import Link from "next/link";
+import ShortAnswerQuestion from "@/components/shortanswerq";
+import SubmitButton from "@/components/submitButton";
+import supabase from "@/config/supabaseClient";
 
 export default function ForgotPasswordPage() {
-  const [email, setEmail] = useState('');
-  const [formError, setFormError] = useState('');
-  const [formSuccess, setFormSuccess] = useState('');
+  const [email, setEmail] = useState("");
+  const [formError, setFormError] = useState("");
+  const [formSuccess, setFormSuccess] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -16,23 +16,23 @@ export default function ForgotPasswordPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFormError('');
-    setFormSuccess('');
+    setFormError("");
+    setFormSuccess("");
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/account/update-password`,
     });
     if (error) {
       setFormError(error.message);
     } else {
-      setFormSuccess('Password reset email sent! Please check your inbox.');
+      setFormSuccess("Password reset email sent! Please check your inbox.");
     }
   };
 
   return (
-    <div className="min-h-screen bg-navPrimary flex flex-col justify-center items-center">
+    <div className="bg-navPrimary min-h-[70vh] flex flex-col justify-center items-center">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md mx-auto bg-white/80 rounded-xl shadow-md px-8 py-12 mt-24"
+        className="w-full max-w-md mx-auto bg-white/80 rounded-xl shadow-md px-8 py-12"
       >
         <h1 className="text-3xl font-bold text-textPrimary mb-6">
           Forgot Your Password?
@@ -51,7 +51,7 @@ export default function ForgotPasswordPage() {
           onChange={handleChange}
           required
         />
-        <SubmitButton className="bg-[#1A1536] hover:bg-[#2A2346] px-8 py-3 text-xl font-semibold rounded-lg shadow-md w-full mt-8">
+        <SubmitButton className="text-white bg-[#1A1536] hover:bg-[#2A2346] px-8 py-3 text-xl font-semibold rounded-lg shadow-md w-full mt-8">
           Send Reset Link
         </SubmitButton>
         {formError && <div className="text-red-500 mt-4">{formError}</div>}
