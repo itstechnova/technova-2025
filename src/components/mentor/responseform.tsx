@@ -119,7 +119,7 @@ function MentorRoleForm({
             <span className="font-bold text-base">
               All mentors and volunteers must go over onboarding materials
               regarding logistics and conduct around mid August. Do you agree to
-              attend an onboarding session?
+              attend an onboarding session?*
             </span>
             <div className="flex flex-col gap-4">
               {onboardingOptions.map((option) => (
@@ -139,7 +139,7 @@ function MentorRoleForm({
           </div>
           {/* Hackathon Experience */}
           <div className="flex flex-col gap-2">
-            <span className="font-bold text-base">I have...</span>
+            <span className="font-bold text-base">I have...*</span>
             <MultiCheckbox
               options={hackathonExperienceOptions}
               selected={data.hackathon_experience}
@@ -154,7 +154,7 @@ function MentorRoleForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               Please upload your resume. Note: Please provide a .docx or .pdf
-              file (10MB maximum)
+              file (10MB maximum)*
             </span>
             <input
               type="file"
@@ -199,7 +199,7 @@ function MentorRoleForm({
           </div>
           {/* Role */}
           <div className="flex flex-col gap-2">
-            <span className="font-bold text-base">I am a...</span>
+            <span className="font-bold text-base">I am a...*</span>
             <div className="flex flex-col gap-4">
               {roleOptions.map((option) => (
                 <CheckOff
@@ -221,7 +221,7 @@ function MentorRoleForm({
           {/* Experience Areas */}
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
-              Which of the following areas do you have experience in?
+              Which of the following areas do you have experience in?*
             </span>
             <span className="text-sm text-gray-600">
               Experience can be from work, projects, or mentorship! Please
@@ -243,7 +243,7 @@ function MentorRoleForm({
           {/* Specific Mentorship */}
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
-              Are there any specific areas you want to provide mentorship in?
+              Are there any specific areas you want to provide mentorship in?*
             </span>
             <span className="text-sm text-gray-600">
               Note: This can be a specific coding language, a tech stack, any
@@ -264,7 +264,7 @@ function MentorRoleForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               Beyond mentoring with us, are you interested in helping out with
-              any of the following (select ALL that apply):
+              any of the following (select ALL that apply):*
             </span>
             <span className="text-sm text-gray-600">
               Note: this is not binding and we will not assign all to you, we
@@ -315,7 +315,7 @@ function MentorRoleForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               Are you interested in participating as a volunteer if not chosen
-              as a mentor?
+              as a mentor?*
             </span>
             <div className="flex flex-col gap-4">
               {volunteerOptions.map((option) => (

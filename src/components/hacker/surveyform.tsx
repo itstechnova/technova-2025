@@ -156,8 +156,8 @@ function HackerSurveyForm({
         <div className="flex flex-col gap-24 text-textPrimary">
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
-              What career sessions would be most useful to you? (Choose your top
-              5)
+              What career sessions would be most useful to you?* (Choose your
+              top 5)
             </span>
             <MultiCheckbox
               options={careerSessionsOptions}
@@ -172,7 +172,8 @@ function HackerSurveyForm({
 
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
-              What community sessions would you be most interested in attending?{" "}
+              What community sessions would you be most interested in
+              attending?*{" "}
             </span>
             <MultiCheckbox
               options={communitySessionsOptions}
@@ -190,7 +191,7 @@ function HackerSurveyForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               What "Intro to ..." technical sessions would you be most
-              interested in attending? (Choose your top 5)
+              interested in attending?* (Choose your top 5)
             </span>
             <MultiCheckbox
               options={technicalSessionsOptions}
@@ -208,7 +209,7 @@ function HackerSurveyForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               Which themed technology sessions would you be most interested in
-              attending?
+              attending?*
             </span>
             <MultiCheckbox
               options={themedSessionsOptions}
@@ -224,7 +225,7 @@ function HackerSurveyForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               What technology industries would you be most interested in
-              learning about at the event? (Choose your top 5){" "}
+              learning about at the event?* (Choose your top 5){" "}
             </span>
             <MultiCheckbox
               options={techIndustriesOptions}
@@ -240,7 +241,7 @@ function HackerSurveyForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               What field(s) would you be interested in learning about at
-              TechNova? (Choose your top 5){" "}
+              TechNova?* (Choose your top 5){" "}
             </span>
             <MultiCheckbox
               options={techFieldsOptions}

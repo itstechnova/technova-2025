@@ -75,7 +75,7 @@ function HackerMLHForm({
               >
                 MLH Code of Conduct
               </a>
-              ."
+              ."*
             </span>
             <div className="flex flex-col gap-2 mt-2">
               <CheckOff
@@ -119,7 +119,7 @@ function HackerMLHForm({
               >
                 MLH Privacy Policy
               </a>
-              .”
+              .”*
             </span>
             <div className="flex flex-col gap-2 mt-2">
               <CheckOff

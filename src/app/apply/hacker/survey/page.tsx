@@ -30,6 +30,10 @@ function HackerSurvey() {
     ["tech_industries", "tech_industries_other"],
     ["tech_fields", "tech_fields_other"],
   ];
+  const requiredFields = [
+    ["community_sessions", "community_sessions_other"],
+    ["themed_sessions", "themed_sessions_other"],
+  ];
 
   useEffect(() => {
     const loadData = async () => {
@@ -128,6 +132,20 @@ function HackerSurvey() {
       })
     ) {
       setFormError("Please select at least 5 of all required fields");
+      return;
+    } else if (
+      requiredFields.some(([field, otherField]) => {
+        const arrayField = surveyData[field as keyof typeof surveyData];
+        const otherText = surveyData[otherField as keyof typeof surveyData];
+        return (
+          !Array.isArray(arrayField) &&
+          arrayField.length === 0 &&
+          typeof otherText === "string" &&
+          otherText.trim() === ""
+        );
+      })
+    ) {
+      setFormError("Please fill in all required fields");
       return;
     } else {
       setFormError(null);
