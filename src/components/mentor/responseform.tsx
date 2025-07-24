@@ -1,8 +1,7 @@
 import React from "react";
-import SubmitButton from "../submitButton";
 import MultiCheckbox from "../hacker/MultiCheckbox";
 import CheckOff from "../checkOff";
-import { Button } from "../base-ui/button";
+
 interface MentorRoleFormProps {
   data: any;
   setData: React.Dispatch<React.SetStateAction<any>>;
@@ -354,14 +353,13 @@ function MentorRoleForm({
           {formError && <p className="text-red-500">{formError}</p>}
           <div className="flex justify-between items-center mt-2">
             {onBack && (
-              <Button
+              <button
                 type="button"
-                variant="secondary"
-                size="lg"
                 onClick={onBack}
+                className="px-8 py-2 text-xl rounded-xl bg-gray-100 text-gray-800 shadow-sm shadow-navSecondary hover:bg-gray-200"
               >
                 ←
-              </Button>
+              </button>
             )}
             <button
               type="submit"

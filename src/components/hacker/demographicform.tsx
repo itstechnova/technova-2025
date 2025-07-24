@@ -3,7 +3,6 @@ import Image from "next/image";
 import SubmitButton from "../submitButton";
 import CheckOff from "../checkOff";
 import MultiCheckbox from "./MultiCheckbox";
-import { Button } from "../base-ui/button";
 
 interface HackerDemographicFormProps {
   data: any;
@@ -208,9 +207,13 @@ function HackerDemographicForm({
         <div className=" mt-10">
           <div className="flex justify-between mt-2">
             {onBack && (
-              <Button type="button" size="lg" onClick={onBack}>
+              <button
+                type="button"
+                onClick={onBack}
+                className="px-8 py-2 text-xl rounded-xl bg-pink-50 text-[#992650] shadow-sm shadow-[#992650] hover:bg-pink-100"
+              >
                 ←
-              </Button>
+              </button>
             )}
             <SubmitButton>→</SubmitButton>
           </div>
