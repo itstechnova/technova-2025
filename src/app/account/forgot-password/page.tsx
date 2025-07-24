@@ -32,7 +32,7 @@ export default function ForgotPasswordPage() {
     <div className="text-textPrimary bg-navPrimary min-h-[70vh] flex flex-col justify-center items-center">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md mx-auto bg-white/80 rounded-xl shadow-md px-8 py-12"
+        className="w-full max-w-lg mx-auto bg-white/80 rounded-xl shadow-md px-8 py-12 mt-24"
       >
         <h1 className="text-3xl font-bold text-textPrimary mb-6">
           Forgot Your Password?
@@ -42,7 +42,7 @@ export default function ForgotPasswordPage() {
           password.
         </p>
         <ShortAnswerQuestion
-          question="Email Address*"
+          question="Email Address"
           name="email"
           id="email"
           type="email"
@@ -51,7 +51,7 @@ export default function ForgotPasswordPage() {
           onChange={handleChange}
           required
         />
-        <SubmitButton className="text-white bg-[#1A1536] hover:bg-[#2A2346] px-8 py-3 text-xl font-semibold rounded-lg shadow-md w-full mt-8">
+        <SubmitButton className="bg-textPrimary hover:bg-buttonSecondary px-8 py-3 text-xl font-semibold rounded-lg shadow-md w-full mt-8 text-white transition-all duration-300">
           Send Reset Link
         </SubmitButton>
         {formError && <div className="text-red-500 mt-4">{formError}</div>}
@@ -61,7 +61,7 @@ export default function ForgotPasswordPage() {
         <div className="mt-8 text-base text-textPrimary text-center">
           <Link
             href="/account/login"
-            className="underline text-[#1A1536] hover:text-[#2A2346]"
+            className="underline text-textPrimary hover:text-buttonSecondary"
           >
             Back to Login
           </Link>
