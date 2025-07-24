@@ -76,7 +76,7 @@ function HeroAbout() {
           >
             <Button
               variant="default"
-              size="lg"
+              size="xl"
               onClick={() => {
                 if (user) {
                   router.push("/apply/dashboard");
@@ -89,7 +89,7 @@ function HeroAbout() {
             </Button>
             <Button
               variant="outline"
-              size="lg"
+              size="xl"
               onClick={() => {
                 if (user) {
                   router.push("/apply/dashboard");
