@@ -50,7 +50,7 @@ function HackerMLHForm({
             MLH Requirements
           </h1>
           <br />
-          <p>
+          <p className="text-textPrimary">
             We are currently in the process of partnering with MLH. The
             following 3 checkboxes are for this partnership. If we do not end up
             partnering with MLH, your information will not be shared. All
