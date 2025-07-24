@@ -2,8 +2,11 @@
 
 import AlmostDoneForm from "@/components/hacker/almostdoneform";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 function HackerAlmostDone() {
+  const router = useRouter();
+
   const [acceptanceData, setAcceptanceData] = useState({
     acceptance: "",
   });
@@ -38,6 +41,7 @@ function HackerAlmostDone() {
     }
 
     console.log(JSON.stringify(acceptanceData));
+    router.push("/apply/hacker/thanks");
   };
 
   return (

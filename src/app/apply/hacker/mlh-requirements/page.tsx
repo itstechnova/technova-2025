@@ -91,7 +91,7 @@ function HackerMLHRequirements() {
       setFormError(null);
       sessionStorage.removeItem("hackerMLHData");
       console.log("data submitted");
-      router.push("/apply/hacker/survey");
+      router.push("/apply/hacker/short-answers");
     }
   };
 
