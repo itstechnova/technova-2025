@@ -2,11 +2,17 @@
 import React, { useState } from "react";
 import InterestInputBox from "../interestinputbox";
 import supabase from "@/config/supabaseClient";
+import { Button } from "../base-ui/button";
+import { useRouter } from "next/navigation";
+import { useAccount } from "../AccountContext";
 
 function HeroAbout() {
   const [email, setEmail] = useState("");
   const [formError, setFormError] = useState("");
   const [formSuccess, setFormSuccess] = useState("");
+
+  const { user, logout } = useAccount();
+  const router = useRouter();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -34,7 +40,7 @@ function HeroAbout() {
           alt="Clouds background"
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         />
-        <div className="relative z-10 flex flex-row justify-between max-md:flex-col gap-6">
+        <div className="relative z-10 flex [@media(min-width:1400px)]:flex-row justify-between flex-col gap-6">
           <div className="flex flex-col gap-12 text-textPrimary">
             <div className="flex flex-col gap-4 max-md:items-center">
               <h1 className="text-6xl md:text-9xl font-bold">
@@ -62,6 +68,34 @@ function HeroAbout() {
                 <div className="text-green-500">{formSuccess}</div>
               )}
             </div>
+          </div>
+          <div className="flex flex-col gap-4 justify-center items-center [@media(min-width:1400px)]:mr-32">
+            <Button
+              variant="default"
+              size="lg"
+              onClick={() => {
+                if (user) {
+                  router.push("/apply/dashboard");
+                } else {
+                  router.push("/account/login");
+                }
+              }}
+            >
+              Hack with us!
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => {
+                if (user) {
+                  router.push("/apply/dashboard");
+                } else {
+                  router.push("/account/login");
+                }
+              }}
+            >
+              Mentor with us!
+            </Button>
           </div>
         </div>
       </div>

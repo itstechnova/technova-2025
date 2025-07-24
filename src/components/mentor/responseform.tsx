@@ -356,7 +356,7 @@ function MentorRoleForm({
               <button
                 type="button"
                 onClick={onBack}
-                className="px-8 py-2 text-xl rounded-xl bg-gray-100 text-gray-800 shadow-sm shadow-navSecondary hover:bg-gray-200"
+                className="w-20 h-11 text-xl rounded-xl bg-gray-100 text-gray-800 shadow-sm shadow-navSecondary hover:bg-gray-200"
               >
                 ←
               </button>
