@@ -114,6 +114,8 @@ function HackerShortAnswers() {
     ) {
       setFormError("Please fill in all required fields.");
       return;
+    } else {
+      setFormError(null);
     }
     const { data, error } = await supabase
       .from("hacker_landing")
