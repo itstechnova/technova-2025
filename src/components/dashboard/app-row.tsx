@@ -21,8 +21,18 @@ function AppRow({ application }: Props) {
         {application.lastUpdated.substring(0, 10)}
       </td>
       <td className="flex flex-nowrap">
-        <div className="border-r border-gray-300">
+        {application.status === "Not Started" ||
+        application.status === "In Progress" ? (
           <Link href={`/apply/${application.type.toLowerCase()}`}>
+            <Button variant="link" title="Edit your application">
+              <FontAwesomeIcon
+                icon={faPenToSquare}
+                className="text-gray-600 w-5 h-5 py-2 hover:text-navSecondary"
+              />
+            </Button>
+          </Link>
+        ) : (
+          <Link href={`/apply/${application.type.toLowerCase()}/view`}>
             <Button variant="link" title="View your application">
               <FontAwesomeIcon
                 icon={faEye}
@@ -30,15 +40,7 @@ function AppRow({ application }: Props) {
               />
             </Button>
           </Link>
-        </div>
-        <Link href={`/apply/${application.type.toLowerCase()}`}>
-          <Button variant="link" title="Edit your application">
-            <FontAwesomeIcon
-              icon={faPenToSquare}
-              className="text-gray-600 w-5 h-5 py-2 hover:text-navSecondary"
-            />
-          </Button>
-        </Link>
+        )}
       </td>
     </tr>
   );

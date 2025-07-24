@@ -4,6 +4,7 @@ interface AvailabilityGridProps {
   availability: boolean[][];
   setAvailability: React.Dispatch<React.SetStateAction<boolean[][]>>;
   updateData: (newData: any) => void;
+  disabled?: boolean;
 }
 
 const days = ["Fri. Sept 27th", "Sat. Sept 28th", "Sun. Sept 29"];
@@ -24,6 +25,7 @@ export const AvailabilityGrid: React.FC<AvailabilityGridProps> = ({
   availability,
   setAvailability,
   updateData,
+  disabled,
 }) => {
   const toggleCheckbox = (row: number, col: number) => {
     const updated = availability.map((r) => [...r]);
@@ -64,6 +66,7 @@ export const AvailabilityGrid: React.FC<AvailabilityGridProps> = ({
                     checked={availability?.[rowIndex]?.[colIndex] || false}
                     onChange={() => toggleCheckbox(rowIndex, colIndex)}
                     className="h-5 w-5 text-[#AABD9C] border-gray-300 rounded focus:ring-[#AABD9C]"
+                    disabled={disabled}
                   />
                 </td>
               ))}
