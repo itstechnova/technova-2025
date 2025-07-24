@@ -5,10 +5,12 @@ import MentorAboutYouForm from "@/components/mentor/aboutyouform";
 import supabase from "@/config/supabaseClient";
 import { useAccount } from "@/components/AccountContext";
 import { useRouter } from "next/navigation";
+import NoFormAccess from "@/components/app/no-access";
 
 export default function MentorAboutYouFormPage() {
   const [formError, setFormError] = useState<string | null>(null);
   const { user } = useAccount();
+  const [appStatus, setAppStatus] = useState<string>("");
   const router = useRouter();
 
   const [formData, setFormData] = useState({
@@ -121,6 +123,21 @@ export default function MentorAboutYouFormPage() {
     if (user?.id) {
       loadData();
     }
+    const loadAppStatus = async () => {
+      if (!user?.id) return;
+
+      const response = await supabase
+        .from("applications")
+        .select("mentor")
+        .eq("user_id", user?.id)
+        .single();
+      if (response.error) {
+        throw response.error;
+      } else {
+        setAppStatus(response.data.mentor);
+      }
+    };
+    loadAppStatus();
   }, [user?.id]);
 
   const handleChange = (
@@ -179,13 +196,19 @@ export default function MentorAboutYouFormPage() {
   };
 
   return (
-    <MentorAboutYouForm
-      data={formData}
-      setData={setFormData}
-      handleChange={handleChange}
-      handleSubmit={handleSubmit}
-      formError={formError}
-      onBack={() => router.push("/apply/mentor")}
-    />
+    <div className="min-h-screen bg-navPrimary">
+      {appStatus === "Not Started" || appStatus === "In Progress" ? (
+        <MentorAboutYouForm
+          data={formData}
+          setData={setFormData}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          formError={formError}
+          onBack={() => router.push("/apply/mentor")}
+        />
+      ) : (
+        <NoFormAccess role="mentor" />
+      )}
+    </div>
   );
 }

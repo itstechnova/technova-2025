@@ -5,10 +5,12 @@ import MentorLandingForm from "@/components/mentor/landingform";
 import supabase from "@/config/supabaseClient";
 import { useAccount } from "@/components/AccountContext";
 import { useRouter } from "next/navigation";
+import NoFormAccess from "@/components/app/no-access";
 
 function MentorLanding() {
   const [formError, setFormError] = useState<string | null>(null);
   const { user } = useAccount();
+  const [appStatus, setAppStatus] = useState<string>("");
   const router = useRouter();
 
   const [landingData, setLandingData] = useState({
@@ -47,6 +49,21 @@ function MentorLanding() {
       }
     };
     loadData();
+    const loadAppStatus = async () => {
+      if (!user?.id) return;
+
+      const response = await supabase
+        .from("applications")
+        .select("mentor")
+        .eq("user_id", user?.id)
+        .single();
+      if (response.error) {
+        throw response.error;
+      } else {
+        setAppStatus(response.data.mentor);
+      }
+    };
+    loadAppStatus();
   }, [user?.id]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -125,13 +142,17 @@ function MentorLanding() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-navPrimary">
-      <MentorLandingForm
-        data={landingData}
-        setData={setLandingData}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        formError={formError}
-      />
+      {appStatus === "Not Started" || appStatus === "In Progress" ? (
+        <MentorLandingForm
+          data={landingData}
+          setData={setLandingData}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          formError={formError}
+        />
+      ) : (
+        <NoFormAccess role="mentor" />
+      )}
     </div>
   );
 }

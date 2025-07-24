@@ -5,10 +5,12 @@ import React, { useState, useEffect } from "react";
 import supabase from "@/config/supabaseClient";
 import { useRouter } from "next/navigation";
 import { useAccount } from "@/components/AccountContext";
+import NoFormAccess from "@/components/app/no-access";
 
 function HackerDemographic() {
   const router = useRouter();
   const { user } = useAccount();
+  const [appStatus, setAppStatus] = useState<string>("");
 
   const [demographicData, setDemographicData] = useState({
     ethnicity: [],
@@ -73,6 +75,21 @@ function HackerDemographic() {
     if (user?.id) {
       loadData();
     }
+    const loadAppStatus = async () => {
+      if (!user?.id) return;
+
+      const response = await supabase
+        .from("applications")
+        .select("hacker")
+        .eq("user_id", user?.id)
+        .single();
+      if (response.error) {
+        throw response.error;
+      } else {
+        setAppStatus(response.data.hacker);
+      }
+    };
+    loadAppStatus();
   }, [user?.id]);
 
   const handleChange = (
@@ -117,13 +134,17 @@ function HackerDemographic() {
 
   return (
     <div className="min-h-screen bg-navPrimary">
-      <HackerDemographicForm
-        data={demographicData}
-        setData={setDemographicData}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        onBack={() => router.push("/apply/hacker/survey")}
-      />
+      {appStatus === "Not Started" || appStatus === "In Progress" ? (
+        <HackerDemographicForm
+          data={demographicData}
+          setData={setDemographicData}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          onBack={() => router.push("/apply/hacker/survey")}
+        />
+      ) : (
+        <NoFormAccess role="hacker" />
+      )}
     </div>
   );
 }

@@ -5,9 +5,11 @@ import HackerLandingForm from "@/components/hacker/landingform";
 import supabase from "@/config/supabaseClient";
 import { useRouter } from "next/navigation";
 import { useAccount } from "@/components/AccountContext";
+import NoFormAccess from "@/components/app/no-access";
 
 function HackerLanding() {
   const [formError, setFormError] = useState<string | null>(null);
+  const [appStatus, setAppStatus] = useState<string>("");
   const [landingData, setLandingData] = useState({
     email: "",
     age2025: "",
@@ -20,10 +22,12 @@ function HackerLanding() {
   // Load from Supabase or sessionStorage on mount
   useEffect(() => {
     const loadData = async () => {
+      if (!user?.id) return;
+
       const response = await supabase
         .from("hacker_landing")
         .select("email, age2025")
-        .eq("user_id", user.id ? user.id : "")
+        .eq("user_id", user?.id)
         .single();
 
       if (response.error) {
@@ -43,6 +47,21 @@ function HackerLanding() {
       }
     };
     loadData();
+    const loadAppStatus = async () => {
+      if (!user?.id) return;
+
+      const response = await supabase
+        .from("applications")
+        .select("hacker")
+        .eq("user_id", user?.id)
+        .single();
+      if (response.error) {
+        throw response.error;
+      } else {
+        setAppStatus(response.data.hacker);
+      }
+    };
+    loadAppStatus();
   }, [user?.id]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -104,13 +123,17 @@ function HackerLanding() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-navPrimary">
-      <HackerLandingForm
-        data={landingData}
-        setData={setLandingData}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        formError={formError}
-      />
+      {appStatus === "Not Started" || appStatus === "In Progress" ? (
+        <HackerLandingForm
+          data={landingData}
+          setData={setLandingData}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          formError={formError}
+        />
+      ) : (
+        <NoFormAccess role="hacker" />
+      )}
     </div>
   );
 }

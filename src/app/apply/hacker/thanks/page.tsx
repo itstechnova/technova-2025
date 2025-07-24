@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -7,9 +6,14 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import Image from "next/image";
 import Link from "next/link";
+import { useAccount } from "@/components/AccountContext";
+import supabase from "@/config/supabaseClient";
+import NoFormAccess from "@/components/app/no-access";
 
 export default function ThankYouPage() {
   const [markdown, setMarkdown] = useState("");
+  const { user } = useAccount();
+  const [appStatus, setAppStatus] = useState<string>("");
 
   useEffect(() => {
     fetch("/textFiles/hacker/thanks.md")
@@ -17,57 +21,80 @@ export default function ThankYouPage() {
       .then(setMarkdown)
       .catch(console.error);
   }, []);
+  useEffect(() => {
+    const loadAppStatus = async () => {
+      if (!user?.id) return;
+
+      const response = await supabase
+        .from("applications")
+        .select("hacker")
+        .eq("user_id", user?.id)
+        .single();
+      if (response.error) {
+        throw response.error;
+      } else {
+        setAppStatus(response.data.hacker);
+      }
+    };
+    loadAppStatus();
+  }, [user?.id]);
 
   return (
-    <div className="relative min-h-screen bg-navPrimary">
-      {/* Gradient Background */}
-      <div
-        className="fixed inset-x-0 top-0 h-1/3 pointer-events-none z-0
+    <div className="flex flex-col items-center justify-center min-h-screen bg-navPrimary">
+      {appStatus === "Not Started" || appStatus === "In Progress" ? (
+        <div className="relative min-h-screen bg-navPrimary">
+          {/* Gradient Background */}
+          <div
+            className="fixed inset-x-0 top-0 h-1/3 pointer-events-none z-0
                    bg-gradient-to-b from-backgroundSecondary to-navPrimary"
-      />
+          />
 
-      {/* Main Content */}
-      <div className="pt-10 md:pt-24 relative z-10 mx-auto px-6 lg:px-24 py-12">
-        {/* Header */}
-        <div className="flex items-center gap-2 pb-10">
-          <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
-            Thanks for Applying! 🚀
-          </h1>
-        </div>
+          {/* Main Content */}
+          <div className="pt-10 md:pt-24 relative z-10 mx-auto px-6 lg:px-24 py-12">
+            {/* Header */}
+            <div className="flex items-center gap-2 pb-10">
+              <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
+                Thanks for Applying! 🚀
+              </h1>
+            </div>
 
-        {/* Markdown Text */}
-        <div
-          className="prose max-w-none prose-lg prose-stone mb-8
+            {/* Markdown Text */}
+            <div
+              className="prose max-w-none prose-lg prose-stone mb-8
 			prose-headings:font-semibold prose-headings:text-2xl
 			prose-a:text-inherit hover:prose-a:text-inherit prose-a:underline
 			prose-p:text-textPrimary prose-headings:text-textPrimary
       prose-strong:text-textPrimary prose-em:italic"
-        >
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw]}
-          >
-            {markdown}
-          </ReactMarkdown>
-        </div>
+            >
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeRaw]}
+              >
+                {markdown}
+              </ReactMarkdown>
+            </div>
 
-        <div className="flex justify-center mt-12">
-          <Link href="/apply/dashboard">
-            <button className="text-lg bg-gradient-to-l from-[#FAC4BD] to-[#CD5769] text-white px-6 py-3 rounded-xl">
-              Go Back to the Dashboard
-            </button>
-          </Link>
-        </div>
+            <div className="flex justify-center mt-12">
+              <Link href="/apply/dashboard">
+                <button className="text-lg bg-gradient-to-l from-[#FAC4BD] to-[#CD5769] text-white px-6 py-3 rounded-xl">
+                  Go Back to the Dashboard
+                </button>
+              </Link>
+            </div>
 
-        <div className="h-64" />
-      </div>
-      <Image
-        className="absolute bottom-0 right-0 z-5 pointer-events-none"
-        src="/themed_assets/bunnywithflower.svg"
-        alt="flower bunny"
-        width={800}
-        height={800}
-      />
+            <div className="h-64" />
+          </div>
+          <Image
+            className="absolute bottom-0 right-0 z-5 pointer-events-none"
+            src="/themed_assets/bunnywithflower.svg"
+            alt="flower bunny"
+            width={800}
+            height={800}
+          />
+        </div>
+      ) : (
+        <NoFormAccess role="hacker" />
+      )}
     </div>
   );
 }
