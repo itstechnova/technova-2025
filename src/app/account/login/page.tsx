@@ -60,7 +60,7 @@ export default function SignUpPage() {
           <p className="text-xl font-semibold text-textPrimary mb-10">
             Log in to access and manage your application.
           </p>
-          <div className="flex flex-col gap-8 mb-4 w-3/5">
+          <div className="flex flex-col gap-8 mb-4 w-3/5 text-textPrimary">
             <ShortAnswerQuestion
               question="Email Address*"
               name="email"

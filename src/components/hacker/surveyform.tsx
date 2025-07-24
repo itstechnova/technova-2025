@@ -139,7 +139,7 @@ function HackerSurveyForm({
             <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
               What Would You Like to See at the Event? 🎉{" "}
             </h1>
-            <span>
+            <span className="text-textPrimary">
               Please note these are an early list so we cannot guarantee they
               will be at the event. However, you can help us figure out which
               ones you&apos;d find most helpful! List any ideas you have in the

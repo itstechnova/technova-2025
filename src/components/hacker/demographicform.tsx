@@ -80,7 +80,7 @@ function HackerDemographicForm({
             <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
               Demographic Questions 🗺️
             </h1>
-            <p>
+            <p className="text-textPrimary">
               One of our most important team pillars is diversity and we would
               like to better understand the backgrounds of our applicants in
               order to gain insight into how to improve accessibility as an
@@ -88,7 +88,7 @@ function HackerDemographicForm({
               application other than being used for statistical purposes to
               better forward our event's mission. 💡
             </p>
-            <p>
+            <p className="text-textPrimary">
               Your information will be kept confidential in accordance with our
               <a href="https://mlh.io/privacy" className="underline ml-1">
                 Privacy Policy
@@ -203,7 +203,7 @@ function HackerDemographicForm({
         </div>
 
         <div className="flex justify-end mt-8">
-          <SubmitButton>Submit</SubmitButton>
+          <SubmitButton>→</SubmitButton>
         </div>
       </form>
     </div>

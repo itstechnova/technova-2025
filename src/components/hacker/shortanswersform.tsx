@@ -37,7 +37,7 @@ function HackerShortAnswersForm({
   };
 
   return (
-    <div className="p-24 flex flex-col h-full bg-navPrimary relative">
+    <div className="p-10 md:p-24 flex flex-col h-full bg-navPrimary relative">
       {/* Background SVG graphic */}
       <div className="absolute inset-0 z-7 pointer-events-none">
         <img
@@ -49,12 +49,10 @@ function HackerShortAnswersForm({
       <div className="absolute top-0 left-0 w-full h-1/4 pointer-events-none z-5 bg-gradient-to-b from-backgroundSecondary to-navPrimary" />
       <div className="pb-5 relative z-10">
         <div className="pb-10">
-          <h1 className="text-5xl font-semibold text-textSecondary">
+          <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary pb-4">
             Short Answers 📝
           </h1>
-          <br />
-          <br />
-          <p>
+          <p className="text-textPrimary">
             Our mission is to create a more gender-equitable future in
             technology. Check out our social medias for more info!
           </p>

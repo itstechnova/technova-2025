@@ -52,7 +52,7 @@ function HackerLandingForm({
                    bg-gradient-to-b from-backgroundSecondary to-navPrimary"
       />
       <div className="pt-10 md:pt-24 relative z-10 mx-auto px-6 lg:px-24 py-12">
-        <div className="flex items-center gap-2 pb-10 md:pb-24">
+        <div className="flex items-center gap-2 pb-10">
           <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
             TechNova 2025 Hacker Application
           </h1>
@@ -64,7 +64,13 @@ function HackerLandingForm({
             className="hidden md:block"
           />
         </div>
-        <div className="prose max-w-none prose-lg prose-stone mb-8 prose-headings:font-semibold prose-headings:text-2xl prose-a:text-blue-600 prose-a:underline hover:prose-a:text-blue-800 prose-em:text-gray-700 prose-em:italic">
+        <div
+          className="prose max-w-none prose-lg prose-stone mb-8
+			prose-headings:font-semibold prose-headings:text-2xl
+			prose-a:text-inherit hover:prose-a:text-inherit prose-a:underline
+			prose-p:text-textPrimary prose-headings:text-textPrimary
+      prose-strong:text-textPrimary prose-em:italic"
+        >
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw]}

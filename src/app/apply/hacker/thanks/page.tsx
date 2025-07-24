@@ -28,7 +28,7 @@ export default function ThankYouPage() {
       {/* Main Content */}
       <div className="pt-10 md:pt-24 relative z-10 mx-auto px-6 lg:px-24 py-12">
         {/* Header */}
-        <div className="flex items-center gap-2 pb-10 md:pb-24">
+        <div className="flex items-center gap-2 pb-10">
           <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
             Thanks for Applying! 🚀
           </h1>
@@ -38,8 +38,9 @@ export default function ThankYouPage() {
         <div
           className="prose max-w-none prose-lg prose-stone mb-8
 			prose-headings:font-semibold prose-headings:text-2xl
-			prose-a:text-inherit hover:prose-a:text-inherit prose-a:no-underline
-			prose-em:text-gray-700 prose-em:italic"
+			prose-a:text-inherit hover:prose-a:text-inherit prose-a:underline
+			prose-p:text-textPrimary prose-headings:text-textPrimary
+      prose-strong:text-textPrimary prose-em:italic"
         >
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
@@ -49,16 +50,14 @@ export default function ThankYouPage() {
           </ReactMarkdown>
         </div>
 
-        {/* CTA Button */}
         <div className="flex justify-center mt-12">
-          <Link href="/">
+          <Link href="/apply/dashboard">
             <button className="text-lg bg-gradient-to-l from-[#FAC4BD] to-[#CD5769] text-white px-6 py-3 rounded-xl">
-              Go Back Home!
+              Go Back to the Dashboard
             </button>
           </Link>
         </div>
 
-        {/* Spacer to push frog down */}
         <div className="h-64" />
       </div>
       <Image

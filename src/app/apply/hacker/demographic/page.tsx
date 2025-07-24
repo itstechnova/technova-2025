@@ -112,7 +112,7 @@ function HackerDemographic() {
 
     sessionStorage.removeItem("hackerDemographicData");
     console.log("All data submitted!");
-    router.push("/apply/hacker/thanks");
+    router.push("/apply/hacker/almost-done");
   };
 
   return (

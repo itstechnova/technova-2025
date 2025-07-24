@@ -23,24 +23,36 @@ function HackerShortAnswers() {
     const loadData = async () => {
       const response = await supabase
         .from("hacker_landing")
-        .select("long_answer_q1, long_answer_q2, selected_option, long_answer_q3, long_answer_q4")
+        .select(
+          "long_answer_q1, long_answer_q2, selected_option, long_answer_q3, long_answer_q4"
+        )
         .eq("user_id", user.id)
         .single();
 
       if (response.error) {
         throw response.error;
       } else if (response.data) {
-        const fallbackData = JSON.parse(sessionStorage.getItem("hackerShortAnswersData") ?? "{}");
+        const fallbackData = JSON.parse(
+          sessionStorage.getItem("hackerShortAnswersData") ?? "{}"
+        );
 
         const sanitizedData = {
-          long_answer_q1: response.data.long_answer_q1 ?? fallbackData.long_answer_q1 ?? "",
-          long_answer_q2: response.data.long_answer_q2 ?? fallbackData.long_answer_q2 ?? "",
-          selected_option: response.data.selected_option ?? fallbackData.selected_option ?? "",
-          long_answer_q3: response.data.long_answer_q3 ?? fallbackData.long_answer_q3 ?? "",
-          long_answer_q4: response.data.long_answer_q4 ?? fallbackData.long_answer_q4 ?? "",
+          long_answer_q1:
+            response.data.long_answer_q1 ?? fallbackData.long_answer_q1 ?? "",
+          long_answer_q2:
+            response.data.long_answer_q2 ?? fallbackData.long_answer_q2 ?? "",
+          selected_option:
+            response.data.selected_option ?? fallbackData.selected_option ?? "",
+          long_answer_q3:
+            response.data.long_answer_q3 ?? fallbackData.long_answer_q3 ?? "",
+          long_answer_q4:
+            response.data.long_answer_q4 ?? fallbackData.long_answer_q4 ?? "",
         };
 
-        sessionStorage.setItem("hackerShortAnswersData", JSON.stringify(sanitizedData));
+        sessionStorage.setItem(
+          "hackerShortAnswersData",
+          JSON.stringify(sanitizedData)
+        );
         setShortAnswersData(sanitizedData);
         return;
       }
@@ -57,7 +69,9 @@ function HackerShortAnswers() {
   }, [user?.id]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
     wordLimit?: number
   ) => {
     const { name, value } = e.target;
@@ -76,7 +90,10 @@ function HackerShortAnswers() {
     };
 
     setShortAnswersData(updatedData);
-    sessionStorage.setItem("hackerShortAnswersData", JSON.stringify(updatedData));
+    sessionStorage.setItem(
+      "hackerShortAnswersData",
+      JSON.stringify(updatedData)
+    );
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -100,7 +117,7 @@ function HackerShortAnswers() {
     } else {
       setFormError(null);
       sessionStorage.removeItem("hackerShortAnswersData");
-      router.push("/apply/hacker/mlh-requirements");
+      router.push("/apply/hacker/survey");
     }
   };
 
@@ -111,7 +128,9 @@ function HackerShortAnswers() {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
       />
-      {formError && <p className="text-red-500 text-center mt-4">{formError}</p>}
+      {formError && (
+        <p className="text-red-500 text-center mt-4">{formError}</p>
+      )}
     </div>
   );
 }
