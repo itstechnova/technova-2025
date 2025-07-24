@@ -77,6 +77,8 @@ function HackerMLHRequirements() {
     ) {
       setFormError("Please accept all required fields");
       return;
+    } else {
+      setFormError(null);
     }
     console.log(JSON.stringify(mlhData));
     const response = await supabase
