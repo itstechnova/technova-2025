@@ -20,7 +20,7 @@ interface HackerShortAnswersProps {
     word_limit?: number
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  formError?: string;
+  formError?: string | null;
   onBack?: () => void;
 }
 
