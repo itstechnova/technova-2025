@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import ShortAnswerQuestion from "../shortanswerq";
 import SubmitButton from "../submitButton";
@@ -13,6 +13,8 @@ interface HackerAboutYouFormProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  formError: string | null;
+  onBack?: () => void;
 }
 
 const tshirtSizeOptions = ["XS", "S", "M", "L", "XL", "2XL", "3XL"];
@@ -59,10 +61,27 @@ function HackerAboutYouForm({
   setData,
   handleChange,
   handleSubmit,
+  formError,
+  onBack,
 }: HackerAboutYouFormProps) {
+  useEffect(() => {
+    const savedData = sessionStorage.getItem("hackerAboutYouData");
+    if (savedData) {
+      setData(JSON.parse(savedData));
+    }
+  }, [setData]);
+
+  const updateData = (newData: any) => {
+    setData((prev: any) => {
+      const updated = { ...prev, ...newData };
+      sessionStorage.setItem("hackerAboutYouData", JSON.stringify(updated));
+      console.log(updated);
+      return updated;
+    });
+  };
+
   return (
-    <div className="p-24 flex flex-col h-full bg-navPrimary relative">
-      {/* Background SVG graphic */}
+    <div className="p-10 md:p-24 flex flex-col h-full bg-navPrimary relative">
       <div className="absolute inset-0 z-7 pointer-events-none">
         <img
           src="/hackerformsgraphic.svg"
@@ -73,52 +92,64 @@ function HackerAboutYouForm({
       <div className="absolute top-0 left-0 w-full h-1/4 pointer-events-none z-5 bg-gradient-to-b from-backgroundSecondary to-navPrimary" />
       <div className="pb-5 relative z-10">
         <div className="flex gap-2 items-center pb-10">
-          <h1 className="text-5xl font-semibold text-textSecondary">
-            Let's get to know you better!
+          <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
+            Let&apos;s get to know you better!
           </h1>
           <Image
             src="/themed_assets/sunflower.svg"
-            alt="grass"
+            alt="sunflower"
             width={40}
             height={40}
+            className="hidden md:block"
           />
         </div>
       </div>
 
-      <form className="form z-10" onSubmit={handleSubmit}>
+      <form className="form z-10" onSubmit={handleSubmit} noValidate>
         <div className="flex flex-col gap-24 text-textPrimary">
           <div className="grid grid-cols-2 gap-10 w-full">
             <ShortAnswerQuestion
-              question="What's your first name?"
+              question="What's your first name?*"
               name="firstName"
               id="firstName"
               placeholder="ex. Jane"
               value={data.firstName}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+                updateData({ firstName: e.target.value });
+              }}
             />
             <ShortAnswerQuestion
-              question="What's your last name?"
+              question="What's your last name?*"
               name="lastName"
               id="lastName"
               placeholder="ex. Smith"
               value={data.lastName}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+                updateData({ lastName: e.target.value });
+              }}
             />
           </div>
+
+          {/* Pronouns */}
           <ShortAnswerQuestion
-            question="What are your pronouns?"
+            question="What are your pronouns?*"
             name="pronouns"
             id="pronouns"
             placeholder="ex. she/her/hers (all lowercase)"
             value={data.pronouns}
-            onChange={handleChange}
+            onChange={(e) => {
+              handleChange(e);
+              updateData({ pronouns: e.target.value });
+            }}
           />
 
           {/* T-shirt size section */}
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               Using the sizing guide below, what t-shirt size are you (unisex
-              sizing)?
+              sizing)?*
             </span>
             <span className="text-base font-semibold">
               Disclaimer:
@@ -144,7 +175,10 @@ function HackerAboutYouForm({
                   name="tshirtSize"
                   value={size}
                   checked={data.tshirtSize === size}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    updateData({ tshirtSize: e.target.value });
+                  }}
                 />
               ))}
             </div>
@@ -153,7 +187,7 @@ function HackerAboutYouForm({
           {/* Level of study section */}
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
-              What is your current level of study?
+              What is your current level of study?*
             </span>
             <span className="text-base font-semibold">
               Note:
@@ -171,29 +205,35 @@ function HackerAboutYouForm({
                   name="levelOfStudy"
                   value={level}
                   checked={data.levelOfStudy === level}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    if (level === "Other:") {
+                      updateData({ levelOfStudy: "Other:" });
+                    } else {
+                      updateData({
+                        levelOfStudy: e.target.value,
+                        levelOfStudyOther: "",
+                      });
+                    }
+                  }}
                   otherValue={
                     level === "Other:" ? data.levelOfStudyOther : undefined
                   }
                   onOtherChange={
                     level === "Other:"
-                      ? (val) =>
-                          setData((prev: any) => ({
-                            ...prev,
-                            levelOfStudy: "Other:",
-                            levelOfStudyOther: val,
-                          }))
+                      ? (val) => updateData({ levelOfStudyOther: val })
                       : undefined
                   }
+                  required
                 />
               ))}
             </div>
           </div>
 
-          {/* Graduating year section */}
+          {/* Graduating Year */}
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
-              What year will you be graduating? 
+              What year will you be graduating? *
             </span>
             <span className="font-normal">
               (Based on the education level you had selected above)
@@ -207,20 +247,26 @@ function HackerAboutYouForm({
                   name="graduatingYear"
                   value={year}
                   checked={data.graduatingYear === year}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    if (year === "Other:") {
+                      updateData({ graduatingYear: "Other:" });
+                    } else {
+                      updateData({
+                        graduatingYear: e.target.value,
+                        graduatingYearOther: "",
+                      });
+                    }
+                  }}
                   otherValue={
                     year === "Other:" ? data.graduatingYearOther : undefined
                   }
                   onOtherChange={
                     year === "Other:"
-                      ? (val) =>
-                          setData((prev: any) => ({
-                            ...prev,
-                            graduatingYear: "Other:",
-                            graduatingYearOther: val,
-                          }))
+                      ? (val) => updateData({ graduatingYearOther: val })
                       : undefined
                   }
+                  required
                 />
               ))}
             </div>
@@ -228,52 +274,61 @@ function HackerAboutYouForm({
 
           {/* University section */}
           <div className="flex flex-col gap-2">
-            <span className="font-bold text-base mb-4">
+            <span className="font-bold text-base">
               Please select which institution you are/will be attending in Fall
-              2025.
+              2025.*
             </span>
             <UniversityDropdown
               value={data.university}
               otherValue={data.universityOther}
-              onChange={handleChange}
-              onOtherChange={(val) =>
-                setData((prev: any) => ({
-                  ...prev,
-                  university: "Other:",
-                  universityOther: val,
-                }))
-              }
+              onChange={(e) => {
+                handleChange(e);
+                if (e.target.value === "Other:") {
+                  updateData({ university: "Other:" });
+                } else {
+                  updateData({
+                    university: e.target.value,
+                    universityOther: "",
+                  });
+                }
+              }}
+              onOtherChange={(val) => updateData({ universityOther: val })}
             />
           </div>
 
           <ShortAnswerQuestion
-            question="What program are you in?"
+            question="What program are you in?*"
             note="If in Highschool, what is your program of interest?"
             name="major"
             id="major"
             placeholder="ex. Systems Design Engineering"
             value={data.major}
-            onChange={handleChange}
+            onChange={(e) => {
+              handleChange(e);
+              updateData({ major: e.target.value });
+            }}
           />
 
           {/* Hackathon count section */}
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
-              How many hackathons have you been to?
+              How many hackathons have you been to?*
             </span>
-
             <div className="flex flex-col gap-2">
-              {hackathonCountOptions.map((level) => (
-                <label key={level} className="flex items-end gap-2 w-full">
-                  <CheckOff
-                    label={level}
-                    name="hackathonCount"
-                    value={level}
-                    checked={data.hackathonCount === level}
-                    onChange={handleChange}
-                  />
-                </label>
-              ))}
+              {hackathonCountOptions.map((count) => (
+                <CheckOff
+                  key={count}
+                  label={count}
+                  name="hackathonCount"
+                  value={count}
+                  checked={data.hackathonCount === count}
+                  onChange={(e) => {
+                    handleChange(e);
+                    updateData({ hackathonCount: e.target.value });
+                  }}
+                />
+              ))}{" "}
+              {/* //TODO superbase saved choice doesn't update this */}
             </div>
           </div>
 
@@ -285,18 +340,26 @@ function HackerAboutYouForm({
             <MultiCheckbox
               options={wordOfMouthOptions}
               selected={data.hearAboutUs}
-              onChange={(selected) =>
-                setData((prev: any) => ({ ...prev, hearAboutUs: selected }))
-              }
+              onChange={(selected) => updateData({ hearAboutUs: selected })}
               otherValue={data.hearAboutUsOther}
-              onOtherChange={(val) =>
-                setData((prev: any) => ({ ...prev, hearAboutUsOther: val }))
-              }
+              onOtherChange={(val) => updateData({ hearAboutUsOther: val })}
             />
           </div>
         </div>
-        <div className="flex justify-end mt-8">
-          <SubmitButton>→</SubmitButton>
+        <div className="flex justify-between rows-10 mt-10">
+          {onBack && (
+            <button
+              type="button"
+              onClick={onBack}
+              className="px-8 py-2 text-xl rounded-xl bg-pink-50 text-[#992650] shadow-sm shadow-[#992650] hover:bg-pink-100"
+            >
+              ←
+            </button>
+          )}
+          <div className="flex flex-col gap-2 items-end">
+            {formError && <p className="text-red-500">{formError}</p>}
+            <SubmitButton>→</SubmitButton>
+          </div>
         </div>
       </form>
     </div>

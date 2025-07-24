@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import SubmitButton from "../submitButton";
 import CheckOff from "../checkOff";
@@ -11,6 +11,7 @@ interface HackerDemographicFormProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  onBack?: () => void;
 }
 
 const ethnicityOptions = [
@@ -48,9 +49,25 @@ function HackerDemographicForm({
   setData,
   handleChange,
   handleSubmit,
+  onBack,
 }: HackerDemographicFormProps) {
+  useEffect(() => {
+    const savedData = sessionStorage.getItem("hackerDemographicData");
+    if (savedData) {
+      setData(JSON.parse(savedData));
+    }
+  }, [setData]);
+
+  const updateData = (newData: any) => {
+    setData((prev: any) => {
+      const updated = { ...prev, ...newData };
+      sessionStorage.setItem("hackerDemographicData", JSON.stringify(updated));
+      console.log(updated);
+      return updated;
+    });
+  };
   return (
-    <div className="p-24 flex flex-col h-full bg-navPrimary relative">
+    <div className="p-10 md:p-24 flex flex-col h-full bg-navPrimary relative">
       <div className="absolute inset-0 z-7 pointer-events-none">
         <img
           src="/hackerformsgraphic.svg"
@@ -62,10 +79,10 @@ function HackerDemographicForm({
       <div className="pb-5 relative z-10">
         <div className="flex gap-2 items-center pb-10">
           <div className="flex flex-col gap-4">
-            <h1 className="text-5xl font-semibold text-textSecondary">
+            <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
               Demographic Questions 🗺️
             </h1>
-            <p>
+            <p className="text-textPrimary">
               One of our most important team pillars is diversity and we would
               like to better understand the backgrounds of our applicants in
               order to gain insight into how to improve accessibility as an
@@ -73,7 +90,7 @@ function HackerDemographicForm({
               application other than being used for statistical purposes to
               better forward our event's mission. 💡
             </p>
-            <p>
+            <p className="text-textPrimary">
               Your information will be kept confidential in accordance with our
               <a href="https://mlh.io/privacy" className="underline ml-1">
                 Privacy Policy
@@ -93,13 +110,9 @@ function HackerDemographicForm({
             <MultiCheckbox
               options={ethnicityOptions}
               selected={data.ethnicity}
-              onChange={(selected) =>
-                setData((prev: any) => ({ ...prev, ethnicity: selected }))
-              }
-              otherValue={data.ethnicityOther}
-              onOtherChange={(val) =>
-                setData((prev: any) => ({ ...prev, ethnicityOther: val }))
-              }
+              onChange={(selected) => updateData({ ethnicity: selected })}
+              otherValue={data.ethnicity_other}
+              onOtherChange={(val) => updateData({ ethnicity_other: val })}
             />
           </div>
 
@@ -115,17 +128,16 @@ function HackerDemographicForm({
                   value={option}
                   label={option}
                   checked={data.gender === option}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    updateData({ gender: e.target.value });
+                  }}
                   otherValue={
-                    option === "Other:" ? data.genderOther : undefined
+                    option === "Other:" ? data.gender_other : undefined
                   }
                   onOtherChange={
                     option === "Other:"
-                      ? (val) =>
-                          setData((prev: any) => ({
-                            ...prev,
-                            genderOther: val,
-                          }))
+                      ? (val) => updateData({ gender_other: val })
                       : undefined
                   }
                 />
@@ -140,12 +152,9 @@ function HackerDemographicForm({
             </span>
             <MultiCheckbox
               options={minorityCategoriesOptions}
-              selected={data.minorityCategories}
+              selected={data.minority_categories}
               onChange={(selected) =>
-                setData((prev: any) => ({
-                  ...prev,
-                  minorityCategories: selected,
-                }))
+                updateData({ minority_categories: selected })
               }
             />
           </div>
@@ -159,11 +168,14 @@ function HackerDemographicForm({
               {firstToPursueTechOptions.map((choice) => (
                 <CheckOff
                   key={choice}
-                  name="firstToPursueTech"
+                  name="first_to_pursue_tech"
                   value={choice}
                   label={choice}
-                  checked={data.firstToPursueTech === choice}
-                  onChange={handleChange}
+                  checked={data.first_to_pursue_tech === choice}
+                  onChange={(e) => {
+                    handleChange(e);
+                    updateData({ first_to_pursue_tech: e.target.value });
+                  }}
                 />
               ))}
             </div>
@@ -178,19 +190,33 @@ function HackerDemographicForm({
               {timeStudyingTechOptions.map((time) => (
                 <CheckOff
                   key={time}
-                  name="timeStudyingTech"
+                  name="time_studying_tech"
                   value={time}
                   label={time}
-                  checked={data.timeStudyingTech === time}
-                  onChange={handleChange}
+                  checked={data.time_studying_tech === time}
+                  onChange={(e) => {
+                    handleChange(e);
+                    updateData({ time_studying_tech: e.target.value });
+                  }}
                 />
               ))}
             </div>
           </div>
         </div>
 
-        <div className="flex justify-end mt-8">
-          <SubmitButton>→</SubmitButton>
+        <div className=" mt-10">
+          <div className="flex justify-between mt-2">
+            {onBack && (
+              <button
+                type="button"
+                onClick={onBack}
+                className="px-8 py-2 text-xl rounded-xl bg-pink-50 text-[#992650] shadow-sm shadow-[#992650] hover:bg-pink-100"
+              >
+                ←
+              </button>
+            )}
+            <SubmitButton>→</SubmitButton>
+          </div>
         </div>
       </form>
     </div>

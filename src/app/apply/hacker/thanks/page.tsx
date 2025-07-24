@@ -1,67 +1,73 @@
+
 "use client";
+
+import React, { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function ThankYouPage() {
+  const [markdown, setMarkdown] = useState("");
+
+  useEffect(() => {
+    fetch("/textFiles/hacker/thanks.md")
+      .then((res) => res.text())
+      .then(setMarkdown)
+      .catch(console.error);
+  }, []);
+
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[rgba(255,196,188,0.5)] to-[#FFFAF3] px-20 sm:px-20 py-20 relative overflow-hidden text-left text-sm sm:text-base text-[#171717]">
-      <h1 className="text-3xl sm:text-4xl font-bold text-green-900 mb-6">
-        Thanks for Applying!{" "}
-        <span role="img" aria-label="rocket">
-          🚀
-        </span>
-      </h1>
-
-      <p className="mb-4">
-        <br></br>
-        <br></br>
-        Congratulations on finishing the form, we’re so stoked to read your
-        application ✨!
-      </p>
-      <p className="mb-4">
-        We will be reviewing applications on a rolling basis, so make sure to
-        keep an eye on your inbox and check the{" "}
-        <a href="https://example.com" className="underline text-inherit">
-          application portal
-        </a>
-        ! Expect to hear back in August 👀
-      </p>
-      <p className="mb-4">
-        In the meantime, follow our socials (
-        <a
-          href="https://itstechnova.carrd.co"
-          className="underline text-inherit"
-        >
-          itstechnova.carrd.co
-        </a>
-        ) and tell your friends to apply! 😊
-      </p>
-      <p className="mb-4">
-        If you have any questions or concerns, contact us at{" "}
-        <a
-          href="mailto:hello@itstechnova.org"
-          className="underline text-inherit"
-        >
-          hello@itstechnova.org
-        </a>
-      </p>
-      <p className="mb-10">
-        Thank you for applying to TechNova’s Hack with Us &lt;3
-      </p>
-
-      {/* 🔥 Fully centered button across full page */}
-      <div className="flex justify-center">
-        <Link href="/">
-          <button className="bg-gradient-to-l from-[#FAC4BD] to-[#CD5769] text-white px-6 py-3 rounded-xl font-semibold">
-            Go Back Home!
-          </button>
-        </Link>
-      </div>
-
-      <img
-        src="/bunny.png"
-        alt="Cute bunny"
-        className="absolute bottom-0 right-0 w-[520px] sm:w-[600px] pointer-events-none select-none"
+    <div className="relative min-h-screen bg-navPrimary">
+      {/* Gradient Background */}
+      <div
+        className="fixed inset-x-0 top-0 h-1/3 pointer-events-none z-0
+                   bg-gradient-to-b from-backgroundSecondary to-navPrimary"
       />
-    </main>
+
+      {/* Main Content */}
+      <div className="pt-10 md:pt-24 relative z-10 mx-auto px-6 lg:px-24 py-12">
+        {/* Header */}
+        <div className="flex items-center gap-2 pb-10">
+          <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
+            Thanks for Applying! 🚀
+          </h1>
+        </div>
+
+        {/* Markdown Text */}
+        <div
+          className="prose max-w-none prose-lg prose-stone mb-8
+			prose-headings:font-semibold prose-headings:text-2xl
+			prose-a:text-inherit hover:prose-a:text-inherit prose-a:underline
+			prose-p:text-textPrimary prose-headings:text-textPrimary
+      prose-strong:text-textPrimary prose-em:italic"
+        >
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw]}
+          >
+            {markdown}
+          </ReactMarkdown>
+        </div>
+
+        <div className="flex justify-center mt-12">
+          <Link href="/apply/dashboard">
+            <button className="text-lg bg-gradient-to-l from-[#FAC4BD] to-[#CD5769] text-white px-6 py-3 rounded-xl">
+              Go Back to the Dashboard
+            </button>
+          </Link>
+        </div>
+
+        <div className="h-64" />
+      </div>
+      <Image
+        className="absolute bottom-0 right-0 z-5 pointer-events-none"
+        src="/themed_assets/bunnywithflower.svg"
+        alt="flower bunny"
+        width={800}
+        height={800}
+      />
+    </div>
   );
 }

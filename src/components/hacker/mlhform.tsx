@@ -1,19 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SubmitButton from "../submitButton";
 import CheckOff from "../checkOff";
 
 interface HackerMLHProps {
   data: any;
+  setData: React.Dispatch<React.SetStateAction<any>>;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  formError: string | null;
+  onBack?: () => void;
 }
 
-function HackerMLHForm({ data, handleChange, handleSubmit }: HackerMLHProps) {
+function HackerMLHForm({
+  data,
+  setData,
+  handleChange,
+  handleSubmit,
+  formError,
+  onBack,
+}: HackerMLHProps) {
+  useEffect(() => {
+    const savedData = sessionStorage.getItem("hackerMLHData");
+    if (savedData) {
+      setData(JSON.parse(savedData));
+    }
+  }, [setData]);
+
+  const updateData = (newData: any) => {
+    setData((prev: any) => {
+      const updated = { ...prev, ...newData };
+      sessionStorage.setItem("hackerMLHData", JSON.stringify(updated));
+      return updated;
+    });
+  };
+
   return (
-    <div className="p-24 flex flex-col h-full bg-navPrimary relative">
-      {/* Background SVG graphic */}
+    <div className="p-10 md:p-24 flex flex-col h-full bg-navPrimary relative">
       <div className="absolute inset-0 z-7 pointer-events-none">
         <img
           src="/goose.svg"
@@ -24,17 +48,16 @@ function HackerMLHForm({ data, handleChange, handleSubmit }: HackerMLHProps) {
       <div className="absolute top-0 left-0 w-full h-1/4 pointer-events-none z-5 bg-gradient-to-b from-backgroundSecondary to-navPrimary" />
       <div className="pb-5 relative z-10">
         <div className="pb-10">
-          <h1 className="text-5xl font-semibold text-textSecondary">
+          <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
             MLH Requirements
           </h1>
-          <br></br>
-          <br></br>
-          <p>
+          <br />
+          <p className="text-textPrimary">
             We are currently in the process of partnering with MLH. The
             following 3 checkboxes are for this partnership. If we do not end up
             partnering with MLH, your information will not be shared. All
-            hackers MUST agree to the first two checkboxes however, the third
-            checkbox is optional.
+            hackers MUST agree to the first two checkboxes; the third is
+            optional.
           </p>
         </div>
       </div>
@@ -51,17 +74,20 @@ function HackerMLHForm({ data, handleChange, handleSubmit }: HackerMLHProps) {
               >
                 MLH Code of Conduct
               </a>
-              ."
+              ."*
             </span>
             <div className="flex flex-col gap-2 mt-2">
               <CheckOff
                 type="checkbox"
                 key="requirement1"
                 label="I agree!"
-                name="mandatoryRequirement1"
+                name="mandatory_requirement_1"
                 value="agree"
-                checked={data.mandatoryRequirement1 === "agree"}
-                onChange={handleChange}
+                checked={data.mandatory_requirement_1 === "agree"}
+                onChange={(e) => {
+                  handleChange(e);
+                  updateData({ mandatory_requirement_1: e.target.value });
+                }}
               />
             </div>
           </div>
@@ -92,17 +118,20 @@ function HackerMLHForm({ data, handleChange, handleSubmit }: HackerMLHProps) {
               >
                 MLH Privacy Policy
               </a>
-              .”
+              .”*
             </span>
             <div className="flex flex-col gap-2 mt-2">
               <CheckOff
                 type="checkbox"
                 key="requirement2"
                 label="I agree!"
-                name="mandatoryRequirement2"
+                name="mandatory_requirement_2"
                 value="agree"
-                checked={data.mandatoryRequirement2 === "agree"}
-                onChange={handleChange}
+                checked={data.mandatory_requirement_2 === "agree"}
+                onChange={(e) => {
+                  handleChange(e);
+                  updateData({ mandatory_requirement_2: e.target.value });
+                }}
               />
             </div>
           </div>
@@ -122,13 +151,30 @@ function HackerMLHForm({ data, handleChange, handleSubmit }: HackerMLHProps) {
                 name="optional"
                 value="agree"
                 checked={data.optional === "agree"}
-                onChange={handleChange}
+                onChange={(e) => {
+                  const isChecked = e.target.checked;
+                  const newValue = isChecked ? "agree" : "";
+                  handleChange(e);
+                  updateData({ optional: newValue });
+                }}
               />
             </div>
           </div>
         </div>
-        <div className="flex justify-end mt-8">
-          <SubmitButton>→</SubmitButton>
+        <div className="mt-10">
+          {formError && <p className="text-red-500">{formError}</p>}
+          <div className="flex justify-between items-center mt-2">
+            {onBack && (
+              <button
+                type="button"
+                onClick={onBack}
+                className="px-8 py-2 text-xl rounded-xl bg-pink-50 text-[#992650] shadow-sm shadow-[#992650] hover:bg-pink-100"
+              >
+                ←
+              </button>
+            )}
+            <SubmitButton>→</SubmitButton>
+          </div>
         </div>
       </form>
     </div>

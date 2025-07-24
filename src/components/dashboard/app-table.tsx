@@ -7,7 +7,7 @@ interface Props {
 
 function ApplicationTable({ applications }: Props) {
   return (
-    <div className="w-full border border-gray-300 rounded-md shadow-sm overflow-x-auto">
+    <div className="w-full border border-gray-300 rounded-md shadow-sm overflow-x-auto text-textPrimary">
       <table className="w-full text-left text-base">
         <thead className="bg-backgroundTertiary/15 justify-between">
           <tr>

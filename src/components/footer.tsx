@@ -57,7 +57,7 @@ function Footer() {
           </a>
         </Button>
       </div>
-      <div>
+      <div className="text-textPrimary">
         <p className="text-xs">Made with &lt;3 by TechNova 2025</p>
       </div>
     </div>

@@ -2,7 +2,9 @@ import React from "react";
 
 interface AvailabilityGridProps {
   availability: boolean[][];
-	setAvailability: React.Dispatch<React.SetStateAction<boolean[][]>>;
+  setAvailability: React.Dispatch<React.SetStateAction<boolean[][]>>;
+  updateData: (newData: any) => void;
+  disabled?: boolean;
 }
 
 const days = ["Fri. Sept 27th", "Sat. Sept 28th", "Sun. Sept 29"];
@@ -16,19 +18,20 @@ const timeslots = [
   "5 PM – 7 PM",
   "7 PM – 9 PM",
   "9 PM – 11 PM",
-  "11 PM – 11:59 PM",
+  "11 PM – 12 AM",
 ];
 
 export const AvailabilityGrid: React.FC<AvailabilityGridProps> = ({
   availability,
   setAvailability,
+  updateData,
+  disabled,
 }) => {
   const toggleCheckbox = (row: number, col: number) => {
-    setAvailability((prev) => {
-      const updated = prev.map((r) => [...r]);
-      updated[row][col] = !updated[row][col];
-      return updated;
-    });
+    const updated = availability.map((r) => [...r]);
+    updated[row][col] = !updated[row][col];
+    setAvailability(updated);
+    updateData({ availability: updated });
   };
 
   return (
@@ -60,9 +63,10 @@ export const AvailabilityGrid: React.FC<AvailabilityGridProps> = ({
                 >
                   <input
                     type="checkbox"
-                    checked={availability[rowIndex][colIndex]}
+                    checked={availability?.[rowIndex]?.[colIndex] || false}
                     onChange={() => toggleCheckbox(rowIndex, colIndex)}
                     className="h-5 w-5 text-[#AABD9C] border-gray-300 rounded focus:ring-[#AABD9C]"
+                    disabled={disabled}
                   />
                 </td>
               ))}
