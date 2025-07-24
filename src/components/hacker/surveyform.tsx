@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import SubmitButton from "../submitButton";
 import MultiCheckbox from "./MultiCheckbox";
+import { Button } from "../base-ui/button";
 
 interface HackerSurveyFormProps {
   data: any;
@@ -10,6 +11,7 @@ interface HackerSurveyFormProps {
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   formError: string | null;
+  onBack?: () => void;
 }
 
 const careerSessionsOptions = [
@@ -106,6 +108,7 @@ function HackerSurveyForm({
   handleChange,
   handleSubmit,
   formError,
+  onBack,
 }: HackerSurveyFormProps) {
   useEffect(() => {
     const savedData = sessionStorage.getItem("hackerSurveyData");
@@ -248,9 +251,19 @@ function HackerSurveyForm({
             />
           </div>
         </div>
-        <div className="flex flex-col mt-24 gap-2 items-end">
-          {formError && <p className="text-red-500">{formError}</p>}
-          <SubmitButton>→</SubmitButton>
+        <div className=" mt-10">
+          {formError && (
+            <p className="text-red-500 flex justify-end">{formError}</p>
+          )}
+
+          <div className="flex justify-between mt-2">
+            {onBack && (
+              <Button type="button" size="lg" onClick={onBack}>
+                ←
+              </Button>
+            )}
+            <SubmitButton>→</SubmitButton>
+          </div>
         </div>
       </form>
     </div>

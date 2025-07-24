@@ -2,6 +2,7 @@ import React from "react";
 import SubmitButton from "../submitButton";
 import MultiCheckbox from "../hacker/MultiCheckbox";
 import CheckOff from "../checkOff";
+import { Button } from "../base-ui/button";
 interface MentorRoleFormProps {
   data: any;
   setData: React.Dispatch<React.SetStateAction<any>>;
@@ -15,6 +16,7 @@ interface MentorRoleFormProps {
     e: React.ChangeEvent<HTMLInputElement>
   ) => void | Promise<void>;
   formError?: string | null;
+  onBack?: () => void;
 }
 
 const onboardingOptions = [
@@ -79,6 +81,7 @@ function MentorRoleForm({
   handleSubmit,
   handleResumeUpload,
   formError,
+  onBack = () => {},
 }: MentorRoleFormProps) {
   const updateData = (newData: any) => {
     setData((prev: any) => {
@@ -347,13 +350,26 @@ function MentorRoleForm({
             />
           </div>
         </div>
- {formError && (
-          <p className="pt-10 flex justify-end text-red-500">{formError}</p>
-        )}
-        <div className="flex justify-end mt-8">
-          <SubmitButton className="px-8 py-2 text-xl rounded-xl bg-gradient-to-r from-navSecondary to-navSecondaryHover bg-[length:200%_100%] bg-left hover:bg-right transition-all duration-300 text-white shadow-sm">
-            Submit
-          </SubmitButton>
+        <div className="mt-10">
+          {formError && <p className="text-red-500">{formError}</p>}
+          <div className="flex justify-between items-center mt-2">
+            {onBack && (
+              <Button
+                type="button"
+                variant="secondary"
+                size="lg"
+                onClick={onBack}
+              >
+                ←
+              </Button>
+            )}
+            <button
+              type="submit"
+              className="px-8 py-2 text-xl rounded-xl bg-gradient-to-r from-navSecondary to-navSecondaryHover bg-[length:200%_100%] bg-left hover:bg-right transition-all duration-300 text-white shadow-sm"
+            >
+              Submit
+            </button>
+          </div>
         </div>
       </form>
     </div>

@@ -5,6 +5,7 @@ import SubmitButton from "../submitButton";
 import CheckOff from "../checkOff";
 import UniversityDropdown from "./UniversityDropdown";
 import MultiCheckbox from "./MultiCheckbox";
+import { Button } from "../base-ui/button";
 
 interface HackerAboutYouFormProps {
   data: any;
@@ -14,6 +15,7 @@ interface HackerAboutYouFormProps {
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   formError: string | null;
+  onBack?: () => void;
 }
 
 const tshirtSizeOptions = ["XS", "S", "M", "L", "XL", "2XL", "3XL"];
@@ -61,6 +63,7 @@ function HackerAboutYouForm({
   handleChange,
   handleSubmit,
   formError,
+  onBack,
 }: HackerAboutYouFormProps) {
   useEffect(() => {
     const savedData = sessionStorage.getItem("hackerAboutYouData");
@@ -344,9 +347,16 @@ function HackerAboutYouForm({
             />
           </div>
         </div>
-        <div className="flex flex-col mt-24 gap-2 items-end">
-          {formError && <p className="text-red-500">{formError}</p>}
-          <SubmitButton>→</SubmitButton>
+        <div className="flex justify-between rows-10 mt-10">
+          {onBack && (
+            <Button type="button" size="lg" onClick={onBack}>
+              ←
+            </Button>
+          )}
+          <div className="flex flex-col gap-2 items-end">
+            {formError && <p className="text-red-500">{formError}</p>}
+            <SubmitButton>→</SubmitButton>
+          </div>
         </div>
       </form>
     </div>

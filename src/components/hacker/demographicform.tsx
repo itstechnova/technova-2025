@@ -3,6 +3,7 @@ import Image from "next/image";
 import SubmitButton from "../submitButton";
 import CheckOff from "../checkOff";
 import MultiCheckbox from "./MultiCheckbox";
+import { Button } from "../base-ui/button";
 
 interface HackerDemographicFormProps {
   data: any;
@@ -11,6 +12,7 @@ interface HackerDemographicFormProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  onBack?: () => void;
 }
 
 const ethnicityOptions = [
@@ -48,6 +50,7 @@ function HackerDemographicForm({
   setData,
   handleChange,
   handleSubmit,
+  onBack,
 }: HackerDemographicFormProps) {
   useEffect(() => {
     const savedData = sessionStorage.getItem("hackerDemographicData");
@@ -202,8 +205,15 @@ function HackerDemographicForm({
           </div>
         </div>
 
-        <div className="flex justify-end mt-8">
-          <SubmitButton>→</SubmitButton>
+        <div className=" mt-10">
+          <div className="flex justify-between mt-2">
+            {onBack && (
+              <Button type="button" size="lg" onClick={onBack}>
+                ←
+              </Button>
+            )}
+            <SubmitButton>→</SubmitButton>
+          </div>
         </div>
       </form>
     </div>

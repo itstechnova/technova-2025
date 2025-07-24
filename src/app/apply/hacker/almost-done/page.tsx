@@ -51,6 +51,7 @@ function HackerAlmostDone() {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         formError={formError}
+        onBack={() => router.push("/apply/hacker/demographic")}
       />
     </div>
   );

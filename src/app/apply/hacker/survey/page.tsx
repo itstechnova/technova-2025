@@ -157,6 +157,7 @@ function HackerSurvey() {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         formError={formError}
+        onBack={() => router.push("/apply/hacker/short-answers")}
       />
     </div>
   );

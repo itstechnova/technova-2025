@@ -122,6 +122,7 @@ function HackerDemographic() {
         setData={setDemographicData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
+        onBack={() => router.push("/apply/hacker/survey")}
       />
     </div>
   );

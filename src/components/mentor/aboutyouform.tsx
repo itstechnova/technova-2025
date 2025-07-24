@@ -3,6 +3,7 @@ import Image from "next/image";
 import ShortAnswerQuestion from "../shortanswerq";
 import CheckOff from "../checkOff";
 import AvailabilityGrid from "./AvailabilityGrid";
+import { Button } from "../base-ui/button";
 
 interface MentorAboutYouFormProps {
   data: any;
@@ -12,6 +13,7 @@ interface MentorAboutYouFormProps {
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   formError?: string | null;
+  onBack?: () => void;
 }
 
 const genderIdentityOptions = [
@@ -30,6 +32,7 @@ function MentorAboutYouForm({
   handleChange,
   handleSubmit,
   formError,
+  onBack,
 }: MentorAboutYouFormProps) {
   const [availability, setAvailability] = React.useState<boolean[][]>(
     data.availability ?? Array.from({ length: 10 }, () => Array(3).fill(false))
@@ -243,18 +246,27 @@ function MentorAboutYouForm({
             />
           </div>
         </div>
-        {formError && (
-          <p className="flex justify-end pt-10 pr-10 text-red-500">
-            {formError}
-          </p>
-        )}
-        <div className="pb-36 flex justify-end pt-2 pr-10">
-          <button
-            type="submit"
-            className="px-8 py-2 text-xl rounded-xl bg-gradient-to-r from-navSecondary to-navSecondaryHover bg-[length:200%_100%] bg-left hover:bg-right transition-all duration-300 text-white shadow-sm"
-          >
-            →
-          </button>
+        <div className="mt-10">
+          {formError && <p className="text-red-500">{formError}</p>}
+          <div className="flex justify-between items-center mt-2">
+            {onBack && (
+              <Button
+                type="button"
+                variant="secondary"
+                size="lg"
+                onClick={onBack}
+              >
+                ←
+              </Button>
+            )}
+
+            <button
+              type="submit"
+              className="px-8 py-2 text-xl rounded-xl bg-gradient-to-r from-navSecondary to-navSecondaryHover bg-[length:200%_100%] bg-left hover:bg-right transition-all duration-300 text-white shadow-sm"
+            >
+              →
+            </button>
+          </div>
         </div>
       </form>
     </div>

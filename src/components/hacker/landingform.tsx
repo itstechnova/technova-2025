@@ -110,8 +110,10 @@ function HackerLandingForm({
                 />
               </div>
             </div>
-            {formError && <p className="text-red-500">{formError}</p>}
-            <SubmitButton>→</SubmitButton>
+            <div className="mt-10">
+              {formError && <p className="text-red-500">{formError}</p>}
+              <SubmitButton>→</SubmitButton>
+            </div>
           </form>
         </div>
       </div>

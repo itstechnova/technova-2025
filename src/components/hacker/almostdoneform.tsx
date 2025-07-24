@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import CheckOff from "../checkOff";
 import SubmitButton from "../submitButton";
+import { Button } from "../base-ui/button";
 
 interface AlmostDoneProps {
   data: any;
@@ -16,6 +17,7 @@ interface AlmostDoneProps {
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   formError: string | null;
+  onBack?: () => void;
 }
 
 function AlmostDoneForm({
@@ -23,6 +25,7 @@ function AlmostDoneForm({
   handleChange,
   handleSubmit,
   formError,
+  onBack = () => window.history.back(),
 }: AlmostDoneProps) {
   const [markdown, setMarkdown] = useState("");
 
@@ -84,7 +87,10 @@ function AlmostDoneForm({
 
             {/* Submit button */}
             {formError && <p className="text-red-500">{formError}</p>}
-            <div className="flex justify-center mt-4">
+            <div className="flex justify-center mt-4 gap-4">
+              <Button type="button" size="lg" onClick={onBack}>
+                Go Back
+              </Button>
               <SubmitButton>Submit</SubmitButton>
             </div>
           </form>

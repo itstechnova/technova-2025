@@ -3,6 +3,7 @@
 import React from "react";
 import LongAnswerQuestion from "../longanswerq";
 import SubmitButton from "../submitButton";
+import { Button } from "../base-ui/button";
 
 interface HackerShortAnswersProps {
   data: {
@@ -19,6 +20,8 @@ interface HackerShortAnswersProps {
     word_limit?: number
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  formError?: string;
+  onBack?: () => void;
 }
 
 const question_options = [
@@ -30,6 +33,8 @@ function HackerShortAnswersForm({
   data,
   handleChange,
   handleSubmit,
+  formError,
+  onBack,
 }: HackerShortAnswersProps) {
   const update_data = (new_data: Partial<typeof data>) => {
     const updated = { ...data, ...new_data };
@@ -115,8 +120,19 @@ function HackerShortAnswersForm({
             }}
           />
         </div>
-        <div className="flex justify-end mt-8">
-          <SubmitButton>→</SubmitButton>
+        <div className=" mt-10">
+          {formError && (
+            <p className="text-red-500 flex justify-end">{formError}</p>
+          )}
+
+          <div className="flex justify-between mt-2">
+            {onBack && (
+              <Button type="button" size="lg" onClick={onBack}>
+                ←
+              </Button>
+            )}
+            <SubmitButton>→</SubmitButton>
+          </div>
         </div>
       </form>
     </div>
