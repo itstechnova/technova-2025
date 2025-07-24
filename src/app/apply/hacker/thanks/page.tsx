@@ -51,9 +51,9 @@ export default function ThankYouPage() {
         </div>
 
         <div className="flex justify-center mt-12">
-          <Link href="/">
+          <Link href="/apply/dashboard">
             <button className="text-lg bg-gradient-to-l from-[#FAC4BD] to-[#CD5769] text-white px-6 py-3 rounded-xl">
-              Go Back Home!
+              Go Back to the Dashboard
             </button>
           </Link>
         </div>
