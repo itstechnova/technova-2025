@@ -77,7 +77,7 @@ function AlmostDoneForm({
               </p>
               <CheckOff
                 type="checkbox"
-                label="I accept! 🥳"
+                label="I accept!* 🥳"
                 name="acceptance"
                 value="accept"
                 checked={data.acceptance === "accept"}

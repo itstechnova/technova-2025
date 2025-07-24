@@ -78,7 +78,7 @@ function MentorAboutYouForm({
         <div className="flex flex-col gap-24 text-textPrimary">
           <div className="grid grid-cols-2 gap-10 w-full">
             <ShortAnswerQuestion
-              question="What's your first name?"
+              question="What's your first name?*"
               name="first_name"
               id="first_name"
               placeholder="ex. Jane"
@@ -89,7 +89,7 @@ function MentorAboutYouForm({
               }}
             />
             <ShortAnswerQuestion
-              question="What's your last name?"
+              question="What's your last name?*"
               name="last_name"
               id="last_name"
               placeholder="ex. Smith"
@@ -101,7 +101,7 @@ function MentorAboutYouForm({
             />
           </div>
           <ShortAnswerQuestion
-            question="What's your phone number?"
+            question="What's your phone number?*"
             name="phone_number"
             id="phone_number"
             placeholder="ex. 226-111-1111"
@@ -113,7 +113,7 @@ function MentorAboutYouForm({
           />
 
           <ShortAnswerQuestion
-            question="What are your pronouns?"
+            question="What are your pronouns?*"
             name="pronouns"
             id="pronouns"
             placeholder="ex. she/her/hers (all lowercase)"
@@ -126,7 +126,7 @@ function MentorAboutYouForm({
 
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
-              What’s your gender identity?
+              What’s your gender identity?*
             </span>
             <div className="flex flex-col gap-2 mt-2">
               {genderIdentityOptions.map((gender) => (
@@ -160,7 +160,7 @@ function MentorAboutYouForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               Are you able to mentor in person in Waterloo for the duration of
-              the hackathon (Sep. 27-29)?
+              the hackathon (Sep. 27-29)?*
             </span>
             <span className="text-base font-semibold">
               Note:
@@ -191,7 +191,7 @@ function MentorAboutYouForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               Using the sizing guide below, what t-shirt size are you (unisex
-              sizing)?
+              sizing)?*
             </span>
             <span className="text-base font-semibold">
               Disclaimer:
