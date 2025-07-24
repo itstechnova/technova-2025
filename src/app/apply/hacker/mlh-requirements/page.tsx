@@ -5,10 +5,12 @@ import React, { useState, useEffect } from "react";
 import supabase from "@/config/supabaseClient";
 import { useRouter } from "next/navigation";
 import { useAccount } from "@/components/AccountContext";
+import NoFormAccess from "@/components/app/no-access";
 
 function HackerMLHRequirements() {
   const router = useRouter();
   const { user } = useAccount();
+  const [appStatus, setAppStatus] = useState<string>("");
   const [formError, setFormError] = useState<string | null>(null);
 
   const [mlhData, setMLHData] = useState({
@@ -58,6 +60,21 @@ function HackerMLHRequirements() {
     if (user?.id) {
       loadData();
     }
+    const loadAppStatus = async () => {
+      if (!user?.id) return;
+
+      const response = await supabase
+        .from("applications")
+        .select("hacker")
+        .eq("user_id", user?.id)
+        .single();
+      if (response.error) {
+        throw response.error;
+      } else {
+        setAppStatus(response.data.hacker);
+      }
+    };
+    loadAppStatus();
   }, [user?.id]);
 
   const handleChange = (
@@ -99,14 +116,18 @@ function HackerMLHRequirements() {
 
   return (
     <div className="min-h-screen bg-navPrimary">
-      <HackerMLHForm
-        data={mlhData}
-        setData={setMLHData}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        formError={formError}
-        onBack={() => router.push("/apply/hacker/about-you")}
-      />
+      {appStatus === "Not Started" || appStatus === "In Progress" ? (
+        <HackerMLHForm
+          data={mlhData}
+          setData={setMLHData}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          formError={formError}
+          onBack={() => router.push("/apply/hacker/about-you")}
+        />
+      ) : (
+        <NoFormAccess role="hacker" />
+      )}
     </div>
   );
 }
