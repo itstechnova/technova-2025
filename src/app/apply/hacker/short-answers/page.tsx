@@ -5,9 +5,11 @@ import supabase from "@/config/supabaseClient";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAccount } from "@/components/AccountContext";
+import NoFormAccess from "@/components/app/no-access";
 
 function HackerShortAnswers() {
   const { user } = useAccount();
+  const [appStatus, setAppStatus] = useState<string>("");
   const router = useRouter();
 
   const [formError, setFormError] = useState<string | null>(null);
@@ -74,6 +76,21 @@ function HackerShortAnswers() {
     if (user?.id) {
       loadData();
     }
+    const loadAppStatus = async () => {
+      if (!user?.id) return;
+
+      const response = await supabase
+        .from("applications")
+        .select("hacker")
+        .eq("user_id", user?.id)
+        .single();
+      if (response.error) {
+        throw response.error;
+      } else {
+        setAppStatus(response.data.hacker);
+      }
+    };
+    loadAppStatus();
   }, [user?.id]);
 
   const handleChange = (
@@ -141,13 +158,17 @@ function HackerShortAnswers() {
 
   return (
     <div className="min-h-screen bg-navPrimary">
-      <HackerShortAnswersForm
-        data={shortAnswersData}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        formError={formError}
-        onBack={() => router.push("/apply/hacker/mlh-requirements")}
-      />
+      {appStatus === "Not Started" || appStatus === "In Progress" ? (
+        <HackerShortAnswersForm
+          data={shortAnswersData}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          formError={formError}
+          onBack={() => router.push("/apply/hacker/mlh-requirements")}
+        />
+      ) : (
+        <NoFormAccess role="hacker" />
+      )}
     </div>
   );
 }
