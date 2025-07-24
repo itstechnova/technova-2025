@@ -186,7 +186,7 @@ function HackerSurvey() {
 
   return (
     <div className="min-h-screen bg-navPrimary">
-      {appStatus === "Not Started" || appStatus === "In Progress" ? (
+      {/* {appStatus === "Not Started" || appStatus === "In Progress" ? ( */}
         <HackerSurveyForm
           data={surveyData}
           setData={setSurveyData}
@@ -195,9 +195,9 @@ function HackerSurvey() {
           formError={formError}
           onBack={() => router.push("/apply/hacker/short-answers")}
         />
-      ) : (
+      {/*}      ) : (
         <NoFormAccess role="hacker" />
-      )}
+      )}*/}
     </div>
   );
 }

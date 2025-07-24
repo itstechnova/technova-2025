@@ -134,17 +134,17 @@ function HackerDemographic() {
 
   return (
     <div className="min-h-screen bg-navPrimary">
-      {appStatus === "Not Started" || appStatus === "In Progress" ? (
-        <HackerDemographicForm
-          data={demographicData}
-          setData={setDemographicData}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          onBack={() => router.push("/apply/hacker/survey")}
-        />
-      ) : (
+      {/* {appStatus === "Not Started" || appStatus === "In Progress" ? ( */}
+      <HackerDemographicForm
+        data={demographicData}
+        setData={setDemographicData}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        onBack={() => router.push("/apply/hacker/survey")}
+      />
+      {/*}      ) : (
         <NoFormAccess role="hacker" />
-      )}
+      )}*/}
     </div>
   );
 }

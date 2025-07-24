@@ -123,7 +123,7 @@ function HackerLanding() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-navPrimary">
-      {appStatus === "Not Started" || appStatus === "In Progress" ? (
+      {/* {appStatus === "Not Started" || appStatus === "In Progress" ? ( */}
         <HackerLandingForm
           data={landingData}
           setData={setLandingData}
@@ -131,9 +131,10 @@ function HackerLanding() {
           handleSubmit={handleSubmit}
           formError={formError}
         />
-      ) : (
+     {/* ) : (
         <NoFormAccess role="hacker" />
       )}
+        */}
     </div>
   );
 }
