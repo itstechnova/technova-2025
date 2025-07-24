@@ -287,9 +287,9 @@ function MentorSurvey() {
           formError={formError}
           onBack={() => router.push("/apply/mentor/about-you")}
         />
-      // ) : (
-      //   <NoFormAccess role="mentor" />
-      // )
+       {/* ) : (
+         <NoFormAccess role="mentor" />
+       )} */}
     </div>
   );
 }
