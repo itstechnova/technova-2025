@@ -116,7 +116,7 @@ function HackerMLHRequirements() {
 
   return (
     <div className="min-h-screen bg-navPrimary">
-      {appStatus === "Not Started" || appStatus === "In Progress" ? (
+      {/* {appStatus === "Not Started" || appStatus === "In Progress" ? ( */}
         <HackerMLHForm
           data={mlhData}
           setData={setMLHData}
@@ -125,9 +125,9 @@ function HackerMLHRequirements() {
           formError={formError}
           onBack={() => router.push("/apply/hacker/about-you")}
         />
-      ) : (
+      {/*}      ) : (
         <NoFormAccess role="hacker" />
-      )}
+      )}*/}
     </div>
   );
 }

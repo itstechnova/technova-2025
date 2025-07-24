@@ -142,7 +142,7 @@ function MentorLanding() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-navPrimary">
-      {appStatus === "Not Started" || appStatus === "In Progress" ? (
+      {/* {appStatus === "Not Started" || appStatus === "In Progress" ? ( */}
         <MentorLandingForm
           data={landingData}
           setData={setLandingData}
@@ -150,9 +150,9 @@ function MentorLanding() {
           handleSubmit={handleSubmit}
           formError={formError}
         />
-      ) : (
+      {/* ) : (
         <NoFormAccess role="mentor" />
-      )}
+      )} */}
     </div>
   );
 }
