@@ -29,7 +29,7 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="bg-navPrimary min-h-[70vh] flex flex-col justify-center items-center">
+    <div className="text-textPrimary bg-navPrimary min-h-[70vh] flex flex-col justify-center items-center">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-md mx-auto bg-white/80 rounded-xl shadow-md px-8 py-12"

@@ -74,7 +74,7 @@ export default function CreateAccountPage() {
         <p className="text-xl font-semibold text-textPrimary mb-10">
           Let's get you set up to join the fun.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 text-textPrimary">
           <ShortAnswerQuestion
             question="First Name*"
             name="firstName"
@@ -94,7 +94,7 @@ export default function CreateAccountPage() {
             required
           />
         </div>
-        <div className="flex flex-col gap-8 mb-8">
+        <div className="flex flex-col gap-8 mb-8 text-textPrimary">
           <ShortAnswerQuestion
             question="Email Address*"
             name="email"

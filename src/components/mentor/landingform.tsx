@@ -126,7 +126,7 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
             </div>
 
             {/* Acknowledgement */}
-            <div className="pb-5">
+            <div className="pb-5 text-textPrimary">
               <p className="pt-12 pb-2 text-textPrimary font-semibold">
                 I acknowledge the roles and responsibilities outlined above.
               </p>

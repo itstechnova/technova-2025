@@ -31,7 +31,7 @@ export default function UpdatePasswordPage() {
   };
 
   return (
-    <div className="min-h-[70vh] bg-navPrimary flex flex-col justify-center items-center">
+    <div className="text-textPrimary min-h-[70vh] bg-navPrimary flex flex-col justify-center items-center">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-md mx-auto bg-white/80 rounded-xl shadow-md px-8 py-12"
