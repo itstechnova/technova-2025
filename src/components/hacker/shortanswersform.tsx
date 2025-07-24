@@ -24,8 +24,8 @@ interface HackerShortAnswersProps {
 }
 
 const question_options = [
-  "Option A: What is one emerging technology that you are excited to explore which could potentially enhance representation of women+ in tech?",
-  "Option B: What other experiences, beyond hackathons, have played a pivotal role in advancing your career within the tech industry as an underrepresented gender?",
+  "Option A: Choose one emerging tool or platform that you are most eager to explore due to its potential to improve accessibility and representation in tech. Explain how this tool could help close the gender gap in STEM education and careers, and why its impact excites you.",
+  "Option B: Beyond formal education, what life experience has most influenced your growth and motivation in pursuing a career in tech? Describe a personal experience or challenge that has significantly shaped your journey, and explain how it has transformed your perspective in the present and for the future.",
 ];
 
 function HackerShortAnswersForm({
@@ -57,8 +57,9 @@ function HackerShortAnswersForm({
             Short Answers 📝
           </h1>
           <p className="text-textPrimary">
-            Our mission is to create a more gender-equitable future in
-            technology. Check out our social medias for more info!
+            Our mission is to create a more gender‑equitable future in technology. 
+			Check out our social medias for more info! 
+			Please don’t use GPT or other AI‑generated responses for the responses in this section, we can tell if you use GPT. 
           </p>
         </div>
       </div>
@@ -96,7 +97,7 @@ function HackerShortAnswersForm({
           />
 
           <LongAnswerQuestion
-            question="Here's a fun question: What kind of superpower do you believe would help you in a hackathon?* 🤔"
+            question="Here's a fun question: Which fictional character would you want as your hackathon partner and why?* 🤔"
             name="long_answer_q3"
             id="long_answer_q3"
             placeholder="Start typing..."
@@ -108,7 +109,7 @@ function HackerShortAnswersForm({
           />
 
           <LongAnswerQuestion
-            question="Summarize your approach to problem-solving in 10 words.*"
+            question="Describe yourself as a hacker using a song lyric (get creative!)*"
             name="long_answer_q4"
             id="long_answer_q4"
             placeholder="Start typing..."
