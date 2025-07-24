@@ -8,7 +8,6 @@ import Image from "next/image";
 import Link from "next/link";
 import CheckOff from "../checkOff";
 import SubmitButton from "../submitButton";
-import { Button } from "../base-ui/button";
 
 interface AlmostDoneProps {
   data: any;
@@ -88,9 +87,15 @@ function AlmostDoneForm({
             {/* Submit button */}
             {formError && <p className="text-red-500">{formError}</p>}
             <div className="flex justify-center mt-4 gap-4">
-              <Button type="button" size="lg" onClick={onBack}>
-                Go Back
-              </Button>
+              {onBack && (
+                <button
+                  type="button"
+                  onClick={onBack}
+                  className="px-8 py-2 text-xl rounded-xl bg-pink-50 text-[#992650] shadow-sm shadow-[#992650] hover:bg-pink-100"
+                >
+                  ←
+                </button>
+              )}
               <SubmitButton>Submit</SubmitButton>
             </div>
           </form>

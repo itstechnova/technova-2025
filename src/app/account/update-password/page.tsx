@@ -34,7 +34,7 @@ export default function UpdatePasswordPage() {
     <div className="text-textPrimary min-h-[70vh] bg-navPrimary flex flex-col justify-center items-center">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md mx-auto bg-white/80 rounded-xl shadow-md px-8 py-12"
+        className="w-full max-w-md mx-auto bg-white/80 rounded-xl shadow-md px-8 py-12 [@media(min-height:900px)]:mt-16"
       >
         <h1 className="text-3xl font-bold text-textPrimary mb-6">
           Set a New Password
@@ -49,7 +49,7 @@ export default function UpdatePasswordPage() {
           onChange={handleChange}
           required
         />
-        <SubmitButton className="text-white bg-[#1A1536] hover:bg-[#2A2346] px-8 py-3 text-xl font-semibold rounded-lg shadow-md w-full mt-8">
+        <SubmitButton className="bg-textPrimary hover:bg-buttonSecondary px-8 py-3 text-xl font-semibold rounded-lg shadow-md w-full mt-8 text-white transition-all duration-300">
           Update Password
         </SubmitButton>
         {formError && <div className="text-red-500 mt-4">{formError}</div>}

@@ -5,7 +5,6 @@ import SubmitButton from "../submitButton";
 import CheckOff from "../checkOff";
 import UniversityDropdown from "./UniversityDropdown";
 import MultiCheckbox from "./MultiCheckbox";
-import { Button } from "../base-ui/button";
 
 interface HackerAboutYouFormProps {
   data: any;
@@ -349,9 +348,13 @@ function HackerAboutYouForm({
         </div>
         <div className="flex justify-between rows-10 mt-10">
           {onBack && (
-            <Button type="button" size="lg" onClick={onBack}>
+            <button
+              type="button"
+              onClick={onBack}
+              className="px-8 py-2 text-xl rounded-xl bg-pink-50 text-[#992650] shadow-sm shadow-[#992650] hover:bg-pink-100"
+            >
               ←
-            </Button>
+            </button>
           )}
           <div className="flex flex-col gap-2 items-end">
             {formError && <p className="text-red-500">{formError}</p>}

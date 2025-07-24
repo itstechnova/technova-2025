@@ -18,7 +18,7 @@ const timeslots = [
   "5 PM – 7 PM",
   "7 PM – 9 PM",
   "9 PM – 11 PM",
-  "11 PM – 11:59 PM",
+  "11 PM – 12 AM",
 ];
 
 export const AvailabilityGrid: React.FC<AvailabilityGridProps> = ({
