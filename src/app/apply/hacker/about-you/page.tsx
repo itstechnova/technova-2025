@@ -216,7 +216,7 @@ function HackerAboutYou() {
 
   return (
     <div className="min-h-screen bg-navPrimary">
-      {appStatus === "Not Started" || appStatus === "In Progress" ? (
+      {/* {appStatus === "Not Started" || appStatus === "In Progress" ? ( */}
         <HackerAboutYouForm
           data={aboutYouData}
           setData={setAboutYouData}
@@ -225,9 +225,10 @@ function HackerAboutYou() {
           formError={formError}
           onBack={() => router.push("/apply/hacker")}
         />
-      ) : (
-        <NoFormAccess role="hacker" />
-      )}
+      {/*  ) : (
+         <NoFormAccess role="hacker" />
+       )
+       } */}
     </div>
   );
 }

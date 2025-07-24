@@ -197,7 +197,7 @@ export default function MentorAboutYouFormPage() {
 
   return (
     <div className="min-h-screen bg-navPrimary">
-      {appStatus === "Not Started" || appStatus === "In Progress" ? (
+      {/* {appStatus === "Not Started" || appStatus === "In Progress" ? ( */}
         <MentorAboutYouForm
           data={formData}
           setData={setFormData}
@@ -206,9 +206,9 @@ export default function MentorAboutYouFormPage() {
           formError={formError}
           onBack={() => router.push("/apply/mentor")}
         />
-      ) : (
+      {/* ) : (
         <NoFormAccess role="mentor" />
-      )}
+      )} */}
     </div>
   );
 }

@@ -277,7 +277,7 @@ function MentorSurvey() {
 
   return (
     <div className="min-h-screen bg-navPrimary">
-      {appStatus === "Not Started" || appStatus === "In Progress" ? (
+      {/* {appStatus === "Not Started" || appStatus === "In Progress" ? ( */}
         <MentorRoleForm
           data={mentorData}
           setData={setMentorData}
@@ -287,9 +287,9 @@ function MentorSurvey() {
           formError={formError}
           onBack={() => router.push("/apply/mentor/about-you")}
         />
-      ) : (
-        <NoFormAccess role="mentor" />
-      )}
+      // ) : (
+      //   <NoFormAccess role="mentor" />
+      // )}
     </div>
   );
 }

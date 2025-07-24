@@ -158,7 +158,7 @@ function HackerShortAnswers() {
 
   return (
     <div className="min-h-screen bg-navPrimary">
-      {appStatus === "Not Started" || appStatus === "In Progress" ? (
+      {/* {appStatus === "Not Started" || appStatus === "In Progress" ? ( */}
         <HackerShortAnswersForm
           data={shortAnswersData}
           handleChange={handleChange}
@@ -166,9 +166,9 @@ function HackerShortAnswers() {
           formError={formError}
           onBack={() => router.push("/apply/hacker/mlh-requirements")}
         />
-      ) : (
+      {/*}      ) : (
         <NoFormAccess role="hacker" />
-      )}
+      )}*/}
     </div>
   );
 }
