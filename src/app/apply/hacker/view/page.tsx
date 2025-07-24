@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Button } from "@/components/base-ui/button";
 import supabase from "@/config/supabaseClient";
 import { useAccount } from "@/components/AccountContext";
 
@@ -83,12 +82,15 @@ export default function HackerView() {
       {/* Main Content */}
       <div className="pt-10 md:pt-24 relative z-10 mx-auto px-6 lg:px-24 py-12">
         {/* Header */}
-        <div className="flex flex-row items-end justify-between gap-2 pb-10">
+        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-4 pb-10">
           <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
             Your Hacker Application
           </h1>
-          <Link href="/apply/dashboard">
-            <Button variant="link">Back to Dashboard</Button>
+          <Link
+            className="text-navSecondary underline hover:text-navSecondaryHover"
+            href="/apply/dashboard"
+          >
+            Back to Dashboard
           </Link>
         </div>
 

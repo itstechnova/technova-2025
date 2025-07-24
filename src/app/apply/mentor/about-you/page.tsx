@@ -196,7 +196,7 @@ export default function MentorAboutYouFormPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-navPrimary">
+    <div className="min-h-screen bg-navPrimary">
       {appStatus === "Not Started" || appStatus === "In Progress" ? (
         <MentorAboutYouForm
           data={formData}

@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import ApplicationTable from '@/components/dashboard/app-table';
-import { Application, AppType } from '@/components/dashboard/utils/types';
-import { Button } from '@/components/base-ui/button';
-import { useRouter } from 'next/navigation';
-import { useAccount } from '@/components/AccountContext';
-import supabase from '@/config/supabaseClient';
+import React, { useEffect, useState } from "react";
+import ApplicationTable from "@/components/dashboard/app-table";
+import { Application, AppType } from "@/components/dashboard/utils/types";
+import { Button } from "@/components/base-ui/button";
+import { useRouter } from "next/navigation";
+import { useAccount } from "@/components/AccountContext";
+import supabase from "@/config/supabaseClient";
 
 function AppDashboard() {
   const { user } = useAccount();
@@ -28,7 +28,7 @@ function AppDashboard() {
         .single();
 
       if (error) {
-        console.error('Failed to fetch applications:', error);
+        console.error("Failed to fetch applications:", error);
         setApplications([]);
       } else if (data) {
         const appsFromDB: Application[] = [];
@@ -43,7 +43,7 @@ function AppDashboard() {
             throw updatedAtResponse.error;
           }
           appsFromDB.push({
-            type: 'Hacker',
+            type: "Hacker",
             status: data.hacker,
             lastUpdated: new Date(
               updatedAtResponse.data?.updated_at
@@ -110,7 +110,7 @@ function AppDashboard() {
             </p>
           </div>
           <p className="text-lg">
-            🕒 Deadline to submit or update applications:{" "}
+            🕒 Deadline to submit applications:{" "}
             <span className="font-semibold">August 8, 2025</span>
           </p>
         </div>
@@ -130,7 +130,7 @@ function AppDashboard() {
                 .map((role, index) => (
                   <Button
                     key={role}
-                    variant={index === 0 ? 'default' : 'outline'}
+                    variant={index === 0 ? "default" : "outline"}
                     onClick={() => {
                       router.push(`/apply/${role.toLowerCase()}`);
                     }}
