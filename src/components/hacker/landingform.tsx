@@ -84,7 +84,7 @@ function HackerLandingForm({
             <div className="md:w-1/2">
               <div className="flex flex-col gap-24 text-textPrimary">
                 <ShortAnswerQuestion
-                  question="Email"
+                  question="Email*"
                   name="email"
                   id="email"
                   type="email"
@@ -96,7 +96,7 @@ function HackerLandingForm({
                   }}
                 />
                 <ShortAnswerQuestion
-                  question="How old will you be as of September 27, 2025?"
+                  question="How old will you be as of September 27, 2025?*"
                   name="age2025"
                   id="age2025"
                   placeholder="ex. 21"
@@ -110,8 +110,10 @@ function HackerLandingForm({
                 />
               </div>
             </div>
-            {formError && <p className="text-red-500">{formError}</p>}
-            <SubmitButton>→</SubmitButton>
+            <div className="mt-10">
+              {formError && <p className="text-red-500">{formError}</p>}
+              <SubmitButton>→</SubmitButton>
+            </div>
           </form>
         </div>
       </div>

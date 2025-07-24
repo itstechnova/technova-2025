@@ -267,6 +267,7 @@ function MentorSurvey() {
         handleSubmit={handleSubmit}
         handleResumeUpload={handleResumeUpload}
         formError={formError}
+        onBack={() => router.push("/apply/mentor/about-you")}
       />
     </div>
   );

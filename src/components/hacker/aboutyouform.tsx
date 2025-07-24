@@ -5,6 +5,7 @@ import SubmitButton from "../submitButton";
 import CheckOff from "../checkOff";
 import UniversityDropdown from "./UniversityDropdown";
 import MultiCheckbox from "./MultiCheckbox";
+import { Button } from "../base-ui/button";
 
 interface HackerAboutYouFormProps {
   data: any;
@@ -14,6 +15,7 @@ interface HackerAboutYouFormProps {
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   formError: string | null;
+  onBack?: () => void;
 }
 
 const tshirtSizeOptions = ["XS", "S", "M", "L", "XL", "2XL", "3XL"];
@@ -61,6 +63,7 @@ function HackerAboutYouForm({
   handleChange,
   handleSubmit,
   formError,
+  onBack,
 }: HackerAboutYouFormProps) {
   useEffect(() => {
     const savedData = sessionStorage.getItem("hackerAboutYouData");
@@ -107,7 +110,7 @@ function HackerAboutYouForm({
         <div className="flex flex-col gap-24 text-textPrimary">
           <div className="grid grid-cols-2 gap-10 w-full">
             <ShortAnswerQuestion
-              question="What's your first name?"
+              question="What's your first name?*"
               name="firstName"
               id="firstName"
               placeholder="ex. Jane"
@@ -118,7 +121,7 @@ function HackerAboutYouForm({
               }}
             />
             <ShortAnswerQuestion
-              question="What's your last name?"
+              question="What's your last name?*"
               name="lastName"
               id="lastName"
               placeholder="ex. Smith"
@@ -132,7 +135,7 @@ function HackerAboutYouForm({
 
           {/* Pronouns */}
           <ShortAnswerQuestion
-            question="What are your pronouns?"
+            question="What are your pronouns?*"
             name="pronouns"
             id="pronouns"
             placeholder="ex. she/her/hers (all lowercase)"
@@ -147,7 +150,7 @@ function HackerAboutYouForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               Using the sizing guide below, what t-shirt size are you (unisex
-              sizing)?
+              sizing)?*
             </span>
             <span className="text-base font-semibold">
               Disclaimer:
@@ -185,7 +188,7 @@ function HackerAboutYouForm({
           {/* Level of study section */}
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
-              What is your current level of study?
+              What is your current level of study?*
             </span>
             <span className="text-base font-semibold">
               Note:
@@ -231,7 +234,7 @@ function HackerAboutYouForm({
           {/* Graduating Year */}
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
-              What year will you be graduating? 
+              What year will you be graduating? *
             </span>
             <span className="font-normal">
               (Based on the education level you had selected above)
@@ -274,7 +277,7 @@ function HackerAboutYouForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               Please select which institution you are/will be attending in Fall
-              2025.
+              2025.*
             </span>
             <UniversityDropdown
               value={data.university}
@@ -295,7 +298,7 @@ function HackerAboutYouForm({
           </div>
 
           <ShortAnswerQuestion
-            question="What program are you in?"
+            question="What program are you in?*"
             note="If in Highschool, what is your program of interest?"
             name="major"
             id="major"
@@ -310,7 +313,7 @@ function HackerAboutYouForm({
           {/* Hackathon count section */}
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
-              How many hackathons have you been to?
+              How many hackathons have you been to?*
             </span>
             <div className="flex flex-col gap-2">
               {hackathonCountOptions.map((count) => (
@@ -344,9 +347,16 @@ function HackerAboutYouForm({
             />
           </div>
         </div>
-        <div className="flex flex-col mt-24 gap-2 items-end">
-          {formError && <p className="text-red-500">{formError}</p>}
-          <SubmitButton>→</SubmitButton>
+        <div className="flex justify-between rows-10 mt-10">
+          {onBack && (
+            <Button type="button" size="lg" onClick={onBack}>
+              ←
+            </Button>
+          )}
+          <div className="flex flex-col gap-2 items-end">
+            {formError && <p className="text-red-500">{formError}</p>}
+            <SubmitButton>→</SubmitButton>
+          </div>
         </div>
       </form>
     </div>

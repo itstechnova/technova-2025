@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import SubmitButton from "../submitButton";
 import MultiCheckbox from "./MultiCheckbox";
+import { Button } from "../base-ui/button";
 
 interface HackerSurveyFormProps {
   data: any;
@@ -10,6 +11,7 @@ interface HackerSurveyFormProps {
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   formError: string | null;
+  onBack?: () => void;
 }
 
 const careerSessionsOptions = [
@@ -106,6 +108,7 @@ function HackerSurveyForm({
   handleChange,
   handleSubmit,
   formError,
+  onBack,
 }: HackerSurveyFormProps) {
   useEffect(() => {
     const savedData = sessionStorage.getItem("hackerSurveyData");
@@ -153,8 +156,8 @@ function HackerSurveyForm({
         <div className="flex flex-col gap-24 text-textPrimary">
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
-              What career sessions would be most useful to you? (Choose your top
-              5)
+              What career sessions would be most useful to you?* (Choose your
+              top 5)
             </span>
             <MultiCheckbox
               options={careerSessionsOptions}
@@ -169,7 +172,8 @@ function HackerSurveyForm({
 
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
-              What community sessions would you be most interested in attending?{" "}
+              What community sessions would you be most interested in
+              attending?*{" "}
             </span>
             <MultiCheckbox
               options={communitySessionsOptions}
@@ -187,7 +191,7 @@ function HackerSurveyForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               What "Intro to ..." technical sessions would you be most
-              interested in attending? (Choose your top 5)
+              interested in attending?* (Choose your top 5)
             </span>
             <MultiCheckbox
               options={technicalSessionsOptions}
@@ -205,7 +209,7 @@ function HackerSurveyForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               Which themed technology sessions would you be most interested in
-              attending?
+              attending?*
             </span>
             <MultiCheckbox
               options={themedSessionsOptions}
@@ -221,7 +225,7 @@ function HackerSurveyForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               What technology industries would you be most interested in
-              learning about at the event? (Choose your top 5){" "}
+              learning about at the event?* (Choose your top 5){" "}
             </span>
             <MultiCheckbox
               options={techIndustriesOptions}
@@ -237,7 +241,7 @@ function HackerSurveyForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               What field(s) would you be interested in learning about at
-              TechNova? (Choose your top 5){" "}
+              TechNova?* (Choose your top 5){" "}
             </span>
             <MultiCheckbox
               options={techFieldsOptions}
@@ -248,9 +252,19 @@ function HackerSurveyForm({
             />
           </div>
         </div>
-        <div className="flex flex-col mt-24 gap-2 items-end">
-          {formError && <p className="text-red-500">{formError}</p>}
-          <SubmitButton>→</SubmitButton>
+        <div className=" mt-10">
+          {formError && (
+            <p className="text-red-500 flex justify-end">{formError}</p>
+          )}
+
+          <div className="flex justify-between mt-2">
+            {onBack && (
+              <Button type="button" size="lg" onClick={onBack}>
+                ←
+              </Button>
+            )}
+            <SubmitButton>→</SubmitButton>
+          </div>
         </div>
       </form>
     </div>

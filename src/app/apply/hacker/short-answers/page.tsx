@@ -19,6 +19,14 @@ function HackerShortAnswers() {
     long_answer_q4: "",
   });
 
+  const requiredFields = [
+    "long_answer_q1",
+    "long_answer_q2",
+    "selected_option",
+    "long_answer_q3",
+    "long_answer_q4",
+  ];
+
   useEffect(() => {
     const loadData = async () => {
       const response = await supabase
@@ -99,6 +107,16 @@ function HackerShortAnswers() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (
+      requiredFields.some(
+        (field) => !shortAnswersData[field as keyof typeof shortAnswersData]
+      )
+    ) {
+      setFormError("Please fill in all required fields.");
+      return;
+    } else {
+      setFormError(null);
+    }
     const { data, error } = await supabase
       .from("hacker_landing")
       .update({
@@ -127,10 +145,9 @@ function HackerShortAnswers() {
         data={shortAnswersData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
+        formError={formError}
+        onBack={() => router.push("/apply/hacker/mlh-requirements")}
       />
-      {formError && (
-        <p className="text-red-500 text-center mt-4">{formError}</p>
-      )}
     </div>
   );
 }

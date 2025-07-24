@@ -185,6 +185,7 @@ export default function MentorAboutYouFormPage() {
       handleChange={handleChange}
       handleSubmit={handleSubmit}
       formError={formError}
+      onBack={() => router.push("/apply/mentor")}
     />
   );
 }

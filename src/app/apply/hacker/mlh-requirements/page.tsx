@@ -77,6 +77,8 @@ function HackerMLHRequirements() {
     ) {
       setFormError("Please accept all required fields");
       return;
+    } else {
+      setFormError(null);
     }
     console.log(JSON.stringify(mlhData));
     const response = await supabase
@@ -103,6 +105,7 @@ function HackerMLHRequirements() {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         formError={formError}
+        onBack={() => router.push("/apply/hacker/about-you")}
       />
     </div>
   );

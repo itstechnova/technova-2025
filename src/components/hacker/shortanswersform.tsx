@@ -3,6 +3,7 @@
 import React from "react";
 import LongAnswerQuestion from "../longanswerq";
 import SubmitButton from "../submitButton";
+import { Button } from "../base-ui/button";
 
 interface HackerShortAnswersProps {
   data: {
@@ -19,6 +20,8 @@ interface HackerShortAnswersProps {
     word_limit?: number
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  formError?: string;
+  onBack?: () => void;
 }
 
 const question_options = [
@@ -30,6 +33,8 @@ function HackerShortAnswersForm({
   data,
   handleChange,
   handleSubmit,
+  formError,
+  onBack,
 }: HackerShortAnswersProps) {
   const update_data = (new_data: Partial<typeof data>) => {
     const updated = { ...data, ...new_data };
@@ -62,7 +67,7 @@ function HackerShortAnswersForm({
       <form className="form z-10" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-24 text-textPrimary">
           <LongAnswerQuestion
-            question="Why would you like to attend TechNova? (150 words max)"
+            question="Why would you like to attend TechNova?* (150 words max)"
             name="long_answer_q1"
             id="long_answer_q1"
             placeholder="Start typing..."
@@ -74,7 +79,7 @@ function HackerShortAnswersForm({
           />
 
           <LongAnswerQuestion
-            question="Please choose *one* of the following prompts to answer and clarify the question you have chosen in the box. (200 words max)"
+            question="Please choose *one* of the following prompts to answer and clarify the question you have chosen in the box.* (200 words max)"
             options={question_options}
             selectedOption={data.selected_option}
             selectOption={(e) => {
@@ -92,7 +97,7 @@ function HackerShortAnswersForm({
           />
 
           <LongAnswerQuestion
-            question="Here's a fun question: What kind of superpower do you believe would help you in a hackathon? 🤔"
+            question="Here's a fun question: What kind of superpower do you believe would help you in a hackathon?* 🤔"
             name="long_answer_q3"
             id="long_answer_q3"
             placeholder="Start typing..."
@@ -104,7 +109,7 @@ function HackerShortAnswersForm({
           />
 
           <LongAnswerQuestion
-            question="Summarize your approach to problem-solving in 10 words."
+            question="Summarize your approach to problem-solving in 10 words.*"
             name="long_answer_q4"
             id="long_answer_q4"
             placeholder="Start typing..."
@@ -115,8 +120,19 @@ function HackerShortAnswersForm({
             }}
           />
         </div>
-        <div className="flex justify-end mt-8">
-          <SubmitButton>→</SubmitButton>
+        <div className=" mt-10">
+          {formError && (
+            <p className="text-red-500 flex justify-end">{formError}</p>
+          )}
+
+          <div className="flex justify-between mt-2">
+            {onBack && (
+              <Button type="button" size="lg" onClick={onBack}>
+                ←
+              </Button>
+            )}
+            <SubmitButton>→</SubmitButton>
+          </div>
         </div>
       </form>
     </div>

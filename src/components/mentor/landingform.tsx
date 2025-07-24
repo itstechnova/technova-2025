@@ -90,7 +90,7 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
                 htmlFor="email"
                 className="block text-textPrimary font-bold mb-2"
               >
-                What's your email?
+                What's your email?*
               </label>
               <p className="text-textPrimary mb-2">
                 <strong>Note:</strong> Please enter an email you check
@@ -128,7 +128,7 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
             {/* Acknowledgement */}
             <div className="pb-5 text-textPrimary">
               <p className="pt-12 pb-2 text-textPrimary font-semibold">
-                I acknowledge the roles and responsibilities outlined above.
+                I acknowledge the roles and responsibilities outlined above.*
               </p>
               <CheckOff
                 name="acknowledgement"
@@ -148,12 +148,15 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
             </div>
 
             {/* Submit button */}
-            <button
-              type="submit"
-              className="px-8 py-2 text-xl rounded-xl bg-gradient-to-r from-navSecondary to-navSecondaryHover bg-[length:200%_100%] bg-left hover:bg-right transition-all duration-300 text-white shadow-sm"
-            >
-              →
-            </button>
+            <div className="pt-10">
+              {formError && <p className="text-red-500 mb-4">{formError}</p>}
+              <button
+                type="submit"
+                className="px-8 py-2 text-xl rounded-xl bg-gradient-to-r from-navSecondary to-navSecondaryHover bg-[length:200%_100%] bg-left hover:bg-right transition-all duration-300 text-white shadow-sm"
+              >
+                →
+              </button>
+            </div>
           </form>
         </div>
       </div>

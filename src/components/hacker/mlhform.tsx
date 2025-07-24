@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import SubmitButton from "../submitButton";
 import CheckOff from "../checkOff";
+import { Button } from "../base-ui/button";
 
 interface HackerMLHProps {
   data: any;
@@ -10,6 +11,7 @@ interface HackerMLHProps {
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   formError: string | null;
+  onBack?: () => void;
 }
 
 function HackerMLHForm({
@@ -18,6 +20,7 @@ function HackerMLHForm({
   handleChange,
   handleSubmit,
   formError,
+  onBack,
 }: HackerMLHProps) {
   useEffect(() => {
     const savedData = sessionStorage.getItem("hackerMLHData");
@@ -72,7 +75,7 @@ function HackerMLHForm({
               >
                 MLH Code of Conduct
               </a>
-              ."
+              ."*
             </span>
             <div className="flex flex-col gap-2 mt-2">
               <CheckOff
@@ -116,7 +119,7 @@ function HackerMLHForm({
               >
                 MLH Privacy Policy
               </a>
-              .”
+              .”*
             </span>
             <div className="flex flex-col gap-2 mt-2">
               <CheckOff
@@ -159,9 +162,16 @@ function HackerMLHForm({
             </div>
           </div>
         </div>
-        <div className="flex flex-col mt-24 gap-2 items-end">
+        <div className="mt-10">
           {formError && <p className="text-red-500">{formError}</p>}
-          <SubmitButton>→</SubmitButton>
+          <div className="flex justify-between items-center mt-2">
+            {onBack && (
+              <Button type="button" size="lg" onClick={onBack}>
+                ←
+              </Button>
+            )}
+            <SubmitButton>→</SubmitButton>
+          </div>
         </div>
       </form>
     </div>
