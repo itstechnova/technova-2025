@@ -1,14 +1,14 @@
-'use client';
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import ShortAnswerQuestion from '@/components/shortanswerq';
-import SubmitButton from '@/components/submitButton';
-import supabase from '@/config/supabaseClient';
+"use client";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import ShortAnswerQuestion from "@/components/shortanswerq";
+import SubmitButton from "@/components/submitButton";
+import supabase from "@/config/supabaseClient";
 
 export default function UpdatePasswordPage() {
-  const [password, setPassword] = useState('');
-  const [formError, setFormError] = useState('');
-  const [formSuccess, setFormSuccess] = useState('');
+  const [password, setPassword] = useState("");
+  const [formError, setFormError] = useState("");
+  const [formSuccess, setFormSuccess] = useState("");
   const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,24 +17,24 @@ export default function UpdatePasswordPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFormError('');
-    setFormSuccess('');
+    setFormError("");
+    setFormSuccess("");
     const { error } = await supabase.auth.updateUser({ password });
     if (error) {
       setFormError(error.message);
     } else {
       setFormSuccess(
-        'Password updated! You can now log in with your new password.'
+        "Password updated! You can now log in with your new password."
       );
-      setTimeout(() => router.push('/account/login'), 2000);
+      setTimeout(() => router.push("/account/login"), 2000);
     }
   };
 
   return (
-    <div className="min-h-screen bg-navPrimary flex flex-col justify-center items-center">
+    <div className="text-textPrimary min-h-[70vh] bg-navPrimary flex flex-col justify-center items-center">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md mx-auto bg-white/80 rounded-xl shadow-md px-8 py-12 mt-24"
+        className="w-full max-w-md mx-auto bg-white/80 rounded-xl shadow-md px-8 py-12"
       >
         <h1 className="text-3xl font-bold text-textPrimary mb-6">
           Set a New Password
@@ -49,7 +49,7 @@ export default function UpdatePasswordPage() {
           onChange={handleChange}
           required
         />
-        <SubmitButton className="bg-[#1A1536] hover:bg-[#2A2346] px-8 py-3 text-xl font-semibold rounded-lg shadow-md w-full mt-8">
+        <SubmitButton className="text-white bg-[#1A1536] hover:bg-[#2A2346] px-8 py-3 text-xl font-semibold rounded-lg shadow-md w-full mt-8">
           Update Password
         </SubmitButton>
         {formError && <div className="text-red-500 mt-4">{formError}</div>}

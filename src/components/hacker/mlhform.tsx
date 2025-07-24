@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import SubmitButton from "../submitButton";
 import CheckOff from "../checkOff";
+import { Button } from "../base-ui/button";
 
 interface HackerMLHProps {
   data: any;
@@ -10,6 +11,7 @@ interface HackerMLHProps {
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   formError: string | null;
+  onBack?: () => void;
 }
 
 function HackerMLHForm({
@@ -18,6 +20,7 @@ function HackerMLHForm({
   handleChange,
   handleSubmit,
   formError,
+  onBack,
 }: HackerMLHProps) {
   useEffect(() => {
     const savedData = sessionStorage.getItem("hackerMLHData");
@@ -35,7 +38,7 @@ function HackerMLHForm({
   };
 
   return (
-    <div className="p-24 flex flex-col h-full bg-navPrimary relative">
+    <div className="p-10 md:p-24 flex flex-col h-full bg-navPrimary relative">
       <div className="absolute inset-0 z-7 pointer-events-none">
         <img
           src="/goose.svg"
@@ -46,11 +49,11 @@ function HackerMLHForm({
       <div className="absolute top-0 left-0 w-full h-1/4 pointer-events-none z-5 bg-gradient-to-b from-backgroundSecondary to-navPrimary" />
       <div className="pb-5 relative z-10">
         <div className="pb-10">
-          <h1 className="text-5xl font-semibold text-textSecondary">
+          <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
             MLH Requirements
           </h1>
           <br />
-          <p>
+          <p className="text-textPrimary">
             We are currently in the process of partnering with MLH. The
             following 3 checkboxes are for this partnership. If we do not end up
             partnering with MLH, your information will not be shared. All
@@ -72,7 +75,7 @@ function HackerMLHForm({
               >
                 MLH Code of Conduct
               </a>
-              ."
+              ."*
             </span>
             <div className="flex flex-col gap-2 mt-2">
               <CheckOff
@@ -116,7 +119,7 @@ function HackerMLHForm({
               >
                 MLH Privacy Policy
               </a>
-              .”
+              .”*
             </span>
             <div className="flex flex-col gap-2 mt-2">
               <CheckOff
@@ -159,9 +162,16 @@ function HackerMLHForm({
             </div>
           </div>
         </div>
-        <div className="flex flex-col mt-24 gap-2 items-end">
+        <div className="mt-10">
           {formError && <p className="text-red-500">{formError}</p>}
-          <SubmitButton>→</SubmitButton>
+          <div className="flex justify-between items-center mt-2">
+            {onBack && (
+              <Button type="button" size="lg" onClick={onBack}>
+                ←
+              </Button>
+            )}
+            <SubmitButton>→</SubmitButton>
+          </div>
         </div>
       </form>
     </div>

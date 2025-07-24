@@ -3,6 +3,7 @@ import Image from "next/image";
 import SubmitButton from "../submitButton";
 import CheckOff from "../checkOff";
 import MultiCheckbox from "./MultiCheckbox";
+import { Button } from "../base-ui/button";
 
 interface HackerDemographicFormProps {
   data: any;
@@ -11,6 +12,7 @@ interface HackerDemographicFormProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  onBack?: () => void;
 }
 
 const ethnicityOptions = [
@@ -48,6 +50,7 @@ function HackerDemographicForm({
   setData,
   handleChange,
   handleSubmit,
+  onBack,
 }: HackerDemographicFormProps) {
   useEffect(() => {
     const savedData = sessionStorage.getItem("hackerDemographicData");
@@ -65,7 +68,7 @@ function HackerDemographicForm({
     });
   };
   return (
-    <div className="p-24 flex flex-col h-full bg-navPrimary relative">
+    <div className="p-10 md:p-24 flex flex-col h-full bg-navPrimary relative">
       <div className="absolute inset-0 z-7 pointer-events-none">
         <img
           src="/hackerformsgraphic.svg"
@@ -77,10 +80,10 @@ function HackerDemographicForm({
       <div className="pb-5 relative z-10">
         <div className="flex gap-2 items-center pb-10">
           <div className="flex flex-col gap-4">
-            <h1 className="text-5xl font-semibold text-textSecondary">
+            <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
               Demographic Questions 🗺️
             </h1>
-            <p>
+            <p className="text-textPrimary">
               One of our most important team pillars is diversity and we would
               like to better understand the backgrounds of our applicants in
               order to gain insight into how to improve accessibility as an
@@ -88,7 +91,7 @@ function HackerDemographicForm({
               application other than being used for statistical purposes to
               better forward our event's mission. 💡
             </p>
-            <p>
+            <p className="text-textPrimary">
               Your information will be kept confidential in accordance with our
               <a href="https://mlh.io/privacy" className="underline ml-1">
                 Privacy Policy
@@ -202,8 +205,15 @@ function HackerDemographicForm({
           </div>
         </div>
 
-        <div className="flex justify-end mt-8">
-          <SubmitButton>→</SubmitButton>
+        <div className=" mt-10">
+          <div className="flex justify-between mt-2">
+            {onBack && (
+              <Button type="button" size="lg" onClick={onBack}>
+                ←
+              </Button>
+            )}
+            <SubmitButton>→</SubmitButton>
+          </div>
         </div>
       </form>
     </div>

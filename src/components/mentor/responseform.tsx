@@ -2,6 +2,7 @@ import React from "react";
 import SubmitButton from "../submitButton";
 import MultiCheckbox from "../hacker/MultiCheckbox";
 import CheckOff from "../checkOff";
+import { Button } from "../base-ui/button";
 interface MentorRoleFormProps {
   data: any;
   setData: React.Dispatch<React.SetStateAction<any>>;
@@ -14,6 +15,8 @@ interface MentorRoleFormProps {
   handleResumeUpload: (
     e: React.ChangeEvent<HTMLInputElement>
   ) => void | Promise<void>;
+  formError?: string | null;
+  onBack?: () => void;
 }
 
 const onboardingOptions = [
@@ -77,6 +80,8 @@ function MentorRoleForm({
   handleChange,
   handleSubmit,
   handleResumeUpload,
+  formError,
+  onBack = () => {},
 }: MentorRoleFormProps) {
   const updateData = (newData: any) => {
     setData((prev: any) => {
@@ -87,7 +92,26 @@ function MentorRoleForm({
   };
 
   return (
-    <div className="p-24 flex flex-col h-full bg-navPrimary relative">
+    <div className="p-10 md:p-24 flex flex-col h-full bg-navPrimary relative">
+      {/* Background SVG graphic */}
+      <div className="absolute inset-0 z-7 pointer-events-none">
+        <img
+          src="/mentorFormGraphic.svg"
+          alt="Mentor Forms Graphic Background"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div
+        className="fixed inset-x-0 top-0 h-1/3 pointer-events-none z-0
+                 bg-gradient-to-b from-backgroundTertiary to-transparent"
+      />
+      <div className="pb-5 relative z-10">
+        <div className="flex gap-2 items-center pb-10">
+          <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
+            Mentor Role & Availability Questions
+          </h1>
+        </div>
+      </div>
       <form className="form z-10" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-24 text-textPrimary">
           {/* Onboarding */}
@@ -95,7 +119,7 @@ function MentorRoleForm({
             <span className="font-bold text-base">
               All mentors and volunteers must go over onboarding materials
               regarding logistics and conduct around mid August. Do you agree to
-              attend an onboarding session?
+              attend an onboarding session?*
             </span>
             <div className="flex flex-col gap-4">
               {onboardingOptions.map((option) => (
@@ -115,7 +139,7 @@ function MentorRoleForm({
           </div>
           {/* Hackathon Experience */}
           <div className="flex flex-col gap-2">
-            <span className="font-bold text-base">I have...</span>
+            <span className="font-bold text-base">I have...*</span>
             <MultiCheckbox
               options={hackathonExperienceOptions}
               selected={data.hackathon_experience}
@@ -130,7 +154,7 @@ function MentorRoleForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               Please upload your resume. Note: Please provide a .docx or .pdf
-              file (10MB maximum)
+              file (10MB maximum)*
             </span>
             <input
               type="file"
@@ -175,7 +199,7 @@ function MentorRoleForm({
           </div>
           {/* Role */}
           <div className="flex flex-col gap-2">
-            <span className="font-bold text-base">I am a...</span>
+            <span className="font-bold text-base">I am a...*</span>
             <div className="flex flex-col gap-4">
               {roleOptions.map((option) => (
                 <CheckOff
@@ -197,7 +221,7 @@ function MentorRoleForm({
           {/* Experience Areas */}
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
-              Which of the following areas do you have experience in?
+              Which of the following areas do you have experience in?*
             </span>
             <span className="text-sm text-gray-600">
               Experience can be from work, projects, or mentorship! Please
@@ -219,7 +243,7 @@ function MentorRoleForm({
           {/* Specific Mentorship */}
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
-              Are there any specific areas you want to provide mentorship in?
+              Are there any specific areas you want to provide mentorship in?*
             </span>
             <span className="text-sm text-gray-600">
               Note: This can be a specific coding language, a tech stack, any
@@ -240,7 +264,7 @@ function MentorRoleForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               Beyond mentoring with us, are you interested in helping out with
-              any of the following (select ALL that apply):
+              any of the following (select ALL that apply):*
             </span>
             <span className="text-sm text-gray-600">
               Note: this is not binding and we will not assign all to you, we
@@ -291,7 +315,7 @@ function MentorRoleForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               Are you interested in participating as a volunteer if not chosen
-              as a mentor?
+              as a mentor?*
             </span>
             <div className="flex flex-col gap-4">
               {volunteerOptions.map((option) => (
@@ -326,8 +350,26 @@ function MentorRoleForm({
             />
           </div>
         </div>
-        <div className="flex justify-end mt-8">
-          <SubmitButton>Submit</SubmitButton>
+        <div className="mt-10">
+          {formError && <p className="text-red-500">{formError}</p>}
+          <div className="flex justify-between items-center mt-2">
+            {onBack && (
+              <Button
+                type="button"
+                variant="secondary"
+                size="lg"
+                onClick={onBack}
+              >
+                ←
+              </Button>
+            )}
+            <button
+              type="submit"
+              className="px-8 py-2 text-xl rounded-xl bg-gradient-to-r from-navSecondary to-navSecondaryHover bg-[length:200%_100%] bg-left hover:bg-right transition-all duration-300 text-white shadow-sm"
+            >
+              Submit
+            </button>
+          </div>
         </div>
       </form>
     </div>

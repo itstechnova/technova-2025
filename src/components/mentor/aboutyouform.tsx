@@ -3,6 +3,7 @@ import Image from "next/image";
 import ShortAnswerQuestion from "../shortanswerq";
 import CheckOff from "../checkOff";
 import AvailabilityGrid from "./AvailabilityGrid";
+import { Button } from "../base-ui/button";
 
 interface MentorAboutYouFormProps {
   data: any;
@@ -11,6 +12,8 @@ interface MentorAboutYouFormProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  formError?: string | null;
+  onBack?: () => void;
 }
 
 const genderIdentityOptions = [
@@ -28,6 +31,8 @@ function MentorAboutYouForm({
   setData,
   handleChange,
   handleSubmit,
+  formError,
+  onBack,
 }: MentorAboutYouFormProps) {
   const [availability, setAvailability] = React.useState<boolean[][]>(
     data.availability ?? Array.from({ length: 10 }, () => Array(3).fill(false))
@@ -48,7 +53,7 @@ function MentorAboutYouForm({
   };
 
   return (
-    <div className="p-24 flex flex-col h-full bg-navPrimary relative">
+    <div className="p-10 md:p-24 flex flex-col h-full bg-navPrimary relative">
       {/* Background SVG graphic */}
       <div className="absolute inset-0 z-7 pointer-events-none">
         <img
@@ -63,8 +68,8 @@ function MentorAboutYouForm({
       />
       <div className="pb-5 relative z-10">
         <div className="flex gap-2 items-center pb-10">
-          <h1 className="text-5xl font-semibold text-textSecondary">
-            Let’s get to know you better! 🌷
+          <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
+            Let&apos;s get to know you better! 🌷
           </h1>
         </div>
       </div>
@@ -73,7 +78,7 @@ function MentorAboutYouForm({
         <div className="flex flex-col gap-24 text-textPrimary">
           <div className="grid grid-cols-2 gap-10 w-full">
             <ShortAnswerQuestion
-              question="What's your first name?"
+              question="What's your first name?*"
               name="first_name"
               id="first_name"
               placeholder="ex. Jane"
@@ -84,7 +89,7 @@ function MentorAboutYouForm({
               }}
             />
             <ShortAnswerQuestion
-              question="What's your last name?"
+              question="What's your last name?*"
               name="last_name"
               id="last_name"
               placeholder="ex. Smith"
@@ -96,7 +101,7 @@ function MentorAboutYouForm({
             />
           </div>
           <ShortAnswerQuestion
-            question="What's your phone number?"
+            question="What's your phone number?*"
             name="phone_number"
             id="phone_number"
             placeholder="ex. 226-111-1111"
@@ -108,7 +113,7 @@ function MentorAboutYouForm({
           />
 
           <ShortAnswerQuestion
-            question="What are your pronouns?"
+            question="What are your pronouns?*"
             name="pronouns"
             id="pronouns"
             placeholder="ex. she/her/hers (all lowercase)"
@@ -121,7 +126,7 @@ function MentorAboutYouForm({
 
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
-              What’s your gender identity?
+              What’s your gender identity?*
             </span>
             <div className="flex flex-col gap-2 mt-2">
               {genderIdentityOptions.map((gender) => (
@@ -155,7 +160,7 @@ function MentorAboutYouForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               Are you able to mentor in person in Waterloo for the duration of
-              the hackathon (Sep. 27-29)?
+              the hackathon (Sep. 27-29)?*
             </span>
             <span className="text-base font-semibold">
               Note:
@@ -186,7 +191,7 @@ function MentorAboutYouForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               Using the sizing guide below, what t-shirt size are you (unisex
-              sizing)?
+              sizing)?*
             </span>
             <span className="text-base font-semibold">
               Disclaimer:
@@ -241,14 +246,27 @@ function MentorAboutYouForm({
             />
           </div>
         </div>
-        <div className="pb-36 flex justify-end pt-10 pr-10">
-          <button
-            type="submit"
-            className="bg-buttonSecondary px-8 py-3 text-white text-xl 
-                     rounded-xl shadow-sm"
-          >
-            →
-          </button>
+        <div className="mt-10">
+          {formError && <p className="text-red-500">{formError}</p>}
+          <div className="flex justify-between items-center mt-2">
+            {onBack && (
+              <Button
+                type="button"
+                variant="secondary"
+                size="lg"
+                onClick={onBack}
+              >
+                ←
+              </Button>
+            )}
+
+            <button
+              type="submit"
+              className="px-8 py-2 text-xl rounded-xl bg-gradient-to-r from-navSecondary to-navSecondaryHover bg-[length:200%_100%] bg-left hover:bg-right transition-all duration-300 text-white shadow-sm"
+            >
+              →
+            </button>
+          </div>
         </div>
       </form>
     </div>

@@ -51,7 +51,7 @@ function HeroAbout() {
                 Sept 26–28, 2025
               </small>
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 hidden">
               <InterestInputBox
                 value={email}
                 onChange={handleEmailChange}
@@ -84,11 +84,12 @@ function HeroAbout() {
           />
         </div>
 
-        <div className="relative md:grid md:grid-cols-2 px-10 md:px-24 pb-12 md:pb-16 pt-24 md:pt-28 text-textPrimary">
+        <div
+          id="about"
+          className="relative md:grid md:grid-cols-2 px-10 md:px-24 pb-12 md:pb-16 pt-24 md:pt-28 text-textPrimary"
+        >
           <div className="rounded-3xl w-full">
-            <h2 id="about" className="text-3xl md:text-4xl font-bold mb-10">
-              About Us
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-10">About Us</h2>
             <p className="text-base md:text-lg mb-5">
               TechNova&apos;s mission is to create safe, inclusive and
               empowering spaces for women and non-binary individuals to start,

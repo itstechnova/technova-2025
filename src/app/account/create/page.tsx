@@ -1,31 +1,31 @@
-'use client';
-import React, { useState } from 'react';
-import Link from 'next/link';
-import ShortAnswerQuestion from '@/components/shortanswerq';
-import SubmitButton from '@/components/submitButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import supabase from '@/config/supabaseClient';
-import { useRouter } from 'next/navigation';
+"use client";
+import React, { useState } from "react";
+import Link from "next/link";
+import ShortAnswerQuestion from "@/components/shortanswerq";
+import SubmitButton from "@/components/submitButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import supabase from "@/config/supabaseClient";
+import { useRouter } from "next/navigation";
 
 export default function CreateAccountPage() {
   const [createAccountForm, setCreateAccountForm] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
     codeOfConduct: false,
   });
 
-  const [formError, setFormError] = useState('');
-  const [formSuccess, setFormSuccess] = useState('');
+  const [formError, setFormError] = useState("");
+  const [formSuccess, setFormSuccess] = useState("");
   const router = useRouter();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     setCreateAccountForm((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
@@ -39,7 +39,7 @@ export default function CreateAccountPage() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (createAccountForm.password !== createAccountForm.confirmPassword) {
-      setFormError('Passwords do not match');
+      setFormError("Passwords do not match");
       return;
     }
     signUpNewUser();
@@ -50,15 +50,15 @@ export default function CreateAccountPage() {
       email: createAccountForm.email,
       password: createAccountForm.password,
     });
-    console.log('data', data);
-    console.log('error', error);
+    console.log("data", data);
+    console.log("error", error);
     if (error) {
       setFormError(error.message);
       return;
     } else {
-      setFormError('');
-      setFormSuccess('Account created successfully');
-      router.push('/account/login');
+      setFormError("");
+      setFormSuccess("Account created successfully");
+      router.push("/account/login");
     }
   }
 
@@ -66,15 +66,15 @@ export default function CreateAccountPage() {
     <div className="min-h-screen bg-navPrimary flex flex-col justify-between">
       <form
         onSubmit={handleSubmit}
-        className="w-full mx-auto bg-transparent pt-20 p-24 rounded-xl shadow-none"
+        className="w-full mx-auto bg-transparent md:pt-20 p-10 md:p-24 rounded-xl shadow-none"
       >
-        <h1 className="text-5xl font-semibold text-textPrimary mb-6">
+        <h1 className="text-4xl md:text-5xl font-semibold text-textPrimary mb-6">
           Create Your TechNova Account
         </h1>
         <p className="text-xl font-semibold text-textPrimary mb-10">
           Let's get you set up to join the fun.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 text-textPrimary">
           <ShortAnswerQuestion
             question="First Name*"
             name="firstName"
@@ -94,7 +94,7 @@ export default function CreateAccountPage() {
             required
           />
         </div>
-        <div className="flex flex-col gap-8 mb-8">
+        <div className="flex flex-col gap-8 mb-8 text-textPrimary">
           <ShortAnswerQuestion
             question="Email Address*"
             name="email"
@@ -139,11 +139,11 @@ export default function CreateAccountPage() {
             />
             <div
               className={[
-                'w-5 h-5 rounded border-2 flex items-center justify-center transition-colors',
+                "w-5 h-5 rounded border-2 flex items-center justify-center transition-colors",
                 createAccountForm.codeOfConduct
-                  ? 'border-checkMarkGreen bg-checkMarkGreen'
-                  : 'border-gray-300 bg-transparent',
-              ].join(' ')}
+                  ? "border-checkMarkGreen bg-checkMarkGreen"
+                  : "border-gray-300 bg-transparent",
+              ].join(" ")}
             >
               {createAccountForm.codeOfConduct && (
                 <FontAwesomeIcon
@@ -153,7 +153,7 @@ export default function CreateAccountPage() {
               )}
             </div>
             <span className="ml-3 text-base text-textPrimary">
-              I agree to the{' '}
+              I agree to the{" "}
               <a
                 href="https://github.com/MLH/mlh-policies/blob/main/code-of-conduct.md"
                 target="_blank"
@@ -174,7 +174,7 @@ export default function CreateAccountPage() {
         {formError && <div className="text-red-500">{formError}</div>}
         {formSuccess && <div className="text-green-500">{formSuccess}</div>}
         <div className="mt-8 text-base text-textPrimary">
-          Already have an account?{' '}
+          Already have an account?{" "}
           <Link href="/account/login" className="underline text-textPrimary">
             Log in here!
           </Link>

@@ -11,7 +11,7 @@ import supabase from '@/config/supabaseClient';
 function AppDashboard() {
   const { user } = useAccount();
   const router = useRouter();
-  const appOptions: AppType[] = ['Hacker', 'Mentor'];
+  const appOptions: AppType[] = ["Hacker", "Mentor"];
 
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
@@ -22,9 +22,9 @@ function AppDashboard() {
       setLoading(true);
 
       const { data, error } = await supabase
-        .from('applications')
-        .select('hacker, mentor, updated_at')
-        .eq('user_id', user.id)
+        .from("applications")
+        .select("hacker, mentor")
+        .eq("user_id", user.id)
         .single();
 
       if (error) {
@@ -33,19 +33,39 @@ function AppDashboard() {
       } else if (data) {
         const appsFromDB: Application[] = [];
 
-        if (data.hacker !== 'Not Started') {
+        if (data.hacker !== "Not Started") {
+          const updatedAtResponse = await supabase
+            .from("hacker_landing")
+            .select("updated_at")
+            .eq("user_id", user.id)
+            .single();
+          if (updatedAtResponse.error) {
+            throw updatedAtResponse.error;
+          }
           appsFromDB.push({
             type: 'Hacker',
             status: data.hacker,
-            lastUpdated: new Date(data.updated_at).toISOString(),
+            lastUpdated: new Date(
+              updatedAtResponse.data?.updated_at
+            ).toISOString(),
           });
         }
 
-        if (data.mentor !== 'Not Started') {
+        if (data.mentor !== "Not Started") {
+          const updatedAtResponse = await supabase
+            .from("hacker_landing")
+            .select("updated_at")
+            .eq("user_id", user.id)
+            .single();
+          if (updatedAtResponse.error) {
+            throw updatedAtResponse.error;
+          }
           appsFromDB.push({
-            type: 'Mentor',
-            status: data.hacker,
-            lastUpdated: new Date(data.updated_at).toISOString(),
+            type: "Mentor",
+            status: data.mentor,
+            lastUpdated: new Date(
+              updatedAtResponse.data?.updated_at
+            ).toISOString(),
           });
         }
 
@@ -76,8 +96,8 @@ function AppDashboard() {
       </div>
 
       <div className="w-full flex flex-col gap-12 px-24 max-sm:px-6 py-20 items-start">
-        <div className="w-full flex flex-col gap-6 items-start">
-          <h1 className="text-5xl max-sm:text-4xl font-semibold">
+        <div className="w-full flex flex-col gap-6 items-start text-textPrimary">
+          <h1 className="text-4xl md:text-5xl max-sm:text-4xl font-semibold text-textPrimary">
             Your Application Dashboard 🌟
           </h1>
           <div className="flex flex-col gap-2">
@@ -90,14 +110,14 @@ function AppDashboard() {
             </p>
           </div>
           <p className="text-lg">
-            🕒 Deadline to submit or update applications:{' '}
-            <span className="font-semibold">July 4, 2025</span>
+            🕒 Deadline to submit or update applications:{" "}
+            <span className="font-semibold">August 8, 2025</span>
           </p>
         </div>
 
         {/* Loading state */}
         {loading ? (
-          <p className="text-white text-lg">Loading applications...</p>
+          <p className="text-textPrimary text-lg">Loading applications...</p>
         ) : (
           <>
             {/* App table */}
@@ -123,8 +143,8 @@ function AppDashboard() {
         )}
 
         {/* Pre-footer */}
-        <p className="text-base">
-          Have any questions? Reach out to our team at{' '}
+        <p className="text-base text-textPrimary">
+          Have any questions? Reach out to our team at{" "}
           <a
             href="mailto:hello@itstechnova.org"
             className="text-navSecondary hover:text-navSecondaryHover transition duration-150 underline"

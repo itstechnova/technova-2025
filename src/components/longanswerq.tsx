@@ -28,7 +28,7 @@ function LongAnswerQuestion({
       </label>
       {options && (
         <>
-          <div className="flex flex-col mb-10">
+          <div className="flex flex-col gap-4 mb-10">
             {options.map((option) => (
               <CheckOff
                 key={option}

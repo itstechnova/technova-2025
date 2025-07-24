@@ -27,6 +27,7 @@ interface MentorData {
 }
 
 function MentorSurvey() {
+  const [formError, setFormError] = useState<string | null>(null);
   const { user } = useAccount();
   const router = useRouter();
 
@@ -48,6 +49,12 @@ function MentorSurvey() {
     volunteer_interest: "",
     additional_comments: "",
   });
+
+  const requiredFields = ["onboarding", "resume", "volunteer_interest"];
+  const eitherOrRequiredFields = [
+    ["role", "role_other"],
+    ["experience_areas", "experience_areas_other"],
+  ];
 
   // Load from Supabase or sessionStorage on mount
   useEffect(() => {
@@ -166,6 +173,22 @@ function MentorSurvey() {
     e.preventDefault();
     if (!user?.id) return;
 
+    if (
+      requiredFields.some((field) => !mentorData[field as keyof MentorData]) ||
+      eitherOrRequiredFields.some((pair) => {
+        const [field1, field2] = pair;
+        return (
+          !mentorData[field1 as keyof MentorData] &&
+          !mentorData[field2 as keyof MentorData]
+        );
+      })
+    ) {
+      setFormError("Please fill in all required fields.");
+      return;
+    } else {
+      setFormError(null);
+    }
+
     // Prepare data for Supabase (exclude file object)
     const {
       resume, // don't send file object to Supabase
@@ -191,7 +214,7 @@ function MentorSurvey() {
         .update({ mentor: "Submitted" })
         .eq("user_id", user.id);
       if (statusUpdateResponse.error) throw statusUpdateResponse.error;
-      router.push("/");
+      router.push("/apply/mentor/thanks");
     }
   };
 
@@ -243,6 +266,8 @@ function MentorSurvey() {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         handleResumeUpload={handleResumeUpload}
+        formError={formError}
+        onBack={() => router.push("/apply/mentor/about-you")}
       />
     </div>
   );

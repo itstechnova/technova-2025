@@ -1,20 +1,20 @@
-'use client';
-import React, { useState } from 'react';
-import Link from 'next/link';
-import ShortAnswerQuestion from '@/components/shortanswerq';
-import SubmitButton from '@/components/submitButton';
-import Image from 'next/image';
-import { useAccount } from '@/components/AccountContext';
-import { useRouter } from 'next/navigation';
+"use client";
+import React, { useState } from "react";
+import Link from "next/link";
+import ShortAnswerQuestion from "@/components/shortanswerq";
+import SubmitButton from "@/components/submitButton";
+import Image from "next/image";
+import { useAccount } from "@/components/AccountContext";
+import { useRouter } from "next/navigation";
 
 export default function SignUpPage() {
   const [loginForm, setLoginForm] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
-  const [loginFormError, setLoginFormError] = useState('');
-  const [loginFormSuccess, setLoginFormSuccess] = useState('');
+  const [loginFormError, setLoginFormError] = useState("");
+  const [loginFormSuccess, setLoginFormSuccess] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -41,8 +41,8 @@ export default function SignUpPage() {
       if (res.error) {
         setLoginFormError(res.error);
       } else {
-        setLoginFormSuccess('Login successful');
-        router.push('/apply/dashboard');
+        setLoginFormSuccess("Login successful");
+        router.push("/apply/dashboard");
       }
     });
   };
@@ -52,15 +52,15 @@ export default function SignUpPage() {
       <div className="flex flex-col md:flex-row w-full h-full justify-between items-center">
         <form
           onSubmit={handleSubmit}
-          className="flex-1 w-full mx-auto bg-transparent pt-24 p-24 rounded-xl shadow-none z-10"
+          className="flex-1 w-full mx-auto bg-transparent md:pt-24 p-10 md:p-24 rounded-xl shadow-none z-10"
         >
-          <h1 className="text-5xl font-bold text-textPrimary mb-2 flex items-center gap-2">
+          <h1 className="text-5xl font-semibold text-textPrimary mb-6 flex items-center gap-2">
             Log In 🚀
           </h1>
           <p className="text-xl font-semibold text-textPrimary mb-10">
             Log in to access and manage your application.
           </p>
-          <div className="flex flex-col gap-8 mb-4 w-3/5">
+          <div className="flex flex-col gap-8 mb-4 w-3/5 text-textPrimary">
             <ShortAnswerQuestion
               question="Email Address*"
               name="email"
@@ -88,6 +88,9 @@ export default function SignUpPage() {
               Forgot your password?
             </Link>
 
+            {loginFormError && (
+              <div className="text-red-500">{loginFormError}</div>
+            )}
             <SubmitButton
               type="submit"
               className="bg-textPrimary text-white px-8 py-3 text-xl font-semibold rounded-lg shadow-md w-32 mb-4"
@@ -95,7 +98,7 @@ export default function SignUpPage() {
               Log In
             </SubmitButton>
             <div className=" text-base text-textPrimary">
-              Don't have an account yet?{' '}
+              Don't have an account yet?{" "}
               <Link
                 href="/account/create"
                 className="underline text-textPrimary"
@@ -104,16 +107,10 @@ export default function SignUpPage() {
               </Link>
             </div>
           </div>
-          {loginFormError && (
-            <div className="text-red-500">{loginFormError}</div>
-          )}
-          {loginFormSuccess && (
-            <div className="text-green-500">{loginFormSuccess}</div>
-          )}
         </form>
       </div>
       <Image
-        className="absolute bottom-0 right-0 z-10 pointer-events-none"
+        className="absolute bottom-0 right-0 z-5 pointer-events-none opacity-50 md:opacity-100"
         src="/themed_assets/bunnywithflower.svg"
         alt="flower bunny"
         width={800}

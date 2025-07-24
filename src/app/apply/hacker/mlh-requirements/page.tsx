@@ -77,6 +77,8 @@ function HackerMLHRequirements() {
     ) {
       setFormError("Please accept all required fields");
       return;
+    } else {
+      setFormError(null);
     }
     console.log(JSON.stringify(mlhData));
     const response = await supabase
@@ -91,7 +93,7 @@ function HackerMLHRequirements() {
       setFormError(null);
       sessionStorage.removeItem("hackerMLHData");
       console.log("data submitted");
-      router.push("/apply/hacker/survey");
+      router.push("/apply/hacker/short-answers");
     }
   };
 
@@ -103,6 +105,7 @@ function HackerMLHRequirements() {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         formError={formError}
+        onBack={() => router.push("/apply/hacker/about-you")}
       />
     </div>
   );

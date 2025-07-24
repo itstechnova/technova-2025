@@ -67,7 +67,7 @@ function HackerAboutYou() {
           } else if (parseInt(stringValue) >= 4) {
             return "4+";
           } else {
-            return ""; 
+            return "";
           }
         }
         const sanitizedData = {
@@ -205,6 +205,7 @@ function HackerAboutYou() {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         formError={formError}
+        onBack={() => router.push("/apply/hacker")}
       />
     </div>
   );
