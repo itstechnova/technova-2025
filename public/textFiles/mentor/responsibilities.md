@@ -9,4 +9,4 @@ As a mentor, I am responsible for:
 & being available for:
 
 1. 1-hour mentorship/volunteer training session before the event.
-2. My assigned mentoring shifts and any additional roles I am selected for during the hackathon between Sept. 27th 8 PM to Sept. 29th 10 AM EDT.
+2. My assigned mentoring shifts and any additional roles I am selected for during the hackathon between Sept. 26th 8 PM to Sept. 28th 10 AM EDT.
