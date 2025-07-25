@@ -7,7 +7,7 @@ interface AvailabilityGridProps {
   disabled?: boolean;
 }
 
-const days = ["Fri. Sept 27th", "Sat. Sept 28th", "Sun. Sept 29"];
+const days = ["Fri. Sept 26th", "Sat. Sept 27th", "Sun. Sept 28"];
 const timeslots = [
   "12 AM – 2 AM",
   "7 AM – 9 AM",

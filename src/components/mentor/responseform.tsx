@@ -57,7 +57,7 @@ const additionalRolesOptions = [
   "Community Lead: leading & engaging in an activity (one-hour commitment during hackathon weekend).",
   "Resume Critiquer: providing feedback for hacker resumes (one-hour commitment during hackathon weekend).",
   "Panel Speaker: sharing personal experiences in a student panel (one-hour commitment, during hackathon weekend).",
-  "Judge (Sunday September 29th @12-5pm).",
+  "Judge (Sunday September 28th @12-5pm).",
   "I'm open to any role, as long as I am available!",
 ];
 
