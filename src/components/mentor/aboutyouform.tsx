@@ -159,7 +159,7 @@ function MentorAboutYouForm({
           <div className="flex flex-col gap-2">
             <span className="font-bold text-base">
               Are you able to mentor in person in Waterloo for the duration of
-              the hackathon (Sep. 27-29)?*
+              the hackathon (Sep. 26-28)?*
             </span>
             <span className="text-base font-semibold">
               Note:

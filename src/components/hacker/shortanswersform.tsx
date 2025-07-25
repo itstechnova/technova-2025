@@ -59,7 +59,7 @@ function HackerShortAnswersForm({
           <p className="text-textPrimary">
             Our mission is to create a more gender‑equitable future in technology. 
 			Check out our social medias for more info! 
-			Please don’t use GPT or other AI‑generated responses for the responses in this section, we can tell if you use GPT. 
+			Please don’t use GPT or other AI‑generated responses for the responses in this section, we will check the responses.. 
           </p>
         </div>
       </div>
