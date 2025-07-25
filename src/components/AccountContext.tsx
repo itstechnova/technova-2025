@@ -55,7 +55,7 @@ export const AccountProvider = ({ children }: { children: ReactNode }) => {
       mounted = false;
       listener.subscription.unsubscribe();
     };
-  }, [user]);
+  }, []);
 
   const loginWithEmail = async (email: string, password: string) => {
     setLoading(true);
