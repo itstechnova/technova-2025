@@ -20,6 +20,7 @@ function Navbar() {
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const { user, logout } = useAccount();
   const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <div className="sticky top-0 z-50 w-full border-b-2 border-navSecondary bg-navPrimary px-6 lg:px-24 py-3">
@@ -94,7 +95,7 @@ function Navbar() {
         </div>
 
         {/* MLH Trust Badge */}
-        {usePathname() === "/" && (
+        {pathname === "/" && (
           <div className="pr-20 lg:pr-24">
             <a
               id="mlh-trust-badge"
