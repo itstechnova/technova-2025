@@ -4,7 +4,6 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { AccountProvider } from "@/components/AccountContext";
-import ForceRefresh from "@/components/forceRefresh"; // Add this
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +36,6 @@ export default function RootLayout({
       <body
         className={`${poppinsFont.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ForceRefresh /> {/* Add this */}
         <AccountProvider>
           <div className="min-h-screen flex flex-col">
             <Navbar />
