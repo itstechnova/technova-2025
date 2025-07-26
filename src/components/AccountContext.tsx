@@ -5,6 +5,8 @@ import React, {
   useEffect,
   useState,
   ReactNode,
+  useMemo,
+  useCallback,
 } from 'react';
 import supabase from '@/config/supabaseClient';
 
@@ -23,6 +25,38 @@ const AccountContext = createContext<AccountContextType | undefined>(undefined);
 export const AccountProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+
+  const loginWithEmail = useCallback(
+    async (email: string, password: string) => {
+      setLoading(true);
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      setUser(data.user ?? null);
+      setLoading(false);
+      if (error) return { error: error.message };
+      return {};
+    },
+    []
+  );
+
+  const logout = useCallback(async () => {
+    setLoading(true);
+    await supabase.auth.signOut();
+    setUser(null);
+    setLoading(false);
+  }, []);
+
+  const contextValue: AccountContextType = useMemo(
+    () => ({
+      user,
+      loading,
+      loginWithEmail,
+      logout,
+    }),
+    [user, loading]
+  );
 
   useEffect(() => {
     let mounted = true;
@@ -57,27 +91,8 @@ export const AccountProvider = ({ children }: { children: ReactNode }) => {
     };
   }, []);
 
-  const loginWithEmail = async (email: string, password: string) => {
-    setLoading(true);
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    setUser(data.user ?? null);
-    setLoading(false);
-    if (error) return { error: error.message };
-    return {};
-  };
-
-  const logout = async () => {
-    setLoading(true);
-    await supabase.auth.signOut();
-    setUser(null);
-    setLoading(false);
-  };
-
   return (
-    <AccountContext.Provider value={{ user, loading, loginWithEmail, logout }}>
+    <AccountContext.Provider value={contextValue}>
       {children}
     </AccountContext.Provider>
   );

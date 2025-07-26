@@ -1,14 +1,14 @@
-"use client";
-import React, { useState } from "react";
-import Link from "next/link";
-import ShortAnswerQuestion from "@/components/shortanswerq";
-import SubmitButton from "@/components/submitButton";
-import supabase from "@/config/supabaseClient";
+'use client';
+import React, { useState } from 'react';
+import Link from 'next/link';
+import ShortAnswerQuestion from '@/components/shortanswerq';
+import SubmitButton from '@/components/submitButton';
+import supabase from '@/config/supabaseClient';
 
 export default function ForgotPasswordPage() {
-  const [email, setEmail] = useState("");
-  const [formError, setFormError] = useState("");
-  const [formSuccess, setFormSuccess] = useState("");
+  const [email, setEmail] = useState('');
+  const [formError, setFormError] = useState('');
+  const [formSuccess, setFormSuccess] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -16,15 +16,17 @@ export default function ForgotPasswordPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFormError("");
-    setFormSuccess("");
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    setFormError('');
+    setFormSuccess('');
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/account/update-password`,
     });
+    // show console log of response
+    console.log(data, error);
     if (error) {
       setFormError(error.message);
     } else {
-      setFormSuccess("Password reset email sent! Please check your inbox.");
+      setFormSuccess('Password reset email sent! Please check your inbox.');
     }
   };
 
