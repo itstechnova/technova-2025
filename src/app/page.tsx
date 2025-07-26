@@ -6,8 +6,6 @@ import SponsorUsSection from "@/components/landing-page/sponsorUs";
 import ContactUs from "@/components/landing-page/contact-us";
 
 export default async function Home() {
-  console.dir(supabase, { depth: 1 });
-
   return (
     <div>
       <HeroAbout />
