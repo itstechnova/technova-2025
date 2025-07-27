@@ -4,7 +4,7 @@ const getFaqData = async () => {
 
   const faqs = await Promise.all(
     files.map(async (i) => {
-      const res = await fetch(`/textFiles/faq/${i}.md?t=${Date.now()}`); // cache-busting
+      const res = await fetch(`/text_files/faq/${i}.md?t=${Date.now()}`); // cache-busting
       const text = await res.text();
 
       const [titleLine, ...bodyLines] = text.trim().split("\n");

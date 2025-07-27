@@ -26,14 +26,14 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
   const [resMd, setResMd] = useState("");
 
   useEffect(() => {
-    fetch("/textFiles/mentor/intro.md")
+    fetch("/text_files/mentor/intro.md")
       .then((r) => r.text())
       .then(setIntroMd)
       .catch(console.error);
   }, []);
 
   useEffect(() => {
-    fetch("/textFiles/mentor/responsibilities.md")
+    fetch("/text_files/mentor/responsibilities.md")
       .then((r) => r.text())
       .then(setResMd)
       .catch(console.error);
@@ -164,7 +164,7 @@ const MentorLandingForm: React.FC<MentorLandingFormProps> = ({
       {/* Bottom-right frog */}
       <div className="absolute bottom-0 right-0 z-5">
         <Image
-          src="/themed_assets/profeshFrog.svg"
+          src="/themed_assets/profesh-frog.svg"
           alt="professional frog"
           width={800}
           height={800}

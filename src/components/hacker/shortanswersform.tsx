@@ -45,7 +45,7 @@ function HackerShortAnswersForm({
       {/* Background SVG graphic */}
       <div className="absolute inset-0 z-7 pointer-events-none">
         <img
-          src="/goose.svg"
+          src="/themed_assets/goose-path.svg"
           alt="Goose Graphic Background"
           className="w-full h-full object-cover"
         />
@@ -57,9 +57,10 @@ function HackerShortAnswersForm({
             Short Answers 📝
           </h1>
           <p className="text-textPrimary">
-            Our mission is to create a more gender‑equitable future in technology. 
-			Check out our social medias for more info! 
-			Please don’t use GPT or other AI‑generated responses for the responses in this section, we will check the responses.. 
+            Our mission is to create a more gender‑equitable future in
+            technology. Check out our social medias for more info! Please don’t
+            use GPT or other AI‑generated responses for the responses in this
+            section, we will check the responses.
           </p>
         </div>
       </div>

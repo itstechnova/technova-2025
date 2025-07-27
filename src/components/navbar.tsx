@@ -31,7 +31,7 @@ function Navbar() {
             <div className="flex items-center">
               <Link href="/">
                 <Image
-                  src="/Technova2024Logo512.png"
+                  src="/themed_assets/technova-logo.png"
                   alt="logo"
                   width={40}
                   height={40}
