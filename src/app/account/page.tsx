@@ -41,7 +41,7 @@ function LoginPage() {
       />
       <Image
         className="hidden md:block absolute top-[-100px] left-[-100px] z-0 w-1/3 pointer-events-none"
-        src="/themed_assets/ButtercupFlower.svg"
+        src="/themed_assets/flower-buttercup.svg"
         alt="Buttercup flower"
         width={800}
         height={800}

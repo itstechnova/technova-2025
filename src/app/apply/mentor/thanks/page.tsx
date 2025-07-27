@@ -14,7 +14,7 @@ export default function MentorThankYouPage() {
   const [markdown, setMarkdown] = useState("");
 
   useEffect(() => {
-    fetch("/textFiles/mentor/thanks.md")
+    fetch("/text_files/mentor/thanks.md")
       .then((res) => res.text())
       .then(setMarkdown)
       .catch(console.error);
@@ -68,7 +68,7 @@ export default function MentorThankYouPage() {
         </div>
         <div className="absolute bottom-0 right-0 z-5">
           <Image
-            src="/themed_assets/profeshFrog.svg"
+            src="/themed_assets/profesh-frog.svg"
             alt="professional frog"
             width={800}
             height={800}

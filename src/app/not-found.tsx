@@ -8,7 +8,7 @@ export default function NotFound() {
   return (
     <div className="bg-background min-h-[70vh] flex flex-col justify-center">
       <Image
-        src="/themed_assets/flower-buttercup.svg"
+        src="/themed_assets/flower-buttercup-cropped.svg"
         alt="Flower"
         width={300}
         height={300}

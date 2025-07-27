@@ -40,7 +40,7 @@ function HackerMLHForm({
     <div className="p-10 md:p-24 flex flex-col h-full bg-navPrimary relative">
       <div className="absolute inset-0 z-7 pointer-events-none">
         <img
-          src="/goose.svg"
+          src="/themed_assets/goose-path.svg"
           alt="Goose Graphic Background"
           className="w-full h-full object-cover"
         />

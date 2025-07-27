@@ -70,7 +70,7 @@ function HackerDemographicForm({
     <div className="p-10 md:p-24 flex flex-col h-full bg-navPrimary relative">
       <div className="absolute inset-0 z-7 pointer-events-none">
         <img
-          src="/hackerformsgraphic.svg"
+          src="/themed_assets/hacker-form.svg"
           alt="Hacker Forms Graphic Background"
           className="w-full h-full object-cover"
         />
