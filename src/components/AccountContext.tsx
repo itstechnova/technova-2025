@@ -60,16 +60,29 @@ export const AccountProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     let mounted = true;
-    supabase.auth.getUser().then(({ data }) => {
+
+    // try to get user from local storage
+    supabase.auth.getSession().then(({ data: sessionData }) => {
+      // console.log('sessionData', sessionData);
       if (mounted) {
-        setUser(data.user ?? null);
-        setLoading(false);
+        if (sessionData.session) {
+          setUser(sessionData.session.user ?? null);
+          setLoading(false);
+        } else {
+          // console.log('no session data, getting user from supabase');
+          supabase.auth.getUser().then(({ data }) => {
+            if (mounted) {
+              setUser(data.user ?? null);
+              setLoading(false);
+            }
+          });
+        }
       }
     });
 
     const { data: listener } = supabase.auth.onAuthStateChange(
       (event, session) => {
-        console.log(event, session);
+        // console.log(event, session);
         if (event === 'INITIAL_SESSION') {
           setUser(session?.user ?? null);
         } else if (event === 'SIGNED_IN') {

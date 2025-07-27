@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import Image from "next/image";
-import SubmitButton from "../submitButton";
-import CheckOff from "../checkOff";
-import MultiCheckbox from "./MultiCheckbox";
+import React, { useEffect } from 'react';
+import Image from 'next/image';
+import SubmitButton from '../submitButton';
+import CheckOff from '../checkOff';
+import MultiCheckbox from './MultiCheckbox';
 
 interface HackerDemographicFormProps {
   data: any;
@@ -15,34 +15,34 @@ interface HackerDemographicFormProps {
 }
 
 const ethnicityOptions = [
-  "Hispanic/Latinx",
-  "Black/African Descent",
-  "Indigenous",
-  "Middle Eastern",
-  "Native Hawaiian/Pacific Islander",
-  "East Asian",
-  "Southeast Asian",
-  "South Asian",
-  "Central Asian",
-  "White or Caucasian",
-  "Other:",
+  'Hispanic/Latinx',
+  'Black/African Descent',
+  'Indigenous',
+  'Middle Eastern',
+  'Native Hawaiian/Pacific Islander',
+  'East Asian',
+  'Southeast Asian',
+  'South Asian',
+  'Central Asian',
+  'White or Caucasian',
+  'Other:',
 ];
 
-const genderOptions = ["Female", "Male", "Non-binary", "Other:"];
+const genderOptions = ['Female', 'Male', 'Non-binary', 'Other:'];
 
 const minorityCategoriesOptions = [
-  "LGBTQIA2S+",
-  "Immigrant",
-  "BIPOC",
-  "Indigenous person",
-  "Person with a disability (visible/invisible)",
-  "First-Generation college student",
-  "Person from a low-income household",
+  'LGBTQIA2S+',
+  'Immigrant',
+  'BIPOC',
+  'Indigenous person',
+  'Person with a disability (visible/invisible)',
+  'First-Generation college student',
+  'Person from a low-income household',
 ];
 
-const firstToPursueTechOptions = ["Yes", "No"];
+const firstToPursueTechOptions = ['Yes', 'No'];
 
-const timeStudyingTechOptions = ["Less than 1 year", "1-2 years", "3+ years"];
+const timeStudyingTechOptions = ['Less than 1 year', '1-2 years', '3+ years'];
 
 function HackerDemographicForm({
   data,
@@ -52,7 +52,7 @@ function HackerDemographicForm({
   onBack,
 }: HackerDemographicFormProps) {
   useEffect(() => {
-    const savedData = sessionStorage.getItem("hackerDemographicData");
+    const savedData = sessionStorage.getItem('hackerDemographicData');
     if (savedData) {
       setData(JSON.parse(savedData));
     }
@@ -61,8 +61,8 @@ function HackerDemographicForm({
   const updateData = (newData: any) => {
     setData((prev: any) => {
       const updated = { ...prev, ...newData };
-      sessionStorage.setItem("hackerDemographicData", JSON.stringify(updated));
-      console.log(updated);
+      sessionStorage.setItem('hackerDemographicData', JSON.stringify(updated));
+      // console.log(updated);
       return updated;
     });
   };
@@ -70,7 +70,7 @@ function HackerDemographicForm({
     <div className="p-10 md:p-24 flex flex-col h-full bg-navPrimary relative">
       <div className="absolute inset-0 z-7 pointer-events-none">
         <img
-          src="/hackerformsgraphic.svg"
+          src="/themed_assets/hacker-form.svg"
           alt="Hacker Forms Graphic Background"
           className="w-full h-full object-cover"
         />
@@ -133,10 +133,10 @@ function HackerDemographicForm({
                     updateData({ gender: e.target.value });
                   }}
                   otherValue={
-                    option === "Other:" ? data.gender_other : undefined
+                    option === 'Other:' ? data.gender_other : undefined
                   }
                   onOtherChange={
-                    option === "Other:"
+                    option === 'Other:'
                       ? (val) => updateData({ gender_other: val })
                       : undefined
                   }

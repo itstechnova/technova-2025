@@ -95,7 +95,7 @@ function MentorRoleForm({
       {/* Background SVG graphic */}
       <div className="absolute inset-0 z-7 pointer-events-none">
         <img
-          src="/mentorFormGraphic.svg"
+          src="/themed_assets/mentor-form.svg"
           alt="Mentor Forms Graphic Background"
           className="w-full h-full object-cover"
         />

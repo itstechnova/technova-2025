@@ -29,7 +29,7 @@ function AlmostDoneForm({
   const [markdown, setMarkdown] = useState("");
 
   useEffect(() => {
-    fetch("/textFiles/hacker/almost_done.md")
+    fetch("/text_files/hacker/almost_done.md")
       .then((res) => res.text())
       .then(setMarkdown)
       .catch(console.error);
@@ -105,7 +105,7 @@ function AlmostDoneForm({
       </div>
       <Image
         className="absolute bottom-0 right-0 z-5 pointer-events-none opacity-25"
-        src="/themed_assets/bunnywithflower.svg"
+        src="/themed_assets/bunny-with-flower.svg"
         alt="flower bunny"
         width={800}
         height={800}

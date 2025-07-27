@@ -111,7 +111,7 @@ export default function SignUpPage() {
       </div>
       <Image
         className="absolute bottom-0 right-0 z-5 pointer-events-none opacity-50 md:opacity-100"
-        src="/themed_assets/bunnywithflower.svg"
+        src="/themed_assets/bunny-with-flower.svg"
         alt="flower bunny"
         width={800}
         height={800}

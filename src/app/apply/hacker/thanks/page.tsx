@@ -11,7 +11,7 @@ export default function ThankYouPage() {
   const [markdown, setMarkdown] = useState("");
 
   useEffect(() => {
-    fetch("/textFiles/hacker/thanks.md")
+    fetch("/text_files/hacker/thanks.md")
       .then((res) => res.text())
       .then(setMarkdown)
       .catch(console.error);
@@ -63,7 +63,7 @@ export default function ThankYouPage() {
         </div>
         <Image
           className="absolute bottom-0 right-0 z-5 pointer-events-none"
-          src="/themed_assets/bunnywithflower.svg"
+          src="/themed_assets/bunny-with-flower.svg"
           alt="flower bunny"
           width={800}
           height={800}

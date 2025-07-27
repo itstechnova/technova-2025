@@ -39,7 +39,7 @@ function HackerLandingForm({
   }, [setData]);
 
   useEffect(() => {
-    fetch("/textFiles/hacker/intro.md")
+    fetch("/text_files/hacker/intro.md")
       .then((r) => r.text())
       .then(setIntroMd)
       .catch(console.error);
@@ -120,7 +120,7 @@ function HackerLandingForm({
 
       <Image
         className="absolute bottom-0 right-0 z-5 pointer-events-none"
-        src="/themed_assets/bunnywithflower.svg"
+        src="/themed_assets/bunny-with-flower.svg"
         alt="flower bunny"
         width={800}
         height={800}
