@@ -89,7 +89,10 @@ function HackerAboutYouForm({
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="absolute top-0 left-0 w-full h-1/4 pointer-events-none z-5 bg-gradient-to-b from-backgroundSecondary to-navPrimary" />
+      <div
+        className="fixed inset-x-0 top-0 w-full h-1/3 pointer-events-none z-0 
+                   bg-gradient-to-b from-backgroundSecondary to-transparent"
+      />
       <div className="pb-5 relative z-10">
         <div className="flex gap-2 items-center pb-10">
           <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">

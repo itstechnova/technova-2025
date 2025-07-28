@@ -39,8 +39,8 @@ function AlmostDoneForm({
     <div className="relative min-h-screen bg-navPrimary">
       {/* Gradient Background */}
       <div
-        className="fixed inset-x-0 top-0 h-1/3 pointer-events-none z-0
-                   bg-gradient-to-b from-backgroundSecondary to-navPrimary"
+        className="fixed inset-x-0 top-0 w-full h-1/3 pointer-events-none z-0 
+                   bg-gradient-to-b from-backgroundSecondary to-transparent"
       />
 
       {/* Main Content */}

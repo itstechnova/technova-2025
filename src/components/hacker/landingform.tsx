@@ -48,8 +48,8 @@ function HackerLandingForm({
   return (
     <div className="relative min-h-screen bg-navPrimary">
       <div
-        className="absolute top-0 left-0 w-full h-1/4 pointer-events-none z-5
-                   bg-gradient-to-b from-backgroundSecondary to-navPrimary"
+        className="fixed inset-x-0 top-0 w-full h-1/3 pointer-events-none z-0 
+                   bg-gradient-to-b from-backgroundSecondary to-transparent"
       />
       <div className="pt-10 md:pt-24 relative z-10 mx-auto px-6 lg:px-24 py-12">
         <div className="flex items-center gap-2 pb-10">

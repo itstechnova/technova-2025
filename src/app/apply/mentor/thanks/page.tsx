@@ -21,59 +21,57 @@ export default function MentorThankYouPage() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-navPrimary">
-      <div className="relative min-h-screen bg-navPrimary">
-        {/* Gradient Background */}
-        <div
-          className="fixed inset-x-0 top-0 h-1/3 pointer-events-none z-0
+    <div className="relative min-h-screen bg-navPrimary">
+      {/* Gradient Background */}
+      <div
+        className="fixed inset-x-0 top-0 h-1/3 pointer-events-none z-0
                    bg-gradient-to-b from-backgroundTertiary to-navPrimary"
-        />
+      />
 
-        {/* Main Content */}
-        <div className="pt-10 md:pt-24 relative z-10 mx-auto px-6 lg:px-24 py-12">
-          {/* Header */}
-          <div className="flex items-center gap-2 pb-10">
-            <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
-              Thanks for Applying!
-            </h1>
-          </div>
+      {/* Main Content */}
+      <div className="pt-10 md:pt-24 relative z-10 mx-auto px-6 lg:px-24 py-12">
+        {/* Header */}
+        <div className="flex items-center gap-2 pb-10">
+          <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
+            Thanks for Applying!
+          </h1>
+        </div>
 
-          {/* Markdown Text */}
-          <div
-            className="prose max-w-none prose-lg prose-stone mb-8
+        {/* Markdown Text */}
+        <div
+          className="prose max-w-none prose-lg prose-stone mb-8
 			prose-headings:font-semibold prose-headings:text-2xl
 			prose-a:text-inherit hover:prose-a:text-inherit prose-a:underline
 			prose-p:text-textPrimary prose-headings:text-textPrimary
       prose-strong:text-textPrimary prose-em:italic"
+        >
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw]}
           >
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeRaw]}
-            >
-              {markdown}
-            </ReactMarkdown>
-          </div>
-
-          {/* CTA Button */}
-          <div className="flex justify-center mt-12">
-            <Link href="/apply/dashboard">
-              <button className="text-lg text-white px-6 py-3 rounded-xl shadow-sm bg-gradient-to-r from-navSecondary to-navSecondaryHover bg-[length:200%_100%] bg-left hover:bg-right transition-all duration-300">
-                Go Back to the Dashboard
-              </button>
-            </Link>
-          </div>
-
-          {/* Spacer to push frog down */}
-          <div className="h-64" />
+            {markdown}
+          </ReactMarkdown>
         </div>
-        <div className="absolute bottom-0 right-0 z-5">
-          <Image
-            src="/themed_assets/profesh-frog.svg"
-            alt="professional frog"
-            width={800}
-            height={800}
-          />
+
+        {/* CTA Button */}
+        <div className="flex justify-center mt-12">
+          <Link href="/apply/dashboard">
+            <button className="text-lg text-white px-6 py-3 rounded-xl shadow-sm bg-gradient-to-r from-navSecondary to-navSecondaryHover bg-[length:200%_100%] bg-left hover:bg-right transition-all duration-300">
+              Go Back to the Dashboard
+            </button>
+          </Link>
         </div>
+
+        {/* Spacer to push frog down */}
+        <div className="h-64" />
+      </div>
+      <div className="absolute bottom-0 right-0 z-5">
+        <Image
+          src="/themed_assets/profesh-frog.svg"
+          alt="professional frog"
+          width={800}
+          height={800}
+        />
       </div>
     </div>
   );
