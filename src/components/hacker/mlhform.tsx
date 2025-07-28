@@ -37,7 +37,7 @@ function HackerMLHForm({
   };
 
   return (
-    <div className="p-10 md:p-24 flex flex-col h-full bg-navPrimary relative">
+    <div className="p-10 md:p-24 flex flex-col min-h-screen bg-navPrimary relative">
       <div className="absolute inset-0 z-7 pointer-events-none">
         <img
           src="/themed_assets/goose-path.svg"
@@ -45,7 +45,10 @@ function HackerMLHForm({
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="absolute top-0 left-0 w-full h-1/4 pointer-events-none z-5 bg-gradient-to-b from-backgroundSecondary to-navPrimary" />
+      <div
+        className="fixed inset-x-0 top-0 w-full h-1/3 pointer-events-none z-0 
+                   bg-gradient-to-b from-backgroundSecondary to-transparent"
+      />
       <div className="pb-5 relative z-10">
         <div className="pb-10">
           <h1 className="text-4xl md:text-5xl font-semibold text-textSecondary">
