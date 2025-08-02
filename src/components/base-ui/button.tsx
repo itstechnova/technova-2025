@@ -52,8 +52,12 @@ export function Button({
   return (
     <button
       className={cn(
+        // on small screens still full-width
         size !== "icon" && "max-sm:w-full",
-        "inline-flex items-center justify-center rounded-md font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-2 focus:ring-navSecondary",
+        // allow wrapping and growing
+        "inline-flex items-center justify-center whitespace-normal break-words",
+        // auto width by default
+        "w-auto rounded-md font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-2 focus:ring-navSecondary",
         variantClasses[variant],
         sizeClasses[size],
         className

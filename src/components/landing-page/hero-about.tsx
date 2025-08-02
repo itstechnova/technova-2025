@@ -98,7 +98,7 @@ function HeroAbout() {
                 }
               }}
             >
-              Mentor with us!
+              Mentor/Volunteer with us!
             </Button>
           </div>
         </div>
