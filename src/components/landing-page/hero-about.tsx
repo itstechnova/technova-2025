@@ -90,6 +90,7 @@ function HeroAbout() {
             <Button
               variant="outline"
               size="xl"
+			  className="whitespace-nowrap px-10"
               onClick={() => {
                 if (user) {
                   router.push("/apply/dashboard");
