@@ -128,8 +128,12 @@ function AppDashboard() {
             </p>
           </div>
           <p className="text-lg">
-            🕒 Deadline to submit applications:{" "}
+            🕒 Deadline to submit hacker and mentor applications:{" "}
             <span className="font-semibold">August 8, 2025</span>
+          </p>
+		  <p className="text-lg">
+            🕒 Deadline to submit volunteer application:{" "}
+            <span className="font-semibold">August 15, 2025</span>
           </p>
         </div>
 
