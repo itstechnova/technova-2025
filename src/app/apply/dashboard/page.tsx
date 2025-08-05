@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import ApplicationTable from '@/components/dashboard/app-table';
-import { Application, AppType } from '@/components/dashboard/utils/types';
-import { Button } from '@/components/base-ui/button';
-import { useRouter } from 'next/navigation';
-import { useAccount } from '@/components/AccountContext';
-import supabase from '@/config/supabaseClient';
+import React, { useEffect, useState } from "react";
+import ApplicationTable from "@/components/dashboard/app-table";
+import { Application, AppType } from "@/components/dashboard/utils/types";
+import { Button } from "@/components/base-ui/button";
+import { useRouter } from "next/navigation";
+import { useAccount } from "@/components/AccountContext";
+import supabase from "@/config/supabaseClient";
 
 function AppDashboard() {
   const { user } = useAccount();
   const router = useRouter();
-  const appOptions: AppType[] = ['Hacker', 'Mentor'];
+  const appOptions: AppType[] = ["Hacker", "Mentor", "Volunteer"];
 
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
@@ -22,28 +22,28 @@ function AppDashboard() {
       setLoading(true);
 
       const { data, error } = await supabase
-        .from('applications')
-        .select('hacker, mentor')
-        .eq('user_id', user.id)
+        .from("applications")
+        .select("hacker, mentor, volunteer")
+        .eq("user_id", user.id)
         .single();
 
       if (error) {
-        console.error('Failed to fetch applications:', error);
+        console.error("Failed to fetch applications:", error);
         setApplications([]);
       } else if (data) {
         const appsFromDB: Application[] = [];
 
-        if (data.hacker !== 'Not Started') {
+        if (data.hacker !== "Not Started") {
           const updatedAtResponse = await supabase
-            .from('hacker_landing')
-            .select('updated_at')
-            .eq('user_id', user.id)
+            .from("hacker_landing")
+            .select("updated_at")
+            .eq("user_id", user.id)
             .single();
           if (updatedAtResponse.error) {
             throw updatedAtResponse.error;
           }
           appsFromDB.push({
-            type: 'Hacker',
+            type: "Hacker",
             status: data.hacker,
             lastUpdated: new Date(
               updatedAtResponse.data?.updated_at
@@ -51,18 +51,36 @@ function AppDashboard() {
           });
         }
 
-        if (data.mentor !== 'Not Started') {
+        if (data.mentor !== "Not Started") {
           const updatedAtResponse = await supabase
-            .from('hacker_landing')
-            .select('updated_at')
-            .eq('user_id', user.id)
+            .from("hacker_landing")
+            .select("updated_at")
+            .eq("user_id", user.id)
             .single();
           if (updatedAtResponse.error) {
             throw updatedAtResponse.error;
           }
           appsFromDB.push({
-            type: 'Mentor',
+            type: "Mentor",
             status: data.mentor,
+            lastUpdated: new Date(
+              updatedAtResponse.data?.updated_at
+            ).toISOString(),
+          });
+        }
+
+        if (data.volunteer !== "Not Started") {
+          const updatedAtResponse = await supabase
+            .from("volunteer_application")
+            .select("updated_at")
+            .eq("user_id", user.id)
+            .single();
+          if (updatedAtResponse.error) {
+            throw updatedAtResponse.error;
+          }
+          appsFromDB.push({
+            type: "Volunteer",
+            status: data.volunteer,
             lastUpdated: new Date(
               updatedAtResponse.data?.updated_at
             ).toISOString(),
@@ -110,8 +128,12 @@ function AppDashboard() {
             </p>
           </div>
           <p className="text-lg">
-            🕒 Deadline to submit applications:{' '}
+            🕒 Deadline to submit hacker and mentor applications:{" "}
             <span className="font-semibold">August 8, 2025</span>
+          </p>
+		  <p className="text-lg">
+            🕒 Deadline to submit volunteer application:{" "}
+            <span className="font-semibold">August 15, 2025</span>
           </p>
         </div>
 
@@ -130,7 +152,7 @@ function AppDashboard() {
                 .map((role, index) => (
                   <Button
                     key={role}
-                    variant={index === 0 ? 'default' : 'outline'}
+                    variant={index === 0 ? "default" : "outline"}
                     onClick={() => {
                       router.push(`/apply/${role.toLowerCase()}`);
                     }}
@@ -144,7 +166,7 @@ function AppDashboard() {
 
         {/* Pre-footer */}
         <p className="text-base text-textPrimary">
-          Have any questions? Reach out to our team at{' '}
+          Have any questions? Reach out to our team at{" "}
           <a
             href="mailto:hello@itstechnova.org"
             className="text-navSecondary hover:text-navSecondaryHover transition duration-150 underline"
