@@ -23,7 +23,7 @@ function AppDashboard() {
 
       const { data, error } = await supabase
         .from("applications")
-        .select("hacker, mentor")
+        .select("hacker, mentor, volunteer")
         .eq("user_id", user.id)
         .single();
 
@@ -63,6 +63,24 @@ function AppDashboard() {
           appsFromDB.push({
             type: "Mentor",
             status: data.mentor,
+            lastUpdated: new Date(
+              updatedAtResponse.data?.updated_at
+            ).toISOString(),
+          });
+        }
+
+        if (data.volunteer !== "Not Started") {
+          const updatedAtResponse = await supabase
+            .from("volunteer_application")
+            .select("updated_at")
+            .eq("user_id", user.id)
+            .single();
+          if (updatedAtResponse.error) {
+            throw updatedAtResponse.error;
+          }
+          appsFromDB.push({
+            type: "Volunteer",
+            status: data.volunteer,
             lastUpdated: new Date(
               updatedAtResponse.data?.updated_at
             ).toISOString(),
