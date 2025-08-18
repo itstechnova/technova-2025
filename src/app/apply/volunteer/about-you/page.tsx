@@ -6,6 +6,8 @@ import supabase from "@/config/supabaseClient";
 import { useAccount } from "@/components/AccountContext";
 import { useRouter } from "next/navigation";
 import NoFormAccess from "@/components/app/no-access";
+import { appOpen } from "@/config/config";
+import AppClosed from "@/components/app/app-closed";
 
 export default function VolunteerAboutYouFormPage() {
   const [formError, setFormError] = useState<string | null>(null);
@@ -195,6 +197,8 @@ export default function VolunteerAboutYouFormPage() {
     }
   };
 
+  if (!appOpen) return <AppClosed />;
+  
   return (
     <div className="min-h-screen bg-navPrimary">
       {/* {appStatus === "Not Started" || appStatus === "In Progress" ? ( */}

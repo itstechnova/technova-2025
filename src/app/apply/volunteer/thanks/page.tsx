@@ -9,6 +9,8 @@ import Link from "next/link";
 import supabase from "@/config/supabaseClient";
 import { useAccount } from "@/components/AccountContext";
 import NoFormAccess from "@/components/app/no-access";
+import { appOpen } from "@/config/config";
+import AppClosed from "@/components/app/app-closed";
 
 export default function MentorThankYouPage() {
   const [markdown, setMarkdown] = useState("");
@@ -19,6 +21,8 @@ export default function MentorThankYouPage() {
       .then(setMarkdown)
       .catch(console.error);
   }, []);
+
+  if (!appOpen) return <AppClosed />;
 
   return (
     <div className="relative min-h-screen bg-navPrimary">

@@ -6,6 +6,8 @@ import supabase from "@/config/supabaseClient";
 import { useAccount } from "@/components/AccountContext";
 import { useRouter } from "next/navigation";
 import NoFormAccess from "@/components/app/no-access";
+import { appOpen } from "@/config/config";
+import AppClosed from "@/components/app/app-closed";
 
 function MentorLanding() {
   const [formError, setFormError] = useState<string | null>(null);
@@ -140,16 +142,18 @@ function MentorLanding() {
     }
   };
 
+  if (!appOpen) return <AppClosed />;
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-navPrimary">
       {/* {appStatus === "Not Started" || appStatus === "In Progress" ? ( */}
-        <MentorLandingForm
-          data={landingData}
-          setData={setLandingData}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          formError={formError}
-        />
+      <MentorLandingForm
+        data={landingData}
+        setData={setLandingData}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        formError={formError}
+      />
       {/* ) : (
         <NoFormAccess role="mentor" />
       )} */}

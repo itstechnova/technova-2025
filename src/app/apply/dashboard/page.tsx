@@ -101,7 +101,7 @@ function AppDashboard() {
   }, [user?.id]);
 
   const activeApps = applications.map((app) => app.type);
-
+  
   return (
     <div className="flex flex-col h-full bg-navPrimary relative">
       {/* Background SVG graphic */}

@@ -8,6 +8,8 @@ import { v4 as uuidv4 } from "uuid";
 import { stat } from "fs";
 import NoFormAccess from "@/components/app/no-access";
 import { area } from "framer-motion/client";
+import { appOpen } from "@/config/config";
+import AppClosed from "@/components/app/app-closed";
 
 interface VolunteerData {
   onboarding: string;
@@ -168,6 +170,8 @@ function VolunteerSurvey() {
       router.push("/apply/volunteer/thanks");
     }
   };
+
+  if (!appOpen) return <AppClosed />;
 
   return (
     <div className="min-h-screen bg-navPrimary">

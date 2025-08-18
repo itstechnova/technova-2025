@@ -6,6 +6,8 @@ import supabase from "@/config/supabaseClient";
 import { useRouter } from "next/navigation";
 import { useAccount } from "@/components/AccountContext";
 import NoFormAccess from "@/components/app/no-access";
+import { appOpen } from "@/config/config";
+import AppClosed from "@/components/app/app-closed";
 
 function HackerSurvey() {
   const router = useRouter();
@@ -184,17 +186,19 @@ function HackerSurvey() {
     }
   };
 
+  if (!appOpen) return <AppClosed />;
+
   return (
     <div className="min-h-screen bg-navPrimary">
       {/* {appStatus === "Not Started" || appStatus === "In Progress" ? ( */}
-        <HackerSurveyForm
-          data={surveyData}
-          setData={setSurveyData}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          formError={formError}
-          onBack={() => router.push("/apply/hacker/short-answers")}
-        />
+      <HackerSurveyForm
+        data={surveyData}
+        setData={setSurveyData}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        formError={formError}
+        onBack={() => router.push("/apply/hacker/short-answers")}
+      />
       {/*}      ) : (
         <NoFormAccess role="hacker" />
       )}*/}
