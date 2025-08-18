@@ -6,6 +6,8 @@ import supabase from "@/config/supabaseClient";
 import { useRouter } from "next/navigation";
 import { useAccount } from "@/components/AccountContext";
 import NoFormAccess from "@/components/app/no-access";
+import { appOpen } from "@/config/config";
+import AppClosed from "@/components/app/app-closed";
 
 function HackerLanding() {
   const [formError, setFormError] = useState<string | null>(null);
@@ -121,17 +123,21 @@ function HackerLanding() {
     }));
   };
 
+  if (!appOpen) {
+    return <AppClosed />;
+  }
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-navPrimary">
       {/* {appStatus === "Not Started" || appStatus === "In Progress" ? ( */}
-        <HackerLandingForm
-          data={landingData}
-          setData={setLandingData}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          formError={formError}
-        />
-     {/* ) : (
+      <HackerLandingForm
+        data={landingData}
+        setData={setLandingData}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        formError={formError}
+      />
+      {/* ) : (
         <NoFormAccess role="hacker" />
       )}
         */}
