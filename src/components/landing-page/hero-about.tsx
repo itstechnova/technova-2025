@@ -90,7 +90,7 @@ function HeroAbout() {
             <Button
               variant="outline"
               size="xl"
-			  className="whitespace-nowrap px-10"
+              className="whitespace-nowrap px-10"
               onClick={() => {
                 if (user) {
                   router.push("/apply/dashboard");
@@ -108,7 +108,7 @@ function HeroAbout() {
       {/* Gate to About Section */}
       <div className="relative w-full flex flex-col">
         {/* Reserve space to avoid layout shift */}
-        <div className="relative w-full">
+        <div className="relative w-full z-10">
           {/* Mobile Image */}
           <img
             src="/themed_assets/gate-mobile.svg"
@@ -148,7 +148,7 @@ function HeroAbout() {
               src="/themed_assets/frog.svg"
               alt="Frog"
               width={300}
-              className="ml-24 mt-4"
+              className="ml-24 mt-4 z-10"
             />
           </div>
         </div>
