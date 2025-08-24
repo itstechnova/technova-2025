@@ -126,13 +126,17 @@ const Member: React.FC<MemberProps> = ({ name }) => {
   return (
     <div className="flex flex-col items-center w-32 md:w-48 z-10">
       <div className="w-28 h-28 md:w-44 md:h-44">
-        <img
-          ref={imgRef}
-          onMouseOver={handleHover}
-          onMouseOut={handleUnhover}
-          src={imgSrc || ""}
-          alt={name}
-        />
+        {imgSrc ? (
+          <img
+            ref={imgRef}
+            onMouseOver={handleHover}
+            onMouseOut={handleUnhover}
+            src={imgSrc}
+            alt={name}
+          />
+        ) : (
+          <div ref={imgRef} />
+        )}
       </div>
       <p className="text-sm text-center text-textPrimary">{name}</p>
     </div>
