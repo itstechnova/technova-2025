@@ -69,39 +69,7 @@ function HeroAbout() {
               )}
             </div>
           </div>
-          <div
-            className="flex flex-col gap-4 justify-center items-center 
-          [@media(min-width:1400px)]:mr-32 
-          [@media(min-width:1200px)]:mr-20"
-          >
-            <Button
-              variant="default"
-              size="xl"
-              onClick={() => {
-                if (user) {
-                  router.push("/apply/dashboard");
-                } else {
-                  router.push("/account/login");
-                }
-              }}
-            >
-              Hack with us!
-            </Button>
-            <Button
-              variant="outline"
-              size="xl"
-              className="whitespace-nowrap px-10"
-              onClick={() => {
-                if (user) {
-                  router.push("/apply/dashboard");
-                } else {
-                  router.push("/account/login");
-                }
-              }}
-            >
-              Mentor/Volunteer with us!
-            </Button>
-          </div>
+          
         </div>
       </div>
 
