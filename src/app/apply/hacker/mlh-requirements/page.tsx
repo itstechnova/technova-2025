@@ -6,6 +6,8 @@ import supabase from "@/config/supabaseClient";
 import { useRouter } from "next/navigation";
 import { useAccount } from "@/components/AccountContext";
 import NoFormAccess from "@/components/app/no-access";
+import { appOpen } from "@/config/config";
+import AppClosed from "@/components/app/app-closed";
 
 function HackerMLHRequirements() {
   const router = useRouter();
@@ -114,17 +116,19 @@ function HackerMLHRequirements() {
     }
   };
 
+  if (!appOpen) return <AppClosed />;
+
   return (
     <div className="min-h-screen bg-navPrimary">
       {/* {appStatus === "Not Started" || appStatus === "In Progress" ? ( */}
-        <HackerMLHForm
-          data={mlhData}
-          setData={setMLHData}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          formError={formError}
-          onBack={() => router.push("/apply/hacker/about-you")}
-        />
+      <HackerMLHForm
+        data={mlhData}
+        setData={setMLHData}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        formError={formError}
+        onBack={() => router.push("/apply/hacker/about-you")}
+      />
       {/*}      ) : (
         <NoFormAccess role="hacker" />
       )}*/}

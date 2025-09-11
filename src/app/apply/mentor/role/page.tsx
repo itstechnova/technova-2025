@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import { stat } from "fs";
 import NoFormAccess from "@/components/app/no-access";
+import { appOpen } from "@/config/config";
+import AppClosed from "@/components/app/app-closed";
 
 interface MentorData {
   onboarding: string;
@@ -275,19 +277,21 @@ function MentorSurvey() {
     console.log("Resume uploaded and URL saved:", publicUrl);
   };
 
+  if (!appOpen) return <AppClosed />;
+
   return (
     <div className="min-h-screen bg-navPrimary">
       {/* {appStatus === "Not Started" || appStatus === "In Progress" ? ( */}
-        <MentorRoleForm
-          data={mentorData}
-          setData={setMentorData}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          handleResumeUpload={handleResumeUpload}
-          formError={formError}
-          onBack={() => router.push("/apply/mentor/about-you")}
-        />
-       {/* ) : (
+      <MentorRoleForm
+        data={mentorData}
+        setData={setMentorData}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        handleResumeUpload={handleResumeUpload}
+        formError={formError}
+        onBack={() => router.push("/apply/mentor/about-you")}
+      />
+      {/* ) : (
          <NoFormAccess role="mentor" />
        )} */}
     </div>

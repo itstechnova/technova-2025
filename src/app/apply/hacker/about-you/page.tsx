@@ -6,6 +6,8 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAccount } from "@/components/AccountContext";
 import NoFormAccess from "@/components/app/no-access";
+import AppClosed from "@/components/app/app-closed";
+import { appOpen } from "@/config/config";
 
 function HackerAboutYou() {
   const { user } = useAccount();
@@ -213,18 +215,21 @@ function HackerAboutYou() {
       router.push("/apply/hacker/mlh-requirements");
     }
   };
+  if (!appOpen) {
+    return <AppClosed />;
+  }
 
   return (
     <div className="min-h-screen bg-navPrimary">
       {/* {appStatus === "Not Started" || appStatus === "In Progress" ? ( */}
-        <HackerAboutYouForm
-          data={aboutYouData}
-          setData={setAboutYouData}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          formError={formError}
-          onBack={() => router.push("/apply/hacker")}
-        />
+      <HackerAboutYouForm
+        data={aboutYouData}
+        setData={setAboutYouData}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        formError={formError}
+        onBack={() => router.push("/apply/hacker")}
+      />
       {/*  ) : (
          <NoFormAccess role="hacker" />
        )

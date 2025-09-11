@@ -6,6 +6,8 @@ import supabase from "@/config/supabaseClient";
 import { useAccount } from "@/components/AccountContext";
 import { useRouter } from "next/navigation";
 import NoFormAccess from "@/components/app/no-access";
+import { appOpen } from "@/config/config";
+import AppClosed from "@/components/app/app-closed";
 
 export default function MentorAboutYouFormPage() {
   const [formError, setFormError] = useState<string | null>(null);
@@ -195,17 +197,19 @@ export default function MentorAboutYouFormPage() {
     }
   };
 
+  if (!appOpen) return <AppClosed />;
+
   return (
     <div className="min-h-screen bg-navPrimary">
       {/* {appStatus === "Not Started" || appStatus === "In Progress" ? ( */}
-        <MentorAboutYouForm
-          data={formData}
-          setData={setFormData}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          formError={formError}
-          onBack={() => router.push("/apply/mentor")}
-        />
+      <MentorAboutYouForm
+        data={formData}
+        setData={setFormData}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        formError={formError}
+        onBack={() => router.push("/apply/mentor")}
+      />
       {/* ) : (
         <NoFormAccess role="mentor" />
       )} */}
