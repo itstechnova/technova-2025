@@ -6,6 +6,8 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import Image from "next/image";
 import Link from "next/link";
+import { appOpen } from "@/config/config";
+import AppClosed from "@/components/app/app-closed";
 
 export default function ThankYouPage() {
   const [markdown, setMarkdown] = useState("");
@@ -16,6 +18,8 @@ export default function ThankYouPage() {
       .then(setMarkdown)
       .catch(console.error);
   }, []);
+
+  if (!appOpen) return <AppClosed />;
 
   return (
     <div className="relative min-h-screen bg-navPrimary">

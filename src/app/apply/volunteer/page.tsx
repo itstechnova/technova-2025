@@ -6,6 +6,8 @@ import supabase from "@/config/supabaseClient";
 import { useAccount } from "@/components/AccountContext";
 import { useRouter } from "next/navigation";
 import NoFormAccess from "@/components/app/no-access";
+import { appOpen } from "@/config/config";
+import AppClosed from "@/components/app/app-closed";
 
 function VolunteerLanding() {
   const [formError, setFormError] = useState<string | null>(null);
@@ -146,6 +148,8 @@ function VolunteerLanding() {
       router.push("/apply/volunteer/about-you");
     }
   };
+
+  if (!appOpen) return <AppClosed />;
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-navPrimary">
