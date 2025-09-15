@@ -30,14 +30,14 @@ const OurSponsorsComponent: React.FC<OurSponsorsProps> = ({
           items={primarySponsors.map((s, i) => ({
             key: `primary-${i}`,
             card: (
-              <div className="w-[340px] sm:w-[380px] md:w-[440px]">
+              <div className="w-[340px] sm:w-[380px] md:w-[440px] h-full">
                 <SponsorCard
                   {...s}
                   logo={
                     <img
                       src={s.logosrc}
                       alt={s.logoalt ?? s.title}
-                      className="h-12 w-auto"
+                      className="h-auto w-auto max-h-16 sm:max-h-20 md:max-h-24 max-w-full object-contain"
                     />
                   }
                 />
@@ -55,50 +55,36 @@ const OurSponsors: React.FC = () => {
     <OurSponsorsComponent
       primarySponsors={[
         {
+          title: "Jane Street",
+          description:
+            "Jane Street is excited to support TechNova and future innovators in tech. As a global trading firm, Jane Street values creativity, collaboration, and problem-solving in technology and beyond.",
+          logosrc: "/themed_assets/sponsors/janestreet.png",
+          href: "https://www.janestreet.com/",
+          color: "DEFAULT",
+        },
+        {
           title: "OpenText",
           description:
-            "OpenText is a global leader in enterprise information management, helping organizations securely capture, manage, and analyze information to drive better business outcomes. We leverage cloud, AI, and data analytics technologies to solve complex challenges in information management, cybersecurity, and digital transformation, empowering businesses to innovate faster and make smarter, data-driven decisions.",
+            "OpenText is proud to partner with TechNova and Women in Computer Science (WiCS) for the Women+ Hackathon. As a leader in information management, OpenText is committed to fostering innovation and supporting the next generation of female tech talent. Explore careers at OpenText Careers.",
           logosrc: "/themed_assets/sponsors/opentext.png",
           href: "https://www.opentext.com/",
-          colors: {
-            headerBg: "bg-[#E4DFE2]",
-            text: "text-gray-800",
-            accent: "bg-gradient-to-r from-[#19123C] to-[#3D3D75C7] text-white",
-            outer: "bg-[#19123C]",
-          },
+          color: "NAVY",
         },
         {
-          title: "BDO Canada LLP",
+          title: "CSE Canada",
           description:
-            "BDO Canada LLP is a leading provider of professional services to clients across diverse sectors. For over 100 years, we have supported communities nationwide with assurance, tax, and advisory services, strengthened by deep industry expertise. With more than 5,000 professionals in 100 offices across Canada—and access to 1,800+ offices in 164 countries through the global BDO network—we are positioned to meet both local and international client needs. Our people-first culture has earned us recognition as one of Canada’s Top 100 Employers for 2025, reflecting our commitment to career growth, inclusion, and wellbeing. For students, this means meaningful opportunities through co-op, internship, and full-time roles where you can learn, grow, and make an impact. Beyond traditional services, BDO Digital helps clients innovate through cloud solutions, cybersecurity, data analytics, and emerging technologies—offering exciting career paths at the intersection of business and technology. At BDO, your future is our focus.",
-          logosrc: "/themed_assets/sponsors/bdo.png",
-          href: "https://www.bdo.ca/careers/students",
-        },
-        {
-          title: "NAV CANADA",
-          description:
-            "NAV CANADA plays a unique and critical role managing 18 million square kilometres of Canadian and North Atlantic airspace.  Formed in 1996, we are a not-for-profit corporation — the first fully privatized air navigation service provider in the world. Our sophisticated network of area control centres, air traffic control towers, flight service stations, technology work centres, flight information centres and navigation aids supports our purpose to keep Canada’s skies safe and shape the future of air navigation services.",
-          logosrc: "/themed_assets/sponsors/nav.png",
-          href: "https://www.navcanada.ca/en/",
-          colors: {
-            headerBg: "bg-[#D8F3DC]",
-            text: "text-gray-800",
-            accent: "bg-gradient-to-r from-[#06402B] to-[#4D803B] text-white",
-            outer: "bg-[#06402B]",
-          },
-        },
-        {
-          title: "Communications Secuirty Establishment Canada",
-          description:
-            "Communications Security Establishment Canada (CSE) is the national cryptologic agency, providing the Government of Canada with information technology security and foreign signals intelligence. Le Centre de la sécurité des télécommunications Canada (CST) est l’organisme national de cryptologie chargé de préserver, pour le gouvernement du Canada, la sécurité des technologies de l’information et de recueillir du renseignement électromagnétique étranger.",
+            "The Communications Security Establishment Canada (CSE) is the national cryptologic agency, securing government IT and providing foreign signals intelligence.",
           logosrc: "/themed_assets/sponsors/cse.png",
           href: "https://www.cse-cst.gc.ca/en/careers",
-          colors: {
-            headerBg: "bg-[#FFC4BC78]",
-            text: "text-gray-800",
-            accent: "bg-gradient-to-r from-[#CD5769] to-[#FFA3AF] text-white",
-            outer: "bg-[#CD5769]",
-          },
+          color: "GREEN",
+        },
+        {
+          title: "Ubisoft",
+          description:
+            "Ubisoft, a leading game publisher with over 35 years of experience, is known for creating iconic franchises like Assassin’s Creed, Far Cry, and Just Dance. They’re globally acclaimed for their innovation in open-world and immersive gaming experiences.",
+          logosrc: "/themed_assets/sponsors/ubisoft.png",
+          href: "https://www.ubisoft.com/en-us/company/careers",
+          color: "ROSE",
         },
         {
           title: "Rewriting the Code",
@@ -106,12 +92,82 @@ const OurSponsors: React.FC = () => {
             "Rewriting the Code is a 501(c)(3) nonprofit dedicated to empowering university students and early-career women in tech. Through collaborative learning and career-focused development, we foster belonging, champion opportunity, and equip future innovators with the skills, knowledge, and connections to thrive—reshaping the future of technology.",
           logosrc: "/themed_assets/sponsors/rewriting-the-code.png",
           href: "https://rewritingthecode.org/join-us/",
-          colors: {
-            headerBg: "bg-[#6E9DB269]",
-            text: "text-gray-800",
-            accent: "bg-gradient-to-r from-[#055579] to-[#6E9DB2] text-white",
-            outer: "bg-[#055579]",
-          },
+          color: "TEAL",
+        },
+        {
+          title: "Saily",
+          description:
+            "Hey there, tech enthusiasts and hackathon champions!  We’ve got an amazing treat lined up just for you. As a token of our appreciation for your passion and dedication, we’re thrilled to offer you exclusive deals to help you stay protected online. Stay tuned for more!",
+          logosrc: "/themed_assets/sponsors/saily.png",
+          href: "https://saily.com/",
+          color: "DEFAULT",
+        },
+        {
+          title: "WomenTech Network",
+          description:
+            "WomenTech Network is excited to feature TechNova participants across their newsletter, LinkedIn, Facebook, and Twitter channels, spotlighting the next generation of women+ in tech.",
+          logosrc: "/themed_assets/sponsors/womentech.png",
+          href: "https://www.womentech.net/",
+          color: "NAVY",
+        },
+        {
+          title: "Accenture",
+          description:
+            "Accenture supports TechNova as a Startup Sponsor, empowering innovators at the intersection of technology and strategy. The company is passionate about fostering diverse talent and helping students explore new possibilities in tech consulting and innovation.",
+          logosrc: "/themed_assets/sponsors/accenture.png",
+          href: "https://www.accenture.com/ca-en",
+          color: "GREEN",
+        },
+        {
+          title: "theScore",
+          description: "",
+          logosrc: "/themed_assets/sponsors/thescore.png",
+          href: "https://www.scoremediaandgaming.com/careers",
+          color: "ROSE",
+        },
+        {
+          title: "BDO Canada LLP",
+          description: "",
+          logosrc: "/themed_assets/sponsors/bdo.png",
+          href: "https://www.bdo.ca/careers/students",
+          color: "TEAL",
+        },
+        {
+          title: "Velocity",
+          description:
+            "Velocity is excited to support TechNova’s hackathon innovators! With a track record of helping startups scale, Velocity empowers student founders to turn ideas into impactful ventures.",
+          logosrc: "/themed_assets/sponsors/velocity.png",
+          href: "https://www.velocityincubator.com/",
+          color: "DEFAULT",
+        },
+        {
+          title: "NAV CANADA",
+          description:
+            "NAV CANADA – Thinking about a career in aviation? NAV CANADA is hiring! From air traffic services to engineering, IT, and corporate roles, there are opportunities across Canada—no aviation background required. Explore opportunities at navcanada.ca/careers",
+          logosrc: "/themed_assets/sponsors/nav.png",
+          href: "https://www.navcanada.ca/en/",
+          color: "NAVY",
+        },
+        {
+          title: "Hack the 6ix",
+          description: "",
+          logosrc: "/themed_assets/sponsors/hackthe6.png",
+          href: "https://hackthe6ix.com/",
+          color: "ROSE",
+        },
+        {
+          title: "StarterHacks",
+          description: "",
+          logosrc: "/themed_assets/sponsors/starterhacks.png",
+          href: "https://www.starterhacks.ca/",
+          color: "TEAL",
+        },
+        {
+          title: "WiCS",
+          description: "",
+          logosrc: "/themed_assets/sponsors/wics.png",
+          href: "https://wics.uwaterloo.ca/",
+          color: "DEFAULT",
         },
       ]}
     />

@@ -1,13 +1,17 @@
 "use client";
 
 import * as React from "react";
-import { ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+
+// Built-in color presets for SponsorCard
+export type SponsorCardTheme = "DEFAULT" | "NAVY" | "ROSE" | "TEAL" | "GREEN";
 
 export interface SponsorCardProps {
   title: string;
-  description: string;
+  description?: string;
   logo: React.ReactNode;
   href?: string;
+  color?: SponsorCardTheme;
   colors?: {
     headerBg?: string;
     border?: string;
@@ -25,33 +29,82 @@ export default function SponsorCard({
   logo,
   href,
   colors,
+  color = "DEFAULT",
   className,
   fixedHeight = "h-[420px]",
 }: SponsorCardProps) {
-  const [expanded, setExpanded] = React.useState(false);
+  const hasDescription = !!description && description.trim().length > 0;
 
+  // Preset palettes; can be extended as needed
+  const PRESETS: Record<
+    SponsorCardTheme,
+    {
+      headerBg: string;
+      border: string;
+      text: string;
+      accent: string;
+      outer: string;
+    }
+  > = {
+    DEFAULT: {
+      headerBg: "bg-[#FEF8C5]",
+      border: "border-[#3D3D75]/75",
+      text: "text-gray-800",
+      accent: "bg-gradient-to-r from-[#E8B022] to-[#FDD30C] text-white",
+      outer: "bg-[#E8B022]",
+    },
+    NAVY: {
+      headerBg: "bg-[#E4DFE2]",
+      border: "border-[#3D3D75]/75",
+      text: "text-gray-800",
+      accent: "bg-gradient-to-r from-[#19123C] to-[#3D3D75C7] text-white",
+      outer: "bg-[#19123C]",
+    },
+    ROSE: {
+      headerBg: "bg-[#FFC4BC78]",
+      border: "border-[#3D3D75]/75",
+      text: "text-gray-800",
+      accent: "bg-gradient-to-r from-[#CD5769] to-[#FFA3AF] text-white",
+      outer: "bg-[#CD5769]",
+    },
+    TEAL: {
+      headerBg: "bg-[#6E9DB269]",
+      border: "border-[#3D3D75]/75",
+      text: "text-gray-800",
+      accent: "bg-gradient-to-r from-[#055579] to-[#6E9DB2] text-white",
+      outer: "bg-[#055579]",
+    },
+    GREEN: {
+      headerBg: "bg-[#D8F3DC]",
+      border: "border-[#3D3D75]/75",
+      text: "text-gray-800",
+      accent: "bg-gradient-to-r from-[#06402B] to-[#4D803B] text-white",
+      outer: "bg-[#06402B]",
+    },
+  };
+
+  // Merge preset with any ad-hoc overrides for backward compatibility
+  const preset = PRESETS[color] ?? PRESETS["DEFAULT"];
   const c = {
-    headerBg: colors?.headerBg ?? "bg-[#FEF8C5]",
-    border: colors?.border ?? "border-[#3D3D75]/75",
-    text: colors?.text ?? "text-gray-800",
-    accent:
-      colors?.accent ??
-      "bg-gradient-to-r from-[#E8B022] to-[#FDD30C] text-white",
-    outer: colors?.outer ?? "bg-[#E8B022]",
+    headerBg: colors?.headerBg ?? preset.headerBg,
+    border: colors?.border ?? preset.border,
+    text: colors?.text ?? preset.text,
+    accent: colors?.accent ?? preset.accent,
+    outer: colors?.outer ?? preset.outer,
   };
 
   return (
     <div
-      className={`relative p-3 ${c.outer} rounded-2xl border-2 ${
+      className={`relative p-3 h-full ${c.outer} rounded-2xl border-2 ${
         c.border
       } shadow-md ${className ?? ""}`}
     >
       <div
-        className={`relative flex flex-col justify-between border-2 ${c.border} rounded-xl shadow-md bg-[#FFFAF3] overflow-hidden transition-all duration-300`}
+        className={`relative flex h-full flex-col justify-between border-2 ${c.border} rounded-xl shadow-md bg-[#FFFAF3] overflow-hidden transition-all duration-300`}
       >
         {/* Header */}
         <div
-          className={`w-full px-8 font-bold text-lg sm:text-xl md:text-2xl text-center ${c.headerBg} border-b-2 ${c.border} h-24 flex items-center justify-center overflow-hidden`}
+          className={`w-full px-2 font-bold text-lg sm:text-xl md:text-2xl text-center ${c.headerBg} border-b-2 ${c.border} h-24 flex items-center justify-center overflow-hidden`}
         >
           <div
             title={title}
@@ -72,47 +125,21 @@ export default function SponsorCard({
 
         {/* Content */}
         <div
-          className={`flex flex-col items-center text-center px-12 pt-8 pb-4 gap-4 overflow-hidden transition-all`}
+          className={`flex flex-1 flex-col items-center text-center px-12 pt-8 pb-4 gap-8 overflow-visible transition-all ${
+            hasDescription ? "" : "justify-center"
+          }`}
           style={{
-            height: expanded ? "auto" : "16rem", // fixed collapsed height for uniform cards
+            minHeight: "8rem",
           }}
         >
-          <div className="flex justify-center items-center h-16">{logo}</div>
-          <p
-            className={`text-sm text-justify ${c.text}`}
-            style={
-              expanded
-                ? undefined
-                : {
-                    display: "-webkit-box",
-                    WebkitLineClamp: 8,
-                    WebkitBoxOrient: "vertical" as const,
-                    overflow: "hidden",
-                  }
-            }
-          >
-            {description}
-          </p>
+          <div className="flex justify-center items-center h-24 w-full">{logo}</div>
+          {hasDescription && (
+            <p className={`text-sm text-justify ${c.text}`}>{description}</p>
+          )}
         </div>
 
-        {/* Expand toggle */}
-        <button
-          onClick={() => setExpanded((e) => !e)}
-          className="flex items-center justify-center text-sm hover:underline px-4 pb-2"
-        >
-          {expanded ? (
-            <>
-              <ChevronUp className="ml-1 h-4 w-4" />
-            </>
-          ) : (
-            <>
-              <ChevronDown className="ml-1 h-4 w-4" />
-            </>
-          )}
-        </button>
-
         {/* Footer actions */}
-        <div className="flex items-center justify-between px-4 pb-4">
+        <div className="flex items-center justify-between px-4 pb-4 h-12">
           {href ? (
             <a
               href={href}
