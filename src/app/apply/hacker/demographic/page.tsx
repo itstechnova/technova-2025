@@ -6,6 +6,8 @@ import supabase from "@/config/supabaseClient";
 import { useRouter } from "next/navigation";
 import { useAccount } from "@/components/AccountContext";
 import NoFormAccess from "@/components/app/no-access";
+import { appOpen } from "@/config/config";
+import AppClosed from "@/components/app/app-closed";
 
 function HackerDemographic() {
   const router = useRouter();
@@ -131,6 +133,10 @@ function HackerDemographic() {
     console.log("All data submitted!");
     router.push("/apply/hacker/almost-done");
   };
+
+  if (!appOpen) {
+    return <AppClosed />;
+  }
 
   return (
     <div className="min-h-screen bg-navPrimary">

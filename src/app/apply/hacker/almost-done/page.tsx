@@ -3,6 +3,8 @@
 import AlmostDoneForm from "@/components/hacker/almostdoneform";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import AppClosed from "@/components/app/app-closed";
+import { appOpen } from "@/config/config";
 
 function HackerAlmostDone() {
   const router = useRouter();
@@ -43,6 +45,10 @@ function HackerAlmostDone() {
     console.log(JSON.stringify(acceptanceData));
     router.push("/apply/hacker/thanks");
   };
+
+  if (!appOpen) {
+    return <AppClosed />;
+  }
 
   return (
     <div className="min-h-screen bg-navPrimary">
