@@ -92,7 +92,7 @@ function HeroAbout() {
 
         <div
           id="about"
-          className="relative md:grid md:grid-cols-2 px-10 md:px-24 pb-12 md:pb-16 pt-24 md:pt-28 text-textPrimary"
+          className="scroll-mt-16 relative md:grid md:grid-cols-2 px-10 md:px-24 py-12 md:py-16 text-textPrimary"
         >
           <div className="w-full">
             <h2 className="text-3xl md:text-4xl font-bold mb-10">About Us</h2>
