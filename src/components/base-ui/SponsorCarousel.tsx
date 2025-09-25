@@ -140,17 +140,17 @@ export function SponsorCarousel({
     if (!cardRefs.current.length) return;
 
     const measure = () => {
-      const hs = cardRefs.current
-        .filter(Boolean)
-        .map((el) => {
-          const child = el.firstElementChild as HTMLElement | null;
-          if (child) {
-            // Prefer scrollHeight to detect desired height even if parent is constrained
-            const sh = (child as HTMLElement).scrollHeight;
-            return sh || child.offsetHeight || child.getBoundingClientRect().height;
-          }
-          return el.offsetHeight || el.getBoundingClientRect().height;
-        });
+      const hs = cardRefs.current.filter(Boolean).map((el) => {
+        const child = el.firstElementChild as HTMLElement | null;
+        if (child) {
+          // Prefer scrollHeight to detect desired height even if parent is constrained
+          const sh = (child as HTMLElement).scrollHeight;
+          return (
+            sh || child.offsetHeight || child.getBoundingClientRect().height
+          );
+        }
+        return el.offsetHeight || el.getBoundingClientRect().height;
+      });
       const maxH = hs.length ? Math.max(...hs) : 0;
       setMaxCardHeight(maxH);
     };
@@ -171,12 +171,12 @@ export function SponsorCarousel({
     const imgs: HTMLImageElement[] = [];
     cardRefs.current.forEach((el) => {
       if (!el) return;
-      el.querySelectorAll('img').forEach((img) => {
+      el.querySelectorAll("img").forEach((img) => {
         const im = img as HTMLImageElement;
         imgs.push(im);
         if (!im.complete) {
-          im.addEventListener('load', measure);
-          im.addEventListener('error', measure);
+          im.addEventListener("load", measure);
+          im.addEventListener("error", measure);
         }
       });
     });
@@ -187,8 +187,8 @@ export function SponsorCarousel({
     return () => {
       observers.forEach((ro) => ro.disconnect());
       imgs.forEach((im) => {
-        im.removeEventListener('load', measure);
-        im.removeEventListener('error', measure);
+        im.removeEventListener("load", measure);
+        im.removeEventListener("error", measure);
       });
       window.removeEventListener("resize", measure);
     };
@@ -213,7 +213,11 @@ export function SponsorCarousel({
     // Prefer exact bounds if user is already near an end
     const nearLeft = Math.abs(x.get() - bounds.left) < 12;
     const nearRight = Math.abs(x.get() - bounds.right) < 12;
-    const candidate = nearLeft ? bounds.left : nearRight ? bounds.right : nearestSnap(projected);
+    const candidate = nearLeft
+      ? bounds.left
+      : nearRight
+      ? bounds.right
+      : nearestSnap(projected);
     const target = Math.min(Math.max(candidate, bounds.left), bounds.right);
     animate(x, target, {
       type: "spring",
@@ -254,7 +258,11 @@ export function SponsorCarousel({
       // Snap to nearest, but allow locking to exact ends if close
       const nearLeft = Math.abs(x.get() - bounds.left) < 12;
       const nearRight = Math.abs(x.get() - bounds.right) < 12;
-      const candidate = nearLeft ? bounds.left : nearRight ? bounds.right : nearestSnap(x.get());
+      const candidate = nearLeft
+        ? bounds.left
+        : nearRight
+        ? bounds.right
+        : nearestSnap(x.get());
       const target = clampX(candidate);
       animate(x, target, { type: "spring", stiffness: 500, damping: 44 });
       wheelEndTimer.current = null;

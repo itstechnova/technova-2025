@@ -69,7 +69,6 @@ function HeroAbout() {
               )}
             </div>
           </div>
-          
         </div>
       </div>
 
@@ -95,7 +94,7 @@ function HeroAbout() {
           id="about"
           className="relative md:grid md:grid-cols-2 px-10 md:px-24 pb-12 md:pb-16 pt-24 md:pt-28 text-textPrimary"
         >
-          <div className="rounded-3xl w-full">
+          <div className="w-full">
             <h2 className="text-3xl md:text-4xl font-bold mb-10">About Us</h2>
             <p className="text-base md:text-lg mb-5">
               TechNova&apos;s mission is to create safe, inclusive and
