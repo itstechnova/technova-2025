@@ -8,7 +8,7 @@ const SponsorUsSection: React.FC = () => {
       className="scroll-mt-16 px-10 md:px-24 py-12 md:py-16 flex flex-col h-full relative w-full text-left"
     >
       <h2 className="text-3xl md:text-4xl font-bold text-textPrimary mb-10">
-        Sponsors
+        Sponsor Us
       </h2>
       <p className="max-w-6xl text-base md:text-lg text-textPrimary mb-10">
         Support more than 300+ young women in the next step of their journey by
