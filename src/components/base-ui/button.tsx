@@ -40,7 +40,7 @@ const sizeClasses: Record<Size, string> = {
   sm: "h-8 px-3 text-xs sm:h-9 sm:px-4 sm:text-sm",
   lg: "py-2 px-8 text-base sm:h-12 sm:px-8 sm:text-xl rounded-xl",
   xl: "py-2 w-60 text-base sm:h-12 sm:px-8 sm:text-xl rounded-xl",
-  icon: "h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center",
+  icon: "h-8 w-8 sm:h-10 sm:w-10 flex items-center justify-center",
 };
 
 export function Button({

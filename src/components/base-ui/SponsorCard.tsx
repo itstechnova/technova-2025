@@ -95,9 +95,9 @@ export default function SponsorCard({
 
   return (
     <div
-      className={`relative p-3 h-full ${c.outer} rounded-2xl border-2 ${
-        c.border
-      } shadow-md ${className ?? ""}`}
+      className={`relative p-3 h-[640px] md:h-[520px] ${
+        c.outer
+      } rounded-2xl border-2 ${c.border} shadow-md ${className ?? ""}`}
     >
       <div
         className={`relative flex h-full flex-col justify-between border-2 ${c.border} rounded-xl shadow-md bg-[#FFFAF3] overflow-hidden transition-all duration-300`}
@@ -109,7 +109,7 @@ export default function SponsorCard({
           <div
             title={title}
             aria-label={title}
-            className="max-w-full leading-tight"
+            className="max-w-full leading-tight text-textPrimary"
             style={{
               display: "-webkit-box",
               WebkitLineClamp: 2,
@@ -125,16 +125,20 @@ export default function SponsorCard({
 
         {/* Content */}
         <div
-          className={`flex flex-1 flex-col items-center text-center px-12 pt-8 pb-4 gap-8 overflow-visible transition-all ${
+          className={`flex flex-1 flex-col items-center px-6 md:px-12 pt-8 pb-4 gap-8 overflow-visible transition-all ${
             hasDescription ? "" : "justify-center"
           }`}
           style={{
             minHeight: "8rem",
           }}
         >
-          <div className="flex justify-center items-center h-24 w-full">{logo}</div>
+          <div className="flex justify-center items-center h-24 w-full">
+            {logo}
+          </div>
           {hasDescription && (
-            <p className={`text-sm text-justify ${c.text}`}>{description}</p>
+            <p className={`text-sm text-textPrimary ${c.text}`}>
+              {description}
+            </p>
           )}
         </div>
 

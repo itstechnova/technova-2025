@@ -45,7 +45,7 @@ function FAQ() {
   return (
     <div
       id="faq"
-      className="relative w-full px-10 md:px-24 py-12 md:py-16 rounded-3xl"
+      className="scroll-mt-16 relative w-full px-10 md:px-24 py-12 md:py-16 rounded-3xl"
     >
       {/* FAQ Title */}
       <div className="mb-16">

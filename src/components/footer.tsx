@@ -17,7 +17,7 @@ function Footer() {
           <a href="mailto:hello@itstechnova.org" target="_blank">
             <FontAwesomeIcon
               icon={faEnvelope}
-              className="text-navSecondary w-5 h-5"
+              className="text-navSecondary w-5 h-5 px-1 pt-1"
             />
           </a>
         </Button>
@@ -25,7 +25,7 @@ function Footer() {
           <a href="https://www.instagram.com/itstechnova" target="_blank">
             <FontAwesomeIcon
               icon={faInstagram}
-              className="text-navSecondary w-5 h-5"
+              className="text-navSecondary w-5 h-5 px-1 pt-1"
             />
           </a>
         </Button>
@@ -36,7 +36,7 @@ function Footer() {
           >
             <FontAwesomeIcon
               icon={faLinkedin}
-              className="text-navSecondary w-5 h-5"
+              className="text-navSecondary w-5 h-5 px-1 pt-1"
             />
           </a>
         </Button>
@@ -44,7 +44,7 @@ function Footer() {
           <a href="https://www.facebook.com/itstechnova" target="_blank">
             <FontAwesomeIcon
               icon={faFacebook}
-              className="text-navSecondary w-5 h-5"
+              className="text-navSecondary w-5 h-5 px-1 pt-1"
             />
           </a>
         </Button>
@@ -52,7 +52,7 @@ function Footer() {
           <a href="https://x.com/itstechnova" target="_blank">
             <FontAwesomeIcon
               icon={faTwitter}
-              className="text-navSecondary w-5 h-5"
+              className="text-navSecondary w-5 h-5 px-1 pt-1"
             />
           </a>
         </Button>
