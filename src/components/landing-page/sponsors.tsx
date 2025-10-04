@@ -116,7 +116,7 @@ const OurSponsors: React.FC = () => {
           color: "GREEN",
         },
         {
-          title: "BDO Canada LLP",
+          title: "BDO",
           description: "",
           logosrc: "/themed_assets/sponsors/bdo.png",
           href: "https://www.bdo.ca/careers/students",
