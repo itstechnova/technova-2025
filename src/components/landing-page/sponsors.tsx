@@ -185,7 +185,8 @@ const OurSponsors: React.FC = () => {
         },
         {
           title: "NordVPN",
-          description: "Fast, secure, and risk-free VPN for online privacy.",
+          description:
+            "A secure virtual private network (VPN) service that encrypts your internet traffic and protects your online privacy.",
           logosrc: "/themed_assets/sponsors/nordvpn.png",
           href: "https://nordvpn.com/hackathons",
           color: "GREEN",
