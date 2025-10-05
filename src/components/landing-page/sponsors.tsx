@@ -102,9 +102,9 @@ const OurSponsors: React.FC = () => {
         {
           title: "NAV CANADA",
           description:
-            "Thinking about a career in aviation? NAV CANADA is hiring! From air traffic services to engineering, IT, and corporate roles, there are opportunities across Canada—no aviation background required. Explore opportunities at navcanada.ca/careers",
+            "Thinking about a career in aviation? NAV CANADA is hiring! From air traffic services to engineering, IT, and corporate roles, there are opportunities across Canada—no aviation background required.",
           logosrc: "/themed_assets/sponsors/nav.png",
-          href: "https://www.navcanada.ca/en/",
+          href: "https://www.navcanada.ca/en/careers",
           color: "NAVY",
         },
         {
@@ -116,7 +116,7 @@ const OurSponsors: React.FC = () => {
           color: "GREEN",
         },
         {
-          title: "BDO Canada LLP",
+          title: "BDO",
           description: "",
           logosrc: "/themed_assets/sponsors/bdo.png",
           href: "https://www.bdo.ca/careers/students",
@@ -155,7 +155,7 @@ const OurSponsors: React.FC = () => {
         {
           title: "Saily",
           description:
-            "Hey there, tech enthusiasts and hackathon champions! We’ve got an amazing treat lined up just for you. As a token of our appreciation for your passion and dedication, we’re thrilled to offer you exclusive deals to help you stay protected online. Stay connected on your next trip with Saily!",
+            "An eSIM service that lets you easily connect to mobile networks worldwide without physical SIM cards.",
           logosrc: "/themed_assets/sponsors/saily.png",
           href: "https://saily.com/",
           color: "ROSE",
@@ -170,25 +170,42 @@ const OurSponsors: React.FC = () => {
         {
           title: "nexos.ai",
           description:
-            "Centralize your AI operations with a single platform - access models, manage AI workloads, enforce policies, and maintain control over your AI ecosystem with nexos.ai.",
+            "An AI-driven platform for automating and enhancing business processes, decision-making, and productivity through intelligent insights.",
           logosrc: "/themed_assets/sponsors/nexos-ai.png",
           href: "https://nexos.ai/",
           color: "DEFAULT",
         },
         {
-          title: "Nord VPN",
-          description: "Get NordVPN PLUS and also enjoy NordPass.",
-          logosrc: "/themed_assets/sponsors/nordvpn.png",
-          href: "https://nordvpn.com/",
+          title: "Incogni",
+          description:
+            "A data privacy tool that helps remove your personal information from data broker databases.",
+          logosrc: "/themed_assets/sponsors/incogni.png",
+          href: "https://incogni.com/",
           color: "NAVY",
         },
         {
-          title: "Incogni",
+          title: "NordVPN",
           description:
-            "Delete your personal data from the internet with Incogni.",
-          logosrc: "/themed_assets/sponsors/incogni.png",
-          href: "https://incogni.com/",
+            "A secure virtual private network (VPN) service that encrypts your internet traffic and protects your online privacy.",
+          logosrc: "/themed_assets/sponsors/nordvpn.png",
+          href: "https://nordvpn.com/hackathons",
           color: "GREEN",
+        },
+        {
+          title: "NordPass",
+          description:
+            "A password manager that securely stores, generates, and auto-fills passwords and sensitive information.",
+          logosrc: "/themed_assets/sponsors/nordpass.png",
+          href: "https://nordpass.com/",
+          color: "ROSE",
+        },
+        {
+          title: "NordProtect",
+          description:
+            "A cybersecurity suite providing protection against online threats such as malware, phishing, and tracking.",
+          logosrc: "/themed_assets/sponsors/nordprotect.png",
+          href: "https://nordprotect.com/",
+          color: "TEAL",
         },
       ]}
     />

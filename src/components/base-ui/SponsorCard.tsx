@@ -148,7 +148,7 @@ export default function SponsorCard({
             <a
               href={href}
               target="_blank"
-              rel="noreferrer"
+              rel="sponsored"
               className={`inline-flex items-center justify-center rounded-md px-3 py-2 ${c.accent} hover:opacity-90 transition border-2 ${c.border}`}
             >
               <ArrowUpRight className="w-6 h-5" />
